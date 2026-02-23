@@ -1,0 +1,108 @@
+\begin{definition}[Uniform / Lipschitz continuity]\label{def:unif_lipsch_cont}
+	Let $f: X \to Y$ be a map between metric spaces.
+	\begin{enumerate}
+		\item $f$ is uniformly continuous if $\forall \epsilon > 0 \; \exists \delta > 0 \text{ s.t. } \forall x \in X: f(B_{\delta}(x)) \subset B_{\epsilon}(f(x))$.
+		\item $f$ is $L$-Lipschitz for $L > 0$ if $\forall x,y \in X: d_{Y}(f(x),f(y)) \leq L \cdot d_{X}(x,y)$.
+	\end{enumerate}
+\end{definition}
+
+\begin{lecexercise}
+	Prove that any Lipschitz function is also uniformly continuous, hence also continuous.
+\end{lecexercise}
+
+\begin{eg}
+	The distance is a continuous map: Let $(X,d)$ be a metric space and $x_{0} \in X$. Define $f(x) = d(x,x_{0})$, mapping to the space $Y = [0,\infty)$ with the Euclidean distance (from now on implied, unless specified otherwise). Then $f$ is $1$-Lipschitz. Indeed,
+	\begin{align*}
+		d_{Y}(f(x),f(y)) = \left| f(x) - f(y) \right| = \left| d(x,x_{0}) - d(y, x_{0}) \right| \leq d(x,y),
+	\end{align*}
+	using triangle inequality.
+\end{eg}
+
+There is this very useful and fundamental theorem about Lipschitz maps in complete spaces.
+
+\begin{theorem}[Banach fixed point theorem]\label{thm:banach_fixed_point}
+	Let $(X,d)$ be a complete metric space and $T: X \to X$ be a $\lambda$-Lipschitz map for $\lambda \in (0,1)$. Then $T$ has a unique fixed point $x \in X$ such that $T(x) = x$.
+\end{theorem}
+\begin{proof}
+	Fix $x_{0} \in X$. Define $x_{n+1} = T(x_{n})$. Then,
+	\begin{align*}
+		d(x_{n+1}, x_{n}) = d(T(x_{n}), T(x_{n-1})) \leq \lambda d(x_{n}, x_{n-1}),
+	\end{align*}
+	using that $T$ is $\lambda$-Lipschitz. We claim that $(x_{n})_{n}^{\infty}$ is Cauchy. We have
+	\begin{align*}
+		d(x_{n+1}, x_{n}) \leq \lambda d(x_{n}, x_{n-1}) \leq \lambda^{2} d(x_{n-1}, x_{n-2}) \leq \dots \leq \lambda^{n} d(x_{1}, x_{0}).
+	\end{align*}
+	Hence for wlog $m < n$,
+	\begin{align*}
+		d(x_{n}, x_{m}) \leq \sum_{k=m}^{n-1} d(x_{k+1}, x_{k}) \leq \sum_{k=m}^{n-1} \lambda^{k} d(x_{1}, x_{0}) = d(x_{1}, x_{0}) \lambda^{m} \frac{1}{1-\lambda}.
+	\end{align*}
+	As $\lambda^{m} \to 0$ with $m \to \infty$, the sequence is Cauchy and converges to $x = \lim_{n \to \infty} x_{n}$, because $X$ is complete. For this point, we have, using sequential continuity,
+	\begin{align*}
+		T(x) = \lim_{n \to \infty} T(x_{n}) = \lim_{n \to \infty} x_{n+1} = \lim_{n \to \infty} x_{n} = x.
+	\end{align*}
+	If $x,y$ are two fixed points, then
+	\begin{align*}
+		d(x, y) = d(T(x), T(y)) \leq \lambda d(x,y)),
+	\end{align*}
+	which is possible only if $d(x,y) = 0$, so $x = y$.
+\end{proof}
+
+\section{Compactness}
+
+Compact is \textit{not} just bounded and closed, like in $\mathbb{R}$.
+
+\begin{definition}[Cover and subcover]\label{def:cover}
+	Given a set $X$ and $E \subset X$, we say $\mathcal{U} = \left\{ U_{i} \right\}_{i \in I}$, a family of subsets of $X$, is a cover of $E$ if
+	\begin{align*}
+		E \subset \bigcup \mathcal{U} = \bigcup_{i \in I} U_{i}.
+	\end{align*}
+	If $\mathcal{V} \subset \mathcal{U}$ is still a cover, we call $\mathcal{V}$ a subcover.
+	If $\mathcal{U}$ is a collection of open sets, we call it an open cover.
+\end{definition}
+
+\begin{definition}[Compactness]\label{def:compactness}
+	Let $(X,d)$ be a metric space. A set $K \subset X$ is called
+	\begin{enumerate}
+		\item sequentially compact if $\forall (x_{n})_{n}^{\infty} \subset K, \; \exists$ a subsequence s.t. $\lim_{k \to \infty} x_{n_{k}} \in K$.
+		\item topologically compact if $\forall$ open covers $\mathcal{U}$ of $K$, $\exists$ a finite subcover.
+	\end{enumerate}
+\end{definition}
+
+\begin{eg}
+	In $\mathbb{R}$, the intervals $[a,b]$ are compact by Bolzano-Weierstrass, while $\mathbb{Q} \cap [0,1]$ is for instance not compact.
+
+	Consider $X = (0,1) \cap \mathbb{Q}$. Enumerate $\mathbb{Q} \subset \left\{ x_{n} \mid n \geq 0 \right\}$. If we let the cover $\mathcal{U} = \left\{ B_{2^{-n-10^{3}}}(x_{n}) \right\}$. The total "length" of the intervals in this cover will be much less than $1$. But this cover by definition includes all rationals in $(0,1)$, but it doesn't even cover the length of the interval $(0,1)$.
+\end{eg}
+
+\begin{prop}[Compactness]\label{prop:compactness}
+	The two definitions of compactness are equivalent.
+\end{prop}
+\begin{proof}
+	$(1) \implies (2)$: Assume $K \subset X$ is sequentially compact. Let $\mathcal{U} = \left\{ U_{i} \right\}_{i \in I}$ be an open cover. This means $\forall x \in K \; \exists U_{i} \text{ open s.t. } x \in U_{i}$. For $x \in K$, we let 
+	\begin{align*}
+		r(x) = \min\Big\{ \sup \left\{ r > 0 \mid B_{r}(x) \subset U_{j} \text{ for some } U_{j} \in \mathcal{U} \right\}, 1 \Big\}.
+	\end{align*}
+	Using this, given $x \in K$, select $U_{i(x)} \in \mathcal{U}$ s.t.
+	\begin{align*}
+		B_{r(x) / 2}(x) \subset U_{i(x)}.
+	\end{align*}
+	In a way, this is an open set containing a (half) maximally big neighborhood of $x$. With this in mind, we can construct a finite subcover for $K$.
+
+	Pick any $x_{0} \in K$. Define
+	\begin{align*}
+		\mathcal{V} = \left\{ U_{0}, U_{1}, \dots \right\},
+	\end{align*}
+	by setting $U_{0} = U_{i(x_{0})}$ and always picking $x_{n}$ so that it's in none of the previous open sets $U_{0}, \dots, U_{n-1}$, and letting $U_{n} = U_{i(x_{n})}$. If this is not possible, then we're done. We will prove that assuming this goes on forever leads to a contradiction.
+
+	Formally, unless this stops, we'll produce a sequence $(x_{n})_{n}^{\infty}$ with 
+	\begin{align*}
+		x_{n} \in K \setminus \bigcup_{k=0}^{n-1} U_{i(x_{k})}.
+	\end{align*}
+	By sequential compactness, $(x_{n})_{n}^{\infty}$ has a converging subsequence $(x_{n_{\ell}})_{\ell}^{\infty}$ with $x = \lim_{\ell \to \infty} x_{n_{\ell}} \in K$. Note that $x \not  \in U_{n_{\ell}}$ for all $\ell$, because the complement of the union of all the open sets $U$ that came before $U_{n_{\ell}}$ is closed (see Lemma \ref{lem:union_intersec_closed} and \ref{lem:seq_open_closed}) and the sequence elements that come afterward and the limit must hence remain in the complement. In particular, $r(x_{n_{\ell}}) \to 0$, otherwise $x$ would have to lie in one of the $U_{n_{\ell}}$ at some point.
+    
+    Since $B_{r(x) / 2}(x)$ is open, $x_{n_{\ell}}$ must eventually lie inside it as $x_{n_{\ell}} \to x$. And since $r(x_{n_{\ell}}) \to 0$, it must at some point contain
+    \begin{align*}
+        B_{2r\left( x_{n_{\ell}} \right) }(x_{n_{\ell}}) \subset B_{r(x) / 2}(x) \subset U_{i(x)},
+    \end{align*}
+    which is impossible, because this would imply $2r(x_{n_{\ell}})(x) \leq r(x_{n_{\ell}})$, as $r(x_{n_{\ell}})$ was supposed to be the supremum of all the radii such that $B_{r}(x)$ is contained in any open set in the cover.
+\end{proof}

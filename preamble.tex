@@ -1,0 +1,354 @@
+% eth-standard
+
+% basics
+\pdfminorversion=7
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{url}
+% \hypersetup{
+%     colorlinks,
+%     linkcolor={black},
+%     citecolor={black},
+%     urlcolor={blue!80!black}
+% }
+% \usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\setlist[enumerate]{label=(\arabic*)}
+
+% changed here
+\usepackage[skip=5pt plus1pt, indent=40pt]{parskip}
+
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{eso-pic}
+\usepackage{afterpage}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{placeins}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{braket}
+% \usepackage{cmbright}
+\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{bm}
+\usepackage{leftindex}
+
+% spacings and such
+\setlength{\parindent}{0cm}
+\linespread{1.25}\selectfont
+
+\DeclareMathOperator{\sgn}{sgn}
+\usepackage{systeme}
+\let\svlim\lim\def\lim{\svlim\limits}
+% \let\implies\Rightarrow
+% \let\impliedby\Leftarrow
+% \let\iff\Leftrightarrow
+\let\epsilon\varepsilon
+\usepackage{stmaryrd} % for \lightning
+\newcommand\contra{\scalebox{1.1}{$\lightning$}}
+% \let\phi\varphi
+
+% correct
+\definecolor{correct}{HTML}{009900}
+\definecolor{pergament}{HTML}{E9E0C9}
+\definecolor{pagecol}{HTML}{FFFFFF}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+
+% horizontal rule
+\newcommand\hr{
+	\noindent\rule[0.5ex]{\linewidth}{0.5pt}
+}
+
+% hide parts
+\newcommand\hide[1]{}
+
+% si unitx, probably won't use
+\usepackage{siunitx}
+
+% tikz
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{intersections, angles, quotes, calc, positioning}
+\usetikzlibrary{arrows.meta}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.13}
+
+\tikzset{
+	force/.style={thick, {Circle[length=2pt]}-stealth, shorten <=-1pt}
+}
+
+% args: course name, lecturer name, semester
+\newcommand\frontpage[3]
+{\begin{titlepage}
+		\thispagestyle{empty}
+
+		\vspace*{1.5cm}
+
+		\begin{center}
+
+			{\scshape\large Eidgen\"ossische Technische Hochschule Z\"urich\par}
+
+			\vspace{2.5cm}
+
+			\rule{\textwidth}{5pt}
+
+			\vspace{0.5cm}
+
+			{\LARGE\bfseries #1\par}
+
+			\vspace{0.5cm}
+
+			\rule{\textwidth}{5pt}
+
+			\vspace{1.5cm}
+
+			{\large #2 -- #3\par}
+
+			\vspace{1cm}
+
+			{\scshape\large Jakub Jurcik\par}
+
+		\end{center}
+
+		\vfill
+
+		\begin{flushright}
+			Version: \today
+		\end{flushright}
+
+	\end{titlepage}}
+
+% theorems
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{theorems, breakable}
+
+% theorem colors
+\definecolor{DefFrame}{HTML}{A6D1A6}
+\definecolor{DefBack}{HTML}{D3E8D3}
+\definecolor{ThmFrame}{HTML}{FDD6A1}
+\definecolor{ThmBack}{HTML}{FDE9CC}
+\definecolor{BlueFrame}{HTML}{ACC5E7}
+\definecolor{BlueBack}{HTML}{DFE9F6}
+\definecolor{ExplFrame}{HTML}{CCCCCC}
+\definecolor{ExplBack}{HTML}{E6E6E6}
+
+\tcbset{
+	mytheoremstyle/.style={
+		enhanced,
+		breakable,
+		coltitle=black,
+		fonttitle=\normalfont\scshape,
+	}
+}
+
+% Internal tcolorbox theorem environments.
+% Wrappers below keep existing document syntax:
+% \begin{theorem}[Title] ... \label{...}
+\newtcbtheorem[number within=chapter]{tcbtheorem}{Theorem}{
+	mytheoremstyle,
+	colframe=ThmFrame,
+	colback=ThmBack,
+}{thm}
+
+\newtcbtheorem[use counter from=tcbtheorem]{tcbdefinition}{Definition}{
+	mytheoremstyle,
+	colframe=DefFrame,
+	colback=DefBack,
+}{def}
+
+\newtcbtheorem[use counter from=tcbtheorem]{tcblemma}{Lemma}{
+	mytheoremstyle,
+	colframe=ThmFrame,
+	colback=ThmBack,
+}{lem}
+
+\newtcbtheorem[use counter from=tcbtheorem]{tcbprop}{Proposition}{
+	mytheoremstyle,
+	colframe=ThmFrame,
+	colback=ThmBack,
+}{prop}
+
+\newtcbtheorem[use counter from=tcbtheorem]{tcbcorollary}{Corollary}{
+	mytheoremstyle,
+	colframe=ThmFrame,
+	colback=ThmBack,
+}{cor}
+
+\newtcbtheorem[use counter from=tcbtheorem]{tcbeg}{Example}{
+	mytheoremstyle,
+	colframe=BlueFrame,
+	colback=BlueBack,
+}{eg}
+
+\newtcbtheorem[use counter from=tcbtheorem]{tcbremark}{Remark}{
+	mytheoremstyle,
+	colframe=BlueFrame,
+	colback=BlueBack,
+}{rem}
+
+
+% Public environment names (kept stable for existing source files).
+% clanker added a counter for \ref{} to link to the correct prop and actually also display it correctly
+\makeatletter
+\newcommand{\tcbsetcurrentlabel}{%
+	\ifx\tcbcounter\@empty\else
+		\protected@edef\@currentlabel{\csname p@\tcbcounter\endcsname\csname the\tcbcounter\endcsname}%
+	\fi
+}
+\makeatother
+\newenvironment{theorem}[1][]{\begin{tcbtheorem}{#1}{}\tcbsetcurrentlabel}{\end{tcbtheorem}}
+\newenvironment{definition}[1][]{\begin{tcbdefinition}{#1}{}\tcbsetcurrentlabel}{\end{tcbdefinition}}
+\newenvironment{lemma}[1][]{\begin{tcblemma}{#1}{}\tcbsetcurrentlabel}{\end{tcblemma}}
+\newenvironment{prop}[1][]{\begin{tcbprop}{#1}{}\tcbsetcurrentlabel}{\end{tcbprop}}
+\newenvironment{corollary}[1][]{\begin{tcbcorollary}{#1}{}\tcbsetcurrentlabel}{\end{tcbcorollary}}
+\newenvironment{eg}[1][]{\begin{tcbeg}{#1}{}\tcbsetcurrentlabel}{\end{tcbeg}}
+\newenvironment{remark}[1][]{\begin{tcbremark}{#1}{}\tcbsetcurrentlabel}{\end{tcbremark}}
+
+% clanker:
+% Hyperref destination names for this counter default to plain arabic values.
+% Since the counter resets per chapter, include the chapter component to keep
+% all PDF anchors globally unique.
+\makeatletter
+\providecommand*{\theHtcb@cnt@tcbtheorem}{}
+\renewcommand*{\theHtcb@cnt@tcbtheorem}{\thechapter.\arabic{tcb@cnt@tcbtheorem}}
+\makeatother 
+
+% Explanation: gray box.
+\newenvironment{explanation}[1][]{%
+	\begin{tcolorbox}[
+		mytheoremstyle,
+		colframe=ExplFrame,
+		colback=ExplBack,
+		title={Explanation},
+	]
+}{%
+	\end{tcolorbox}
+}
+
+\newcounter{lecexercise}[chapter]
+
+\newenvironment{lecexercise}[1][]{%
+    \refstepcounter{lecexercise}%
+    \par\smallskip
+    \noindent\textsc{Exercise.}%
+    \if\relax\detokenize{#1}\relax\else\ \textit{#1}\fi\quad
+}{%
+    \par\smallskip
+}
+
+
+% for homework problems
+
+\newcounter{exercise}
+\newcounter{subex}[exercise]
+
+\renewcommand{\theexercise}{\arabic{exercise}}
+\renewcommand{\thesubex}{\alph{subex}}
+
+\newenvironment{exercise}[1][]{
+	\refstepcounter{exercise}
+	\par\noindent\textbf{Exercise \theexercise.} \textit{#1}\par
+}{\par}
+
+\newenvironment{subex}{
+	\refstepcounter{subex}
+	\par\noindent(\thesubex)\,
+}{\par}
+
+\newenvironment{aufgabe}[1][]{
+	\refstepcounter{exercise}
+	\par\noindent\textbf{Aufgabe \theexercise.} \textit{#1}\par
+}{\par}
+
+\newenvironment{subaufgabe}{
+	\refstepcounter{subex}
+	\par\noindent(\thesubex)\,
+}{\par}
+
+\usepackage{xifthen}
+
+% we will not be doing lessons anymore
+% \def\@lesson{}%
+% \newcommand{\lesson}[2]{
+%     \ifthenelse{\isempty{#2}}{%
+%         \def\@lesson{Lecture #1}%
+%     }{%
+%         \def\@lesson{Lecture #1: #2}%
+%     }%
+%     \section*{\@lesson}
+% }
+
+% \renewcommand\date[1]{\marginpar{#1}}
+
+% fancy headers
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\fancyhf{} % clear all header and footer fields
+\setlength{\headheight}{15pt}
+\newcommand{\associationbadge}{\includegraphics[width=1.5cm]{document_C3EA_3359406.pdf}}
+\newcommand{\enableassociationbadge}{
+	\AddToShipoutPictureBG{
+		\begin{tikzpicture}[remember picture, overlay]
+			\node[anchor=north east, xshift=-0.55cm, yshift=-0.75cm] at (current page.north east) {\associationbadge};
+		\end{tikzpicture}
+	}
+}
+
+% --- Headers ---
+\fancyhead[L]{\nouppercase{\leftmark}}   % current section (upper left)
+\fancyhead[R]{}
+
+% --- Footer ---
+\fancyfoot[C]{\thepage}                  % page number in the middle bottom
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Apply the same header/footer look to chapter-opening pages (plain style).
+\fancypagestyle{plain}{
+	\fancyhf{}
+	\fancyhead[L]{\nouppercase{\leftmark}}
+	\fancyhead[R]{}
+	\fancyfoot[C]{\thepage}
+	\renewcommand{\footrulewidth}{0.4pt}
+}
+
+% --- Section mark setup ---
+\renewcommand{\sectionmark}[1]{\markboth{\textsc{#1}}{}}
+
+% gets rid of chapter in numbering
+% \renewcommand\thesection{\arabic{section}}
+
+\makeatother
+% figure support
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+	\def\svgwidth{\columnwidth}
+	\import{./figures/}{#1.pdf_tex}
+}
+
+% %http://tex.stackexchange.com/questions/76273/multiple-pdfs-with-page-group-included-in-a-single-page-warning
+\pdfsuppresswarningpagegroup=1
+
+\author{Jakub Jurcik}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\mutesection}[1]{%
+	\section*{#1}%
+	\addcontentsline{toc}{section}{#1}%
+}

@@ -1,0 +1,95 @@
+\section{Sequences in metric spaces}
+
+Like in the real numbers, we can define sequences in all metric spaces. And in fact, we need to understand sequences in real numbers to define sequences in metric spaces. 
+
+\begin{definition}[Sequence]\label{def:sequence}
+    For a set $X$, we call a sequence in $X$ a map $x: \mathbb{N} \to X$ and write $x_{n} = x(n)$. For the entire sequence, we write $(x_{n})_{n}^{\infty} \subset X$.
+\end{definition}
+
+\begin{definition}[Convergence and limit]\label{def:conv_lim}
+    Let $(x_{n})_{n}^{\infty}$ be a sequence in a metric space $(X,d)$. We say $(x_{n})_{n}^{\infty}$ converges to $x \in X$ if $d(x_{n}, x) \to 0$ as a sequence of real numbers.
+
+    Equivalently, $\forall \epsilon > 0 \;  \exists N \in \mathbb{N} \text{ s.t. } \forall n \geq N: d(x_{n}, x) < \epsilon$.
+
+    We write $\lim_{n \to \infty} x_{n} = x$, or $x_{n} \to x$. 
+\end{definition}
+
+
+\begin{lemma}[Limit is unique]\label{lem:lim_unique}
+    Let $(X, d)$ be a metric space and $(x_{n})_{n}^{\infty} \subset X$ a sequence with $x_{n} \to x, x_{n} \to y$. Then $x = y$. 
+\end{lemma}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{definition}[Subsequence]\label{def:subsequence}
+    Let $(x_{n})_{n}^{\infty}$ be a sequence in $X$. We define a subsequence as any sequence of the form $\left(x_{f(k)}\right)_{k}^{\infty}$ where $f: \mathbb{N} \to \mathbb{N}$ is increasing. We write $f(k) = n_{k}$, so the subsequence is denoted $\left(x_{n_{k}}\right)_{k}^{\infty}$.
+\end{definition}
+
+\begin{definition}[Accumulation point]\label{def:acc_point}
+    Let $(X,d)$ be a metric space.
+
+    (1) For a subset $Y \subset X$, we say that $y \in X$ is an accumulation point of $Y$ if $\exists (y_{n})_{n}^{\infty} \subset Y$ such that $y_{n} \to y$.
+
+    (2) For a sequence $(x_{n})_{n}^{\infty} \subset X$, we say that $x \in X$ is an accumulation point if $\exists$ a subsequence $x_{n_{k}} \to x$. 
+\end{definition}
+
+\begin{lemma}[Subsequences and limit]\label{lem:subseq_lim}
+    A sequence $(x_{n})_{n} \subset X$, for $(X,d)$ metric space, converges to $x$ if and only if every subsequence $(x_{n_{k}})_{k}^{\infty}$ converges to $x$.
+\end{lemma}
+\begin{proof}
+    $\impliedby$: If every subsequence converges to $x$, since $(x_{n})_{n}^{\infty}$ is also a subsequence, the limit is $x$.
+
+    $\implies$: Let $(x_{n})_{n}^{\infty} \to x$ and $(x_{n_{k}})_{k}^{\infty}$ any subsequence. For $\epsilon > 0$ find $N \in \mathbb{N}$ such that $d(x_{n},x) < \epsilon$ for $n \geq N$, then since $n_{k} \geq k$, we get $d(x_{n_{k}}, 0) < \epsilon$, so $x_{n_{k}} \to x$ as well.
+\end{proof}
+
+\begin{lemma}[Subsequence and limit 2]\label{lem:subseq_lim_2}
+    Under the same assumptions, $x_{n} \to x$ if and only if every subsequence $(x_{n_{k}})_{k}^{\infty}$ has a sub-subsequence $x_{n_{k}} \to x$.
+\end{lemma}
+\begin{proof}
+    Exercise.
+\end{proof}
+
+\begin{definition}[Cauchy sequence]\label{def:cauchy_seq}
+    In a metric space, $(x_{n})_{n}^{\infty}$ is Cauchy if 
+    \begin{align*}
+        \forall \epsilon > 0 \; \exists N \in \mathbb{N} \text{ s.t. } \forall n,m \geq N: d(x_{n}, x_{m}) < \epsilon.
+    \end{align*}
+\end{definition}
+
+\begin{definition}[Completeness]\label{def:completeness}
+   $(X,d)$ is complete if every Cauchy sequence in it converges.
+\end{definition}
+
+\begin{eg} 
+    Consider $(\mathbb{R}, d_{\text{Euclidean}})$. The space $A = (0,\infty)$ is \textit{not} complete, but $A = [a,b]$ is. $\mathbb{Q} \subset \mathbb{R}$ is not complete, because you can have a sequence going to $\sqrt{2}$, which is not in $\mathbb{Q}$.
+\end{eg}
+
+\begin{remark}
+    There is a conflict of notation in the following proofs, because for a sequence $(x_{n})_{n}^{\infty} \subset \mathbb{R}^{n}$, $x_{n}$ could either mean $x(n)$ or the $n$-th component of the vector $x$. So in the following two proofs, $m$ will be the index in the sequence and $i,j$ the coordinate index. And then $x_{m,i}$ means the $i$-th component of $x(m)$.
+\end{remark}
+
+\begin{lemma}[Coordinate wise convergence ]\label{lem:coordin_wise_conv}
+    Let $(x_{m})_{m}^{\infty}$ be a sequence. Then $x_{m} \to x$ if and only if $x_{m,i} \to x_{i}$ for every $1 \leq i \leq n$.
+\end{lemma}
+\begin{proof}
+    $\implies$: Assume $x_{m} \to x$. This means for all $\epsilon > 0$ there exists $N \in \mathbb{N}$ such that $\lVert x_{m} - x \rVert < \epsilon$ if $m \geq N$. Given $1 \leq i \leq n$, notice
+    \begin{align*}
+        \left| x_{m,i} - x_{i} \right| \leq \sqrt{ \sum_{j=1}^{n} \left| x_{m,j} - x_{j} \right|^{2} } = \lVert x_{m} - x \rVert < \epsilon.
+    \end{align*}
+    This way, $x_{m,i} \to x_{i}$.
+
+    $\impliedby$: Let $\epsilon > 0$. By assumption for all $1 \leq i \leq n$, $\exists N_{i} \in \mathbb{N} \text{ s.t. } \forall m \geq N_{i}: \left| x_{m,i} - x_{i} \right| < \frac{\epsilon}{\sqrt{n}}$. If we define $N = \max_{1 \leq i \leq n} N_{i}$, then for $m \geq N$,
+    \begin{align*}
+        \lVert x_{m} - x \rVert  = \sqrt{\sum_{j=1}^{n} \left| x_{m,i} - x_{i} \right|^{2}  } \leq \sqrt{n \frac{\epsilon^{2}}{n}} = \epsilon.
+    \end{align*}
+    This way, $x_{m} \to x$ as a whole.
+\end{proof}
+
+\begin{theorem}[Euclidean $\mathbb{R}^{n}$ is complete]\label{thm:reals_complete}
+    The metric space $(\mathbb{R}^{n}, d_{\text{Euclidean}})$ with the Euclidean metric \ref{def:euclid_norm} is complete.
+\end{theorem}
+\begin{proof}
+    So let $(x_{n})_{n}^{\infty}$ be a Cauchy sequence in $\mathbb{R}^{n}$. Because $\left| x_{i} - y_{i} \right| \leq \lVert x - y \rVert  $ for $x,y \in \mathbb{R}^{n}$, we get that all the component-wise sequence are Cauchy. But those are in $\mathbb{R}$, so they converge. By \ref{lem:coordin_wise_conv}, $x_{n} \to x$.
+\end{proof}
+

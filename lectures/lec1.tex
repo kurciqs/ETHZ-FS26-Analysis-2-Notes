@@ -1,0 +1,91 @@
+\chapter{Metric spaces}
+
+\section{Euclidean Space $\mathbb{R}^{n}$}
+
+We all know the set $\mathbb{R}^{n} = \left\{ x = (x_{1}, \dots, x_{n}) \mid x_{i} \in \mathbb{R} \right\}$, all $n$-tuples of real numbers. We want a vector space structure on this
+\begin{align*}
+	x + y = (x_{1} + y_{1}, \dots, x_{n} + y_{n}), \quad \lambda x = (\lambda x_{1}, \dots, \lambda x_{n}),
+\end{align*}
+but with a notion on distance.
+
+\begin{definition}[Euclidean Structure of $\mathbb{R}^{n}$]\label{def:euclid_norm}
+	Given $x,y \in \mathbb{R}^{n}$, we define the \textit{scalar product}
+	\begin{align*}
+		x \cdot y = \langle x, y \rangle := \sum_{i=1}^{n} x_{i}y_{i},
+	\end{align*}
+	the \textit{Euclidean norm}
+	\begin{align*}
+		\lVert x \rVert := \sqrt{x_{1}^{2} + \dots + x_{n}^{2}}
+	\end{align*}
+	and \textit{Euclidean distance}
+	\begin{align*}
+		d_{\text{Euclidean}}(x,y) := \lVert x - y \rVert.
+	\end{align*}
+\end{definition}
+
+\begin{lemma}[Cauchy-Schwartz]\label{lem:cauchy-schwartz}
+	For all $x, y \in \mathbb{R}^{n}$, $ x \cdot y \leq \lVert x \rVert \lVert y \rVert $.
+\end{lemma}
+\begin{proof}
+	If either $x = 0$ or $y = 0$, both sides are zero and the inequality is true. So assume wlog both $x,y \neq 0$. Let $\lambda > 0$ and using $2ab \leq a^{2} + b^{2}$
+	\begin{align*}
+		2x\cdot y = 2 \sum_{i=1}^{n} \lambda x_{i} \frac{y_{i}}{\lambda} \leq \sum_{i=1}^{n} \lambda^{2}x_{i}^{2} + \frac{y_{i}^{2}}{\lambda } = \lambda^{2} \lVert x \rVert^{2} + \frac{1}{\lambda^{2}} \lVert y \rVert^{2}.
+	\end{align*}
+	Take $\lambda = \displaystyle\frac{\lVert y \rVert }{\lVert x \rVert }$ and the equation becomes
+	\begin{align*}
+		\lambda^{2} \lVert x \rVert^{2} + \frac{1}{\lambda^{2}} \lVert y \rVert^{2} = 2\lVert x \rVert \lVert y \rVert,
+	\end{align*}
+	which proves the inequality.
+\end{proof}
+
+\begin{lemma}[Triangle inequality]\label{lem:triangle_ineq}
+	For all $x, y, z \in \mathbb{R}^{n}$,
+	\begin{align*}
+		\lVert  x - z \rVert \leq \lVert x - y \rVert + \lVert y - z \rVert.
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	We want to prove
+	\begin{align*}
+		\forall x, y \in \mathbb{R}^{n}: \lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert.
+	\end{align*}
+	This is equivalent by substitution. We square this to get
+	\begin{align*}
+		 & \lVert x + y \rVert^{2} \leq \lVert x \rVert^{2} + \lVert y \rVert^{2} + 2 \lVert x \rVert \lVert y \rVert.
+	\end{align*}
+	But the LHS computes to
+	\begin{align*}
+		\sum_{i=1}^{n} (x_{i} + y_{i})^{2} = \sum_{i=1}^{n} x_{i}^{2} + y_{i}^{2} + 2x_{i}y_{i} = \lVert x \rVert^{2} + \lVert y \rVert^{2} + 2 x\cdot y.
+	\end{align*}
+	And the statement is equivalent to $x \cdot y \leq\lVert x \rVert \lVert y \rVert$, which holds by the Cauchy-Schwartz, Lemma \ref{lem:cauchy-schwartz}.
+\end{proof}
+
+\section{Definition of metric space}
+We will work with just three axioms for distance, staying general until we later apply what we learned to $\mathbb{R}^{n}$ specifically.
+
+\begin{definition}[Metric space]\label{def:metric-space}
+	A metric space is a pair $(X,d)$, where $X$ is a set and the \textit{distance} $d: X \times X \to [0, \infty)$ satisfies
+	\begin{enumerate}
+		\item $\forall x,y \in X: d(x,y) = 0 \iff x = y$.
+		\item $\forall x,y \in X: d(x,y) = d(y,x)$.
+		\item $\forall x,y,z \in X: d(x,z) \leq d(x,y) + d(y,z)$.
+	\end{enumerate}
+\end{definition}
+
+\begin{eg}
+	$(\mathbb{R}^{n}, d_{\text{Euclidean}})$ is a metric space.
+
+	But for $\mathbb{R}^{2}$, there is also the distance $d(x,y) = d((x_{1}, x_{2}), (y_{1}, y_{2})) = \left| x_{1} - y_{1} \right|
+		+ \left| x_{2} - y_{2} \right|$.
+
+    For a metric $(X,d)$ and $Y \subset X$, $(Y,d)$ is also a metric space.
+
+    On the sphere $X = \left\{ x \in \mathbb{R}^{3} \mid \lVert x \rVert = 1 \right\}$, you can also either define the distance as the Euclidean distance or by going on a circular arc from one point to another. This also demonstrates that the most common metric isn't always the most natural/useful pick.
+
+    Let $X = C_{0}([a,b])$, the space of all real-valued continuos functions on $[a,b]$. Then
+    \begin{align*}
+        d_{1}(f,g) = \max_{[a,b]} \left| f - g \right| , \quad d_{2}(f,g) = \left( \int_{a}^{b} (f-g)^{2} \, dx \right)^{\frac{1}{2}}
+    \end{align*}
+	are both metrics.
+\end{eg}
+

@@ -1,0 +1,128 @@
+\section{Open and closed sets}
+
+Continuing our quest to generalise everything, we extend the definition of open and closed sets in $\mathbb{R}$ to any metric space $(X,d)$.
+
+\begin{definition}[Open ball]\label{def:open_ball}
+	Let $(X,d)$ be a metric space. Define the open ball of radius $r > 0$ centered at $x \in X$ as
+	\begin{align*}
+		B_{r}(x) = B(x,r) = \left\{ y \in X  \mid d(y,x) < r \right\}.
+	\end{align*}
+\end{definition}
+
+\begin{definition}[Open and closed sets]\label{def:open_closed_sets}
+	For $(X,d)$ a metric space, we say 
+	\begin{itemize}
+		\item $U \subset X$ is \textit{open} if $\forall x \in U \; \exists r > 0 \text{ s.t. } B(x,r) \subset U$.
+		\item $A \subset X$ is \textit{closed} if $X \setminus A$ is open.
+    \end{itemize}
+    The collection of all open sets $\mathcal{T}_{d} = \left\{ U \subset X \mid U \text{ is open} \right\}$ is called the \textit{topology}.
+\end{definition}
+
+\begin{lemma}[Union and intersection of open sets is open]\label{lem:union_intersec_open}
+	Let $(X,d)$ be a metric space and $\left\{ U_{i} \right\}_{i \in I}$ a family of open sets in $X$.
+	\begin{itemize}
+		\item Arbitrary unions of open sets are open. So $\bigcup_{i \in I} U_{i}$ is open.
+		\item Finite intersections of open sets are open. So if $I$ is finite, $\bigcap_{i \in I} U_{i}$ is open.
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+	Set
+	\begin{align*}
+		U = \bigcup_{i \in I} U_{i}.
+	\end{align*}
+	If $x \in U$, Then there exists $i \in I$ with $x \in U_{i}$ and since $U_{i}$ is open, there exists an $r > 0$ such that $B(x,r) \subset U_{i}$, so also contained in $U$. Thus, $U$ is open.
+
+	For the second one, consider that if $x$ is in all the open sets $U_{i}$, then for each $i$, there exists a small enough radius $r_{i}$ such that $B(r_{i},x) \subset U_{i}$. Then, out of all $r_{i}$'s, pick the smallest one, call it $r$ and $B(r,x)$ is contained in all the $U_{i}$, so in $U$.
+\end{proof}
+
+\begin{lemma}[Union and intersection of closed sets]\label{lem:union_intersec_closed}
+	Let $(X,d)$ be a metric space and $\left\{ A_{i} \right\}_{i \in I}$ a family of closed sets.
+	\begin{itemize}
+		\item Arbitrary intersections of closed sets are closed. So $\bigcup_{i \in I} A_{i}$ is closed.
+		\item Finite unions of closed sets are closed. So if $I$ is finite, $\bigcap_{i \in I} A_{i}$ is closed.
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+    Consider that
+    \begin{align*}
+        X \setminus \bigcup_{i \in I} A_{i} &= \bigcap_{i \in I} (X \setminus A_{i}), \\ 
+        X \setminus \bigcap_{i \in I} A_{i} &= \bigcup_{i \in I} (X \setminus A_{i}).
+    \end{align*}
+    Using this, one applies Lemma \ref{lem:union_intersec_open} to get the statement. 
+\end{proof}
+
+\begin{eg}
+    The intersection of infinitely many open sets might not be open. In particular, in $(\mathbb{R}, d_{| \cdot |})$, one gets for $U_{k} = \left( -\frac{1}{k}, \frac{1}{k} \right)$ that the intersection over all $k \in \mathbb{N}$ is $\left\{ 0 \right\}$, which is not open. Passing this into the complement also gives a counterexample to "infinitely many unions of closed sets are closed.
+\end{eg}
+
+\begin{definition}[Interior, closure and boundary]\label{def:int_clos_bound}
+    Given $\Omega \subset X$, for $(X,d)$ a metric space, we define:
+    \begin{itemize} 
+        \item The interior $\Omega^{\circ} = \bigcup \left\{ U \subset \Omega \mid U \text{ is open} \right\}$.
+        \item The closure $\overline{ \Omega }= \left\{ x \in X \mid \exists (x_{n})_{n}^{\infty} \subset \Omega \text{ s.t. } x_{n} \to x \right\} = \bigcap \left\{ A \supset \Omega \mid A \text{ is closed} \right\}$\footnote{We still have to show the equality TODO: WHEN?}.
+        \item The (topological) boundary $\partial \Omega := \overline{ \Omega } \setminus \Omega^{\circ}$.
+    \end{itemize}
+\end{definition}
+
+\begin{eg} 
+    The set $[0,1) \times [0,1) \subset \mathbb{R}^{2}$ will have for instance $(0,0)$ in the closure, but also $(1,1)$. It will not contain $(0,0)$ in the interior.
+\end{eg}
+
+\begin{remark}
+    We say a proposition $\mathcal{P}(x_{n})$ holds "eventually" for a sequence $(x_{n})_{n}^{\infty}$, when there exists an $N \in \mathbb{N}$ such that for all $n \geq N$, $\mathcal{P}(x_{n})$ holds. We will use this terminology a lot, so it's good to get accustomed to it. Sometimes, we also say "for $n$ large enough".
+\end{remark}
+
+\begin{lemma}[Open and closed sets through sequences]\label{lem:seq_open_closed}
+    Let $(X,d)$ be a metric space.
+    \begin{itemize} 
+        \item A subset $U \subset X$ is open if and only if for every sequence $(x_{n})_{n}^{\infty} \subset X$ with $x_{n} \to x \in U$, $x_{n}$ lies eventually in $U$.
+        \item A subset $A \subset X$ is closed if and only if for every sequence $(x_{n})_{n}^{\infty} \subset A: x_{n} \to x \in X \implies x \in A$.
+    \end{itemize} 
+\end{lemma}
+\begin{proof}
+    First, we prove the statement about open sets.
+
+    $\implies$: Take $x \in U$. Since $U$ is open, there exists $r > 0$ such that $B(x,r) \subset U$. Since $x_{n} \to x$, $\exists N$ s.t. $d(x_{n},x) < r$, so $x_{n} \in B(r,x)$ for all $n \geq N$.
+
+    $\impliedby$: We will prove this by contraposition. Assume that $U$ is not open. This means $\exists x \in U$ such that $\forall r > 0$, $B(x,r) \not \subset U$. This means there exists $x_{r} \in B(x,r) \cap (X \setminus U)$ for any $r > 0$. Taking $r = \frac{1}{n}$, we can produce a sequence of points $x_{n} \to x$, with none of the $x_{n}$ in $U$.
+
+    Now we prove the one about closed sets. 
+
+    $\implies$: Assume $A$ is closed, so $X \setminus A$ is open. Assume that $x_{n} \to x$, but $x \in X \setminus A$. By what we just proved, $x_{n}$ must eventually lie in $X \setminus A$, a contradiction to $(x_{n})_{n}^{\infty} \subset A$.
+
+    $\impliedby$: By contraposition. Assume $A$ is not closed. This means $X \setminus A$ is not open. By the statement about open sets we just proved, there exists a sequence $(x_{n})_{n}^{\infty} \subset X$ with $x_{n} \to x \in X \setminus A$ that never lies in $X \setminus A$, so it lies entirely in $A$.
+\end{proof}
+
+\begin{lecexercise}
+    Prove that if $(X,d)$ is complete and $A \subset X$ is closed, then $(A,d)$ is complete.
+\end{lecexercise}
+
+\section{Continuity}
+
+This time we generalise for continuity. So we will consider maps $f: X \to Y$ for metric spaces $(X,d_{X})$ and $(Y,d_{Y})$, which might not be the same. This is a significant difference to the old continuity, which was defined between two sets that are both the reals, hence share the same metric.
+
+\begin{definition}[Continuity]\label{def:continuity}
+    Let $(X,d)$ be a metric space. Consider a function $f: X \to Y$. We say $f$ is continuous if one of the following 3 equivalent properties hold.
+    \begin{enumerate} 
+        \item $\forall x \in X \; \forall \epsilon > 0 \; \exists \delta > 0 \text{ s.t. } f(B_{\delta}(x)) \subset B_{\epsilon}(f(x))$.
+        \item For $(x_{n})_{n}^{\infty} \subset X$ with $x_{n} \to x$, $(f(x_{n}))_{n}^{\infty}$ is a convergent sequence in $Y$ with limit $f(x_{n})$.
+        \item $\forall V \subset Y$ open, $f^{-1}(V) \subset X$ is open.
+    \end{enumerate}
+    We call them $\epsilon-\delta$-continuity (1), sequential continuity (2) and topological continuity (3).
+\end{definition}
+
+\begin{prop}[Equivalent definitions of continuity]\label{prop:equiv_def_cont}
+    The three definitions of continuity are equivalent.
+\end{prop}
+\begin{proof} 
+    We will prove an implication cycle.
+
+    $(1) \implies (2)$: Assume $f: X \to Y$ is $\epsilon-\delta$ continuous and let $x_{n} \to x$. Let $\epsilon > 0$. I want to prove $d(f(x_{n}),f(x)) < \epsilon$ eventually, or in other words $f(x_{n}) \in B_{\epsilon}(f(x))$ eventually.
+    By $\epsilon-\delta$ continuity, there exists $\delta > 0$ such that $f(B_{\delta}(x)) \subset B_{\epsilon}(f(x))$. But $x_{n} \in B_{\delta}(x)$ eventually, so $f(x_{n}) \in B_{\epsilon}(f(x))$ eventually.
+
+    $\neg (3) \implies \neg(2)$: By $\neg(3)$, we have $\exists V \subset Y$ open such that $f^{-1}(V)$ not open. By Lemma \ref{lem:seq_open_closed}, $\exists x \in f^{-1}(V)$ such that there is a sequence $x_{n} \to x$ with $x_{n} \in X \setminus f^{-1}(V)$ for all $n$. In particular, $f(x_{n}) \in Y \setminus V$, but $f(x) \in V$. Because $V$ is open, $f(x_{n}) \not \to f(x)$, by Lemma \ref{lem:seq_open_closed}.
+
+    $(3) \implies (1)$: Let $x \in X$ and $\epsilon > 0$. The set $V = B_{\epsilon}(f(x))$ is open, so $f^{-1}(V)$ is also open. We have of course $x \in f^{-1}(V)$. In particular, there exists $\delta > 0$ such that $B_{\delta}(x) \subset f^{-1}(V)$. But then, for $x' \in B_{\delta}(x)$, we have $f(x') \in V$, so $f(x') \in B_{\epsilon}(f(x))$. This proves $f(B_{\delta}(x)) \subset B_{\epsilon}(f(x))$.
+\end{proof}
+
+
