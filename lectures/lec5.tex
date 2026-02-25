@@ -1,0 +1,108 @@
+\begin{corollary}\label{cor:compactness}
+	The last proposition gives us the following corollaries:
+	\begin{enumerate}
+		\item $K \subset X$ compact $\implies K$ closed.
+		\item $K \subset X$ compact $\implies K$ complete.
+		\item $K \subset X$, $A \subset X$ closed $\implies$ $K \cap A$ compact.
+	\end{enumerate}
+\end{corollary}
+\begin{proof}
+	(1) is simple, we can use sequential closedness \ref{lem:seq_open_closed}. If a sequence converges, then it must converge to the limit of any of its subsequences. (2) also follows since if a Cauchy sequence has a convergent subsequence, then it also converges as a whole, and converges into $K$, because it is closed by (1). (3) also follows from sequential compactness and the fact that the limit of the subsequence must be in $A$.
+\end{proof}
+
+\begin{prop}[Continuous image of a compact set is compact]\label{prop:contin_image_of_compact}
+	Let $(X, d_{X})$ and $(Y, d_{Y})$ be metric spaces and $K \subset X$ be compact. If $f: X \to Y$ is continuous, then $f(K)$ is compact in $Y$.
+\end{prop}
+\begin{proof}
+	The goal is to show that $f(K)$ is topologically compact, so for $\mathcal{V}$ an open cover of $f(K)$, I want to find a finite subcover. So let $\mathcal{U} = \left\{ f^{-1}(V) \mid V \in \mathcal{V} \right\}$, which is an open (by continuity) cover of $K$. Extract a finite subcover of $K$ and map it back to the codomain.
+\end{proof}
+
+\begin{theorem}[Extreme value theorem]\label{thm:extreme_val_theorem}
+	Let $(X,d)$ be a metric space and $f:K \to \mathbb{R}$ be continuous and $K \subset X$ compact. Then both $\sup\left\{ f(x) \mid x \in K \right\}$ and $\inf\left\{ f(x) \mid x \in K \right\}$ are attained.
+\end{theorem}
+\begin{proof}
+	We will prove it for the supremum only. By definition of the supremum $s = \sup_{x \in K} \left\{ f(x) \right\}$, there exists a sequence $(x_{n})_{n}^{\infty} \subset K$ such that $f(x_{n}) \to s$. By compactness, this has a convergent subsequence $x_{n_{k}} \to \bar{x}$. By sequential continuity, $f(\bar{x}) = s$.
+\end{proof}
+
+\begin{remark}
+	We take a subset $K \subset \mathbb{R}^{n}$ to be bounded w.r.t. the Euclidean distance if there exists $N \in \mathbb{N}$ such that $\lVert x \rVert < N$ for all $x \in K$, equivalently $K \subset B_{N}(0)$.
+\end{remark}
+
+\begin{theorem}[Heine-Borel]\label{thm:heine-borel}
+	For the metric space $\mathbb{R}^{n}$ with the Euclidean distance, $K \subset \mathbb{R}^{n}$ is compact if and only if it is bounded and closed.
+\end{theorem}
+\begin{proof}
+	$\implies$: $K$ is closed by Corollary \ref{cor:compactness}. If $K$ is unbounded, $\exists (x_{n})_{n}^{\infty} \subset K$ such that $\lVert x_{n} \rVert \geq N$ for all $N \in \mathbb{N}$. Any subsequence will hence diverge. Indeed, $x_{n_{k}} \to x$ would imply $\lVert x_{n_{k}}-x \rVert \to 0$, and by triangle inequality, \ref{lem:triangle_ineq}
+	\begin{align*}
+		\lVert x_{n_{k}} \rVert  \leq \lVert x \rVert + \lVert x_{n_{k}} - x \rVert,
+	\end{align*}
+	a contradiction to $x_{n_{k}}$ being arbitrarily large.
+
+	$\impliedby$: It suffices to show that for $N \in \mathbb{N}$, $[-N, N]^{n} \subset \mathbb{R}^{n}$ is compact, assuming that $K \subset \mathbb{R}^{n}$ is closed and bounded by $B_{N}(0)$. This is because $K \subset B_{N}(0) \subset [-N, N]^{n}$, and a closed subset of a compact set is compact, so $K$ would be compact, by Corollary \ref{cor:compactness}.
+
+	The proof will have to use the Bolzano-Weierstrass Theorem in $\mathbb{R}$. Given a sequence $(x_{k})_{k}^{\infty}$, we can write this component-wise
+	\begin{align*}
+		x_{k} = (x_{k,1}, \dots, x_{k, n}).
+	\end{align*}
+
+	Consider the sequences $(x_{k,i})_{k=1}^{\infty} \subset [-N,N]$ for $1 \le i \le n$.
+	By Bolzano--Weierstrass, there exists a strictly increasing sequence of indices
+	$(k_m^{(1)})_{m=1}^{\infty}$ such that
+	\begin{align*}
+		x_{k_m^{(1)},1} \to \ell_1 \in [-N,N]
+		\quad \text{as } m \to \infty.
+	\end{align*}
+
+	Now consider the sequence $(x_{k_m^{(1)},2})_{m=1}^{\infty} \subset [-N,N]$. Again by Bolzano--Weierstrass, there exists a strictly increasing sequence $(k_m^{(2)})_{m=1}^{\infty}$ which is a subsequence of $(k_m^{(1)})_{m=1}^{\infty}$ such that
+	\begin{align*}
+		x_{k_m^{(2)},2} \to \ell_2 \in [-N,N] \quad \text{as } m \to \infty.
+	\end{align*}
+	Since $(k_m^{(2)})$ is a subsequence of $(k_m^{(1)})$, we still have
+	\begin{align*}
+		x_{k_m^{(2)},1} \to \ell_1.
+	\end{align*}
+
+	Proceeding inductively, for each $j=1,\dots,n$ we obtain a strictly increasing sequence $(k_m^{(j)})_{m=1}^{\infty}$ which is a subsequence of $(k_m^{(j-1)})_{m=1}^{\infty}$ and such that
+	\begin{align*}
+		x_{k_m^{(j)},j} \to \ell_j \in [-N,N] \quad \text{as } m \to \infty,
+	\end{align*}
+	and for all $i \le j$,
+	\begin{align*}
+		x_{k_m^{(j)},i} \to \ell_i.
+	\end{align*}
+
+	After $n$ steps we obtain $(k_m^{(n)})_{m=1}^{\infty}$ such that
+	\begin{align*}
+		x_{k_m^{(n)},i} \to \ell_i \quad \text{for all } i=1,\dots,n.
+	\end{align*}
+
+	Define $x := (\ell_1,\dots,\ell_n) \in [-N,N]^n$. Then $x_{k_m^{(n)}} \to x$ componentwise, hence $x_{k_m^{(n)}} \to x$ in $\mathbb{R}^n$ by Lemma \ref{lem:coordin_wise_conv}.
+\end{proof}
+
+\begin{eg}
+	Consider $X = \mathbb{R}$ and $A = (0,1]$. Why is this not compact? Because
+	\begin{align*}
+		A \subset \bigcup_{n = 1}^{\infty} \left( \frac{1}{n}, 2 \right)
+	\end{align*}
+	gives us a cover of $A$. But any finite cover of this will definitely miss some numbers of $A$.
+\end{eg}
+
+\section{Connectedness}
+
+In any metric space, $X, \emptyset$ are always both open and closed (clopen). Are there other clopen sets and how many? Or, consider the following question. For the sphere $X = \mathbb{S}^{2} = \left\{ v \in \mathbb{R}^{3} \mid \lVert v \rVert = 1 \right\}$ and the Euclidean distance, is it possible to write $\mathbb{S} = U \cup V$ with $U \cap V = \emptyset$ such that $U, V$ are both open and non-empty? Intuitively, it seems quite improbable. One can ask the same question for $(0,1) \subset \mathbb{R}$. We want to explore the concept of connected space in this section and end up answering these seemingly unrelated questions.
+
+\begin{definition}[Connectedness]\label{def:connectedness}
+	Let $(X,d)$ be a metric space and $A \subset X$ a nonempty subset.
+
+	$X$ is \textit{disconnected} if $\exists U, V \subset A$ open, disjoint and nonempty such that
+	\begin{align*}
+		A \subset U \cup V \text{ and } A \cap  U = \emptyset.
+	\end{align*}
+
+	Any subset $A$ that is not disconnected is called \textit{connected}.
+\end{definition}
+
+\begin{eg}
+	In $\mathbb{R}$, the set $A = (0,1) \cup (2,3)$ is immediately seen to be disconnected, as is $A = \left\{ 0,1 \right\}$.
+\end{eg}
+

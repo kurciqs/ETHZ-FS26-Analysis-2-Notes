@@ -100,9 +100,17 @@ Compact is \textit{not} just bounded and closed, like in $\mathbb{R}$.
 	\end{align*}
 	By sequential compactness, $(x_{n})_{n}^{\infty}$ has a converging subsequence $(x_{n_{\ell}})_{\ell}^{\infty}$ with $x = \lim_{\ell \to \infty} x_{n_{\ell}} \in K$. Note that $x \not  \in U_{n_{\ell}}$ for all $\ell$, because the complement of the union of all the open sets $U$ that came before $U_{n_{\ell}}$ is closed (see Lemma \ref{lem:union_intersec_closed} and \ref{lem:seq_open_closed}) and the sequence elements that come afterward and the limit must hence remain in the complement. In particular, $r(x_{n_{\ell}}) \to 0$, otherwise $x$ would have to lie in one of the $U_{n_{\ell}}$ at some point.
     
-    Since $B_{r(x) / 2}(x)$ is open, $x_{n_{\ell}}$ must eventually lie inside it as $x_{n_{\ell}} \to x$. And since $r(x_{n_{\ell}}) \to 0$, it must at some point contain
+    Since $B_{r(x) / 2}(x)$ is open, $x_{n_{\ell}}$ must eventually lie inside it as $x_{n_{\ell}} \to x$. And since $r(x_{n_{\ell}}) \to 0$, it must eventually contain
     \begin{align*}
         B_{2r\left( x_{n_{\ell}} \right) }(x_{n_{\ell}}) \subset B_{r(x) / 2}(x) \subset U_{i(x)},
     \end{align*}
     which is impossible, because this would imply $2r(x_{n_{\ell}})(x) \leq r(x_{n_{\ell}})$, as $r(x_{n_{\ell}})$ was supposed to be the supremum of all the radii such that $B_{r}(x)$ is contained in any open set in the cover.
+
+	$(2) \implies (1)$: Let $(x_{n})_{n}^{\infty} \subset K$ be a sequence. We need to show that there exists a convergent subsequence. So assume by contradiction that $\forall x \in K$, $x$ is not an accumulation point of $x_{n}$. But this means for any $x \in K$ there exists $\epsilon(x) > 0$, such that eventually, $x_{n} \in K \setminus B_{\epsilon(x)}(x)$ (quick contraposition). 
+
+	Define $\mathcal{U} = \left\{ B_{\epsilon(x)}(x) \mid x \in K \right\}$. This is an open cover of $K$, so it admits a finite subcover, such that
+	\begin{align*}
+		K \subset \bigcup_{j=1}^{n} B_{\epsilon(y_{j})}(y_{j}).
+	\end{align*}
+	But then $(x_{n})_{n}^{\infty}$ can only have finitely many terms, by the definition of $\epsilon(x)$, a contradiction.
 \end{proof}
