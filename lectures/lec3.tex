@@ -59,9 +59,10 @@ Continuing our quest to generalise everything, we extend the definition of open 
     Given $\Omega \subset X$, for $(X,d)$ a metric space, we define:
     \begin{itemize} 
         \item The interior $\Omega^{\circ} = \bigcup \left\{ U \subset \Omega \mid U \text{ is open} \right\}$.
-        \item The closure $\overline{ \Omega }= \left\{ x \in X \mid \exists (x_{n})_{n}^{\infty} \subset \Omega \text{ s.t. } x_{n} \to x \right\} = \bigcap \left\{ A \supset \Omega \mid A \text{ is closed} \right\}$\footnote{We still have to show the equality TODO: WHEN?}.
+        \item The closure $\overline{ \Omega }= \left\{ x \in X \mid \exists (x_{n})_{n}^{\infty} \subset \Omega \text{ s.t. } x_{n} \to x \right\} = \bigcap \left\{ A \supset \Omega \mid A \text{ is closed} \right\}$\footnote{Provable with \ref{lem:seq_open_closed}. Exercise.}.
         \item The (topological) boundary $\partial \Omega := \overline{ \Omega } \setminus \Omega^{\circ}$.
     \end{itemize}
+    One shows $\Omega^{\circ }, \partial \Omega$ are closed, while $\overline{ \Omega }$ is open using \ref{lem:union_intersec_closed} and \ref{lem:union_intersec_open}.
 \end{definition}
 
 \begin{eg} 
