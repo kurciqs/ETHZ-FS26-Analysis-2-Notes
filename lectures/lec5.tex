@@ -87,6 +87,31 @@
 	gives us a cover of $A$. But any finite cover of this will definitely miss some numbers of $A$.
 \end{eg}
 
+\begin{prop}[Uniform continuity]\label{prop:unif_cont}
+	Let $f: X \to Y$ be a continuous map between metric spaces. If $K \subset X$ is compact, then $f|_{K}$ is uniformly continuous.
+\end{prop}
+\begin{proof}
+	The goal is to show that given $\epsilon > 0$, there exists $\delta > 0$ such that $\forall x \in K: f(B_{\delta}(x)) \subset B_{\epsilon}(f(x))$. Using continuity, $\forall x \in K$, there exists $\delta(x) > 0$ such that $f(B_{\delta(x)}(x)) \subset B_{\frac{\epsilon}{2}}(f(x))$. Define
+	\begin{align*}
+		\mathcal{U} = \left\{ B_{\frac{\delta(x)}{2}}(x) \mid x \in K \right\}.
+	\end{align*}
+	This is an open cover of $K$. So it has a finite subcover. So 
+	\begin{align*}
+		K \subset \bigcup_{i=1}^{n} B_{\frac{\delta(x_{i})}{2}}(x_{i})
+	\end{align*}
+	and we define $\delta = \min_{1 \leq i \leq n}\left\{ \frac{\delta(x_{i})}{2} \right\}$. 
+
+	If $x \in K$ and $y \in B_{\delta}(x)$, then $x \in B_{\delta(x_{i}) / 2}(x_{i})$ for some $i$. Consider that 
+	\begin{align*}
+		d(x,y) < \delta \leq \frac{\delta(x_{i})}{2} , \quad d(x_{i}, y) < \frac{\delta(x_{i})}{2} + \frac{\delta(x_{i})}{2} < \delta(x_{i}).
+	\end{align*}
+	That means
+	\begin{align*}
+		f(B_{\delta}(x)) \subset f(B_{\delta(x_{i})}(x_{i})) \subset B_{\epsilon / 2} (f(x_{i})) \subset B_{\epsilon}(f(x)). 
+	\end{align*}
+	
+\end{proof}
+
 \section{Connectedness}
 
 In any metric space, $X, \emptyset$ are always both open and closed (clopen). Are there other clopen sets and how many? Or, consider the following question. For the sphere $X = \mathbb{S}^{2} = \left\{ v \in \mathbb{R}^{3} \mid \lVert v \rVert = 1 \right\}$ and the Euclidean distance, is it possible to write $\mathbb{S} = U \cup V$ with $U \cap V = \emptyset$ such that $U, V$ are both open and non-empty? Intuitively, it seems quite improbable. One can ask the same question for $(0,1) \subset \mathbb{R}$. We want to explore the concept of connected space in this section and end up answering these seemingly unrelated questions.
@@ -96,7 +121,7 @@ In any metric space, $X, \emptyset$ are always both open and closed (clopen). Ar
 
 	$X$ is \textit{disconnected} if $\exists U, V \subset A$ open, disjoint and nonempty such that
 	\begin{align*}
-		A \subset U \cup V \text{ and } A \cap  U = \emptyset.
+		A \subset U \cup V \text{ and } A \cap  U \neq \emptyset, A \cap V \neq \emptyset.
 	\end{align*}
 
 	Any subset $A$ that is not disconnected is called \textit{connected}.
