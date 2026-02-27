@@ -1,109 +1,125 @@
 
 \begin{remark}\label{rem:interval_criterion}
-    A subset $I$ of $\mathbb{R}$ is an interval if and only if $\forall x_{1},x_{2} \in I$ with $x_{1} \leq x_{2}$, $[x_{1}, x_{2}] \subset I$.
+	A subset $I$ of $\mathbb{R}$ is an interval if and only if $\forall x_{1},x_{2} \in I$ with $x_{1} \leq x_{2}$, $[x_{1}, x_{2}] \subset I$.
 \end{remark}
 
 \begin{prop}[Connected subsets of $\mathbb{R}$]\label{prop:connected_subs_RR}
-    For the metric space $(\mathbb{R}, d_{\text{Eucl}})$, $E \subset \mathbb{R}$ is connected if and only if $E$ is an interval.
+	For the metric space $(\mathbb{R}, d_{\text{Eucl}})$, $E \subset \mathbb{R}$ is connected if and only if $E$ is an interval.
 \end{prop}
 \begin{proof}
-    $\implies$: By contraposition. Assume $E$ is not an interval. That means there exist points $x_{1}, x_{2} \in E$ and $y \in \mathbb{R} \setminus E$ such that $x_{1} < y < x_{2}$. This gives us the disjoint open cover $(-\infty, y)$ and $(y, \infty)$. Hence, $E$ is disconnected.
+	$\implies$: By contraposition. Assume $E$ is not an interval. That means there exist points $x_{1}, x_{2} \in E$ and $y \in \mathbb{R} \setminus E$ such that $x_{1} < y < x_{2}$. This gives us the disjoint open cover $(-\infty, y)$ and $(y, \infty)$. Hence, $E$ is disconnected.
 
-    $\implies$ Again, by contraposition. Assume $E$ is disconnected. This means $\exists U_{1}, U_{2}$ open s.t. $E \subset U_{1} \cup U_{2}$ and $U_{1} \cap U_{2} = \emptyset$. There exist $x_{1} \in E \cap U_{1}$ and $x_{2} \in E \cap U_{2}$. Assume wlog that $x_{1} < x_{2}$. We define
-    \begin{align*}
-        y = \sup \left\{ t \geq x_{1} \mid [x_{1},t) \subset U_{1} \right\} \in \mathbb{R}.
-    \end{align*}
-    This exists because the set is clearly bounded by $x_{2}$. $y$ is the supremum, hence the limit of points in $\mathbb{R} \setminus U_{2}$, which is closed, so itself in $\mathbb{R} \setminus U_{2}$. Furthermore, $y \in \mathbb{R} \setminus U_{1}$. Because if $y \in U_{1}$, there exists a ball $(y - \epsilon, y + \epsilon) \subset U_{1}$ for $\epsilon > 0$, but then that would give us $[x_{1}, y + \epsilon) \subset U_{1}$, a contradiction. 
-    As a consequence, $y \in \mathbb{R} \setminus (U_{1} \cup U_{2}) \subset \mathbb{R} \setminus E$. This gives us $x_{1}, x_{2}$ and $y \in (x_{1},x_{2})$ with $y \not \in E$.
+	$\implies$ Again, by contraposition. Assume $E$ is disconnected. This means $\exists U_{1}, U_{2}$ open s.t. $E \subset U_{1} \cup U_{2}$ and $U_{1} \cap U_{2} = \emptyset$. There exist $x_{1} \in E \cap U_{1}$ and $x_{2} \in E \cap U_{2}$. Assume wlog that $x_{1} < x_{2}$. We define
+	\begin{align*}
+		y = \sup \left\{ t \geq x_{1} \mid [x_{1},t) \subset U_{1} \right\} \in \mathbb{R}.
+	\end{align*}
+	This exists because the set is clearly bounded by $x_{2}$. $y$ is the supremum, hence the limit of points in $\mathbb{R} \setminus U_{2}$, which is closed, so itself in $\mathbb{R} \setminus U_{2}$. Furthermore, $y \in \mathbb{R} \setminus U_{1}$. Because if $y \in U_{1}$, there exists a ball $(y - \epsilon, y + \epsilon) \subset U_{1}$ for $\epsilon > 0$, but then that would give us $[x_{1}, y + \epsilon) \subset U_{1}$, a contradiction.
+	As a consequence, $y \in \mathbb{R} \setminus (U_{1} \cup U_{2}) \subset \mathbb{R} \setminus E$. This gives us $x_{1}, x_{2}$ and $y \in (x_{1},x_{2})$ with $y \not \in E$.
 \end{proof}
 
 \begin{prop}[Connectedness under continuous maps]\label{prop:connect_continuous}
-    Let $f: X \to Y$ be a continuous map between metric spaces and $E \subset X$ connected. Then $f(E)$ is connected.
+	Let $f: X \to Y$ be a continuous map between metric spaces and $E \subset X$ connected. Then $f(E)$ is connected.
 \end{prop}
 \begin{proof}
-    By contraposition. Assume that $f(E)$ is disconnected. This means 
-    \begin{align*}
-        \exists V_{1}, V_{2} \subset Y \text{ open disjoint, with } f(E) \subset V_{1} \cup V_{2} \text{ and } V_{i} \cap f(E) \neq \emptyset.
-    \end{align*}
-    We define $U_{1} = f^{-1}(V_{1})$ and $U_{2} = f^{-1}(V_{2})$. Then $E \subset f^{-1}(V_{1}) \cup  f^{-1}(V_{2}) = U_{1} \cup U_{2}$. Since the images were disjoint, we have 
-    \begin{align*}
-        U_{1} \cap U_{2} = f^{-1}(V_{1}) \cap f^{-1}(V_{2}) = f^{-1}(V_{1} \cap V_{2}) = f^{-1}(\emptyset) = \emptyset.
-    \end{align*}
-    $U_{1}, U_{2}$ are also open since $f$ is continuous and the intersection with $E$ is also non-empty, so $U_{1}, U_{2}$ split $E$, so it is disconnected.
+	By contraposition. Assume that $f(E)$ is disconnected. This means
+	\begin{align*}
+		\exists V_{1}, V_{2} \subset Y \text{ open disjoint, with } f(E) \subset V_{1} \cup V_{2} \text{ and } V_{i} \cap f(E) \neq \emptyset.
+	\end{align*}
+	We define $U_{1} = f^{-1}(V_{1})$ and $U_{2} = f^{-1}(V_{2})$. Then $E \subset f^{-1}(V_{1}) \cup  f^{-1}(V_{2}) = U_{1} \cup U_{2}$. Since the images were disjoint, we have
+	\begin{align*}
+		U_{1} \cap U_{2} = f^{-1}(V_{1}) \cap f^{-1}(V_{2}) = f^{-1}(V_{1} \cap V_{2}) = f^{-1}(\emptyset) = \emptyset.
+	\end{align*}
+	$U_{1}, U_{2}$ are also open since $f$ is continuous and the intersection with $E$ is also non-empty, so $U_{1}, U_{2}$ split $E$, so it is disconnected.
 \end{proof}
 
 \begin{corollary}[Intermediate value theorem]
-    Let $(X, d)$ be a connected metric space and $f: X \to \mathbb{R}$ continuous, with $f(x) = a, f(y) = b$ and $a \leq b$ for some $x,y \in X$. Then $\exists z \in X$ s.t. $f(z) = c$ for all $c \in [a,b]$.
+	Let $(X, d)$ be a connected metric space and $f: X \to \mathbb{R}$ continuous, with $f(x) = a, f(y) = b$ and $a \leq b$ for some $x,y \in X$. Then $\exists z \in X$ s.t. $f(z) = c$ for all $c \in [a,b]$.
 \end{corollary}
 \begin{proof}
-    Because $X$ is connected, $f(X)$ is connected. But in $\mathbb{R}$, by Proposition \ref{prop:connect_continuous}, the only connected sets are the intervals, immediately proving the corollary. 
+	Because $X$ is connected, $f(X)$ is connected. But in $\mathbb{R}$, by Proposition \ref{prop:connect_continuous}, the only connected sets are the intervals, immediately proving the corollary.
 \end{proof}
 
 \begin{definition}[Curve]\label{def:curve}
-    Let $(X,d)$ be a metric space. A curve or path in $X$ is a map $\gamma:[0,1] \to X$ that is continuous. 
-    We call $\gamma (0)$ the starting point and $\gamma (1)$ the end point. 
+	Let $(X,d)$ be a metric space. A curve or path in $X$ is a map $\gamma:[0,1] \to X$ that is continuous.
+	We call $\gamma (0)$ the starting point and $\gamma (1)$ the end point.
 
-    A path with $\gamma (0) = \gamma (1)$ is called a closed curve, or a loop.
+	A path with $\gamma (0) = \gamma (1)$ is called a closed curve, or a loop.
 \end{definition}
 
 \begin{definition}[Path-connected]\label{def:path-connected}
-    Let $(X,d)$ be a metric space. A set $E \subset X$ is called path connected if $\forall x,y \in E$, there exists a path $\gamma: [0,1] \to E$ joining $x$ and $y$, i.e. $\gamma(0) = x$ and $\gamma (1) = y$.
+	Let $(X,d)$ be a metric space. A set $E \subset X$ is called path connected if $\forall x,y \in E$, there exists a path $\gamma: [0,1] \to E$ joining $x$ and $y$, i.e. $\gamma(0) = x$ and $\gamma (1) = y$.
 \end{definition}
 
 
 \begin{prop}[Path connected implies connected]\label{prop:path_conn_conn}
-    Let $(X,d)$ be a metric space and $E \subset X$. If $E$ is path connected, then $E$ is connected.
+	Let $(X,d)$ be a metric space and $E \subset X$. If $E$ is path connected, then $E$ is connected.
 \end{prop}
 \begin{proof}
-    By contraposition. Assume $E$ is disconnected, so there exist $U_{1}, U_{2}$ open, disjoint s.t. $E \subset U_{1} \cup U_{2}$ and $\exists x_{i} \in U_{i} \cap E$.
-    Assume further that there exists a path $\gamma: [0,1] \to E$ joining $x_{1}$ and $x_{2}$. Define $V_{i} = \gamma^{-1}(U_{i}) \subset [0,1]$. These are open disjoint nonempty ($0 \in V_{1}$ and $1 \in V_{2}$) and covering $[0,1]$. Hence $[0,1]$ is disconnected, which is impossible by \ref{prop:connected_subs_RR}.
+	By contraposition. Assume $E$ is disconnected, so there exist $U_{1}, U_{2}$ open, disjoint s.t. $E \subset U_{1} \cup U_{2}$ and $\exists x_{i} \in U_{i} \cap E$.
+	Assume further that there exists a path $\gamma: [0,1] \to E$ joining $x_{1}$ and $x_{2}$. Define $V_{i} = \gamma^{-1}(U_{i}) \subset [0,1]$. These are open disjoint nonempty ($0 \in V_{1}$ and $1 \in V_{2}$) and covering $[0,1]$. Hence $[0,1]$ is disconnected, which is impossible by \ref{prop:connected_subs_RR}.
 \end{proof}
 
 \begin{eg}[Topoligsts' curve]
-    Consider $(\mathbb{R}^{2}, d_{\text{Eucl}})$. Define $E = (\left\{ 0 \right\} \times [0,1]) \cup \left\{ (t, \sin(1 / t)) \mid t > 0 \right\}$. One can prove this is connected as an exercise, but not path connected, creating sequences that converge to some point in $[0,y]$, which would make a path connection from $[0,y]$ to any point on the sine curve impossible. So connected does not imply path connected, at least not in general. 
+	Consider $(\mathbb{R}^{2}, d_{\text{Eucl}})$. Define $E = (\left\{ 0 \right\} \times [0,1]) \cup \left\{ (t, \sin(1 / t)) \mid t > 0 \right\}$. One can prove this is connected as an exercise, but not path connected, creating sequences that converge to some point in $[0,y]$, which would make a path connection from $[0,y]$ to any point on the sine curve impossible. So connected does not imply path connected, at least not in general.
 \end{eg}
 
 \begin{definition}[Composed and reversed paths]\label{def:composed_path}
-    Let $\gamma_{1}:[0,1] \to X$ with $\gamma_{1} (0) = x$ and $\gamma_{1} (1) = y$ and $\gamma_{2}: [0,1] \to X$ with $\gamma_{2}(0) = y$ and $\gamma_{2}(1) = z$. 
-    
-    We define $\gamma_{1}^*(t) = \gamma_{1}(1-t)$, the reverse path. Since $1-t$ is continuous, $\gamma_{1}^*$ is a continuous map as well and represents the reversion of $\gamma_{1}$.
+	Let $\gamma_{1}:[0,1] \to X$ with $\gamma_{1} (0) = x$ and $\gamma_{1} (1) = y$ and $\gamma_{2}: [0,1] \to X$ with $\gamma_{2}(0) = y$ and $\gamma_{2}(1) = z$.
 
-    We also define the composition
-    \begin{align*}
-        \gamma_{3}(t) = 
-        \begin{cases}
-            \gamma_{1}(2t) \quad & t \in \left[0,\tfrac{1}{2}\right] \\ 
-            \gamma_{2}(2t - 1) \quad & t \in \left[\tfrac{1}{2},1\right]. 
-        \end{cases}
-    \end{align*}
-    This is also a curve (check that it's continuous, best with $\epsilon-\delta$).
+	We define $\gamma_{1}^*(t) = \gamma_{1}(1-t)$, the reverse path. Since $1-t$ is continuous, $\gamma_{1}^*$ is a continuous map as well and represents the reversion of $\gamma_{1}$.
+
+	We also define the composition
+	\begin{align*}
+		\gamma_{3}(t) =
+		\begin{cases}
+			\gamma_{1}(2t) \quad     & t \in \left[0,\tfrac{1}{2}\right]  \\
+			\gamma_{2}(2t - 1) \quad & t \in \left[\tfrac{1}{2},1\right].
+		\end{cases}
+	\end{align*}
+	This is also a curve (check that it's continuous, best with $\epsilon-\delta$).
 \end{definition}
 
 Finally, we are ready to show that in Euclidean space, path connected and connected mean the same thing, also revealing for instance that $\mathbb{S}^{2}$ is connected (because it is path connected), so can not be decomposed into open sets. And I'll throw in a remark about clopen sets. With this and the work leading up to this, all of the questions posted at the beginning of the section should be answered.
 
 \begin{remark}\label{rem:clopen_iff_connected}
-    It turns out that the answer to the question about clopen sets was right in front of us the whole time. Assume $X$ is connected and let $A \subset X$ be clopen. Then $X \setminus A$ and $A$ give a separation of $X$, so one of them must be empty. Conversely, if $X$ is disconnected, then $X = U \cup V$ for $U, V \subset X$ a separation. But then $U \cap V = \emptyset$, so we're left with $V = X \setminus U$. But these sets are by assumption non-empty, giving a non-trivial clopen set $V$.
+	It turns out that the answer to the question about clopen sets was right in front of us the whole time. Assume $X$ is connected and let $A \subset X$ be clopen. Then $X \setminus A$ and $A$ give a separation of $X$, so one of them must be empty. Conversely, if $X$ is disconnected, then $X = U \cup V$ for $U, V \subset X$ a separation. But then $U \cap V = \emptyset$, so we're left with $V = X \setminus U$. But these sets are by assumption non-empty, giving a non-trivial clopen set $V$.
 \end{remark}
 
 \begin{theorem}[Connected iff path connected in $\mathbb{R}^{n}$]\label{thm:RR_conn_iff_path_conn}
-    In Euclidean $\mathbb{R}^{n}$, an open subset $U \subset \mathbb{R}^{n}$ is connected if and only if it is path connected.
+	In Euclidean $\mathbb{R}^{n}$, an open subset $U \subset \mathbb{R}^{n}$ is connected if and only if it is path connected.
 \end{theorem}
 \begin{proof}
-    One direction we already proved in Proposition \ref{prop:path_conn_conn}. The goal is to fix an $x_{0} \in U$, and then prove we can join it with any other point $x \in U$ by a path. Then, any two points $x,y \in U$ can be joined by composing the path from $x$ to $x_{0}$ and the path from $x_{0}$ to $y$.
+	One direction we already proved in Proposition \ref{prop:path_conn_conn}. The goal is to fix an $x_{0} \in U$, and then prove we can join it with any other point $x \in U$ by a path. Then, any two points $x,y \in U$ can be joined by composing the path from $x$ to $x_{0}$ and the path from $x_{0}$ to $y$.
 
-    Define the set $G \subset U$, with
-    \begin{align*}
-        G = \left\{ x \in U \mid \exists \text{ path } \gamma :[0,1] \to U \text{ with } \gamma (0) = x_{0}, \gamma(1) = x \right\}.
-    \end{align*}
+	Define the set $G \subset U$, with
+	\begin{align*}
+		G = \left\{ x \in U \mid \exists \text{ path } \gamma :[0,1] \to U \text{ with } \gamma (0) = x_{0}, \gamma(1) = x \right\}.
+	\end{align*}
 
-    We will prove that (1) $G$ is open and (2) $U \setminus G$ is open. But $x_{0} \in G$, and since $U$ is connected, $U \setminus G$ will have to be empty, leaving us with $G = U$.
+	We will prove that (1) $G$ is open and (2) $U \setminus G$ is open. But $x_{0} \in G$, and since $U$ is connected, $U \setminus G$ will have to be empty, leaving us with $G = U$.
 
-    The key observation is that, using openness of $U$, $\forall x \in U \; \exists B_{r}(x) \subset U$, and that for $y \in B_{r}(x)$, $y \in G \iff x \in G$. Why? Because the map $t \in [0,1] \mapsto (1-t)x + ty \in \mathbb{R}^{n}$ is continuous and lives only inside $B_{r}(x) \subset U$, as
-    \begin{align*}
-        \lVert (1-t)x + ty - x \rVert = \lVert t(y-x) \rVert = t \lVert y-x \rVert < r,
-    \end{align*}
-    connecting $y$ and $x$, hence if $y \in G$, then $x$ can be connected to $x_{0}$ via $y$. And conversely, if $x \in G$, then $y \in G$ by the same argument. 
-   
-    But this just shows that if $x \in G$, then there exists a small enough ball $B_{r}(x) \subset G$, showing $G$ is open, but also that if $x \not \in G$, that there exists another small ball $B_{r}(x)$ that has \textit{no} elements in $G$, so $B_{r}(x) \subset X \setminus G$. But this proves $X \setminus G$ is open and we're done. 
+	The key observation is that, using openness of $U$, $\forall x \in U \; \exists B_{r}(x) \subset U$, and that for $y \in B_{r}(x)$, $y \in G \iff x \in G$. Why? Because the map $t \in [0,1] \mapsto (1-t)x + ty \in \mathbb{R}^{n}$ is continuous and lives only inside $B_{r}(x) \subset U$, as
+	\begin{align*}
+		\lVert (1-t)x + ty - x \rVert = \lVert t(y-x) \rVert = t \lVert y-x \rVert < r,
+	\end{align*}
+	connecting $y$ and $x$, hence if $y \in G$, then $x$ can be connected to $x_{0}$ via $y$. And conversely, if $x \in G$, then $y \in G$ by the same argument.
+
+	But this just shows that if $x \in G$, then there exists a small enough ball $B_{r}(x) \subset G$, showing $G$ is open, but also that if $x \not \in G$, that there exists another small ball $B_{r}(x)$ that has \textit{no} elements in $G$, so $B_{r}(x) \subset X \setminus G$. But this proves $X \setminus G$ is open and we're done.
 \end{proof}
 
+% nice joke:
+% \begin{definition}[Totally Confused $C$-Property]
+% 	Let $(X,d)$ be a metric space. We say that $X$ is
+% 	\emph{Cauchy-complete-continuous-compact-connected-contractive}
+% 	if for every $\varepsilon > 0$ there exists $\delta > 0$ and
+% 	$N \in \mathbb{N}$ such that for all $x,y \in X$ and all
+% 	$n,m \ge N$,
+% 	\[
+% 		d(x_n,y_m) < \delta
+% 		\;\Longrightarrow\;
+% 		d(f(x_n),f(y_m)) \le \lambda d(x,y) < \varepsilon,
+% 	\]
+% 	for some fixed $\lambda \in (0,1)$, and moreover every open cover
+% 	of $X$ has a finite subsequence which converges to a unique limit
+% 	contained in the same connected component as $x$.
+% \end{definition}
