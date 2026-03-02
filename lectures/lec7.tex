@@ -1,0 +1,112 @@
+\section{Normed vector spaces}
+
+Having tackled metric spaces in general, we still have to consider vector spaces with a special operation, the norm. We need this because $\mathbb{R}^{n}$ with the Euclidean distance is exactly one such space. We consider normed vector spaces over $\mathbb{R}$, but one can also do it over $\mathbb{C}$ analogously. 
+
+\begin{definition}[Normed vector space]\label{def:normed_vs}
+    Let $V$ be a vector space over $\mathbb{R}$. A map $\lVert \cdot  \rVert: V \to [0,\infty)$ is called a norm if 
+    \begin{enumerate} 
+        \item $\lVert v \rVert = 0 \iff v = 0$.
+        \item $\forall v \in V, \alpha \in \mathbb{R}: \lVert \alpha v \rVert = \left| \alpha \right| \lVert v \rVert$.
+        \item $\forall v,w \in V: \lVert v+w \rVert \leq \lVert v \rVert + \lVert w \rVert$.
+    \end{enumerate}
+    Then, $V$ is called a normed vector space (over $\mathbb{R}$).
+\end{definition}
+
+\begin{eg} 
+    We have of course $\mathbb{R}^{n}$ with $\lVert \cdot  \rVert_{\text{Euclid}}$, which we will denote with $\left| \cdot  \right|$ from now on, because it is so common. 
+
+    For $p \in \mathbb{N}$, we have the $p$-norm on $\mathbb{R}^{n}$,
+    \begin{align*}
+        \lVert v \rVert_{p} = \left( \sum_{i=1}^{n} \left| v_{i} \right|^{p} \right)^{\frac{1}{p}}.
+    \end{align*}
+
+    One shows as an exercise that
+    \begin{align*}
+        \lVert v \rVert_{\infty} = \lim_{p \to \infty} \lVert v \rVert_{p} = \max_{1 \leq i \leq n} \left| v_{i} \right|
+    \end{align*}
+    also gives a norm.
+\end{eg}
+
+
+\begin{definition}[Hilbert-Schmidt norm]\label{def:hilbert-schmidt-norm}
+    Consider the space $V = \text{Hom}(\mathbb{R}^{n}, \mathbb{R}^{m})$. For $M \in V$, we define
+    \begin{align*}
+        \lVert M \rVert_{2} = \sqrt{ \text{tr}(M^* M)} = \sqrt{\sum_{i=1}^{n} \left| Me_{i} \right| },
+    \end{align*} 
+    where $e_{i}$ is the canonical basis on $\mathbb{R}^{n}$. One checks this is a norm.
+\end{definition}
+
+\begin{lemma}[Hilbert-Schmidt norm]\label{lem:hilbert-schmidt-norm}
+    For every $x \in \mathbb{R}^{n}$ and $M: \mathbb{R}^{n} \to \mathbb{R}^{m}$ linear, 
+    \begin{align*}
+        \left| Mx \right| \leq \lVert M \rVert_{2} \left| x \right|.
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    We have 
+    \begin{align*}
+        \left| Mx \right|^{2} &= \left| M \left( \sum_{i=1}^{n} x_{i}e_{i} \right)  \right|^{2} = \left| \sum_{i=1}^{n} x_{i} M e_{i} \right|^{2} \leq \left(\sum_{i=1}^{n} \left| x_{i}Me_{i} \right| \right)^{2} \\ &= \left( \sum_{i=1}^{n} \left| x_{i} \right| \left| M e_{i} \right| \right)^{2} \leq \left| x \right|^{2} \sum_{i=1}^{n} \left| Me_{i} \right|^{2} = \left| x \right|^{2} \lVert M \rVert_{2}^{2}, 
+    \end{align*}
+    invoking Cauchy-Schwartz \ref{lem:cauchy-schwartz} and the triangle inequality.
+\end{proof}
+
+\begin{eg} 
+    Let's consider more examples. Let $V$ be the continuous real-valued functions on $[0,1]$. Define the $p$-norm for $f \in V$:
+    \begin{align*}
+        \lVert f \rVert_{p} = \left( \int_{0}^{1} |f|^{p} \, dx \right)^{\frac{1}{p}}.
+    \end{align*}    
+    There is also the analogous $\infty$-norm, or supremum norm
+    \begin{align*}
+        \lVert f \rVert_{\infty} = \max_{x \in [0,1]} \left| f \right|.
+    \end{align*}
+    To prove the $p$-norm is a norm is tricky but the infinity norm is easier to prove, left as an exercise.
+\end{eg}
+
+\begin{prop}[Norm induces metric]\label{prop:norm_induces_metric}
+    Every normed vector space is a metric space with $d(v,w) = \lVert v-w \rVert$.
+\end{prop}
+\begin{proof}
+    Exercise.
+\end{proof}
+
+\begin{definition}[Inner product vector space]\label{def:inner_prod_vs}
+    Let $V$ be a vector space over $\mathbb{R}$. An inner product is a map $\langle \cdot ,\cdot  \rangle: V \times V \to \mathbb{R}$ that satisfies
+    \begin{enumerate} 
+        \item $\forall v, w \in V: \langle v,w \rangle=\langle w,v \rangle$.
+        \item $\forall \alpha, \beta \in \mathbb{R}, v,w \in V: \langle \alpha v, \beta w \rangle = \alpha \langle v,w \rangle + \beta \langle v,w \rangle$.
+        \item $\forall v \in V: \langle v,v \rangle \geq 0$ and $\langle v,v \rangle = 0 \iff v = 0$.
+    \end{enumerate}
+\end{definition}
+
+\begin{prop}[Inner product induces norm]\label{prop:inner_prod_induces_norm}
+    Every inner product space is a normed vector space with the norm $\lVert v \rVert = \sqrt{\langle v,v \rangle}$.
+\end{prop}
+\begin{proof}
+    Exercise on problem sheet 3. We will also do all of this in the Linear Algebra Course.
+\end{proof}
+
+\begin{remark}\label{rem:global_conventions}
+    From now on, $\mathbb{R}^{n}$ will be the vector space over $\mathbb{R}$ with the Euclidean norm $\left| \cdot \right|$. It is also an inner product space, with the inner product as in \ref{def:euclid_norm}. It is also a metric space with $d(x,y) = \left| x-y \right|$. 
+
+    If we say that $x_{n} \to x$ in $\mathbb{R}^{n}$, then we mean $\left| x_{n} - x \right| \to 0$. What will also be central is that convergence is equivalent to component-wise convergence $\left| x_{i,n} - x_{i} \right| \to 0$. 
+
+    Also if $U \subset \mathbb{R}^{n}$ is an open set and $f: U \to \mathbb{R}^{m}$ a function, we say
+    \begin{align*}
+        y = \lim_{x \to x_{0}} f(x)
+    \end{align*}
+    if and only if for every sequence $(x_{k})_{k}^{\infty}$ with $x_{k} \to x$, we have $f(x_{k}) \to y$. 
+\end{remark}
+
+\chapter{Multidimensional differential calculus}
+
+\section{The differential}
+
+This will be the most important definition of the course.
+
+\begin{definition}[Differential]\label{def:differential}
+    Let $f: U \to \mathbb{R}^{m}$ with $U \subset \mathbb{R}^{n}$ open be a function. We say that $L : \mathbb{R}^{n} \to \mathbb{R}^{m}$, a linear map, is the differential of $f$ if for all $x_{0} \in U$
+    \begin{align*}
+        \lim_{x \to 0} \frac{f(x_{0}+x) - f(x) - Lx}{\left| x \right|} = 0.
+    \end{align*}
+\end{definition}
+

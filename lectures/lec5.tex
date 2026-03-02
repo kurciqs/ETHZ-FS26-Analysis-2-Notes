@@ -91,15 +91,15 @@
 	Let $f: X \to Y$ be a continuous map between metric spaces. If $K \subset X$ is compact, then $f|_{K}$ is uniformly continuous.
 \end{prop}
 \begin{proof}
-	The goal is to show that given $\epsilon > 0$, there exists $\delta > 0$ such that $\forall x \in K: f(B_{\delta}(x)) \subset B_{\epsilon}(f(x))$. Using continuity, $\forall x \in K$, there exists $\delta(x) > 0$ such that $f(B_{\delta(x)}(x)) \subset B_{\frac{\epsilon}{2}}(f(x))$. Define
+	The goal is to show that given $\epsilon > 0$, there exists $\delta > 0$ such that $\forall x \in K: f(B_{\delta}(x)) \subset B_{\epsilon}(f(x))$. Using continuity, $\forall x \in K$, there exists $\delta(x) > 0$ such that $f(B_{\delta(x)}(x)) \subset B_{\epsilon/2}(f(x))$. Define
 	\begin{align*}
-		\mathcal{U} = \left\{ B_{\frac{\delta(x)}{2}}(x) \mid x \in K \right\}.
+		\mathcal{U} = \left\{ B_{{\delta(x)}/{2}}(x) \mid x \in K \right\}.
 	\end{align*}
 	This is an open cover of $K$. So it has a finite subcover. So 
 	\begin{align*}
-		K \subset \bigcup_{i=1}^{n} B_{\frac{\delta(x_{i})}{2}}(x_{i})
+		K \subset \bigcup_{i=1}^{n} B_{{\delta(x_{i})}/{2}}(x_{i})
 	\end{align*}
-	and we define $\delta = \min_{1 \leq i \leq n}\left\{ \frac{\delta(x_{i})}{2} \right\}$. 
+	and we define $\delta = \frac{1}{2}\min\left\{ {\delta(x_{i})} \right\}$. 
 
 	If $x \in K$ and $y \in B_{\delta}(x)$, then $x \in B_{\delta(x_{i}) / 2}(x_{i})$ for some $i$. Consider that 
 	\begin{align*}
@@ -107,7 +107,7 @@
 	\end{align*}
 	That means
 	\begin{align*}
-		f(B_{\delta}(x)) \subset f(B_{\delta(x_{i})}(x_{i})) \subset B_{\epsilon / 2} (f(x_{i})) \subset B_{\epsilon}(f(x)). 
+		d_{Y}(f(x),f(y)) \leq d_{Y}(f(x),f(x_{i})) + d_{Y}(f(x_{i}), f(y)) < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
 	\end{align*}
 	
 \end{proof}
