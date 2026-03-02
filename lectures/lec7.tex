@@ -27,11 +27,10 @@ Having tackled metric spaces in general, we still have to consider vector spaces
     also gives a norm.
 \end{eg}
 
-
 \begin{definition}[Hilbert-Schmidt norm]\label{def:hilbert-schmidt-norm}
     Consider the space $V = \text{Hom}(\mathbb{R}^{n}, \mathbb{R}^{m})$. For $M \in V$, we define
     \begin{align*}
-        \lVert M \rVert_{2} = \sqrt{ \text{tr}(M^* M)} = \sqrt{\sum_{i=1}^{n} \left| Me_{i} \right| },
+        \lVert M \rVert_{2} = \sqrt{ \text{tr}(M^* M)} = \sqrt{\sum_{i=1}^{n} \left| Me_{i} \right|^{2}},
     \end{align*} 
     where $e_{i}$ is the canonical basis on $\mathbb{R}^{n}$. One checks this is a norm.
 \end{definition}
