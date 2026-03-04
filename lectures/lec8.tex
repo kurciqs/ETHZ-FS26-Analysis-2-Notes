@@ -1,0 +1,174 @@
+\begin{remark}
+	Clearly, for $m=n=1$, $L(x)=f'(x_{0})x$. Indeed
+	\begin{align*}
+		0 = \lim_{x \to 0} \frac{f(x_{0} + x) - f(x_{0}) - f'(x_{0})x}{x} \implies f'(x_{0}) = \lim_{x \to 0} \frac{f(x_{0}+x)-f(x_{0})}{x}.
+	\end{align*}
+\end{remark}
+
+\begin{lemma}[Differential component-wise in the codomain]\label{lem:differential_component_wise}
+	Let $U \subset \mathbb{R}^{n}$ open, $f: U \to \mathbb{R}^{m}$ and $x_{0} \in U$. Then $f$ is differentiable at $x_{0}$ if and only if $f_{j}$ is differentiable at $x_{0}$ for every $1 \leq j \leq m$. In that case,
+	\begin{align*}
+		Df_{x_{0}}(x) = (Df_{1,x_{0}}(x), \dots, Df_{m,x_{0}}(x)).
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	\begin{align*}
+		\lim_{x \to 0}\frac{f(x_{0}+x)-f(x_{0})-L(x)}{\left| x \right| } = 0
+	\end{align*}
+	exists and equals zero iff the limit exists and equals zero component-wise, by Lemma \ref{lem:coordin_wise_conv}. So the above limit holds iff
+	\begin{align*}
+		\lim_{x \to 0} \frac{f_{j}(x_{0}+x)-f_{j}(x_{0})-(L(x))_{j}}{\left| x \right|} = 0,
+	\end{align*}
+	for every $1 \leq j \leq m$, hence the statement.
+\end{proof}
+
+\begin{definition}[$\mathcal{O}$ Notation]\label{def:bigO-notation}
+	Let $U \subset \mathbb{R}^{n}$ be open and $f: U \to \mathbb{R}^{m}$. We say that $f(x) = \mathcal{O}(\left| g(x) \right|)$ as $x \to x_{0}$ if
+	\begin{align*}
+		\limsup_{x \to x_{0}} \frac{\left| f(x) \right| }{\left| g(x) \right| } < \infty.
+	\end{align*}
+	Here, $\limsup_{x \to x_{0}} $ means the supremum over all sequences $x_{n} \to x_{0}$, consistent with the definition of limit in Remark \ref{rem:global_conventions}.
+\end{definition}
+
+\begin{definition}[$\smalO$ Notation]\label{def:smalO-notation}
+	Let $U \subset \mathbb{R}^{n}$ be open and $f: U \to \mathbb{R}^{m}$. We say that $f(x) = \smalO(\left| g(x) \right|)$ as $x \to x_{0}$ if
+	\begin{align*}
+		\lim_{x \to x_{0}} \frac{\left| f(x) \right| }{\left| g(x) \right| } = 0.
+	\end{align*}
+\end{definition}
+
+\begin{remark}
+	Clearly, $f: U \to \mathbb{R}^{m}$ is differentiable at $x_{0} \in U$ if and only if $f(x_{0} + x) - f(x_{0}) - L(x) = \smalO(\left| x \right|)$.
+\end{remark}
+
+\begin{definition}[Directional derivative]\label{def:directional-derivative}
+	Let $U \subset \mathbb{R}^{n}$ open and $f:U \to \mathbb{R}^{m}$, $x_{0} \in U$. Given $v \in \mathbb{R}^{n}$, we define the directional derivative at $x_{0}$ (along $v$) as
+	\begin{align*}
+		\partial_{v}f(x_{0}) = \lim_{\mathbb{R}\ni t \to 0} \frac{f(x_{0} + tv)-f(x_{0})}{t}
+	\end{align*}
+	provided the limit exists.
+\end{definition}
+
+\begin{prop}[Differentiable implies directionally differentiable]\label{prop:diff-impl-dir-diff}
+	Let $U \subset \mathbb{R}^{n}$ be open and $f: U \to \mathbb{R}^{m}$. If $f$ is differentiable at $x_{0} \in U$, then $ \partial_{v}f(x_{0})$ exists for all $v \in \mathbb{R}^{n}$ and
+	\begin{align*}
+		\partial_{v}f(x_{0}) = Df_{x_{0}}(v).
+	\end{align*}
+\end{prop}
+\begin{proof}
+	Because $f$ is differentiable,
+	\begin{align*}
+		f(x_{0} + x) - f(x) - Df_{x_{0}}(x) = \smalO(\left| x \right|)
+	\end{align*}
+	as $x \to 0$. But setting $x = tv$ and letting $t \to  0$, we get
+	\begin{align*}
+		\lim_{t \to 0} \frac{\left| f(x_{0}+tv) - f(x_{0}) - Df_{x_{0}}(tv) \right|}{\left| tv \right| } = 0,
+	\end{align*}
+	and using linearity of $Df_{x_{0}}$, multiplying by $\left| v \right|$ and dropping the absolute value (because it goes to zero),
+	\begin{align*}
+		\lim_{t \to 0}  \frac{f(x_{0} + tv) - f(x_{0}) - t \cdot Df_{x_{0}}(v)}{ t } = 0,
+	\end{align*}
+	and so
+	\begin{align*}
+		\lim_{t \to 0}  \frac{f(x_{0} + tv) - f(x_{0})}{\left| t \right| } =  Df_{x_{0}}(v).
+	\end{align*}
+\end{proof}
+
+\begin{definition}[Partial derivative]\label{def:partial-der}
+	Let $\left\{ e_{i} \right\}_{1 \leq i \leq n}$ be the canonical basis for $\mathbb{R}^{n}$. We define the $i$-th partial derivative w.r.t. $x_{i}$ at $x_{0}$ as
+	\begin{align*}
+		\frac{\partial f}{\partial x_{i}}(x_{0}) = \partial_{i}f(x_{0}) := \partial_{e_{i}}f(x_{0}),
+	\end{align*}
+	assuming it exists.	This equals $Df_{x_{0}}(e_{i})$ assuming $f$ is differentiable at $x_{0}$, by Proposition \ref{prop:diff-impl-dir-diff}.
+\end{definition}
+
+\begin{eg}[Computing partial derivatives]
+	Define the function $f(x_{1},x_{2},x_{3}) = \exp(x_{2})[1+x_{1}x_{3}]$. How do we find $ \partial_{1}f(x_{1},x_{2},x_{3})$? We compute
+	\begin{align*}
+		\lim_{t \to 0} \frac{f(x_{1}+t, x_{2}, x_{3}) - f(x_{1},x_{2},x_{3})}{t}.
+	\end{align*}
+	But this is as if we were computing the derivative of the function $g(t) = f(x_{1}+t, x_{2}, x_{3})$ and so $x_{2}$ and $x_{3}$ are just like constants. Hence, using simple one dimensional differentiation,
+	\begin{align*}
+		\partial_{{1}}f(x_{1},x_{2},x_{3}) & = \exp(x_{2}) x_{3}          \\
+		\partial_{{2}}f(x_{1},x_{2},x_{3}) & = \exp(x_{2}) (1+x_{1}x_{3}) \\
+		\partial_{{3}}f(x_{1},x_{2},x_{3}) & = \exp(x_{2}) x_{1}.
+	\end{align*}
+	More generally, $\partial_{v}f(x_{0}) = g'(0)$ for the function $g(t) = f(x_{0} + tv)$. So partial derivative are extremely easy to compute.
+\end{eg}
+
+\begin{remark}
+	If $f:U \to \mathbb{R}^{m}$ is differentiable on all of $U$, then the partial derivatives define functions
+	\begin{align*}
+		\partial_{i}f = \frac{\partial f}{\partial x_{i}}: U \to \mathbb{R}^{m}: x \mapsto \frac{\partial f}{\partial x_{i}}(x).
+	\end{align*}
+\end{remark}
+
+\begin{theorem}[Sufficient condition for differentiability]\label{thm:suff-cond-diff}
+	Let $U \subset \mathbb{R}^{n}$ be open and $f: U \to \mathbb{R}^{m}$. If $\partial_{i}f(x_{0})$ exists and is continuous for every $1 \leq i \leq n$, for any $x_{0} \in U$, then $f$ is differentiable at every $x_{0} \in U$. Furthermore,
+	\begin{align*}
+		Df_{x_{0}}(x) = (\partial_{1}f(x_{0}), \dots, \partial_{n}f(x_{0})) \cdot x =
+		\begin{pmatrix}
+			\partial_{1}f_{1}(x_{0}) & \dots  & \partial_{n}f_{1}(x_{0}) \\
+			\vdots                   & \ddots & \vdots                   \\
+			\partial_{1}f_{m}(x_{0}) & \dots  & \partial_{n}f_{m}(x_{0})
+		\end{pmatrix}
+		\begin{pmatrix}
+			x_{1} \\ \vdots \\ x_{n}
+		\end{pmatrix}
+	\end{align*}
+	is the matrix representation of $Df_{x_{0}}$ in the standard basis.
+\end{theorem}
+
+\begin{proof}
+	The idea is to fix $x_{0} \in U$ and take for $\epsilon > 0$ the set $\left\{ x \in \mathbb{R}^{n} \mid \left| x_{i} - x_{0,i} \right| < \epsilon \right\} \subset U$. This is the $n$ dimensional cube of "radius" $\epsilon$ around $x_{0}$. Then, we will use the partial derivatives to take steps in each of the $n$ directions, ultimately giving us the differential.
+
+	Assume without loss of generality that $m = 1$, using Lemma \ref{lem:differential_component_wise}. So from now on, $f: \mathbb{R}^{n} \to \mathbb{R}$.
+	Fix $x_{0} \in U$ and take some $x \in U$. For $1 \leq k \leq n$, define $x^{(k)} = x_{0} + \sum_{i=1}^{k} x_{i}e_{i}$. Then
+	\begin{align*}
+		f(x_{0} + x) - f(x_{0}) = \sum_{k=1}^{n} f(x^{(k)}) - f(x^{(k-1)}),
+	\end{align*}
+	by telescoping. We claim this is equal to
+	\begin{align*}
+		\sum_{k=1}^{n} \partial_{k} f(y^{(k)}) \cdot x_{k},
+	\end{align*}
+	for certain $y^{(k)}$ we are yet to pick. Define the functions $g_{k}: \mathbb{R} \to \mathbb{R}$ by
+	\begin{align*}
+		g_{k}(t) = f(x^{(k-1)}+te_{k}).
+	\end{align*}
+	These satisfy
+	\begin{align*}
+		g_{k}(x_{k}) &= f(x^{(k-1)}+x_{k}e_{k}) = f(x^{(k)}) \quad  &(1)\\  g_{k}'(t) &= \lim_{h \to 0} \frac{f(x^{(k-1)} + (t+h)e_{k}) - f(x^{(k-1)} + te_{k})}{h} = \partial_{k}f(x^{(k-1)} + te_{k}) \quad &(2)
+	\end{align*}
+	Applying (1), we get
+	\begin{align*}
+		f(x^{(k)}) - f(x^{(k-1)}) = g_{k}(x_{k}) - g_{k}(0).
+	\end{align*}
+	By the mean value theorem, which we can apply because $g$ is differentiable based on (2), this equals
+	\begin{align*}
+		f(x^{(k)}) - f(x^{(k-1)}) = g'_{k}(\xi_{k})(x_{k} - 0) \text{ with } \xi_{k} \in (0, x_{k}),
+	\end{align*}
+	which in turn equals
+	\begin{align*}
+		g'_{k}(\xi_{k})\cdot x_{k} = \partial_{k}f(x^{(k-1)}+\xi_{k}e_{k})\cdot x_{k},
+	\end{align*}
+	and so it stands to reason to define the points $y^{(k)} = x^{(k-1)}+\xi_{k}e_{k} = x_{0} + \sum_{i=1}^{k-1} x_{i}e_{i} + \xi_{k}e_{k}$. And since we're taking $x \to 0$, and $\left| \xi_{k} \right| < \left| x_{k} \right|$, we ultimately get that $y^{(k)} \to x_{0}$.
+	We summarize the term $\sum_{i=1}^{k-1} x_{i}e_{i} + \xi_{k}e_{k} = \smalO( 1 )$, just meaning that it goes to zero and write $y^{(k)} = x_{0} + \smalO( 1 )$ as $x \to 0$.
+
+	Let's go back to the sum
+	\begin{align*}
+		f(x_{0} + x) - f(x_{0}) = \sum_{k=1}^{n} \partial_{k}f(y^{(k)})x_{k} = \sum_{k=1}^{n} \partial_{k}f(x_{0} + \smalO(1))x_{k}.
+	\end{align*}
+	Using the crucial fact that the partial derivatives are also continuous, we get that $\partial_{k}f(x_{0} + \smalO(1)) = \partial_{k}f(x_{0}) + \smalO(1)$ and write
+	\begin{align*}
+		f(x_{0} + x) - f(x_{0}) = \sum_{k=1}^{n} (\partial_{k}f(x_{0})+ \smalO(1))x_{k} = \sum_{k=1}^{n} \partial_{k}f(x_{0})x_{k} + \smalO(\left| x \right|)
+	\end{align*}
+	since $\left| \smalO(1) \cdot x_{i} \right| \leq \left| x \right|$ as $x \to x_{0}$. And so we define the function
+	\begin{align*}
+		Df_{x_{0}}(x) = \sum_{k=1}^{n} \partial_{k}f(x_{0})x_{k}
+	\end{align*}
+	and get
+	\begin{align*}
+		f(x_{0} + x) - f(x_{0}) - Df_{x_{0}}(x) = \smalO(\left| x \right|),
+	\end{align*}
+	meaning that $f$ is differentiable at $x_{0}$, with the proposed matrix values for $Df_{x_{0}}$.
+\end{proof}

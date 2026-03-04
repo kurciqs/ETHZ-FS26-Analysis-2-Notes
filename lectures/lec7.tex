@@ -64,9 +64,6 @@ Having tackled metric spaces in general, we still have to consider vector spaces
 \begin{prop}[Norm induces metric]\label{prop:norm_induces_metric}
     Every normed vector space is a metric space with $d(v,w) = \lVert v-w \rVert$.
 \end{prop}
-\begin{proof}
-    Exercise.
-\end{proof}
 
 \begin{definition}[Inner product vector space]\label{def:inner_prod_vs}
     Let $V$ be a vector space over $\mathbb{R}$. An inner product is a map $\langle \cdot ,\cdot  \rangle: V \times V \to \mathbb{R}$ that satisfies
@@ -85,15 +82,15 @@ Having tackled metric spaces in general, we still have to consider vector spaces
 \end{proof}
 
 \begin{remark}\label{rem:global_conventions}
-    From now on, $\mathbb{R}^{n}$ will be the vector space over $\mathbb{R}$ with the Euclidean norm $\left| \cdot \right|$. It is also an inner product space, with the inner product as in \ref{def:euclid_norm}. It is also a metric space with $d(x,y) = \left| x-y \right|$. 
+    From now on, $\mathbb{R}^{n}$ will be the vector space over $\mathbb{R}$ with the Euclidean norm denoted $\left| \cdot \right|$. It is also an inner product space, with the inner product as in \ref{def:euclid_norm}. It is also a metric space with $d(x,y) = \left| x-y \right|$. 
 
-    If we say that $x_{n} \to x$ in $\mathbb{R}^{n}$, then we mean $\left| x_{n} - x \right| \to 0$. What will also be central is that convergence is equivalent to component-wise convergence $\left| x_{i,n} - x_{i} \right| \to 0$. 
+    If we say that $x_{n} \to x$ in $\mathbb{R}^{n}$, then we mean $\left| x_{n} - x \right| \to 0$. Recall that convergence is equivalent to component-wise convergence $\left| x_{i,n} - x_{i} \right| \to 0$ for all $1 \leq i \leq n$. 
 
-    Also if $U \subset \mathbb{R}^{n}$ is an open set and $f: U \to \mathbb{R}^{m}$ a function, we say
+    Also, if $U \subset \mathbb{R}^{n}$ is an open set and $f: U \to \mathbb{R}^{m}$ a function, we say
     \begin{align*}
         y = \lim_{x \to x_{0}} f(x)
     \end{align*}
-    if and only if for every sequence $(x_{k})_{k}^{\infty}$ with $x_{k} \to x$, we have $f(x_{k}) \to y$. 
+    if and only if for every sequence $(x_{k})_{k}^{\infty}$ with $x_{k} \to x_{0}$, we have $f(x_{k}) \to y$. 
 \end{remark}
 
 \chapter{Multidimensional differential calculus}
@@ -103,9 +100,12 @@ Having tackled metric spaces in general, we still have to consider vector spaces
 This will be the most important definition of the course.
 
 \begin{definition}[Differential]\label{def:differential}
-    Let $f: U \to \mathbb{R}^{m}$ with $U \subset \mathbb{R}^{n}$ open be a function. We say that $L : \mathbb{R}^{n} \to \mathbb{R}^{m}$, a linear map, is the differential of $f$ if for all $x_{0} \in U$
+    Let $f: U \to \mathbb{R}^{m}$ with $U \subset \mathbb{R}^{n}$ open be a function. We say that $L : \mathbb{R}^{n} \to \mathbb{R}^{m}$, a linear map, is the differential of $f$ at $x_{0} \in U$ if
     \begin{align*}
-        \lim_{x \to 0} \frac{f(x_{0}+x) - f(x) - Lx}{\left| x \right|} = 0.
+        \lim_{x \to 0} \frac{f(x_{0}+x) - f(x) - L(x)}{\left| x \right|} = 0.
     \end{align*}
+    Then, we call $f$ differentiable at $x_{0}$. 
+
+    One can prove that $L$ is unique and we write $L = Df_{x_{0}}$.
 \end{definition}
 
