@@ -1,0 +1,175 @@
+
+\begin{definition}[$C_{1}$-functions]\label{def:c1-func}
+	Given $U \subset \mathbb{R}^{n}$ open, we define
+	\begin{align*}
+		C^{1}(U, \mathbb{R}^{m}) := \left\{ f: U \to \mathbb{R}^{m} \mid f \text{ is continuously differentiable in } U \right\},
+	\end{align*}
+	where continuously differentiable means that all partial derivatives exist and are continuous as in Theorem \ref{thm:suff-cond-diff}. If $m = 1$, we simplify this to $C^{1}(U)$.
+\end{definition}
+
+\begin{definition}[Jacobian Matrix]\label{def:jabocian-matrix}
+	For $U \subset \mathbb{R}^{n}$, open $f: U \to \mathbb{R}^{m}$ is differentiable at $x_{0}$ we define the Jacobi matrix at $x_{0}$:
+	\begin{align*}
+		Jf(x_{0}) = (\partial_{1}f(x_{0}), \dots, \partial_{n}f(x_{0})) =
+		\begin{pmatrix}
+			\partial_{1}f_{1}(x_{0}) & \dots  & \partial_{n}f_{1}(x_{0}) \\
+			\vdots                   & \ddots & \vdots                   \\
+			\partial_{1}f_{m}(x_{0}) & \dots  & \partial_{n}f_{m}(x_{0})
+		\end{pmatrix}.
+	\end{align*}
+	It is also sometimes denoted $Df(x_{0})$, which is not to be confused with the differential $Df_{x_{0}}$, which is the linear map to which $Jf(x_{0}) = Df(x_{0})$ is the matrix.
+\end{definition}
+
+\begin{remark}[Distinction between differential and Jacobi matrix]
+	Observe that for some $v = \sum_{i=1}^{n} v_{i}e_{i} \in \mathbb{R}^{n}$, we have
+	\begin{align*}
+		Df_{x_{0}}(v) = \sum_{i=1}^{n} v_{i} Df_{x_{0}}(e_{i}) = \sum_{i=1}^{n} v_{i} \frac{\partial f}{\partial x_{i}}(x_{0}) = Jf(x_{0}) \cdot v,
+	\end{align*}
+	confirming the connection between $Df_{x_{0}}$, the linear map and $Jf(x_{0})$, the matrix of that map in the canonical basis. In the linear algebra course, we write
+	\begin{align*}
+		Jf(x_{0}) = [Df_{x_{0}}]_{\mathcal{E}}^{\mathcal{E}},
+	\end{align*}
+	where $\mathcal{E}$ is the standard canonical basis.
+\end{remark}
+
+We will now prove the chain rule in multiple dimensions.
+
+\begin{theorem}[Chain rule]\label{thm:chain-rule}
+	Let $U \subset \mathbb{R}^{n}$ be open, $V \subset \mathbb{R}^{m}$ open and $f: U \to V, g: V \to \mathbb{R}^{k}$. Assume that $f$ is differentiable at $x_{0} \in U$ and $g$ is differentiable at $y_{0} = f(x_{0}) \in V$. Then the function $g \circ f: U \to \mathbb{R}^{k}$ is differentiable at $x_{0}$ and
+	\begin{align*}
+		D(g \circ f)_{x_{0}} = Dg_{f(x_{0})} \circ Df_{x_{0}}.
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	This is the intuition: We have that $f(x_{0}+x) - f(x_{0}) \approx L(x)$ for some linear map $L(x)$ and $g(y_{0} + y) - g(y_{0}) \approx M(y)$ for a linear $M$. Then we would like to substitute $y = f(x_{0}+x)- f(x_{0})$ to get
+	\begin{align*}
+		g(f(x_{0}+x)) - g(f(x_{0})) = g(y_{0} + f(x_{0} + x) - f(x_{0})) - g(y_{0}) \approx M(f(x_{0}+x) - f(x_{0})) \approx M(L(x)).
+	\end{align*}
+
+	Now comes the actual proof. We have that
+	\begin{align*}
+		f(x_{0} + x) - f(x) = L(x) + R(x),
+	\end{align*}
+	for a map $R$ such that $\lim_{x \to 0} \frac{R(x)}{\left| x \right|} = 0$. Same for $g$, we have
+	\begin{align*}
+		g(y_{0} + y)- g(y_{0}) = M(y) + S(y), \quad \lim_{y \to 0} \frac{S(y)}{\left| y \right|} = 0.
+	\end{align*}
+	Hence we compute, setting $y = f(x_{0}+x)- f(x_{0})$,
+	\begin{align*}
+		g(f(x_{0}+x)) - g(f(x_{0})) & = g(y_{0} + f(x_{0} + x) - f(x_{0})) - g(y_{0})
+		\\ &= M(f(x_{0}+x)-f(x_{0})) + S(f(x_{0} + x) - f(x_{0}))
+		\\ &= M(L(x)+R(x)) + S(L(x) + R(x)) n
+		\\ &= ML(x)+\underbrace{ M(R(x)) + S(L(x) + R(x))}_{T(x)},
+	\end{align*}
+	and all we have to show now is that $T(x) = \smalO(x)$, so $\lim_{x \to 0} \frac{T(x)}{\left| x \right|} = 0$. By the inequality for the Hilbert-Schmidt Norm, Proposition \ref{lem:hilbert-schmidt-norm}, we get
+	\begin{align*}
+		\lim_{x \to 0}\frac{\left| M(R(x)) \right|}{\left| x \right|} \leq \lim_{x \to 0} \frac{\lVert M \rVert_{2} \left| R(x) \right|}{\left| x \right|} = 0,
+	\end{align*}
+	as $R(x) = \smalO(x)$. We also get
+	\begin{align*}
+		\frac{|S(L(x) + R(x))|}{\left| x \right|} = \frac{\left| S(L(x) + R(x)) \right|}{\left| L(x)+R(x) \right| + \left| x \right|^{2}} \frac{\left| L(x)+R(x) \right|+\left| x\right|^{2}}{\left| x \right|}.
+	\end{align*}
+	As $x \to 0$, $L(x) \to 0$ and $R(x) \to 0$, hence\footnote{Notice how we added $\left| x \right|^{2}$ to the denominator. This is to prevent dividing by zero such that if it happens for some sequence testing the limit that $L(x) + ¨R(x)=0$, the following inequality still holds for all the parts of the sequence where there is no division by zero.}
+	\begin{align*}
+		\frac{\left| S(L(x) + R(x)) \right|}{ \left| L(x) + R(x) \right| + \left| x \right|^{2}} \leq \frac{\left| S(L(x) + R(x)) \right|}{ \left| L(x) + R(x) \right|} \to 0,
+	\end{align*}
+	since $S(y) = \smalO(y)$ and finally,
+	\begin{align*}
+		\frac{\left| L(x) + R(x) \right| + \left| x^{2} \right|}{\left| x \right|} \leq \frac{\left| L(x) \right|}{\left| x \right|} + \frac{\left| R(x) \right|}{\left| x \right|} + \left| x \right| \leq \lVert L \rVert_{2} + \frac{\smalO(x)}{\left| x \right|} + \left| x \right|
+	\end{align*}
+	which is bounded, so the entire error term $T(x)$ goes to zero.
+\end{proof}
+
+\begin{remark}
+	This is useful because it allows us to compute the Jacobi matrix of the composition,
+	\begin{align*}
+		J(g \circ f)(x_{0}) = Jg(f(x_{0})) \cdot Jg(x_{0}).
+	\end{align*}
+    Component-wise, for $1 \leq i \leq n$, this becomes the $\mathbb{R}^{k}$ vector
+    \begin{align*}
+        \frac{\partial (g \circ f)}{\partial x_{i}}(x) = \sum_{j=1}^{m} \frac{\partial g}{\partial y_{j}} (f(x)) \cdot \frac{\partial f_{j}}{\partial x_{i}}(x) = \partial_{j}(g \circ f)(x) = \sum_{j=1}^{m} \partial_{j}g(f(x)) \cdot \partial_{i}f_{j}(x),
+    \end{align*}
+    where $y_{j}$ are the components in $\mathbb{R}^{m}$ and $x_{i}$ are in $\mathbb{R}^{n}$.
+\end{remark}
+
+\newpage
+
+\begin{theorem}[Generalised mean value theorem]\label{thm:MVT}
+    Let $U \subset \mathbb{R}^{n}$ open and $f \in C^{1}(U)$. Assume that $x_{0} \in U$ and $h \in \mathbb{R}^{n}$ such that $x_{0} + th \in U$ for all $t \in [0,1]$. Then 
+    \begin{align*}
+        f(x_{0} + h) - f(x_{0}) = D f_{\xi}(h) = \partial_{h}f(\xi),
+    \end{align*}
+    where $\xi = x_{0} + \theta h$ for some $\theta \in (0,1)$.
+\end{theorem}
+\begin{proof}
+    For $t \in [0,1]$, define $g: \mathbb{R} \to \mathbb{R}$ by $g(t) = f(x_{0} + th)$. Then
+    \begin{align*}
+        f(x_{0}+h) - f(x_{0}) = g(1) - g(0) = g'(\theta)
+    \end{align*}
+    for some $\theta \in (0,1)$, by the MVT. But $g(t) = (f \circ \gamma) (t)$ for the curve $\gamma (t) = x_{0} + th$, which has differential 
+    \begin{align*}
+        D\gamma_{t}(s) = sh
+    \end{align*}
+    for any $t$, as can be quickly verified. Then we can apply the chain rule to get
+    \begin{align*}
+        Dg_{t} = D(f \circ \gamma)_{t} = Df_{\gamma (t)} \circ D\gamma_{t}.
+    \end{align*}
+    Since $g : \mathbb{R} \to \mathbb{R}$, we have $g'(t) = Dg_{t}(1)$, by Remark \ref{rem:1d-derivative}. Hence
+    \begin{align*}
+        g'(t) = Dg_{t}(1) = Df_{\gamma (t)}\bigl(D\gamma_{t}(1)\bigr) = Df_{\gamma (t)}(h),
+    \end{align*}
+    and taking $t = \theta$ we get the statement.
+\end{proof}
+
+\begin{definition}[Convex sets]\label{def:convexity}
+    A set $A \subset \mathbb{R}^{n}$ is called convex if 
+    \begin{align*}
+        \forall x,y \in A: \forall t \in [0,1]: tx + (1-t)y \in A.
+    \end{align*}
+    In intuitive terms, one can connect any two points in $A$ by a straight line in $n$-dimensional space.
+\end{definition}
+
+\begin{definition}[Gradient]\label{def:gradient}
+    For $U \subset \mathbb{R}^{n}$ open and $f \in C^{1}(U)$, we define the gradient of $f$ at $x \in U$ as the vector
+    \begin{align*}
+        \nabla f(x) = Jf(x)^\top.
+    \end{align*}
+    Notice that technically, $Jf(x) = (\partial_{1}f(x), \dots, \partial_{n}f(x))$ is a row vector and we want the gradient to be column, so we take the transpose.
+\end{definition}
+
+\begin{prop}[]\label{prop:}
+    Let $U \subset \mathbb{R}^{n}$ open and $f \in C^{1}(U)$. Assume that $U$ is convex and 
+    \begin{align*}
+        \sup_{x \in U} \left| \nabla f(x) \right| \leq M < \infty.
+    \end{align*}
+    Then $f$ is $M$-Lipschitz.
+\end{prop}
+\begin{proof}
+    Let $x,y \in U$, $h = x-y$ to write $x = y+h$ and $y=x_{0}$, then, applying Cauchy-Schwartz and by the generalised Mean Value Theorem \ref{thm:MVT}, there exists a $\xi \in U$ on the line between $x$ and $y$ such that
+    \begin{align*}
+        |f(x) - f(y)| &= |f(x_{0} + h) - f(x_{0})| = |Df_{\xi}(h)| = |Jf(\xi) \cdot h| = |h \cdot \nabla f(\xi)| 
+        \\ &\leq \left| \nabla f(\xi) \right| \left| h \right| \leq M \left| h \right| = M \left| y-x \right|.
+    \end{align*}
+\end{proof}
+
+
+\begin{theorem}[Constant function]\label{thm:}
+    Let $U \subset \mathbb{R}^{n}$ be open and connected. Let $f \in C^{1}(U)$ and assume that $\forall x \in U: \nabla f(x) = 0$. Then $f$ is constant on $U$.
+\end{theorem}
+\begin{proof}
+    Let $x_{0} \in U$. We define
+    \begin{align*}
+        G = \left\{ x \in U \mid f(x) = f(x_{0}) \right\}.
+    \end{align*}
+    We will show that $G$ is open and $U \setminus G$ is open, forcing $G = U$, as it is connected.
+
+	So assume that $x \in U$. Then, by openness of $U$, there exists a ball $B_{r}(x)$ such that $B_{r}(x) \subset U$. Now take any $y \in B_{r}(x)$. Because the ball is convex (exercise), I can apply the Mean Value Theorem \ref{thm:MVT} to get 
+	\begin{align*}
+		f(y) - f(x) = Df_{\xi}(h) = Jf(\xi) \cdot h = h \cdot \nabla f(\xi) = 0,
+	\end{align*}
+	for $h = y-x$ and $\xi = x + \theta h \in B_{r}(x)$ with $\theta \in (0,1)$. But that just means $f(x) = f(y)$. 
+
+	Now, if $x \in G$, then the ball $B_{r}(x)$ must be a subset of $G$, as for any $y \in B_{r}(x)$, $f(y) = f(x) = f(x_{0})$. But conversely, if $x \not  \in G$, then certainly $f(y) = f(x) \neq f(x_{0})$ for any $y \in B_{r}(x)$. This shows both $G$ and $U \setminus G$ are open.
+
+	And so finally, as $x_{0} \in G$, it is non-empty, which forces $U = G$, by connectedness.
+\end{proof}

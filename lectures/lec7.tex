@@ -36,10 +36,7 @@ Having tackled metric spaces in general, we still have to consider vector spaces
 \end{definition}
 
 \begin{lemma}[Hilbert-Schmidt norm]\label{lem:hilbert-schmidt-norm}
-    For every $x \in \mathbb{R}^{n}$ and $M: \mathbb{R}^{n} \to \mathbb{R}^{m}$ linear, 
-    \begin{align*}
-        \left| Mx \right| \leq \lVert M \rVert_{2} \left| x \right|.
-    \end{align*}
+    For every $x \in \mathbb{R}^{n}$ and $M: \mathbb{R}^{n} \to \mathbb{R}^{m}$ linear, $ \left| Mx \right| \leq \lVert M \rVert_{2} \left| x \right|$. In particular, any linear map is Lipschitz.
 \end{lemma}
 \begin{proof}
     We have 
@@ -69,7 +66,7 @@ Having tackled metric spaces in general, we still have to consider vector spaces
     Let $V$ be a vector space over $\mathbb{R}$. An inner product is a map $\langle \cdot ,\cdot  \rangle: V \times V \to \mathbb{R}$ that satisfies
     \begin{enumerate} 
         \item $\forall v, w \in V: \langle v,w \rangle=\langle w,v \rangle$.
-        \item $\forall \alpha, \beta \in \mathbb{R}, v,w \in V: \langle \alpha v, \beta w \rangle = \alpha \langle v,w \rangle + \beta \langle v,w \rangle$.
+        \item $\forall \alpha, \beta \in \mathbb{R}, u,v,w \in V: \langle \alpha v+ \beta u, w \rangle = \alpha \langle v,w \rangle + \beta \langle u,w \rangle$.
         \item $\forall v \in V: \langle v,v \rangle \geq 0$ and $\langle v,v \rangle = 0 \iff v = 0$.
     \end{enumerate}
 \end{definition}

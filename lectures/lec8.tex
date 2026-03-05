@@ -1,8 +1,9 @@
-\begin{remark}
+\begin{remark}\label{rem:1d-derivative}
 	Clearly, for $m=n=1$, $L(x)=f'(x_{0})x$. Indeed
 	\begin{align*}
 		0 = \lim_{x \to 0} \frac{f(x_{0} + x) - f(x_{0}) - f'(x_{0})x}{x} \implies f'(x_{0}) = \lim_{x \to 0} \frac{f(x_{0}+x)-f(x_{0})}{x}.
 	\end{align*}
+	In particular, for $f: \mathbb{R} \to \mathbb{R}$, we get that $Df_{x_{0}}(x) = f'(x_{0}) \cdot x$.
 \end{remark}
 
 \begin{lemma}[Differential component-wise in the codomain]\label{lem:differential_component_wise}
@@ -38,7 +39,7 @@
 \end{definition}
 
 \begin{remark}
-	Clearly, $f: U \to \mathbb{R}^{m}$ is differentiable at $x_{0} \in U$ if and only if $f(x_{0} + x) - f(x_{0}) - L(x) = \smalO(\left| x \right|)$.
+	Clearly, $f: U \to \mathbb{R}^{m}$ is differentiable at $x_{0} \in U$ if and only if $f(x_{0} + x) - f(x_{0}) - L(x) = \smalO(x)$.
 \end{remark}
 
 \begin{definition}[Directional derivative]\label{def:directional-derivative}
@@ -104,7 +105,7 @@
 \end{remark}
 
 \begin{theorem}[Sufficient condition for differentiability]\label{thm:suff-cond-diff}
-	Let $U \subset \mathbb{R}^{n}$ be open and $f: U \to \mathbb{R}^{m}$. If $\partial_{i}f(x_{0})$ exists and is continuous for every $1 \leq i \leq n$, for any $x_{0} \in U$, then $f$ is differentiable at every $x_{0} \in U$. Furthermore,
+	Let $U \subset \mathbb{R}^{n}$ be open and $f: U \to \mathbb{R}^{m}$. If the functions $\partial_{i}f$ exist and are continuous for every $1 \leq i \leq n$, then $f$ is differentiable at every $x_{0} \in U$. Furthermore,
 	\begin{align*}
 		Df_{x_{0}}(x) = (\partial_{1}f(x_{0}), \dots, \partial_{n}f(x_{0})) \cdot x =
 		\begin{pmatrix}
@@ -160,15 +161,15 @@
 	\end{align*}
 	Using the crucial fact that the partial derivatives are also continuous, we get that $\partial_{k}f(x_{0} + \smalO(1)) = \partial_{k}f(x_{0}) + \smalO(1)$ and write
 	\begin{align*}
-		f(x_{0} + x) - f(x_{0}) = \sum_{k=1}^{n} (\partial_{k}f(x_{0})+ \smalO(1))x_{k} = \sum_{k=1}^{n} \partial_{k}f(x_{0})x_{k} + \smalO(\left| x \right|)
+		f(x_{0} + x) - f(x_{0}) = \sum_{k=1}^{n} (\partial_{k}f(x_{0})+ \smalO(1))x_{k} = \sum_{k=1}^{n} \partial_{k}f(x_{0})x_{k} + \smalO( x)
 	\end{align*}
 	since $\left| \smalO(1) \cdot x_{i} \right| \leq \left| x \right|$ as $x \to x_{0}$. And so we define the function
 	\begin{align*}
-		Df_{x_{0}}(x) = \sum_{k=1}^{n} \partial_{k}f(x_{0})x_{k}
+		Df_{x_{0}}(x) = \sum_{k=1}^{n} \partial_{k}f(x_{0}) \cdot x_{k}
 	\end{align*}
 	and get
 	\begin{align*}
-		f(x_{0} + x) - f(x_{0}) - Df_{x_{0}}(x) = \smalO(\left| x \right|),
+		f(x_{0} + x) - f(x_{0}) - Df_{x_{0}}(x) = \smalO(x ),
 	\end{align*}
 	meaning that $f$ is differentiable at $x_{0}$, with the proposed matrix values for $Df_{x_{0}}$.
 \end{proof}
