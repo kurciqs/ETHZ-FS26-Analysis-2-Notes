@@ -1,0 +1,126 @@
+\section{Higher order derivatives}
+
+The next logical step is to take partial derivatives of partial derivatives of course.
+
+\begin{definition}[Class $C^{k}$]\label{def:}
+	Let $U \subset \mathbb{R}^{n}$ be open. We define
+	\begin{align*}
+		C^{0}(U, \mathbb{R}^{m}) = \left\{ f : U \to \mathbb{R}^{m} \mid f \text{ continuous} \right\}.
+	\end{align*}
+	Then, inductively we let
+	\begin{align*}
+		C^{k}(U, \mathbb{R}^{m}) = \left\{ f :U \to \mathbb{R}^{m} \mid \partial_{i}f \in C^{k-1}(U, \mathbb{R}^{m}) \text{ for each } 1 \leq i \leq n \right\}.
+	\end{align*}
+	If $f \in C^{k}(U, \mathbb{R}^{m})$, we say that $f$ is $k$-times continuously differentiable. Once again $C^{k}(U) := C^{k}(U, \mathbb{R})$ is a shorthand. If $U$ is clear from the context, we just write $C^{k}$.
+\end{definition}
+
+\begin{prop}[Sum, product, composition of $C^{k}$ functions]\label{prop:Ck-conservation}
+	Let $f,g \in C^{k}(U)$, where $U \subset \mathbb{R}^{n}$ is open. Let $V \subset \mathbb{R}^{m}$ and $h: V \to \mathbb{R}^{n}$ such that $h(V) \subset U$ and $h \in C^{k}(V, \mathbb{R}^{n})$.
+	Then
+	\begin{enumerate}
+		\item $f+g \in C^{k}(U)$ and $f \cdot g \in C^{k}(U)$.
+		\item $f \circ h \in C^{k}(V)$.
+	\end{enumerate}
+\end{prop}
+\begin{proof}
+	We prove (1) by induction over $k$. The base case $k = 0$ is left as an exercise, as in Analysis 1. we will assume that (1) holds for $k-1$. But then, for $f,g \in C^{k}(U)$,
+	\begin{align*}
+		\partial_{i}(f+g) = \partial_{i}f + \partial_{i}g.
+	\end{align*}
+	Since $f,g \in C^{k}(U)$, we have $\partial_{i} f, \partial_{i} g \in C^{k-1}$ by assumption. But by induction hypothesis, their sum is $C_{k-1}$ and hence $f+g \in C^{k}(U)$.
+
+	Similarly, for the product, one verifies the base case. Then assume that $f,g \in C^{k}(U)$. By expansion,
+	\begin{align*}
+		\partial_{i}(fg) = \partial_{i}f \cdot g + f \cdot \partial_{i} g.
+	\end{align*}
+	Once again, all functions on the RHS are $C^{k-1}(U)$, by assumption the products and sums are as well and so $\partial_{i}(fg) \in C^{k-1}(U)$, proving $fg \in C^{k}(U)$.
+
+	(2) we also prove by induction. Indeed, the case $k=0$ is easily proven, as composition of continuous maps is continuous. Now assume the statement holds for $k-1$. By the Chain Rule, Theorem \ref{thm:chain-rule}
+	\begin{align*}
+		\partial_{j}(f \circ h) = \sum_{i=1}^{n} [(\partial_{i} f) \circ h] \cdot \partial_{j} h_{i}.
+	\end{align*}
+	By induction hypothesis, $(\partial_{i} f) \circ h \in C^{k-1}$ and so the sum runs over products of $C^{k-1}$ functions, so is $C^{k-1}$ itself.
+\end{proof}
+
+\begin{theorem}[Schwarz]\label{thm:schwarz}
+	Let $f \in C^{2}(U)$, with $U \subset \mathbb{R}^{n}$ open. For every, $1 \leq i, j  \leq n$,
+	\begin{align*}
+		\partial_{j} \partial_{i} f = \partial_{i} \partial_{j} f.
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	\textit{Intuition behind the proof}: We will assume wlog $f: \mathbb{R}^{2} \to \mathbb{R}$ is of class $C^{2}$ and consider wlog the statement at the origin, then cleverly use that to prove the general case. Roughly speaking,
+	\begin{align*}
+		\partial_{1} f(0,0) \approx \frac{f(h, 0) - f(0,0)}{h}, \quad \partial_{1} f (0,h) \approx  \frac{f(h,h) - f(0,h)}{h} \\
+		\partial_{2} f(0,0) \approx \frac{f(0,h) - f(0,0)}{h}, \quad \partial_{2}f(h,0) \approx \frac{f(h,h) - f(h,0)}{h}.
+	\end{align*}
+	And with that,
+	\begin{align*}
+		\partial_{2}(\partial_{1} f)(0,0) = \frac{\partial_{1}f(0,h) - \partial_{1} f(0,0)}{h} &\approx \frac{\frac{f(h,h) - f(0,h)}{h} - \frac{f(h,0) - f(0,0)}{h}}{h} \\ &= \frac{f(h,h) - f(0,h) - f(h,0) + f(0,0)}{h^{2}} \\
+		\partial_{1}(\partial_{2} f)(0,0) = \frac{\partial_{2}f(h,0) - \partial_{2} f(0,0)}{h} &\approx \frac{\frac{f(h,h) - f(h,0)}{h} - \frac{f(0,h) - f(0,0)}{h}}{h} \\  &= \frac{f(h,h) - f(0,h) - f(h,0) + f(0,0)}{h^{2}}.
+	\end{align*}
+
+    \textit{Actual proof}: We will do first the case $n = 2, m=1$, $U \subset \mathbb{R}^{2}$ is open with $(0,0) \in U$ and use it later to conclude the general case. So the goal is to show 
+    \begin{align*}
+        \partial_{2} \partial_{1} f(0,0) = \partial_{1} \partial_{2} f(0,0).
+    \end{align*}
+    We will define $F: \mathbb{R} \to \mathbb{R}$ by
+    \begin{align*}
+        F(h) = f(h,h) - f(h,0) - f(0,h) + f(0,0).
+    \end{align*}
+    As $U$ is open, for $h > 0$ small enough, $F(h) \in U$. We will only consider such $h$. We define another function $\varphi: [0,1] \to \mathbb{R}$ by 
+    \begin{align*}
+        \varphi(t) = f(th,h) - f(th,0) \implies F(h) = \varphi(1) - \varphi(0) = \varphi'(\xi_{1})
+    \end{align*}
+    for some $\xi_{1} \in (0,1)$, by the mean value theorem. But we have by definitions and the Chain Rule \ref{thm:chain-rule}
+    \begin{align*}
+        \varphi'(\xi_{1}) = [\partial_{1}f(\xi_{1}h, h) - \partial_{1}f(\xi_{1}h, 0)] \cdot h = [\psi(1) - \psi(0)]\cdot h = \psi'(\xi_{2})\cdot h,
+    \end{align*}
+    for some $\xi_{2} \in (0,1)$, for the function $\psi: [0,1] \to \mathbb{R}$ given by 
+    \begin{align*}
+        \psi(s)  = \partial_{1} f(\xi_{1}h, sh),
+    \end{align*}
+    and applying the MVT. Again, by the Chain Rule,
+    \begin{align*}
+        \psi'(\xi_{2})\cdot h = \partial_{2} \partial_{1} f(\xi_{1}h, \xi_{2} h) \cdot h^{2}.
+    \end{align*}
+
+    We can do the same and define 
+    \begin{align*}
+        \tilde{\varphi}(t) = f(h, th) - f(0, th) \implies F(h) = \tilde{\varphi}(1) - \tilde{\varphi}(0) = \tilde{\varphi}'(\tilde{\xi}_{2}) = [\partial_{2} f(h, \tilde{\xi}_{2}h) - \partial_{2} f(0, \tilde{\xi}_{2}h)] \cdot h.
+    \end{align*}
+    If we let $\tilde{\psi}(s) = \partial_{1}f(sh, \tilde{\xi}_{2})$, we get by the Chain Rule \ref{thm:chain-rule}
+    \begin{align*}
+        [\partial_{2} f(h, \tilde{\xi}_{2}h) - \partial_{2} f(0, \tilde{\xi}_{2}h)] \cdot h = [\tilde{\psi}(1) - \tilde{\psi}(0)] \cdot  h = \tilde{\psi}'(\tilde{\xi}_{1}) = \partial_{1} \partial_{2} f(\tilde{\xi}_{1}h, \tilde{\xi}_{2} h) \cdot h^{2}.
+    \end{align*}
+
+    So in essence, what we proved is that 
+    \begin{align*}
+        \partial_{2} \partial_{1} f(\xi_{1}j, \xi_{2}h) = \partial_{1} \partial_{2} f(\tilde{\xi}_{1} h, \tilde{\xi}_{2} h). 
+    \end{align*}
+    Since $\xi_{i}, \tilde{\xi}_{i}$ are bounded in $(0,1)$, letting $h \to 0$ and using that $f \in C^{2}(U)$, so both partials are continuous, we get $\partial_{2} \partial_{1}f(0,0) = \partial_{1} \partial_{2} f(0,0)$. 
+
+    From this, we can infer the general case. We let $f: U \to  \mathbb{R}^{m}$ with $U \subset \mathbb{R}^{n}$ open and $y \in U$. Write $f = f(y_{1}, \dots, y_{n})$ and assume wlog $i < j$. We claim that 
+    \begin{align*}
+        \partial_{i} \partial_{j} f_{k}(y) = \partial_{j} \partial_{i} f_{k}(y)
+    \end{align*}
+    for any $1 \leq k \leq m$. Define the function 
+    \begin{align*}
+        \tilde{f}(x_{1}, x_{2}) = f_{k}(y + x_{1}e_{i} + x_{2} e_{j}) = f_{k}(y_{1}, y_{2}, \dots, y_{i} + x_{1}, \dots, y_{j} + x_{2}, \dots, y_{n}).  
+    \end{align*}
+    We get by the special case we just proved that
+    \begin{align*}
+        \partial_{2} \partial_{1} f_{k}(y) = \partial_{2} \partial_{1} \tilde{f}(0,0) = \partial_{1} \partial_{2} \tilde{f}(0,0) = \partial_{1} \partial_{2} f_{k}(y).
+    \end{align*}
+    Doing this for all $k$, we get the general statement.
+\end{proof}
+
+\begin{corollary}[Permutation of partials]
+    Let $U \subset \mathbb{R}^{n}$ be open and $f \in C^{k}(U)$. Let $i_{1}, \dots, i_{k}$ be indices in $\left\{ 1, \dots, n \right\}$ and $\sigma \in S_{n}$. Then
+    \begin{align*}
+        \partial_{i_{1}} \partial_{i_{2}} \cdots \partial_{i_{k}} f = \partial_{\sigma (i_{1})} \partial_{\sigma (i_{2})} \cdots \partial_{\sigma (i_{k})} f.
+    \end{align*}
+\end{corollary}
+\begin{proof}
+    Induction on Schwarz Theorem \ref{thm:schwarz}.
+\end{proof}

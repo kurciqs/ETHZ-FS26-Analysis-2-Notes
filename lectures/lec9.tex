@@ -41,54 +41,6 @@ We will now prove the chain rule in multiple dimensions.
 	\end{align*}
 \end{theorem}
 
-{
-	\definecolor{chalkorange}{RGB}{250, 105, 65}
-		\begin{center}
-		\begin{tikzpicture}[
-		    scale=0.7,
-		    transform shape,
-		    thick,
-		    black,
-		    blob/.style={smooth cycle, tension=0.8, draw=black, line width=1.2pt},
-		    point/.style={circle, fill=chalkorange, inner sep=0pt, minimum size=4pt}
-		]
-			\node[font=\huge] at (-2, 2.5) {$\mathbb{R}^n$};
-			\node[font=\huge] at (3.5, 2.5) {$\mathbb{R}^m$};
-			\node[font=\huge] at (8.5, 2.5) {$\mathbb{R}^k$};
-
-			\draw[blob] plot coordinates {
-				(-2.5,0.8) (-0.8,1.2) (0.2,0) (-0.2,-1.5)
-				(-1.5,-2.5) (-2.8,-1.8) (-3.2,-0.5)
-			};
-			\node[font=\LARGE] at (-0.5, 1.6) {$U$};
-
-			\draw[blob] plot coordinates {
-				(2.2,0.2) (3,0.5) (4.5,1.2) (5.8,0.2)
-				(5.5,-1.5) (4,-2) (3,-1) (2,-1)
-			};
-			\node[font=\LARGE] at (4.7, 1.8) {$V$};
-
-			\node[point] (x0) at (-1.5, -0.6) {};
-			\node[chalkorange, below right, font=\LARGE, yshift=-2pt] at (x0) {$x_0$};
-
-			\node[point] (fx0) at (3.5, -0.3) {};
-			\node[chalkorange, right, font=\LARGE, xshift=2pt] at (fx0) {$f(x_0)$};
-
-			\node[point] (gfx0) at (8.8, -0.8) {};
-			\node[chalkorange, above right, font=\LARGE, yshift=2pt] at (gfx0) {$g(f(x_0))$};
-
-			\draw[->, >=stealth, line width=1.2pt]
-				(-0.2, 0) to[out=40, in=140]
-				node[midway, above, font=\LARGE, yshift=2pt] {$f$}
-				(2.8, -0.4);
-
-			\draw[->, >=stealth, line width=1.2pt]
-				(5.2, 0.2) to[out=30, in=150]
-				node[midway, above, font=\LARGE, yshift=2pt] {$g$}
-				(8.1, -0.6);
-		\end{tikzpicture}
-	\end{center}
-}
 
 \begin{proof}
 	This is the intuition: We have that $f(x_{0}+x) - f(x_{0}) \approx L(x)$ for some linear map $L(x)$ and $g(y_{0} + y) - g(y_{0}) \approx M(y)$ for a linear $M$. Then we would like to substitute $y = f(x_{0}+x)- f(x_{0})$ to get
@@ -130,254 +82,99 @@ We will now prove the chain rule in multiple dimensions.
 	which is bounded, so the entire error term $T(x)$ goes to zero.
 \end{proof}
 
-\begin{remark}
+\begin{remark}[Composition is multiplication of Jacobi matrices]
 	This is useful because it allows us to compute the Jacobi matrix of the composition,
 	\begin{align*}
 		J(g \circ f)(x_{0}) = Jg(f(x_{0})) \cdot Jf(x_{0}).
 	\end{align*}
-	    {
-	        \definecolor{chalkgreen}{RGB}{80, 200, 70}
-	        \begin{center}
-	            \[
-	            \begin{tikzcd}[row sep=0.2ex, column sep=3.2em, cells={nodes={inner sep=0.2ex}}]
-	                {\scriptstyle \color{chalkgreen}(x_{1},\ldots,x_{n})} &
-	                {\scriptstyle \color{chalkgreen}(y_{1},\ldots,y_{m})} &
-	                {} \\
-	                U \arrow[r, "f"] &
-	                V \arrow[r, "g"] &
-	                \mathbb{R}^{k} \\
-	                {\scriptstyle \subset \mathbb{R}^{n}} &
-	                {\scriptstyle \subset \mathbb{R}^{m}} &
-	                {}
-	            \end{tikzcd}
-	            \]
-	        \end{center}
-	    }
-    Component-wise, for $1 \leq i \leq n$, this becomes the $\mathbb{R}^{k}$ vector
-    \begin{align*}
-        \frac{\partial (g \circ f)}{\partial x_{i}}(x) = \sum_{j=1}^{m} \frac{\partial g}{\partial y_{j}} (f(x)) \cdot \frac{\partial f_{j}}{\partial x_{i}}(x) = \partial_{i}(g \circ f)(x) = \sum_{j=1}^{m} \partial_{j}g(f(x)) \cdot \partial_{i}f_{j}(x),
-    \end{align*}
-    where $y_{j}$ are the components in $\mathbb{R}^{m}$ and $x_{i}$ are in $\mathbb{R}^{n}$.
+	Component-wise, for $1 \leq i \leq n$, this becomes the $\mathbb{R}^{k}$ vector
+	\begin{align*}
+		\frac{\partial (g \circ f)}{\partial x_{i}}(x) = \sum_{j=1}^{m} \frac{\partial g}{\partial y_{j}} (f(x)) \cdot \frac{\partial f_{j}}{\partial x_{i}}(x) = \partial_{i}(g \circ f)(x) = \sum_{j=1}^{m} \partial_{j}g(f(x)) \cdot \partial_{i}f_{j}(x),
+	\end{align*}
+	where $y_{j}$ are the components in $\mathbb{R}^{m}$ and $x_{i}$ are in $\mathbb{R}^{n}$.
 \end{remark}
 
 \newpage
 
 \begin{theorem}[Generalised mean value theorem]\label{thm:MVT}
-    Let $U \subset \mathbb{R}^{n}$ open and $f \in C^{1}(U)$. Assume that $x_{0} \in U$ and $h \in \mathbb{R}^{n}$ such that $x_{0} + th \in U$ for all $t \in [0,1]$. Then 
-    \begin{align*}
-        f(x_{0} + h) - f(x_{0}) = D f_{\xi}(h) = \partial_{h}f(\xi),
-    \end{align*}
-    where $\xi = x_{0} + \theta h$ for some $\theta \in (0,1)$.
+	Let $U \subset \mathbb{R}^{n}$ open and $f \in C^{1}(U)$. Assume that $x_{0} \in U$ and $h \in \mathbb{R}^{n}$ such that $x_{0} + th \in U$ for all $t \in [0,1]$. Then
+	\begin{align*}
+		f(x_{0} + h) - f(x_{0}) = D f_{\xi}(h) = \partial_{h}f(\xi),
+	\end{align*}
+	where $\xi = x_{0} + \theta h$ for some $\theta \in (0,1)$.
 \end{theorem}
-{
-    \definecolor{chalkgreen}{RGB}{80, 200, 70}
-    \definecolor{chalkorange}{RGB}{250, 105, 65}
-    \definecolor{chalkblue}{RGB}{90, 180, 225}
-	    \begin{center}
-		        \begin{tikzpicture}[
-		          scale=0.5,
-		          transform shape,
-		          thick,
-		          blob/.style={
-		            smooth cycle,
-	            tension=0.8,
-	            draw=chalkgreen,
-	            line width=2pt
-	          },
-	          point/.style={
-	            circle,
-	            draw,
-	            inner sep=1.5pt,
-	            line width=1.5pt,
-	            fill=white
-	          }
-	        ]
-            \draw[blob] plot coordinates {
-                (-3, 1)
-                (-1.5, 2.5)
-                (1, 3)
-                (3, 1.5)
-                (3.5, -1)
-                (1.5, -2.5)
-                (-0.5, -3.5)
-                (-2, -1.5)
-                (-3.5, -0.5)
-            };
 
-            \node[chalkgreen, font=\Huge] at (3.5, 3.2) {$U$};
-
-            \coordinate (X0) at (-1.2, -0.8);
-            \coordinate (X0H) at (0.8, 1.2);
-
-	            \draw[chalkorange, line width=1.5pt] (X0) -- (X0H);
-
-            \foreach \t in {0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.90}{
-                \node[point, draw=chalkorange] at ($(X0)!\t!(X0H)$) {};
-            }
-
-            \node[point, draw=chalkorange] at (X0) {};
-            \node[chalkorange, font=\huge, below right] at (-1.5, -0.8) {$x_0$};
-
-            \node[point, draw=chalkgreen] at (X0H) {};
-            \node[chalkgreen, font=\huge, below right] at (0.8, 1.2) {$x_0+h$};
-
-	            \draw[->, >=stealth, chalkblue, line width=2pt]
-	                (4.5, -0.5) -- (6.5, 1.5)
-                node[midway, below right, font=\huge] {$h$};
-        \end{tikzpicture}
-    \end{center}
-}
 
 \begin{proof}
-    For $t \in [0,1]$, define $g: \mathbb{R} \to \mathbb{R}$ by $g(t) = f(x_{0} + th)$. Then
-    \begin{align*}
-        f(x_{0}+h) - f(x_{0}) = g(1) - g(0) = g'(\theta)
-    \end{align*}
-    for some $\theta \in (0,1)$, by the MVT. But $g(t) = (f \circ \gamma) (t)$ for the curve $\gamma (t) = x_{0} + th$, which has differential 
-    \begin{align*}
-        D\gamma_{t}(s) = sh
-    \end{align*}
-    for any $t$, as can be quickly verified. Then we can apply the chain rule to get
-    \begin{align*}
-        Dg_{t} = D(f \circ \gamma)_{t} = Df_{\gamma (t)} \circ D\gamma_{t}.
-    \end{align*}
-    Since $g : \mathbb{R} \to \mathbb{R}$, we have $g'(t) = Dg_{t}(1)$, by Remark \ref{rem:1d-derivative}. Hence
-    \begin{align*}
-        g'(t) = Dg_{t}(1) = Df_{\gamma (t)}\bigl(D\gamma_{t}(1)\bigr) = Df_{\gamma (t)}(h),
-    \end{align*}
-    and taking $t = \theta$ we get the statement.
+	For $t \in [0,1]$, define $g: \mathbb{R} \to \mathbb{R}$ by $g(t) = f(x_{0} + th)$. Then
+	\begin{align*}
+		f(x_{0}+h) - f(x_{0}) = g(1) - g(0) = g'(\theta)
+	\end{align*}
+	for some $\theta \in (0,1)$, by the MVT. But $g(t) = (f \circ \gamma) (t)$ for the curve $\gamma (t) = x_{0} + th$, which has differential
+	\begin{align*}
+		D\gamma_{t}(s) = sh
+	\end{align*}
+	for any $t$, as can be quickly verified. Then we can apply the chain rule to get
+	\begin{align*}
+		Dg_{t} = D(f \circ \gamma)_{t} = Df_{\gamma (t)} \circ D\gamma_{t}.
+	\end{align*}
+	Since $g : \mathbb{R} \to \mathbb{R}$, we have $g'(t) = Dg_{t}(1)$, by Remark \ref{rem:1d-derivative}. Hence
+	\begin{align*}
+		g'(t) = Dg_{t}(1) = Df_{\gamma (t)}\bigl(D\gamma_{t}(1)\bigr) = Df_{\gamma (t)}(h),
+	\end{align*}
+	and taking $t = \theta$ we get the statement.
 \end{proof}
 
 \begin{definition}[Convex sets]\label{def:convexity}
-    A set $A \subset \mathbb{R}^{n}$ is called convex if 
-    \begin{align*}
-        \forall x,y \in A: \forall t \in [0,1]: tx + (1-t)y \in A.
-    \end{align*}
-    In intuitive terms, one can connect any two points in $A$ by a straight line in $n$-dimensional space.
+	A set $A \subset \mathbb{R}^{n}$ is called convex if
+	\begin{align*}
+		\forall x,y \in A: \forall t \in [0,1]: tx + (1-t)y \in A.
+	\end{align*}
+	In intuitive terms, one can connect any two points in $A$ by a straight line in $n$-dimensional space.
 \end{definition}
-{
-    \definecolor{chalkorange}{RGB}{250, 105, 65}
-    \definecolor{chalkgreen}{RGB}{80, 200, 70}
-    \begin{center}
-        \begin{tikzpicture}[
-            scale=0.4,
-            transform shape,
-            thick,
-	            blob/.style={
-	                smooth cycle,
-	                tension=0.8,
-	                draw=chalkorange,
-	                line width=1.35pt
-	            },
-	            greenline/.style={
-	                draw=chalkgreen,
-	                line width=1pt,
-	                line cap=round
-	            },
-	            greenpoint/.style={
-	                circle,
-	                draw=chalkgreen,
-	                fill=white,
-	                line width=0.8pt,
-	                inner sep=1.4pt
-	            },
-	            counterexample/.style={
-	                draw=chalkgreen,
-	                line width=0.8pt,
-	                line cap=round
-	            }
-        ]
-            \draw[blob] plot coordinates {
-                (-4.5, 0.5)
-                (-3.5, 2.2)
-                (-1.5, -0.5)
-                (-0.5, 2.8)
-                (1.5, 0.5)
-                (0.5, -3)
-                (-3, -3)
-            };
-            \node[chalkorange, font=\Huge] at (0, 1) {$A_1$};
-
-            \coordinate (P1) at (-3.7, 1);
-            \coordinate (P2) at (-0.4, 2.2);
-            \draw[greenline] (P1) -- (P2);
-            \node[greenpoint] at (P1) {};
-            \node[greenpoint] at (P2) {};
-            \coordinate (Xbad) at ($(P1)!0.45!(P2)$);
-            \draw[counterexample] ($(Xbad)+(-0.18,-0.28)$) -- ($(Xbad)+(0.18,0.28)$);
-            \draw[counterexample] ($(Xbad)+(-0.18,0.28)$) -- ($(Xbad)+(0.18,-0.28)$);
-
-	            \draw[draw=chalkorange, line width=1.35pt]
-	                plot[smooth cycle, tension=0.55] coordinates {
-                    (4.0, 0.7)
-                    (4.9, 2.8)
-                    (6.8, 4.0)
-                    (9.4, 3.7)
-                    (10.8, 2.1)
-                    (11.0, -0.6)
-                    (10.0, -2.9)
-                    (8.0, -3.9)
-                    (5.7, -3.4)
-                    (4.3, -1.7)
-                };
-            \node[chalkorange, font=\Huge] at (8.0, 2.15) {$A_2$};
-
-            \coordinate (P3) at (4.9, 0.4);
-            \coordinate (P4) at (6.0, 2.55);
-            \draw[greenline] (P3) -- (P4);
-            \node[greenpoint] at (P3) {};
-            \node[greenpoint] at (P4) {};
-
-            \coordinate (P5) at (5.8, -2.35);
-            \coordinate (P6) at (8.7, -0.4);
-            \draw[greenline] (P5) -- (P6);
-            \node[greenpoint] at (P5) {};
-            \node[greenpoint] at (P6) {};
-        \end{tikzpicture}
-    \end{center}
-}
 
 \begin{definition}[Gradient]\label{def:gradient}
-    For $U \subset \mathbb{R}^{n}$ open and $f \in C^{1}(U)$, we define the gradient of $f$ at $x \in U$ as the vector
-    \begin{align*}
-        \nabla f(x) = Jf(x)^\top.
-    \end{align*}
-    Notice that technically, $Jf(x) = (\partial_{1}f(x), \dots, \partial_{n}f(x))$ is a row vector and we want the gradient to be column, so we take the transpose.
+	For $U \subset \mathbb{R}^{n}$ open and $f \in C^{1}(U)$, we define the gradient of $f$ at $x \in U$ as the vector
+	\begin{align*}
+		\nabla f(x) = Jf(x)^\top.
+	\end{align*}
+	Notice that technically, $Jf(x) = (\partial_{1}f(x), \dots, \partial_{n}f(x))$ is a row vector and we want the gradient to be column, so we take the transpose.
 \end{definition}
 
-\begin{prop}[]\label{prop:}
-    Let $U \subset \mathbb{R}^{n}$ open and $f \in C^{1}(U)$. Assume that $U$ is convex and 
-    \begin{align*}
-        \sup_{x \in U} \left| \nabla f(x) \right| \leq M < \infty.
-    \end{align*}
-    Then $f$ is $M$-Lipschitz.
+\begin{prop}[Bounded gradient is Lipschitz]\label{prop:derivative-lipschitz}
+	Let $U \subset \mathbb{R}^{n}$ open and $f \in C^{1}(U)$. Assume that $U$ is convex and
+	\begin{align*}
+		\sup_{x \in U} \left| \nabla f(x) \right| \leq M < \infty.
+	\end{align*}
+	Then $f$ is $M$-Lipschitz.
 \end{prop}
 \begin{proof}
-    Let $x,y \in U$, $h = x-y$ to write $x = y+h$ and $y=x_{0}$, then, applying Cauchy-Schwartz and by the generalised Mean Value Theorem \ref{thm:MVT}, there exists a $\xi \in U$ on the line between $x$ and $y$ such that
-    \begin{align*}
-        |f(x) - f(y)| &= |f(x_{0} + h) - f(x_{0})| = |Df_{\xi}(h)| = |Jf(\xi) \cdot h| = |h \cdot \nabla f(\xi)| 
-        \\ &\leq \left| \nabla f(\xi) \right| \left| h \right| \leq M \left| h \right| = M \left| y-x \right|.
-    \end{align*}
+	Let $x,y \in U$, $h = x-y$ to write $x = y+h$ and $y=x_{0}$, then, applying Cauchy-Schwartz and by the generalised Mean Value Theorem \ref{thm:MVT}, there exists a $\xi \in U$ on the line between $x$ and $y$ such that
+	\begin{align*}
+		|f(x) - f(y)| & = |f(x_{0} + h) - f(x_{0})| = |Df_{\xi}(h)| = |Jf(\xi) \cdot h| = |h \cdot \nabla f(\xi)|
+		\\ &\leq \left| \nabla f(\xi) \right| \left| h \right| \leq M \left| h \right| = M \left| y-x \right|.
+	\end{align*}
 \end{proof}
 
 
 \begin{theorem}[Constant function]\label{thm:}
-    Let $U \subset \mathbb{R}^{n}$ be open and connected. Let $f \in C^{1}(U)$ and assume that $\forall x \in U: \nabla f(x) = 0$. Then $f$ is constant on $U$.
+	Let $U \subset \mathbb{R}^{n}$ be open and connected. Let $f \in C^{1}(U)$ and assume that $\forall x \in U: \nabla f(x) = 0$. Then $f$ is constant on $U$.
 \end{theorem}
 \begin{proof}
-    Let $x_{0} \in U$. We define
-    \begin{align*}
-        G = \left\{ x \in U \mid f(x) = f(x_{0}) \right\}.
-    \end{align*}
-    We will show that $G$ is open and $U \setminus G$ is open, forcing $G = U$, as it is connected.
+	Let $x_{0} \in U$. We define
+	\begin{align*}
+		G = \left\{ x \in U \mid f(x) = f(x_{0}) \right\}.
+	\end{align*}
+	We will show that $G$ is open and $U \setminus G$ is open, forcing $G = U$, as it is connected.
 
-	So assume that $x \in U$. Then, by openness of $U$, there exists a ball $B_{r}(x)$ such that $B_{r}(x) \subset U$. Now take any $y \in B_{r}(x)$. Because the ball is convex (exercise), I can apply the Mean Value Theorem \ref{thm:MVT} to get 
+	So assume that $x \in U$. Then, by openness of $U$, there exists a ball $B_{r}(x)$ such that $B_{r}(x) \subset U$. Now take any $y \in B_{r}(x)$. Because the ball is convex (exercise), I can apply the Mean Value Theorem \ref{thm:MVT} to get
 	\begin{align*}
 		f(y) - f(x) = Df_{\xi}(h) = Jf(\xi) \cdot h = h \cdot \nabla f(\xi) = 0,
 	\end{align*}
-	for $h = y-x$ and $\xi = x + \theta h \in B_{r}(x)$ with $\theta \in (0,1)$. But that just means $f(x) = f(y)$. 
+	for $h = y-x$ and $\xi = x + \theta h \in B_{r}(x)$ with $\theta \in (0,1)$. But that just means $f(x) = f(y)$.
 
 	Now, if $x \in G$, then the ball $B_{r}(x)$ must be a subset of $G$, as for any $y \in B_{r}(x)$, $f(y) = f(x) = f(x_{0})$. But conversely, if $x \not  \in G$, then certainly $f(y) = f(x) \neq f(x_{0})$ for any $y \in B_{r}(x)$. This shows both $G$ and $U \setminus G$ are open.
 
 	And so finally, as $x_{0} \in G$, it is non-empty, which forces $U = G$, by connectedness.
 \end{proof}
+
