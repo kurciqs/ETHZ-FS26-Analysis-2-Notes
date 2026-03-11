@@ -115,12 +115,13 @@ The next logical step is to take partial derivatives of partial derivatives of c
     Doing this for all $k$, we get the general statement.
 \end{proof}
 
-\begin{corollary}[Permutation of partials]
+\begin{corollary}[Permutation of partials]\label{cor:perm_partials}
     Let $U \subset \mathbb{R}^{n}$ be open and $f \in C^{k}(U)$. Let $i_{1}, \dots, i_{k}$ be indices in $\left\{ 1, \dots, n \right\}$ and $\sigma \in S_{n}$. Then
     \begin{align*}
         \partial_{i_{1}} \partial_{i_{2}} \cdots \partial_{i_{k}} f = \partial_{\sigma (i_{1})} \partial_{\sigma (i_{2})} \cdots \partial_{\sigma (i_{k})} f.
     \end{align*}
 \end{corollary}
 \begin{proof}
-    Induction on Schwarz Theorem \ref{thm:schwarz}.
+    Follows from Schwarz Theorem \ref{thm:schwarz}, as any permutation can be written as a product of transpositions.
 \end{proof}
+

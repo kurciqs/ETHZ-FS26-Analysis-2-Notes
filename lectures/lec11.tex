@@ -1,0 +1,135 @@
+\begin{definition}[Multi-index notation]\label{def:multiindnotation}
+    For $\alpha \in \mathbb{N}^{n}$, i.e. $\alpha = (\alpha_{1}, \dots, \alpha_{n})$, we write
+    \begin{align*}
+        \left| \alpha \right| = \sum_{k=1}^{n} \alpha_{i}.
+    \end{align*}
+    With the Schwarz corollary \ref{cor:perm_partials}, we can define (well) the expressions
+    \begin{align*}
+        \partial^{\alpha }f = \partial_{1}^{\alpha_{1}} \cdots \partial_{n}^{\alpha_{n}} f
+    \end{align*}
+    where $\partial_{i}^{k}$ means taking the $i$-th partial derivative $k$ times, and for $x \in \mathbb{R}^{n}$
+    \begin{align*}
+        x^{\alpha } = x_{1}^{\alpha_{1}} \cdots x_{n}^{\alpha_{n}}. 
+    \end{align*}
+    Furthermore, we define the multi-factorial
+    \begin{align*}
+        \alpha ! = \alpha_{1} \cdots \alpha_{n}.
+    \end{align*}
+    This is very useful notation for dealing with multidimensional derivatives.
+\end{definition}
+
+The Taylor theorem in $\mathbb{R}^{n}$ will in essence be the one in $\mathbb{R}$ but applied to the function $f \circ \gamma = \varphi$, so basically we will be able to express the value of $f$ around some point $x_{0}$ by approaching it with the path $\gamma = x_{0} + th$. That in turn will tell us that for smaller and smaller $h$ the Taylor polynomial at $h$ is going to approach $f(x_{0}+h)$. 
+
+\begin{lemma}[Derivative in terms of partials]
+    Let $U \subset \mathbb{R}^{n}$ be open. Assume $f \in C^{m}(U)$, $x_{0} \in U$, $h \in \mathbb{R}^{n}$ and $x_{0} + th \in U$ for all $t \in (-\epsilon, 1+\epsilon)$ with some $\epsilon > 0$. Let $\gamma (t) = x_{0} + ht$ and define $\varphi(t) = f \circ \gamma (t)$. Then
+    \begin{align*}
+        \frac{\varphi^{(m)}(t)}{m!} = \sum_{\left| \alpha  \right| = m} \frac{\partial^{\alpha } f(x_{0}+ th) h^{\alpha }}{\alpha !}.
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    Induction over $m$. For $m=1$, the component-wise Chain Rule \ref{rem:chain-rule-comp} gives
+    \begin{align*}
+        D\varphi_{t}(1) = \varphi'(t) = \sum_{j=1}^{n} \partial_{j} f(x_{0} + th) \cdot h_{j} = \sum_{\left| \alpha  \right| = 1} \partial^{\alpha }f(x_{0} + th) \frac{h^{\alpha }}{\alpha !},
+    \end{align*}
+    since $\partial_{1} \gamma (t) = \frac{d}{dt} \gamma (t) = h = (h_{1}, \dots, h_{n})$. 
+
+    Now assume the equality holds for $m$. Differentiating the induction assumption with the Chain Rule \ref{rem:chain-rule-comp}, we get
+    \begin{align*}
+        \frac{\varphi^{(m+1)}(t)}{m!} = \sum_{\left| \alpha  \right| = m} \sum_{i=1}^{n} \frac{1}{\alpha !} \partial_{i}\partial^{\alpha }f(x_{0}+th) \cdot h^{\alpha }h_{i} = \sum_{\left| \alpha \right| = m} \sum_{i=1}^{n} \frac{\partial_{\alpha + e_{i} } f(x_{0} + th)h^{\alpha + e_{i}}}{\alpha !}.
+    \end{align*}
+    Define for every $i$ the multi-index $\beta = \alpha + e_{i}$ such that $\frac{1}{\alpha !} = \frac{1}{\beta !} \beta_{i}$. Then
+    \begin{align*}
+        \frac{\varphi^{(m+1)}(t)}{m!} = \sum_{\left| \beta  \right| = m+1} \; \sum_{\beta_{i} > 0} \frac{\partial^{\beta } f(x_{0}+th) h^{\beta }}{\beta !} \beta_{i}  
+        = \sum_{\left| \beta  \right| = m+1} \frac{\partial^{\beta } f(x_{0}+th) h^{\beta }}{\beta !} \underbrace{\sum_{i=1}^{n} \beta_{i}}_{\left| \beta  \right| = m+1}
+    \end{align*}
+    and the equality follows for $m+1$.
+\end{proof}
+
+\newpage
+
+\begin{theorem}[Taylor Theorem]\label{thm:taylor}
+    Let $f \in C^{k+1}(U)$ with $U \subset \mathbb{R}^{n}$ open. Let $x_{0} \in U$, $h \in \mathbb{R}^{n}$ and assume that $x_{0}+th \in U$ for all $t \in [0,1]$. Then
+    \begin{align*}
+        f(x_{0} + h) = \sum_{\left| \alpha  \right| = 0}^{k} \frac{\partial^{\alpha }f(x_{0}) h^{\alpha }}{\alpha !} + R_{k+1}f(h), 
+    \end{align*}
+    where 
+    \begin{align*}
+        R_{k+1}f(h) = \int_{0}^{1} (1-t)^{k}(k+1) \left( \sum_{\left| \alpha  \right| = k+1} \frac{\partial^{\alpha }f(x_{0}+th)}{\alpha !} h^{\alpha }\right)   \, dt.
+    \end{align*}
+    Furthermore, $R_{k+1}f(h) = \mathcal{O}(\left| h \right|^{k+1})$ as $h \to 0$.
+\end{theorem}
+\begin{proof}
+    By one dimensional Taylor theorem of $\varphi$ evaluated at $1$, expanded around $0$, up to degree $k$,
+    \begin{align*}
+        f(x_{0} + h) = \varphi(1) = \sum_{m=0}^{k} \frac{\varphi^{(m)}(0)}{m!} + \int_{0}^{1} (k+1)(1-t)^{k} \frac{\varphi^{(k+1)}(t)}{(k+1)!} \, dt.
+    \end{align*}
+    Plugging in the expression for $\frac{\varphi^{(m)}(t)}{m!}$ from the previous Lemma with $\epsilon > 0$ small enough that we're contained in $U$, we get the equality.
+
+    Finally, for the asymptotic, consider that
+    \begin{align*}
+        \left| h^{\alpha } \right| = \left| h_{1}^{\alpha_{1}} \cdots h_{n}^{\alpha_{n}} \right| \leq \left| h \right|^{\alpha_{1}} \cdots \left| h \right|^{\alpha_{n}} = \left| h \right|^{\left| \alpha  \right|} = \left| h \right|^{k+1}.
+    \end{align*}
+    So pick a small enough ball such that $\overline{ B_{r}(x_{0}) } \subset U$. For $h$ with $\left| h \right| < r$, we have by the Extreme Value Theorem \ref{thm:extreme_val_theorem} that all $\partial^{\alpha }f$ are bounded (because continuous) on this ball. After that, with the triangle inequality for integrals, it's not particularly hard to estimate $R_{k+1}f$ from above by a constant multiple of $\left| h \right|^{k+1}$, and we're done. 
+\end{proof}
+
+\begin{prop}[Polynomial expansions]\label{prop:poly-exp}
+    Let $f \in C^{k+1}(U)$ with $U \subset \mathbb{R}^{n}$ open and $x_{0} \in U$. Assume that 
+    \begin{align*}
+        \left| f(x_{0}+h) - P(h) \right| = \smalO(\left| h \right|^{k}) \quad \text{ as } h \to 0
+    \end{align*}
+    for some polynomial $P$ of degree $\leq k$. Then, 
+    \begin{align*}
+        \partial^{\alpha }f(x_{0}) = \partial^{\alpha } P(0) \quad \forall \alpha \in \mathbb{N}^{n} \text{ with } \left| \alpha  \right| \leq k.
+    \end{align*}
+\end{prop}
+\begin{proof}
+    Denote by $P_{x_{0},k}$ the Taylor polynomial up to degree $k$ at $x_{0}$. Then by Taylor Theorem \ref{thm:taylor},
+    \begin{align*}
+        \left| f(x_{0}+h) - P_{x_{0},k}(h) \right| \leq \mathcal{O}(\left| x \right|^{k+1}) = \smalO(\left| x \right|^{k}).
+    \end{align*}
+    By assumption, $\left| f(x_{0}+h)-P(h) \right| = \smalO(\left| h \right|^{k})$. By triangle inequality, we get
+    \begin{align*}
+        \left| P_{x_{0},k}(h) - P(h) \right| = \smalO(\left| h \right|^{k}).
+    \end{align*}
+    It will be an exercise in the problem sheet that from this follows that $P_{x_{0},k}(h) - P(h)$ is the zero polynomial. And so of course the derivatives align as claimed, since the Taylor polynomial coefficients are determined by the partial derivatives of $f$.
+\end{proof}
+
+\begin{eg} 
+    With this corollary, we can avoid always writing out the massive original Taylor formula.
+
+    We want to compute the Taylor expansion of $e^{ x_{1}^{2} - x_{2} + x_{3}^{4} }$. Remember from analysis $1$ that 
+    \begin{align*}
+        e^{ t } = 1 + t + \frac{t^{2}}{2!} + \frac{t^{3}}{3!} + \mathcal{O}(t^{4}) \quad \text{ as } t \to 0.
+    \end{align*}
+    Hence 
+    \begin{align*}
+        e^{ x_{1}^{2} - x_{2} + x_{3}^{4} } = 1 + (x_{1}^{2} - x_{2} + x_{4}^{4}) + \frac{(x_{1}^{2} - x_{2} + x_{4}^{4})^{2}}{2} + \frac{(x_{1}^{2} - x_{2} + x_{4}^{4})^{3}}{6} + \mathcal{O}(\left| x \right|^{4}).
+    \end{align*}
+    This can be reduced to
+    \begin{align*}
+        1 + x_{1}^{2} - x_{2} + \frac{2x_{1}^{2}x_{2} + x_{2}^{2}}{2} - \frac{1}{6}x_{2}^{3} + \underbrace{\mathcal{O}(\left| x \right|^{4})}_{\smalO(\left| x \right|^{3})}.
+    \end{align*}
+    And so by Corollary \ref{prop:poly-exp}, this must be the same as the Taylor expansion around $x = 0$, up to degree $3$.
+\end{eg}
+
+\begin{definition}[Class $C^{\infty}$]\label{def:class-infinity}
+    A function $f: U \to \mathbb{R}^{m}$ is class $C^{\infty}(U, \mathbb{R}^{m})$ if $f \in C^{k}(U, \mathbb{R}^{m})$ for all $k \in \mathbb{N}$. We call this \textit{infinitely differentiable}.
+\end{definition}
+
+\begin{definition}[Real analytic functions (via estimate)]\label{def:analytic-func}
+    We say that $f \in C^{\infty}(U)$ for $U \subset \mathbb{R}^{n}$ open \textit{satisfies analytic estimates} in $U$ if $\forall x_{0} \in U \;  \exists C,\rho > 0$ such that
+    \begin{align*}
+        \sup_{B_{\rho}(x_{0})} \left| \partial^{\alpha }f \right| \leq C \cdot \left| \alpha \right|! \cdot (n \rho)^{-\left| \alpha  \right|}.
+    \end{align*}
+\end{definition}
+
+\begin{theorem}[Analytic expansion]\label{thm:analytic-expansion}
+    Let $U \subset \mathbb{R}^{n}$ be open. Assume that $f \in C^{\infty}(U)$ satisfies analytic estimates. Let $x_{0} \in U, \rho > 0$ and $C$ be as in the previous definition. Let $P_{x_{0}, k}(h) = \sum_{\left| \alpha \right| = 0}^{k} c_{\alpha }h^{\alpha}$ be the Taylor polynomial of degree $k$. Then for $r \in (0, \rho)$, $P_{x_{0},k}(h)$ is absolutely convergent, i.e.
+    \begin{align*}
+        \forall \ell > k: \left| h \right| < r \implies \sum_{\left| \alpha  \right| = k}^{\ell}  \left| c_{\alpha} h^{\alpha } \right| \leq \frac{C (r / \rho)^{k}}{1 - (r / \rho)}.
+    \end{align*}
+    In particular $P_{x_{0}, \infty}(h) := \lim_{k \to \infty} P_{x_{0}, k}(h)$ is defined for all $h \in B_{r}(0)$. Moreover, $P_{x_{0}, \infty}(h)$ represents $f$ in $B_{\rho}(x_{0})$ and 
+    \begin{align*}
+        f(x_{0} + h) = P_{x_{0}, \infty}(h) \quad \forall h \in B_{\rho}(0).
+    \end{align*}
+\end{theorem}
