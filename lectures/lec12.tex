@@ -1,0 +1,155 @@
+
+\begin{theorem}[Analytic expansion]\label{thm:analytic-expansion}
+    Let $U \subset \mathbb{R}^{n}$ be open. Assume that $f \in C^{\infty}(U)$ satisfies analytic estimates. Let $x_{0} \in U, \rho > 0$ and $C > 0$ be as in the previous definition. Let $P_{x_{0}, k}(h) = \sum_{\left| \alpha \right| = 0}^{k} c_{\alpha }h^{\alpha}$ be the Taylor polynomial of degree $k$. Then for $r \in (0, \rho)$, $P_{x_{0},k}(h)$ is absolutely convergent, i.e.
+    \begin{align*}
+        \forall \ell > k: \left| h \right| < r \implies \sum_{\left| \alpha  \right| = k}^{\ell}  \left| c_{\alpha} h^{\alpha } \right| \leq \frac{C (r / \rho)^{k}}{1 - (r / \rho)}.
+    \end{align*}
+    In particular $P_{x_{0}, \infty}(h) := \lim_{k \to \infty} P_{x_{0}, k}(h)$ is defined for all $h \in B_{r}(0)$. Moreover, $P_{x_{0}, \infty}(h)$ represents $f$ in $B_{\rho}(x_{0})$ i.e. 
+    \begin{align*}
+        f(x_{0} + h) = P_{x_{0}, \infty}(h) \quad \forall h \in B_{\rho}(0).
+    \end{align*}
+\end{theorem}
+\newpage
+\begin{proof}
+    Fix $r \in (0, \rho)$. We prove the series is absolutely convergent. The key observation is that for $x \in B_{r}(x_{0})$ and $h \in B_{r}(0)$
+    \begin{align*}
+        \sum_{\left| \alpha  \right| = k} \left| \frac{\partial^{\alpha }f(x)}{\alpha !} h^{\alpha } \right| &\leq \sum_{\left| \alpha  \right| = k} \left| \frac{\partial^{\alpha }f(x)}{\alpha !} \right| \cdot \left| h \right|^{\left| \alpha  \right|} \leq \sum_{\left| \alpha  \right| = k} \frac{|\partial^{\alpha }f(x)|}{\alpha !}  \cdot r^{k} \\ 
+        &\leq \sum_{\left| \alpha  \right| = k} \frac{C \rho^{-k} n^{-k} r^{k}}{\alpha !} \left| \alpha  \right|! = C \left( r / \rho \right)^{k} \underbrace{n^{-k} \sum_{\left| \alpha  \right| = k} \frac{\left| \alpha  \right|!}{\alpha !}}_{=1}.
+    \end{align*}
+    The identity $1= \sum_{\left| \alpha  \right| = k} \frac{\left| \alpha  \right|!}{\alpha !}$ can be verified by induction or the multinomial theorem.
+    Then, the Taylor series is bounded by
+    \begin{align*}
+        \sum_{\left| \alpha  \right| = k}^{\infty} \left| \frac{\partial^{\alpha } f(x_{0})}{x} h^{\alpha } \right| \leq \sum_{m=k}^{\infty} C \left( r / \rho \right)^{m} = C \frac{\left( r / \rho \right)^{k} }{1 - r / \rho}
+    \end{align*}
+    because $r / \rho < 1$ and that is a geometric series. Hence the limit
+    \begin{align*}
+        P_{x_{0}, \infty}(h) = \lim_{k \to \infty} P_{x_{0}, k}(h)
+    \end{align*}
+    exists for any $h \in B_{\rho}(0)$. 
+    
+    Now we have to estimate the error. Let $h \in B_{r}(0)$. By Taylor Theorem \ref{thm:analytic-expansion}
+    \begin{align*}
+        f(x_{0} + h) = P_{x_{0}, k}(h) + Rf_{x_{0},k+1}(h),
+    \end{align*}
+    but we found
+    \begin{align*}
+        \left| R_{x_{0}, k+1}f(h) \right| &= \left| \int_{0}^{1} (k+1)(1-t)^{k} \sum_{\left| \alpha  \right| = k+1} \frac{\partial^{\alpha }f(x_{0} + th)}{\alpha !} h^{\alpha } \, dt \right| \\ 
+        &\leq \int_{0}^{1} (k+1)(1-t)^{k} \cdot C \left( r / \rho \right)^{k+1}  \, dt = C \left( r / \rho \right)^{k+1}. 
+    \end{align*}
+    From this we get
+    \begin{align*}
+        \left| f(x_{0} + h) - P_{x_{0},\infty}(h) \right| \leq \left| f(x_{0}+h)-P_{x_{0},k}(h) \right| + \left| P_{x_{0},k}(h) - P_{x_{0}, \infty}(h) \right| \leq C \left( r / \rho \right)^{k+1} +  \frac{C \left( r / \rho \right)^{k}}{1- r / \rho}  
+    \end{align*}
+    for any $k \in \mathbb{N}$. Sending $k \to \infty$, both terms on RHS go to zero and $f(x_{0} + h) = P_{x_{0}, \infty}(h)$ in $B_{r}(x_{0})$ for all $r < \rho$. So the equality holds on the entire ball $B_{\rho}(x_{0})$.
+\end{proof}
+
+\begin{corollary}[Unique continuation principle]
+    Let $U \subset \mathbb{R}^{n}$ open connected and $f,g$ satisfy analytic estimates in $U$. If there exists a point $x_{0} \in U$ such that 
+    \begin{align*}
+        \partial^{\alpha } f(x_{0}) = \partial^{\alpha } g(x_{0}) \quad \forall \alpha \in \mathbb{N}^{n},
+    \end{align*}
+    then $f = g$ in $U$. In particular, if $V \subset U$ is a nonempty open subset where $f$ and $g$ coincide, then $f = g$ in all of $U$.
+\end{corollary}
+\begin{proof}
+    We define 
+    \begin{align*}
+        G = \left\{ x \in U \mid \partial^{\alpha} f(x) = \partial^{\alpha }g(x) \; \forall \alpha \in \mathbb{N}^{n} \right\}.
+    \end{align*}
+    We will prove that $U \setminus G$ is open and $G$ is open. Since $U$ is connected and $G$ is non-empty, this will force $U \setminus G = \emptyset$, as often with proofs about connected spaces.
+
+    Notice that 
+    \begin{align*}
+        G = \bigcap_{\alpha \in \mathbb{N}^{n}} \left\{ x \in U \mid \partial^{\alpha }(f-g)(x) = 0 \right\} \implies U \setminus G = \bigcup_{\alpha  \in \mathbb{N}^{n}} [\partial^{\alpha }(f-g)]^{-1}(\mathbb{R} \setminus \left\{ 0 \right\})
+    \end{align*}
+    is a an arbitrary union of preimages of open sets under a continuous map and so $U \setminus G$ is open.
+
+    But if $x \in G \subset U$, by Theorem \ref{thm:analytic-expansion}, there exists a small enough ball around $x$, namely $\rho > 0$ from the analytic estimates for $f$ and $g$ (take the minimum of both of course) such that 
+    \begin{align*}
+        f(x+h) = P_{x, \infty}^{f}(h), \quad g(x+h) = P_{x, \infty}^{g}(h)
+    \end{align*}
+    for $h \in B_{\rho}(0)$ and $B_{\rho}(x)$ is contained in $U$. But since $x \in G$, $\partial^{\alpha }f(x) = \partial^{\alpha }g(x)$, and so the Taylor polynomials coincide and $f(x+h) = g(x+h)$. And so $B_{\rho}(x) \subset G$ and $G$ is open.
+\end{proof}
+
+\chapter{Optimization problems}
+
+\section{Basic notions}
+
+Now that we have established a strong basis for manipulating and understanding real multi-valued, multi-argument functions, let's look at applications in problems. Roughly speaking, the goal of optimisation is to take a function $f(x_{1},\dots, x_{n})$ with constraints $g_{k}(x_{1}, \dots, x_{n}) = 0$ and find for example the minimum of $f$. For instance, one could be looking for the minimum of 
+\begin{align*}
+    f(x_{1}, x_{2}, x_{3}, x_{4}) = x_{1}^{2} - 2 x_{3}^{2} + x_{4} + x_{2}^{3}
+\end{align*}
+under the constraint
+\begin{align*}
+    g(x) = x_{1}^{2} + x_{2}^{2} + x_{3}^{2} + x_{4}^{2} - 1 = 0.
+\end{align*}
+In Analysis, this task usually came in the form of finding the minimum of a function like $f(x) = x^{2} + x^{3} - 4x$ on an interval $[a,b]$. Let's establish the tools and theorems to do this in multiple dimensions.
+
+\begin{definition}[Local extremum]\label{def:local-extremum}
+    Let $U \subset \mathbb{R}^{n}$ be open, $f \in C^{1}(U)$. We say that $x_{0} \in U$ is a local minimum of $f$ if $\exists r > 0$ such that 
+    \begin{align*}
+        f(x_{0}) \leq f(x) \quad \forall x \in B_{r}(x_{0}).
+    \end{align*}
+    $x_{0}$ is a maximum if the inequality goes the other way. It is an extremum if it is either a minimum or maximum. We call it strict if the inequalities are strict.
+\end{definition}
+
+\begin{definition}[Critical point]\label{def:critical-point}
+    Let $U \subset \mathbb{R}^{n}$ be open and $f \in C^{1}(U)$. A point $x_{0} \in U$ is called a critical point of $f$ if $\nabla f(x_{0}) = 0$. 
+\end{definition}
+
+\begin{prop}[Gradient vanishes at extremum]\label{prop:}
+    Let $U \subset \mathbb{R}^{n}$ be open and $f: U \to \mathbb{R}$ be a class $C^{1}(U)$ function. Then, if for $x_{0} \in U$, $f$ is differentiable at $x_{0}$ and assumes a local extremum, $\nabla f(x_{0}) = 0$ and $x_{0}$ is a critical point.
+\end{prop}
+\begin{proof}
+    Assume wlog that $x_{0}$ is a local minimum. That means $\exists r > 0$ such that $f(x) \geq f (x_{0})$ for all $x \in B_{r}(x_{0})$. Fix some $1 \leq i \leq n$. We have 
+    \begin{align*}
+        \partial_{i}f(x_{0}) = \lim_{t \to 0} \frac{f(x_{0} + te_{i}) -f(x_{0})}{t} = \lim_{t \to 0^{+}} \frac{f(x_{0} + te_{i}) -f(x_{0})}{t} \geq 0,
+    \end{align*}
+    as $t > 0$ and $f(x_{0} + te_{i}) \geq f(x_{0})$ if we're approaching from positive $t$. On the other hand, if we approach from negative $t$, we get
+    \begin{align*}
+        \partial_{i}f(x_{0}) = \lim_{t \to 0^{-}} \frac{f(x_{0} + te_{i}) - f(x_{0})}{t} \leq 0.
+    \end{align*}
+    But that forces $\partial_{i} f(x_{0}) = 0$. If we do this for all $i$, we get that the gradient is zero.
+\end{proof}
+
+\section{Constraint optimisation}
+
+Here's a good interpretation I found for the following theorem: The Lagrange multiplier theorem states that at any local maximum (or minimum) of the function evaluated under the equality constraints, then, roughly speaking, the gradient of the function (at that point) can be expressed as a linear combination of the gradients of the constraints (at that point), with the Lagrange multipliers acting as coefficients. This is equivalent to saying that any direction perpendicular to all gradients of the constraints is also perpendicular to the gradient of the function. Or still, saying that the directional derivative of the function is 0 in every feasible direction.\footnote{\href{https://en.wikipedia.org/wiki/Lagrange_multiplier}{Lagrange multiplier - Wikipedia}} 
+
+\begin{theorem}[Lagrange multiplier]\label{thm:lagrange-multiplier}
+    Let $U \subset \mathbb{R}^{n}$ open, $f, g_{j} \in C^{1}(U)$ be functions for $1 \leq j \leq k$. Define the set 
+    \begin{align*}
+        M = \left\{ x \in U \mid g_{1}(x) = g_{2}(x) = \dots = g_{k}(x) = 0 \right\} \neq \emptyset.
+    \end{align*}
+    Assume further that $x_{0} \in M$ is a local minimum of $f |_{M}$ (on the ball with radius $r > 0$). Then there are real numbers $\lambda_{0}, \dots, \lambda_{k}$ such that
+    \begin{align*}
+        \lambda_{0} \nabla f(x_{0}) +\sum_{i=1}^{k} \lambda_{i} \nabla g_{i} (x_{0}) = 0, \quad \lambda_{0}^{2} + \dots + \lambda_{k}^{2} = 1.
+    \end{align*}
+    The numbers $\lambda_{i}$ are called the Lagrange multipliers and we see that $\nabla f(x_{0}), \nabla g_{j}(x_{0})$ are linearly dependent vectors.
+\end{theorem}
+\begin{proof}
+    Assume without loss of generality that $f$ is non-negative on the ball $\overline{ B_{r}(x_{0}) } $ (ask professor about this move). For now, we assume that the minimum is strict. Given $\epsilon > 0$, we will minimise the "penalised function":
+    \begin{align*}
+        f_{\epsilon}(x) = f(x) + \frac{1}{2\epsilon}\sum_{j=1}^{k} g_{i}^{2}(x)
+    \end{align*}
+    defined for $x \in \overline{ B_{r}(x_{0}) }$. We will take a sequence $(\epsilon_{\ell})_{\ell}^{\infty}$ that goes to zero, for instance $\epsilon_{\ell} = \frac{1}{\ell}$. For each $\ell \in \mathbb{N}$, let $x_{\ell}$ be the point of minimum of $f_{\epsilon_{\ell}}(x)$ in $\overline{ B_{r}(x_{0}) } $. We claim that $x_{\ell} \to x_{0}$ as $\ell \to \infty$. 
+    
+    Notice that $(x_{\ell})_{\ell}^{\infty}$ is a sequence in a compact set and so we can extract a convergent subsequence $x_{\ell_{m}} \to \bar{x} \in \overline{ B_{r}(x_{0}) }$. We claim that $\bar{x} \in M$. Indeed, $f_{\epsilon_{\ell}}(x_{\ell}) \leq f_{\epsilon_{\ell}}(x_{0}) = f(x_{0})$, because we picked $x_{\ell}$ to be the minimum and $x_{0}$ has all $g_{j}(x_{0}) = 0$. And so, using positivity of $f$,
+    \begin{align*}
+        \sum_{j=1}^{k} g_{j}^{2}(x_{\ell}) \leq 2\epsilon_{\ell}f(x_{\ell}) + \sum_{j=1}^{k} g_{j}^{2} (x_{\ell}) = 2\epsilon_{\ell} f_{\epsilon_{\ell}}(x_{\ell}) \leq 2\epsilon_{\ell} \cdot f(x_{0}).
+    \end{align*}
+    And as $\ell \to \infty$, the RHS gets smaller and smaller, hence in particular for our subsequence $x_{m_{\ell}}$,
+    \begin{align*}
+        \lim_{m \to \infty} \sum_{j=1}^{k} g_{j}^{2}(x_{\ell_{m}}) = \sum_{j=1}^{k} g_{j}^{2}(\bar{x}) = 0 
+    \end{align*}
+    and so $\bar{x} \in M \cap \overline{ B _{r}(x_{0})}$. Now consider that
+    \begin{align*}
+        f(x_{\ell_{m}}) \leq f_{\epsilon_{\ell_{m}}}(x_{\ell_{m}}) \leq f(x_{0}).
+    \end{align*}
+    Taking $m \to \infty$, we get
+    \begin{align*}
+        f(\bar{x}) = \lim_{m \to \infty} f(x_{\ell_{m}}) \leq f(x_{0}).
+    \end{align*}
+    But we assumed $x_{0}$ was a strict minimum, which forces $\bar{x} = x_{0}$. In particular, \textit{any} subsequence has the same limit \textit{and} there exists a convergent subsequence, so $x_{\ell} \to \bar{x}$, by a variant of Lemma \ref{lem:subseq_lim}.
+
+
+\end{proof}

@@ -119,17 +119,6 @@ The Taylor theorem in $\mathbb{R}^{n}$ will in essence be the one in $\mathbb{R}
 \begin{definition}[Real analytic functions (via estimate)]\label{def:analytic-func}
     We say that $f \in C^{\infty}(U)$ for $U \subset \mathbb{R}^{n}$ open \textit{satisfies analytic estimates} in $U$ if $\forall x_{0} \in U \;  \exists C,\rho > 0$ such that
     \begin{align*}
-        \sup_{B_{\rho}(x_{0})} \left| \partial^{\alpha }f \right| \leq C \cdot \left| \alpha \right|! \cdot (n \rho)^{-\left| \alpha  \right|}.
+        \max_{\overline{ B_{\rho}(x_{0}) } } \left| \partial^{\alpha }f \right| \leq C \cdot \left| \alpha \right|! \cdot (n \rho)^{-\left| \alpha  \right|} \quad  \forall \alpha \in \mathbb{N}^{n}.
     \end{align*}
 \end{definition}
-
-\begin{theorem}[Analytic expansion]\label{thm:analytic-expansion}
-    Let $U \subset \mathbb{R}^{n}$ be open. Assume that $f \in C^{\infty}(U)$ satisfies analytic estimates. Let $x_{0} \in U, \rho > 0$ and $C$ be as in the previous definition. Let $P_{x_{0}, k}(h) = \sum_{\left| \alpha \right| = 0}^{k} c_{\alpha }h^{\alpha}$ be the Taylor polynomial of degree $k$. Then for $r \in (0, \rho)$, $P_{x_{0},k}(h)$ is absolutely convergent, i.e.
-    \begin{align*}
-        \forall \ell > k: \left| h \right| < r \implies \sum_{\left| \alpha  \right| = k}^{\ell}  \left| c_{\alpha} h^{\alpha } \right| \leq \frac{C (r / \rho)^{k}}{1 - (r / \rho)}.
-    \end{align*}
-    In particular $P_{x_{0}, \infty}(h) := \lim_{k \to \infty} P_{x_{0}, k}(h)$ is defined for all $h \in B_{r}(0)$. Moreover, $P_{x_{0}, \infty}(h)$ represents $f$ in $B_{\rho}(x_{0})$ and 
-    \begin{align*}
-        f(x_{0} + h) = P_{x_{0}, \infty}(h) \quad \forall h \in B_{\rho}(0).
-    \end{align*}
-\end{theorem}
