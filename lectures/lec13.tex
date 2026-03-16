@@ -1,0 +1,93 @@
+
+\begin{remark}
+	We haven't done it in Linear Algebra yet, but an orthonormal basis of $\mathbb{R}^{n}$ is a basis $\mathcal{B} = (v_{1}, \dots, v_{n})$ such that $v_{i} \cdot v_{j} = \delta_{ij}$. In particular, for an orthonormal basis, if you take the change of basis matrix $O = [\text{id}_{\mathbb{R}^{n}}]^{\mathcal{E}}_{\mathcal{B}}$ from the standard basis into $\mathcal{B}$, then $O^\top = O^{-1}$.
+\end{remark}
+
+\begin{lemma}[Eigenvalue minimisation]\label{lem:eig-min}
+	Assume $v_{1}, \dots, v_{k} \in \mathbb{R}^{k}$ for $k \in \left\{ 1, \dots, n-1 \right\}$ are linearly independent vectors and $A$ is an $n \times n$ symmetric real matrix with eigenvectors $v_{i}$, so $A v_{i} = \mu_{i} v_{i}$ for $\mu_{i} \in \mathbb{R}$. Then $\exists w \in \mathbb{R}^{n}$ such that $\left| w \right| = 1$, $w \cdot v_{i} = 0$ and
+	\begin{align*}
+		Aw = \lambda w \quad \text{for } \lambda \in \mathbb{R}.
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	We will be looking to minimise the function $f: \mathbb{R}^{n} \to \mathbb{R}$ given by $f(x) = x \cdot A x$ under the constraints
+	\begin{align*}
+		\begin{cases}
+			g_{*}(x) = \left| x \right|^{2} - 1 = 0 \\
+			g_{1}(x) = v_{1} \cdot  x = 0           \\
+			\quad \vdots                            \\
+			g_{k}(x) = v_{k} \cdot  x = 0.
+		\end{cases}
+	\end{align*}
+	Define $M$ to be the set of points in $\mathbb{R}^{n}$ where all of the constraints are satisfied, which is closed. Let $w \in M$ be a point of minimum of $f|_{M}$, existing by Extreme Value Theorem \ref{thm:extreme_val_theorem}. By Lagrange Multiplier Theorem \ref{thm:lagrange-multiplier}, $\exists \lambda_{0}, \lambda_{*}, \lambda_{1}, \dots, \lambda_{k}$ (with sum of squares equal to $1$) such that
+	\begin{align*}
+		\lambda_{0} \nabla f(w) + \lambda_{*}\nabla g_{*}(w) + \sum_{j=1}^{k} \lambda_{k} \nabla g_{k}(w)=0.
+	\end{align*}
+	We remark that for vectors $v,w \in \mathbb{R}^{n}$, $v \cdot w = v^\top w$ and in particular, if $A$ is symmetric, $v\cdot Aw = (Aw) \cdot v = (Aw)^\top v = w^\top A^\top v = w^\top A v = w \cdot Av$.
+
+	Using this, we can compute the gradients in the equation above. Consider that
+	\begin{align*}
+		\partial_{i}f(x) = \lim_{t \to 0} \frac{f(x + te_{i}) - f(x)}{t} & = \lim_{t \to 0} \frac{(x+te_{i}) \cdot A(x+te_{i}) - x \cdot Ax}{t}                    \\
+		                                                                 & = \lim_{t \to 0} \frac{x \cdot A te_{i} + t e_{i} \cdot Ax + t e_{i} \cdot A te_{i}}{t} \\
+		                                                                 & = 2 e_{i} \cdot Ax
+	\end{align*}
+	and so $e_{i} \cdot \nabla f(x) = \partial_{i}f(x) = 2e_{i} \cdot Ax$. Now, since $g_{*}(x) = x \cdot Ix$, we get $\nabla g_{*}(x) = 2x$.
+	And for the rest,
+	\begin{align*}
+		\partial_{i} g_{j}(x) = \lim_{t \to 0} \frac{v_{j} \cdot (x+te_{i}) - v_{j} \cdot x}{t} = v_{i}e_{i},
+	\end{align*}
+	and so $\nabla g_{j}(x) = v_{j}$. Substituting into the Lagrange Multipliers equation,
+	\begin{align*}
+		\underbrace{2 \lambda_{0} Aw + 2\lambda_{*} w}_{w_{1}} + \underbrace{\sum_{j=1}^{k} \lambda_{j} v_{j}}_{w_{2}} = 0.
+	\end{align*}
+	By assumption,
+	\begin{align*}
+		v_{j} \cdot Aw = w \cdot Av_{j} = w \cdot \mu_{j} v_{j} = \mu_{j}w \cdot v_{i} = 0,
+	\end{align*}
+	hence $w_{1}$ and $w_{2}$ are orthogonal and sum to $0$, so they must each be $0$. And so
+	\begin{align*}
+		\lambda_{0}Aw +  \lambda_{*}w  = 0, \quad \lambda_{1}v_{1} + \dots + \lambda_{k}v_{k} = 0
+	\end{align*}
+	which implies $\lambda_{1} = \dots = \lambda_{k} = 0$, as $(v_{1}, \dots, v_{k})$ form a basis. But then $\lambda_{0}^{2} + \lambda_{*}^{2} = 1$ and $Aw = \lambda w$ with $\lambda = -\lambda_{*} / \lambda_{0}$. And we can't have $\lambda_{0} = 0$, because that would imply $w = 0$ and we had $\left| w \right| = 1$.
+\end{proof}
+
+\begin{theorem}[Spectral theorem for symmetric matrices]\label{thm:spectral-thm}
+	If $A \in \text{M}_{n \times n}(\mathbb{R})$ is a \textit{symmetric} $n \times n$ real matrix, then $A$ diagonalises in some orthonormal basis.
+\end{theorem}
+\begin{proof}
+	You fix $n$ and proceed by induction. The first time you apply the Lemma \ref{lem:eig-min}, you get the statement because you have no constraints except $g_{*}$. And then you keep applying the Lemma and getting eigenvectors that are always perpendicular to the old set of eigenvectors. This way, at some point, you get the Theorem.
+\end{proof}
+
+\newpage
+\section{Second order optimality conditions}
+
+Now we will expand the Taylor series up to order $2$ to get more information about the extrema.
+
+\begin{definition}[Hessian matrix]\label{def:hessian-matrix}
+	Let $U \subset \mathbb{R}^{n}$ be open and $f \in C^{2}(U)$. We define the Hessian matrix of $f$ at $x_{0} \in U$
+	\begin{align*}
+		Hf(x_{0}) = D^{2} f(x_{0}) :=
+		\begin{pmatrix}
+			\partial_{1} \partial_{1} f(x_{0}) & \dots  & \partial_{1} \partial_{n} f(x_{0}) \\
+			\vdots                             & \ddots & \vdots                             \\
+			\partial_{n} \partial_{1} f(x_{0}) & \dots  & \partial_{n} \partial_{n} f(x_{0})
+		\end{pmatrix}
+	\end{align*}
+	Notice that by Schwarz Theorem \ref{thm:schwarz}, $Hf(x_{0})^\top  = Hf(x_{0})$.
+\end{definition}
+
+\begin{prop}[Necessary conditions for the Hessian]\label{prop:hess-cond}
+	Let $U \subset \mathbb{R}^{n}$ be open and $f \in C^{3}(U)$. If $f$ has a local minimum at $x_{0} \in U$, then $Hf(x_{0})$ is non-negative definite, i.e. $x \cdot Hf(x_{0}) x \geq 0 \; \forall x \in \mathbb{R}^{n}$.
+\end{prop}
+\begin{proof}
+    Set $H:=Hf(x_{0})$. Using Taylor and $\nabla f(x_{0}) = 0$ (\ref{prop:grad-vanish}), we write (check with the Taylor formula)
+    \begin{align*}
+        f(x_{0} + x) - f(x_{0}) = \frac{1}{2} x \cdot Hf(x_{0})x + \mathcal{O}(\left| x \right|^{3}).
+    \end{align*}
+    We can use the spectral theorem on $H$, giving $O^\top H O = \Lambda$ where $\Lambda$ is a diagonal matrix. If we then set $y = O x \iff x = O^\top y$, we would have
+    \begin{align*}
+        f(x_{0} + O^\top y) - f(x_{0}) = \frac{1}{2} y \cdot \Lambda y + \mathcal{O}(\left| y \right|^{3}).
+    \end{align*}
+    By minimality, $\frac{1}{2} y \cdot \Lambda y \geq 0$ once $y$ is sufficiently close to $x_{0}$, which proves that all eigenvalues of $\Lambda$ are non-negative, which one can check is equivalent to $Hf(x)$ being non-negative definite. (Will we circle back to this or is this supposed to be the proof?)
+\end{proof}
+

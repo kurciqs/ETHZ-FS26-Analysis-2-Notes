@@ -18,6 +18,8 @@
     This is very useful notation for dealing with multidimensional derivatives.
 \end{definition}
 
+\section{Taylor theorem and analyticity}
+
 The Taylor theorem in $\mathbb{R}^{n}$ will in essence be the one in $\mathbb{R}$ but applied to the function $f \circ \gamma = \varphi$, so basically we will be able to express the value of $f$ around some point $x_{0}$ by approaching it with the path $\gamma = x_{0} + th$. That in turn will tell us that for smaller and smaller $h$ the Taylor polynomial at $h$ is going to approach $f(x_{0}+h)$. 
 
 \begin{lemma}[Derivative in terms of partials]
@@ -40,12 +42,9 @@ The Taylor theorem in $\mathbb{R}^{n}$ will in essence be the one in $\mathbb{R}
     Define for every $i$ the multi-index $\beta = \alpha + e_{i}$ such that $\frac{1}{\alpha !} = \frac{1}{\beta !} \beta_{i}$. Then
     \begin{align*}
         \frac{\varphi^{(m+1)}(t)}{m!} = \sum_{\left| \beta  \right| = m+1} \; \sum_{\beta_{i} > 0} \frac{\partial^{\beta } f(x_{0}+th) h^{\beta }}{\beta !} \beta_{i}  
-        = \sum_{\left| \beta  \right| = m+1} \frac{\partial^{\beta } f(x_{0}+th) h^{\beta }}{\beta !} \underbrace{\sum_{i=1}^{n} \beta_{i}}_{\left| \beta  \right| = m+1}
+        = \sum_{\left| \beta  \right| = m+1} \frac{\partial^{\beta } f(x_{0}+th) h^{\beta }}{\beta !} \underbrace{\sum_{i=1}^{n} \beta_{i}}_{\left| \beta  \right| = m+1}.
     \end{align*}
-    and the equality follows for $m+1$.
 \end{proof}
-
-\newpage
 
 \begin{theorem}[Taylor Theorem]\label{thm:taylor}
     Let $f \in C^{k+1}(U)$ with $U \subset \mathbb{R}^{n}$ open. Let $x_{0} \in U$, $h \in \mathbb{R}^{n}$ and assume that $x_{0}+th \in U$ for all $t \in [0,1]$. Then

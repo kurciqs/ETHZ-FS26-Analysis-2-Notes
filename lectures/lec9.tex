@@ -32,6 +32,8 @@
 	where $\mathcal{E}$ is the standard canonical basis.
 \end{remark}
 
+\section{Differentiation theorems}
+
 We will now prove the chain rule in multiple dimensions.
 
 \begin{theorem}[Chain rule]\label{thm:chain-rule}
@@ -138,7 +140,7 @@ We will now prove the chain rule in multiple dimensions.
 	\begin{align*}
 		\nabla f(x) = Jf(x)^\top.
 	\end{align*}
-	Notice that technically, $Jf(x) = (\partial_{1}f(x), \dots, \partial_{n}f(x))$ is a row vector and we want the gradient to be column, so we take the transpose.
+	Notice that technically, $Jf(x) = (\partial_{1}f(x), \dots, \partial_{n}f(x))$ is a row vector and we want the gradient to be column, so we take the transpose. We will be very loose with whether $\nabla f(x)$ is a row or column vector, it never matters. 
 \end{definition}
 
 \begin{prop}[Bounded gradient is Lipschitz]\label{prop:derivative-lipschitz}
