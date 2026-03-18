@@ -73,21 +73,5 @@ Now we will expand the Taylor series up to order $2$ to get more information abo
 			\partial_{n} \partial_{1} f(x_{0}) & \dots  & \partial_{n} \partial_{n} f(x_{0})
 		\end{pmatrix}
 	\end{align*}
-	Notice that by Schwarz Theorem \ref{thm:schwarz}, $Hf(x_{0})^\top  = Hf(x_{0})$.
+	Notice that by Schwarz Theorem \ref{thm:schwarz}, $Hf(x_{0})^\top  = Hf(x_{0})$ and this matrix is always diagonalisable.
 \end{definition}
-
-\begin{prop}[Necessary conditions for the Hessian]\label{prop:hess-cond}
-	Let $U \subset \mathbb{R}^{n}$ be open and $f \in C^{3}(U)$. If $f$ has a local minimum at $x_{0} \in U$, then $Hf(x_{0})$ is non-negative definite, i.e. $x \cdot Hf(x_{0}) x \geq 0 \; \forall x \in \mathbb{R}^{n}$.
-\end{prop}
-\begin{proof}
-    Set $H:=Hf(x_{0})$. Using Taylor and $\nabla f(x_{0}) = 0$ (\ref{prop:grad-vanish}), we write (check with the Taylor formula)
-    \begin{align*}
-        f(x_{0} + x) - f(x_{0}) = \frac{1}{2} x \cdot Hf(x_{0})x + \mathcal{O}(\left| x \right|^{3}).
-    \end{align*}
-    We can use the spectral theorem on $H$, giving $O^\top H O = \Lambda$ where $\Lambda$ is a diagonal matrix. If we then set $y = O x \iff x = O^\top y$, we would have
-    \begin{align*}
-        f(x_{0} + O^\top y) - f(x_{0}) = \frac{1}{2} y \cdot \Lambda y + \mathcal{O}(\left| y \right|^{3}).
-    \end{align*}
-    By minimality, $\frac{1}{2} y \cdot \Lambda y \geq 0$ once $y$ is sufficiently close to $x_{0}$, which proves that all eigenvalues of $\Lambda$ are non-negative, which one can check is equivalent to $Hf(x)$ being non-negative definite. (Will we circle back to this or is this supposed to be the proof?)
-\end{proof}
-

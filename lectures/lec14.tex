@@ -1,0 +1,118 @@
+\begin{definition}[Sign of a square symmetric matrix]\label{def:sq-sym-mat}
+	Given a symmetric matrix $n \times n$ matrix with real coefficients $A$, the Spectral Theorem \ref{thm:spectral-thm} shows the existence of an orthogonal matrix $O$ such that $A = O \Lambda O^\top $. We say $A$ is: 
+
+	(1) \textit{Positive definite} if all its eigenvalues are positive ( $>0$ ).
+
+	(2) \textit{Nonnegative definite} if all its eigenvalues are nonnegative $(\geq 0)$.
+
+	(3) \textit{Negative definite} if all eigenvalues are negative $(<0)$.
+
+	(4) \textit{Nonpositive definite} if all its eigenvalues are nonpositive $(\leq 0)$.
+
+	(5) \textit{Indefinite} if at least one eigenvalue is positive and at least one is negative.
+
+	(6) \textit{Degenerate} if zero is an eigenvalue.
+\end{definition}
+
+\begin{prop}[Hessian and critical points]\label{prop:hess-crit-points}
+	Let $U \subset \mathbb{R}^{n}$ be open and $f \in C^{2}(U)$ with $x_{0} \in U$, a critical point. For $H = Hf(x_{0})$:
+	\begin{enumerate}
+		\item $x_{0}$ local minimum $\implies$ $H$ non-negative definite.
+		\item $H$ positive definite $\implies$ $x_{0}$ local minimum.
+		\item $x_{0}$ local max $\implies$ $H$ non-positive definite.
+		\item $H$ negative definite $\implies$ $x_{0}$ is local max.
+		\item $H$ indefinite $\implies$ $x_{0}$ is neither max or min and $x_{0}$ is called a \textit{saddle point}.
+	\end{enumerate}
+\end{prop}
+\begin{proof}
+    We prove some of the variations, the rest is the same.
+
+    (2): We use the Taylor expansion and via diagonalisation of $H$ by the orthogonal invertible matrix $O$, substitute $x = Oy$, to get
+	\begin{align*}
+		f(x_{0} + O y) = f(x_{0}) + \frac{1}{2} \sum_{i=1}^{n}  \lambda_{i} y_{i}^{2} + O(\left| y \right|^{3}).
+	\end{align*}
+	If we define $\lambda = \min \lambda_{i} > 0$ and then
+	\begin{align*}
+		f(x_{0} + O y) \geq f(x_{0}) + \frac{1}{2} \sum_{i=1}^{n} \lambda y_{i}^{2} - C \left| y \right|^{3} \geq f(x_{0}) + \frac{1}{2}\lambda \left| y \right|^{2} - C\left| y \right|^{3} \geq f(x_{0}),
+	\end{align*}
+	for $\left| y \right|$ small enough. 
+
+	(3): We expand in some arbitrary direction $e_{j}$,
+	\begin{align*}
+		f(x_{0} + t O e_{j}) = f(x_{0}) + \frac{1}{2} \lambda_{j} t^{2} + O( t^{3}).
+	\end{align*}
+    If even a single eigenvalue $\lambda_{j}$ were positive, we would be able to violate the maximality of $f(x_{0})$ by taking $t^{2}$ small enough. Hence all eigenvalues are non-positive.
+\end{proof}
+
+\begin{theorem}[Fundamental theorem of algebra]\label{thm:algebra}
+	Let $P \in \mathbb{C}[x]$, of degree $n$. Then $P$ has $n$ complex roots (with repetition).
+\end{theorem}
+\begin{proof}
+	We will find $1$ single root and then proceed inductively (assuming we know how to divide polynomials).
+
+	We write
+	\begin{align*}
+		P(x) = a_{0} + a_{1} z + \dots + a_{n} z^{n},
+	\end{align*}
+	where $a_{n} \neq 0$ and $a_{k} \in \mathbb{C}$. Without loss of generality, we divide by $a_{n}$. We wish to minimize $\left| P(z) \right|$ on $\mathbb{C}$. Clearly, that's impossible as $\mathbb{C}$ is not compact. So we have to somehow reduce our domain of possible zeroes to a compact set.
+
+	We define $\beta = \inf_{z \in \mathbb{C}} \left| P(z) \right|$. We have
+	\begin{align*}
+		\left| P(z) \right| \geq \left| z \right|^{n} - (\left| a_{0} \right| + \left| a_{1} \right|\left| z \right| + \dots + \left| a_{n-1} \right|\left| z \right|^{n-1}) \geq R^{n} - C R^{n-1}
+	\end{align*}
+	if $\left| z \right| \geq R$ for some $R > 1$ big enough and where $C = \left| a_{0} \right| + \dots + \left| a_{n-1} \right|$. But for $R$ large enough, this is far above $\beta $. So \textit{if} the value $\beta $ is ever attainable, it will be inside of $\overline{ B_{R}(0)} $. By Extreme Value Theorem \ref{thm:extreme_val_theorem}, $\exists z_{0} \in \overline{ B_{R}(0) }$ such that $\beta = \left| P(z_{0}) \right|$.
+
+    It's also quite clear that $z_{0} \in B_{R}(0)$ is in the interior, and hence is a local minimum. If $\beta = 0$, then we are simply done. So assume $\beta > 0$.
+
+    We center the polynomial at $z_{0}$, meaning we consider
+    \begin{align*}
+        P(z_{0} + z) = \sum_{k=1}^{n} a_{k}(x_{0}+z)^{k} = \sum_{k=1}^{n} b_{k}z^{k},
+    \end{align*}
+    as a polynomial of complex coefficients $b_{k}$ and variable $z \in \mathbb{C}$. Note that $\left| b_{0} \right| = \left| P(z_{0}) \right| = \beta > 0$. We define $\ell = \min\left\{ k \geq 1 \mid b_{k} \neq 0 \right\}$ the index of the first non-zero coefficient. And so
+    \begin{align*}
+        P(z_{0} + z) = b_{0} + b_{\ell}z^{\ell} + \mathcal{O}(\left| z \right|^{\ell+1}) = \beta \left(1 + c_{\ell} z^{\ell} + \mathcal{O}(\left| z \right|^{\ell+1}) \right),
+    \end{align*}
+    where $c_{k} = b_{k} / b_{0} = b_{k} / \beta$. 
+
+    We write $c_{\ell}z^{\ell} = \rho e^{i\alpha } \cdot \left| z \right|^{\ell} e^{i \ell \text{arg}(z)}$ for some $\rho, \alpha \in \mathbb{R}$. If we can achieve $\alpha + \ell \cdot \text{arg}(z) = \pi$, by tweaking the value of $z$, we are done. And this can of course be done always, so once we get that, we're left with
+    \begin{align*}
+        \left| P(z_{0} + z) \right| = \beta \cdot \left| 1 + \rho r^{\ell} e^{ i \pi } + \mathcal{O}(r^{\ell+1}) \right|
+    \end{align*}
+    where $r = \left| z \right|$. If you take $r$ very small, you get 
+    \begin{align*}
+        \beta = \left| P(z_{0}) \right| \leq \left| P(z_{0} + z) \right| = \left| \beta \right||1 - \rho r^{\ell} + \mathcal{O} (r^{\ell + 1})| < \beta
+    \end{align*}
+    which is of course a contradiction.
+\end{proof}
+
+\section{Convex functions}
+
+There are similar relations between convex functions and hessian matrices to those we had between convex functions and second derivatives in Analysis 1.
+
+\begin{definition}[Convex]\label{def:convex-f}
+    Let $f: A \to \mathbb{R}$ be a function defined on a convex set $A \subset \mathbb{R}^{n}$. We say $f$ is convex if 
+    \begin{align*}
+        f((1-t)x + t y) \leq (1-t)f(x) + t f(y) \quad  \forall x,y \in A, t \in [0,1].
+    \end{align*}
+\end{definition}
+
+\begin{prop}[Convexity and hessian]\label{prop:convex-hessian}
+    Let $U \subset \mathbb{R}^{n}$ be open, convex. A function $f \in C^{2}(U)$ is convex if and only if one of the following equivalent conditions hold:
+    \begin{enumerate} 
+        \item $Hf(x)$ is non-negative definite for all $x \in U$.
+        \item $\forall x,y \in U: f(y) - f(x) \geq Df_{x}(y-x)$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    $f$ convex $\implies$ (1). Fix $x,y \in U$. We define $g: [0,1] \to \mathbb{R}$ by
+    \begin{align*}
+        g(s) = f((1-s)x_{0} + sy) = f(x_{0} + sv)
+    \end{align*}
+    for $v = y-x$, which is a convex function of one variable. Since $g \in C^{2}([0,1])$, we get that $g'' \geq 0$. By the same computation as in the Taylor Theorem
+    \begin{align*}
+        g''(s) = \frac{1}{2} v \cdot Hf(x_{0} + sv) v \geq 0 \implies (s = 0 \implies \forall v \in \mathbb{R}^{n}: \frac{1}{2}v \cdot Hf(x_{0}(?))v \geq 0).
+    \end{align*}
+    But this is just an alternate characterisation of $Hf(x)$ being non-negative definite.
+
+    CONTINUE HERE.
+\end{proof}
