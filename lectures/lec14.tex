@@ -1,5 +1,5 @@
 \begin{definition}[Sign of a square symmetric matrix]\label{def:sq-sym-mat}
-	Given a symmetric matrix $n \times n$ matrix with real coefficients $A$, the Spectral Theorem \ref{thm:spectral-thm} shows the existence of an orthogonal matrix $O$ such that $A = O \Lambda O^\top $. We say $A$ is: 
+	Given a symmetric matrix $n \times n$ matrix with real coefficients $A$, the Spectral Theorem \ref{thm:spectral-thm} shows the existence of an orthogonal matrix $O$ such that $A = O \Lambda O^\top $. We say $A$ is:
 
 	(1) \textit{Positive definite} if all its eigenvalues are positive ( $>0$ ).
 
@@ -25,9 +25,9 @@
 	\end{enumerate}
 \end{prop}
 \begin{proof}
-    We prove some of the variations, the rest is the same.
+	We prove some of the variations, the rest is the same.
 
-    (2): We use the Taylor expansion and via diagonalisation of $H$ by the orthogonal invertible matrix $O$, substitute $x = Oy$, to get
+	(2): We use the Taylor expansion and via diagonalisation of $H$ by the orthogonal invertible matrix $O$, substitute $x = Oy$, to get
 	\begin{align*}
 		f(x_{0} + O y) = f(x_{0}) + \frac{1}{2} \sum_{i=1}^{n}  \lambda_{i} y_{i}^{2} + O(\left| y \right|^{3}).
 	\end{align*}
@@ -35,13 +35,13 @@
 	\begin{align*}
 		f(x_{0} + O y) \geq f(x_{0}) + \frac{1}{2} \sum_{i=1}^{n} \lambda y_{i}^{2} - C \left| y \right|^{3} \geq f(x_{0}) + \frac{1}{2}\lambda \left| y \right|^{2} - C\left| y \right|^{3} \geq f(x_{0}),
 	\end{align*}
-	for $\left| y \right|$ small enough. 
+	for $\left| y \right|$ small enough.
 
 	(3): We expand in some arbitrary direction $e_{j}$,
 	\begin{align*}
 		f(x_{0} + t O e_{j}) = f(x_{0}) + \frac{1}{2} \lambda_{j} t^{2} + O( t^{3}).
 	\end{align*}
-    If even a single eigenvalue $\lambda_{j}$ were positive, we would be able to violate the maximality of $f(x_{0})$ by taking $t^{2}$ small enough. Hence all eigenvalues are non-positive.
+	If even a single eigenvalue $\lambda_{j}$ were positive, we would be able to violate the maximality of $f(x_{0})$ by taking $t^{2}$ small enough. Hence all eigenvalues are non-positive.
 \end{proof}
 
 \begin{theorem}[Fundamental theorem of algebra]\label{thm:algebra}
@@ -62,27 +62,27 @@
 	\end{align*}
 	if $\left| z \right| \geq R$ for some $R > 1$ big enough and where $C = \left| a_{0} \right| + \dots + \left| a_{n-1} \right|$. But for $R$ large enough, this is far above $\beta $. So \textit{if} the value $\beta $ is ever attainable, it will be inside of $\overline{ B_{R}(0)} $. By Extreme Value Theorem \ref{thm:extreme_val_theorem}, $\exists z_{0} \in \overline{ B_{R}(0) }$ such that $\beta = \left| P(z_{0}) \right|$.
 
-    It's also quite clear that $z_{0} \in B_{R}(0)$ is in the interior, and hence is a local minimum. If $\beta = 0$, then we are simply done. So assume $\beta > 0$.
+	It's also quite clear that $z_{0} \in B_{R}(0)$ is in the interior, and hence is a local minimum. If $\beta = 0$, then we are simply done. So assume $\beta > 0$.
 
-    We center the polynomial at $z_{0}$, meaning we consider
-    \begin{align*}
-        P(z_{0} + z) = \sum_{k=1}^{n} a_{k}(x_{0}+z)^{k} = \sum_{k=1}^{n} b_{k}z^{k},
-    \end{align*}
-    as a polynomial of complex coefficients $b_{k}$ and variable $z \in \mathbb{C}$. Note that $\left| b_{0} \right| = \left| P(z_{0}) \right| = \beta > 0$. We define $\ell = \min\left\{ k \geq 1 \mid b_{k} \neq 0 \right\}$ the index of the first non-zero coefficient. And so
-    \begin{align*}
-        P(z_{0} + z) = b_{0} + b_{\ell}z^{\ell} + \mathcal{O}(\left| z \right|^{\ell+1}) = \beta \left(1 + c_{\ell} z^{\ell} + \mathcal{O}(\left| z \right|^{\ell+1}) \right),
-    \end{align*}
-    where $c_{k} = b_{k} / b_{0} = b_{k} / \beta$. 
+	We center the polynomial at $z_{0}$, meaning we consider
+	\begin{align*}
+		P(z_{0} + z) = \sum_{k=1}^{n} a_{k}(x_{0}+z)^{k} = \sum_{k=1}^{n} b_{k}z^{k},
+	\end{align*}
+	as a polynomial of complex coefficients $b_{k}$ and variable $z \in \mathbb{C}$. Note that $\left| b_{0} \right| = \left| P(z_{0}) \right| = \beta > 0$. We define $\ell = \min\left\{ k \geq 1 \mid b_{k} \neq 0 \right\}$ the index of the first non-zero coefficient. And so
+	\begin{align*}
+		P(z_{0} + z) = b_{0} + b_{\ell}z^{\ell} + \mathcal{O}(\left| z \right|^{\ell+1}) = \beta \left(1 + c_{\ell} z^{\ell} + \mathcal{O}(\left| z \right|^{\ell+1}) \right),
+	\end{align*}
+	where $c_{k} = b_{k} / b_{0} = b_{k} / \beta$.
 
-    We write $c_{\ell}z^{\ell} = \rho e^{i\alpha } \cdot \left| z \right|^{\ell} e^{i \ell \text{arg}(z)}$ for some $\rho, \alpha \in \mathbb{R}$. If we can achieve $\alpha + \ell \cdot \text{arg}(z) = \pi$, by tweaking the value of $z$, we are done. And this can of course be done always, so once we get that, we're left with
-    \begin{align*}
-        \left| P(z_{0} + z) \right| = \beta \cdot \left| 1 + \rho r^{\ell} e^{ i \pi } + \mathcal{O}(r^{\ell+1}) \right|
-    \end{align*}
-    where $r = \left| z \right|$. If you take $r$ very small, you get 
-    \begin{align*}
-        \beta = \left| P(z_{0}) \right| \leq \left| P(z_{0} + z) \right| = \left| \beta \right||1 - \rho r^{\ell} + \mathcal{O} (r^{\ell + 1})| < \beta
-    \end{align*}
-    which is of course a contradiction.
+	We write $c_{\ell}z^{\ell} = \rho e^{i\alpha } \cdot \left| z \right|^{\ell} e^{i \ell \text{arg}(z)}$ for some $\rho, \alpha \in \mathbb{R}$. If we can achieve $\alpha + \ell \cdot \text{arg}(z) = \pi$, by tweaking the value of $z$, we are done. And this can of course be done always, so once we get that, we're left with
+	\begin{align*}
+		\left| P(z_{0} + z) \right| = \beta \cdot \left| 1 + \rho r^{\ell} e^{ i \pi } + \mathcal{O}(r^{\ell+1}) \right|
+	\end{align*}
+	where $r = \left| z \right|$. If you take $r$ very small, you get
+	\begin{align*}
+		\beta = \left| P(z_{0}) \right| \leq \left| P(z_{0} + z) \right| = \left| \beta \right||1 - \rho r^{\ell} + \mathcal{O} (r^{\ell + 1})| < \beta
+	\end{align*}
+	which is of course a contradiction.
 \end{proof}
 
 \section{Convex functions}
@@ -90,29 +90,52 @@
 There are similar relations between convex functions and hessian matrices to those we had between convex functions and second derivatives in Analysis 1.
 
 \begin{definition}[Convex]\label{def:convex-f}
-    Let $f: A \to \mathbb{R}$ be a function defined on a convex set $A \subset \mathbb{R}^{n}$. We say $f$ is convex if 
-    \begin{align*}
-        f((1-t)x + t y) \leq (1-t)f(x) + t f(y) \quad  \forall x,y \in A, t \in [0,1].
-    \end{align*}
+	Let $f: A \to \mathbb{R}$ be a function defined on a convex set $A \subset \mathbb{R}^{n}$. We say $f$ is convex if
+	\begin{align*}
+		f((1-t)x + t y) \leq (1-t)f(x) + t f(y) \quad  \forall x,y \in A, t \in [0,1].
+	\end{align*}
 \end{definition}
 
 \begin{prop}[Convexity and hessian]\label{prop:convex-hessian}
-    Let $U \subset \mathbb{R}^{n}$ be open, convex. A function $f \in C^{2}(U)$ is convex if and only if one of the following equivalent conditions hold:
-    \begin{enumerate} 
-        \item $Hf(x)$ is non-negative definite for all $x \in U$.
-        \item $\forall x,y \in U: f(y) - f(x) \geq Df_{x}(y-x)$.
-    \end{enumerate}
+	Let $U \subset \mathbb{R}^{n}$ be open, convex. A function $f \in C^{2}(U)$ is convex if and only if one of the following equivalent conditions hold:
+	\begin{enumerate}
+		\item $Hf(x)$ is non-negative definite for all $x \in U$.
+		\item $\forall x,y \in U: f(y) - f(x) \geq Df_{x}(y-x)$.
+	\end{enumerate}
 \end{prop}
 \begin{proof}
-    $f$ convex $\implies$ (1). Fix $x,y \in U$. We define $g: [0,1] \to \mathbb{R}$ by
-    \begin{align*}
-        g(s) = f((1-s)x_{0} + sy) = f(x_{0} + sv)
-    \end{align*}
-    for $v = y-x$, which is a convex function of one variable. Since $g \in C^{2}([0,1])$, we get that $g'' \geq 0$. By the same computation as in the Taylor Theorem
-    \begin{align*}
-        g''(s) = \frac{1}{2} v \cdot Hf(x_{0} + sv) v \geq 0 \implies (s = 0 \implies \forall v \in \mathbb{R}^{n}: \frac{1}{2}v \cdot Hf(x_{0}(?))v \geq 0).
-    \end{align*}
-    But this is just an alternate characterisation of $Hf(x)$ being non-negative definite.
+	$f$ convex $\implies$ (1). Fix $x,y \in U$. We define $g: [0,1] \to \mathbb{R}$ by
+	\begin{align*}
+		g(s) = f((1-s)x + sy) = f(x + sv)
+	\end{align*}
+	for $v = y-x$, which is a convex function of one variable. Since $g \in C^{2}([0,1])$, we get that $g'' \geq 0$. By the same computation as in the Taylor Theorem (but we're actually doing the chain rule)
+	\begin{align*}
+		g''(s) = \frac{1}{2} v \cdot Hf(x + sv) v \geq 0 \implies \forall v \in \mathbb{R}^{n}: \frac{1}{2}v \cdot Hf(x)v \geq 0
+	\end{align*}
+	setting $s=0$.
+	But this is just an alternate characterisation of $Hf(x)$ being non-negative definite.
 
-    CONTINUE HERE.
+	(1) $\implies$ (2). Fix $x,y \in U$ and define $v = y-x$. We have by Taylor Formula for the function $g(t) = f(x+tv)$ on $[0,1]$ that
+	\begin{align*}
+		f(y) - f(x) = g(1) - g(0) = g'(0) + \underbrace{\int_{0}^{1} (1-s)g''(s) \, ds}_{\geq 0} \geq Df_{x}(v) = Df_{x}(y-x).
+	\end{align*}
+    The integral is non-negative because one can show, like in (a) that $g''(s) \geq 0$ and by chain rule, $g'(t) = Df_{x + vt}(v)$. 
+
+	(2) $\implies$ $f$ convex. See below, the Jensen inequality proves actually a stronger version of this claim.
 \end{proof}
+
+\begin{prop}[Jensen inequality]\label{prop:jensen}
+	Let $U \subset \mathbb{R}^{n}$ be open convex and $f \in C^{1}(U)$ convex.
+	For any set of weights $w_{1}, \dots, w_{N} \in [0,1]$ such that $\sum_{i=1}^{N} w_{i} = 1$ and vectors $x_{1}, \dots, x_{N} \in U$, we have
+	\begin{align*}
+		f \left( \sum_{i=1}^{N} w_{i} x_{i} \right) \leq \sum_{i=1}^{N} w_{i}f(x_{i}).
+	\end{align*}
+\end{prop}
+\begin{proof}
+	Fix $x_{0} = \sum_{i=1}^{N} w_{i}x_{i}$. By assumption $f$ is convex, so $f$ satisfies characterisation (2) of previous proposition and we have
+	\begin{align*}
+		f(x_{i}) \geq f(x_{0}) + Df_{x_{0}}(x_{i} - x_{0}) \implies w_{i}f(x_{i}) \geq w_{i} f(x_{0}) + Df_{x_{0}}(w_{i}(x_{i} - x_{0})).
+	\end{align*}
+	We can sum this over $i$ to get the Jensen inequality.
+\end{proof}
+
