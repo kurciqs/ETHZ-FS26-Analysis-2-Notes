@@ -1,0 +1,109 @@
+\section{Inverse function theorem}
+
+As discussed, we will now introduce the generalisation of the inverse function theorem for one variable functions. Note that we're only meaningfully inverting functions from $\mathbb{R}^{n}$ to $\mathbb{R}^{n}$.
+
+\begin{theorem}[Inverse function theorem]\label{thm:inv-func-thm}
+	Let $U \subset \mathbb{R}^{n}$ open and $f: U \to \mathbb{R}^{n}$ of class $C^{1}$, $x_{0} \in U$ such that $Df_{x_{0}}$ is invertible. Then $\exists U_{0} \subset U$ open with $x_{0} \in U_{0}$ such that
+	\begin{enumerate}
+		\item $f|_{U_{0}}$ is injective
+		\item $V = f(U_{0})$ is open
+		\item $\forall x \in U_{0}: Dg_{f(x)} = (Df_{x})^{-1}$
+		\item $g = (f|_{U_{0}})^{-1}: V \to U$ is of class $C^{1}$.
+	\end{enumerate}
+	Moreover, if $f \in C^{k}$, then $g \in C^{k}$.
+\end{theorem}
+\begin{proof}
+	We consider without loss of generality the case $x_{0} = 0$ and $f(x_{0}) = f(0) = 0$. Indeed, we would otherwise just be able to redefine $\tilde{f}(x) = f(x - x_{0}) - f(x_{0})$.
+
+	We take $L = Df_{0}$ and define the function $F = L^{-1} \circ f$. Using the chain rule, the differential of this is (chain rule)
+	\begin{align*}
+		DF_{0} = L^{-1}_{f(0)} \circ Df_{0} = \text{id},
+	\end{align*}
+	hence if we define $\phi = F - \text{id}$, we have
+	\begin{align*}
+		D\phi_{0} = DF_{0} - D \text{id}_{0} = 0,
+	\end{align*}
+	so $\lVert J\phi(0) \rVert_{2} = 0$. By continuity of the components of the Jacobian of $\phi$, $\exists r > 0$ such that $\lVert  J\phi(x) \rVert_{2} \leq \frac{1}{2}$ in $B_{r}(0)$. By Proposition \ref{prop:derivative-lipschitz}, it hence follows that $\phi$ is $\frac{1}{2}$-Lipschitz on this small ball. $F$ is hence what we called a "small perturbation of the identity".
+
+	Apply Lemma \ref{lem:lipschitz-perturb} on $U_{0} = B_{r}(0)$, telling us that $F |_{U_{0}}$ is injective, $F(U_{0})$ is open and $F^{-1}$ is $2$-Lipschitz. Hence $V = f(U_{0}) = L(F(U_{0}))$ is open, as $L$ and $F$ continuous, proving (2). And since $L$ is injective and $F$ is injective, we get that $f = L \circ F$ is injective, proving (1).
+
+	To prove (3), we want to apply \ref{lem:auto-diff-inv} at every point $x \in U_{0}$. For that, we need to show that $Df_{x}$ is invertible for every $x \in U_{0}$ and $g=F^{-1} \circ L^{-1}$ is Lipschitz. We have $f = L \circ F = L \circ (\text{id} + \phi)$, hence
+	\begin{align*}
+		Df_{x} = L \circ (\text{id} + D\phi_{x}).
+	\end{align*}
+	And $L \circ (\text{id} + D\phi_{x})$ is invertible because for any $y \in U_{0}$,
+	\begin{align*}
+		\left| y \right| - \left| D\phi_{x}y \right| \geq \left| y \right| - \lVert D \phi_{x} \rVert_{2} \left| y \right| \geq \frac{1}{2} \left| y \right|,
+	\end{align*}
+	as we had $\lVert D \phi_{x} \rVert_{2} \leq \frac{1}{2}$. But that means that $(\text{id} + D\phi_{x})$ will never have a non-trivial kernel, so it's invertible, as we're mapping from $\mathbb{R}^{n}$ to $\mathbb{R}^{n}$, which have the same dimension. Hence $Df_{x}$ becomes the composition of invertible maps. Applying \ref{lem:auto-diff-inv}, we get at every point $x \in U_{0}$
+	\begin{align*}
+		Dg_{f(x)} = (Df_{x})^{-1},
+	\end{align*}
+	proving (3).
+
+	Since $g = F^{-1} \circ L^{-1}$ is a composition of Lipschitz maps, it itself is Lipschitz and \ref{lem:auto-diff-inv} applies.
+
+	For (4), we need to check is that $g \in C^{1}(V)$. But $Jg(y) = (Jf(g(y)))^{-1}$, and $\Theta: X \to X^{-1}$ is by \ref{lem:smoothness-inverse} $C^{\infty}$, we get that $g \in C^{1}(V)$, by \ref{prop:Ck-conservation}. The case for $C^{k}$ is proved by induction.
+\end{proof}
+
+\begin{definition}[Diffeomorphism]\label{def:diffeo}
+	Let $U, V \subset \mathbb{R}^{n}$ be open sets and $f: U \to V$ a function that is $C_{1}$, bijective and $f^{-1}$ is $C^{1}$ as well. Then we call $f$ a diffeomorphism. $f$ is a $C^{k}$-diffeomorphism if $f$ and $f^{-1}$ are both class $C^{k}$.
+\end{definition}
+
+\newpage
+
+\section{Implicit function theorem}
+
+Let's motivate what we're doing a little better. Consider the circle in 2 dimensions given by the equation $x^{2} + y^{2} - 1 = 0$. Locally, on certain intervals, the curve of this "shape" can be given by the function $y = \sqrt{1-x^{2}}$. This is however not the case for all points, so we will have to take special precautions and assumptions, but that's roughly the point of this.
+
+\begin{theorem}[Implicit function theorem]\label{thm:impl-func-theorem}
+	Let $U \subset \mathbb{R}^{n}$ be open and $0 < d < n$. Let $f \in C^{k}(U, \mathbb{R}^{n-d})$ and $(x_{0}, y_{0}) \in U$ with $x_{0} \in \mathbb{R}^{d}, y_{0} \in \mathbb{R}^{n-d}$, and assume that in the block matrix
+	\begin{align*}
+		Jf(x_{0}, y_{0}) = (J_{x}f(x_{0}, y_{0}) \mid J_{y}f(x_{0},y_{0})) \in \mathbb{R}^{(n-d) \times n},
+	\end{align*}
+	where $J_{x}f(x_{0}, y_{0}) \in \mathbb{R}^{(n-d) \times d}$ and $J_{y}f(x_{0}, y_{0}) \in \mathbb{R}^{(n-d) \times (n-d)}$, we know that $J_{y}f(x_{0}, y_{0})$ is invertible.
+
+	Then $\exists U_{0} = B_{r}(x_{0}) \times B_{s}(y_{0}) \subset U$ and there is a function $g: B_{r}(x_{0}) \to B_{s}(y_{0})$ such that for $\lambda = f(x_{0}, y_{0})$,
+	\begin{align*}
+		\left\{ (x,y) \in U_{0} \mid f(x,y) = \lambda \right\} = \left\{ (x,y) \in U_{0} \mid y = g(x) \right\}
+	\end{align*}
+	and $g$ is class $C^{k}$.
+\end{theorem}
+\begin{proof}
+	Fix $x_{0}$ and $y_{0}$ as in the statement. Define for $x \in \mathbb{R}^{d}$ and $y \in \mathbb{R}^{n-d}$ the map $\Phi: U \to \mathbb{R}^{n}$ such that
+	\begin{align*}
+		\Phi(x,y) = (x, f(x,y)).
+	\end{align*}
+	We compute the block matrix
+	\begin{align*}
+		J\Phi(x_{0}, y_{0}) =
+		\left(\begin{array}{c|c}
+				      I_{d \times d}              & 0                    \\
+				      \hline J_{x}f(x_{0}, y_{0}) & J_{y}f(x_{0}, y_{0})
+			      \end{array}\right).
+	\end{align*}
+	By various rules of linear algebra, this is invertible and we can apply the inverse function theorem \ref{thm:inv-func-thm} to get $U_{0} \subset U$ such that $\Phi|_{U_{0}}$ is invertible, $\Phi(U_{0})$ is open and $(\Phi|_{U_{0}})^{-1}$ is class $C^{k}$. Without loss of generality, we reduce $U_{0}$ to a "cylinder" set of the form
+    \begin{align*}
+        U_{0} = B_{r}(x_{0}) \times B_{s}(y_{0}) \subset U.
+    \end{align*}
+
+	Call $\Psi = \Phi^{-1}: V \to U_{0}$, with $V = \Phi(U_{0})$. Using bijectivity of $\Psi, \Phi$, define for $(\xi, \eta) \in V$:
+	\begin{align*}
+		(\xi, \eta) = \Phi(x,y) = (x, f(x,y)) \iff (x,y) = \Psi(\xi, \eta)
+	\end{align*}
+	with $\xi  \in \mathbb{R}^{d}, \eta \in \mathbb{R}^{n-d}$. We see that $\xi = x$, always and we can express $\Psi$ in the form
+	\begin{align*}
+		\Psi(\xi, \eta) = (\xi, G(\xi, \eta))
+	\end{align*}
+	for some map $G: V \to B_{s}(y_{0})$ that is of course $C^{k}$. 
+
+	Because we defined the variables in such a way, for a fix $\lambda \in \mathbb{R}$,
+	\begin{align*}
+		\eta = f(x,y) = \lambda \iff (x,y) = \Psi(\xi, \eta) = (\xi, G(\xi, \eta)) = (x, G(x, \lambda)).
+	\end{align*}
+	This shows that
+	\begin{align*}
+		f(x,y) = \lambda \iff y = G(x,\lambda).
+	\end{align*}
+    In other words, $g(x) = G(x,\lambda)$ gives the function $g$ we were searching for.
+\end{proof}
