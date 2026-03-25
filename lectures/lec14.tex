@@ -68,13 +68,13 @@
 	\begin{align*}
 		P(z_{0} + z) = \sum_{k=1}^{n} a_{k}(x_{0}+z)^{k} = \sum_{k=1}^{n} b_{k}z^{k},
 	\end{align*}
-	as a polynomial of complex coefficients $b_{k}$ and variable $z \in \mathbb{C}$. Note that $\left| b_{0} \right| = \left| P(z_{0}) \right| = \beta > 0$. We define $\ell = \min\left\{ k \geq 1 \mid b_{k} \neq 0 \right\}$ the index of the first non-zero coefficient. And so
+	as a polynomial of complex coefficients $b_{k}$ and variable $z \in \mathbb{C}$. Note that $\left| b_{0} \right| = \left| P(z_{0}) \right| = \beta > 0$. We define $\ell = \min\left\{ k \geq 1 \mid b_{k} \neq 0 \right\}$ the index of the first non-constant non-zero coefficient. And so
 	\begin{align*}
 		P(z_{0} + z) = b_{0} + b_{\ell}z^{\ell} + \mathcal{O}(\left| z \right|^{\ell+1}) = \beta \left(1 + c_{\ell} z^{\ell} + \mathcal{O}(\left| z \right|^{\ell+1}) \right),
 	\end{align*}
 	where $c_{k} = b_{k} / b_{0} = b_{k} / \beta$.
 
-	We write $c_{\ell}z^{\ell} = \rho e^{i\alpha } \cdot \left| z \right|^{\ell} e^{i \ell \text{arg}(z)}$ for some $\rho, \alpha \in \mathbb{R}$. If we can achieve $\alpha + \ell \cdot \text{arg}(z) = \pi$, by tweaking the value of $z$, we are done. And this can of course be done always, so once we get that, we're left with
+	We write $c_{\ell}z^{\ell} = \rho e^{i\alpha } \cdot \left| z \right|^{\ell} e^{i \ell \cdot \text{arg}(z)}$ for some $\rho, \alpha \in \mathbb{R}$. If we can achieve $\alpha + \ell \cdot \text{arg}(z) = \pi$, by tweaking the value of $z$, we are done. And this can of course be done always, so once we get that, we're left with
 	\begin{align*}
 		\left| P(z_{0} + z) \right| = \beta \cdot \left| 1 + \rho r^{\ell} e^{ i \pi } + \mathcal{O}(r^{\ell+1}) \right|
 	\end{align*}

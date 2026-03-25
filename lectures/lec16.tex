@@ -63,11 +63,11 @@ Let's motivate what we're doing a little better. Consider the circle in 2 dimens
 	\end{align*}
 	where $J_{x}f(x_{0}, y_{0}) \in \mathbb{R}^{(n-d) \times d}$ and $J_{y}f(x_{0}, y_{0}) \in \mathbb{R}^{(n-d) \times (n-d)}$, we know that $J_{y}f(x_{0}, y_{0})$ is invertible.
 
-	Then $\exists U_{0} = B_{r}(x_{0}) \times B_{s}(y_{0}) \subset U$ and there is a function $g: B_{r}(x_{0}) \to B_{s}(y_{0})$ such that for $\lambda = f(x_{0}, y_{0})$,
+	Then $\exists U_{0} = B_{r}(x_{0}) \times B_{s}(y_{0}) \subset U$ and for any $\lambda \in \mathbb{R}$, there is a function $g: B_{r}(x_{0}) \to B_{s}(y_{0})$ such that,
 	\begin{align*}
 		\left\{ (x,y) \in U_{0} \mid f(x,y) = \lambda \right\} = \left\{ (x,y) \in U_{0} \mid y = g(x) \right\}
 	\end{align*}
-	and $g$ is class $C^{k}$.
+	and $g$ is class $C^{k}$. So the level set of $\lambda$ is a graph of a $C^{k}$ function $g$.
 \end{theorem}
 \begin{proof}
 	Fix $x_{0}$ and $y_{0}$ as in the statement. Define for $x \in \mathbb{R}^{d}$ and $y \in \mathbb{R}^{n-d}$ the map $\Phi: U \to \mathbb{R}^{n}$ such that
@@ -82,7 +82,7 @@ Let's motivate what we're doing a little better. Consider the circle in 2 dimens
 				      \hline J_{x}f(x_{0}, y_{0}) & J_{y}f(x_{0}, y_{0})
 			      \end{array}\right).
 	\end{align*}
-	By various rules of linear algebra, this is invertible and we can apply the inverse function theorem \ref{thm:inv-func-thm} to get $U_{0} \subset U$ such that $\Phi|_{U_{0}}$ is invertible, $\Phi(U_{0})$ is open and $(\Phi|_{U_{0}})^{-1}$ is class $C^{k}$. Without loss of generality, we reduce $U_{0}$ to a "cylinder" set of the form
+	By various rules of linear algebra, this is invertible and we can apply the Inverse Function Theorem \ref{thm:inv-func-thm} to get $U_{0} \subset U$ such that $\Phi|_{U_{0}}$ is invertible, $\Phi(U_{0})$ is open and $(\Phi|_{U_{0}})^{-1}$ is class $C^{k}$. Without loss of generality, we reduce $U_{0}$ to a "cylinder" set of the form
     \begin{align*}
         U_{0} = B_{r}(x_{0}) \times B_{s}(y_{0}) \subset U.
     \end{align*}
@@ -91,7 +91,7 @@ Let's motivate what we're doing a little better. Consider the circle in 2 dimens
 	\begin{align*}
 		(\xi, \eta) = \Phi(x,y) = (x, f(x,y)) \iff (x,y) = \Psi(\xi, \eta)
 	\end{align*}
-	with $\xi  \in \mathbb{R}^{d}, \eta \in \mathbb{R}^{n-d}$. We see that $\xi = x$, always and we can express $\Psi$ in the form
+	with $\xi  \in \mathbb{R}^{d}, \eta \in \mathbb{R}^{n-d}$. We see that $\xi = x$ and we can express $\Psi$ in the form
 	\begin{align*}
 		\Psi(\xi, \eta) = (\xi, G(\xi, \eta))
 	\end{align*}

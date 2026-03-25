@@ -1,8 +1,176 @@
-
 \section{Submanifolds of $\mathbb{R}^{n}$}
 
+While the initial definition might be a little out of place, we will see what it really means.
+
 \begin{definition}[Submanifold]\label{def:submanifold}
-	$M \subset \mathbb{R}^{n}$ is a $d$-dimensional manifold if $\forall x \in M$, $\exists \Phi: U \to V \subset \mathbb{R}^{n}$
+	A set $M \subset \mathbb{R}^{n}$ is called a $d$-dimensional submanifold of class $C^{k}$ if $\forall p \in M \; \exists U \subset \mathbb{R}^{n}$ such that $p \in U$, $\exists V \subset \mathbb{R}^{n}$ open, such that $0 \in V$ and $\Psi: U \to V$, a $C^{k}$-diffeomorphism called the \textit{submanifold chart} such that
+	\begin{align*}
+		\Psi(M \cap U) = \left\{ y \in V \mid y_{d+1} = \dots = y_{n} = 0 \right\}.
+	\end{align*}
 \end{definition}
 
+We want to first heuristically present the different ways to describe a manifold. Besides the original definition, there are the following characterisations, which we will prove are equivalent. In almost each one, at every point $p \in M$, we require the existence of an open set $U$ that contains $p$ and satisfies one of the following criteria.
+\begin{itemize}
+	\item Diffeomorphic: see definition above.
+	\item Implicit: $M \cap U = \left\{ x \in U \mid f(x) = 0 \right\}$, where $f \in C^{k}(U, \mathbb{R}^{n-d})$ such that the rank of $Df(p)$ is $n-d$.
+	\item Parametric: $M \cap U = \left\{ G(y) \mid y \in V \subset \mathbb{R}^{d} \right\}$ for a map $G \in C^{k}(V, \mathbb{R}^{n})$, where $V \subset \mathbb{R}^{d}$ is open and $DG(y)$ is of rank $d$, with $G(y) = p$.
+	\item Graphical: $M \cap U = \left\{ (y, g(y)) \mid y \in V \subset \mathbb{R}^{d} \right\}$ for some open set $V \subset \mathbb{R}^{d}$ and $g \in C^{k}(V, \mathbb{R}^{n-d})$.
+\end{itemize}
+
+What does any of this mean? Ignore for now all the additional qualifiers about rank of the differential and the details. Those only tell us the "dimension" of the manifold.
+
+The diffeomorphic definition might be the least intuitive and understandable one. But what it basically says is that $M$ is a manifold if around any point, you can map the neighborhood of that point smoothly and bijectively into a set $V$ where there is only $d$ non-zero coordinates, essentially reducing the set $M \cap U$ to something which is smoothly describable by just $d$ parameters and "flattening" it out.
+
+% put a picture here maybe
+
+The implicit representation is the one people are usually familiar with, so just "solutions to an equation", which often define nice shapes (examples below).
+
+% put a picture here maybe
+
+The parametric representation is also pretty intuitive. Because the manifold is $d$-dimensional, we have $d$ parameters to tune and the manifold becomes just the image of some special function $G$ that assigns points to parameters.
+
+% put a picture here maybe
+
+And finally, the graphical representation is probably actually the easiest. It is literally just the set of points $(x, f(x))$, like in $\mathbb{R}^{2}$, when graphing functions. Note also that we will allow permutations of this, so the pairs might not be so nicely ordered, but it remains the same in essence.
+
+% put a picture here maybe
+
+\begin{eg}[Examples of submanifolds in different representations]
+	\textit{Plane}: Consider a plane in $\mathbb{R}^{3}$. The implicit representation would be via $f(x,y,z) = ax + by + cz - h = 0$.
+
+	The parametric would be $(s,t) \mapsto s v_{1} + t v_{2} + p$ for vectors $v_{1}, v_{2}$ and a point $p$. Notice that here we see why the plane is a $2$-dimensional manifold.
+
+	The graphical representation is for instance $z = -\frac{a}{c}x - \frac{b}{c}y + \frac{h}{c}$, essentially assigning each $x,y$ a coordinate $z$, as if graphing in Desmos.
+
+	\textit{Sphere}: Consider a sphere in $\mathbb{R}^{3}$ with fixed radius $r$. The implicit representation would be via $f(x,y,z) = x^2 + y^2 + z^2 - r^2 = 0$.
+
+	The parametric would be $(\varphi,\theta) \mapsto (r \sin \varphi \cos \theta,\; r \sin \varphi \sin \theta,\; r \cos \varphi)$ for angles $\varphi \in [0,\pi], \theta \in [0,2\pi)$. Notice that here we see why the sphere is a $2$-dimensional manifold. (Ignore details about whether the parameter set is open).
+
+	The graphical representation is for instance $z = \pm \sqrt{r^2 - x^2 - y^2}$, essentially assigning each $x,y$ a coordinate $z$ locally, as if graphing in Desmos. Notice that it's not always possible to express the whole manifold as one function, which is why we will require most of the properties to be very local.
+
+	\textit{Torus}: Consider a torus in $\mathbb{R}^{3}$. The implicit representation would be via $f(x,y,z) = \left(\sqrt{x^2 + y^2} - R\right)^2 + z^2 - r^2 = 0$.
+
+	The parametric would be $(\varphi,\theta) \mapsto ((R + r \cos \varphi)\cos \theta,\; (R + r \cos \varphi)\sin \theta,\; r \sin \varphi)$ for angles $\varphi,\theta \in [0,2\pi)$. Notice that here we see why the torus is a $2$-dimensional manifold.
+
+	The graphical representation is not globally possible in the form $z = g(x,y)$, but locally one can solve
+	$z = \pm \sqrt{r^2 - \left(\sqrt{x^2 + y^2} - R\right)^2}$, assigning each $x,y$ a coordinate $z$ only in suitable regions.
+\end{eg}
+
+\begin{definition}[Permutation of coordinates]\label{def:perm-coord}
+	A map $P: \mathbb{R}^{n} \to \mathbb{R}^{n}$ is called a permutation of coordinates if
+	\begin{align*}
+		P(x_{1}, \dots, x_{n}) = (x_{\sigma 1}, \dots, x_{\sigma n}),
+	\end{align*}
+	where $\sigma$ is a permutation.
+\end{definition}
+
+Now we will state the 4 equivalent criteria. They may seem very arbitrary at first, but if you go back and read the simple descriptions (you will notice these are a little more nuanced), it should be easier to understand why they are all getting at the same thing.
+
+\begin{prop}[Equivalent characterisations of submanifolds]\label{prop:char-manifold}
+	The following $4$ characterisation for $M \subset \mathbb{R}^{n}$ being a submanifold are equivalent:
+	\begin{enumerate}
+		\item \textit{Diffeomorphic}: $M$ is a $d$-dimensional $C^{k}$-submanifold.
+		\item \textit{Implicit}: For all $p \in M$, there is open $U \subset \mathbb{R}^{n}$ such that $p \in U$, a map $f \in C^{k}(U, \mathbb{R}^{n-d})$ such that $Df(p)$ has rank $n-d$ and
+		      \begin{align*}
+			      M \cap U = \left\{ x \in U \mid f(x) = 0 \right\}.
+		      \end{align*}
+		\item \textit{Parametric}: For all $p \in M$, there is $V \subset \mathbb{R}^{d}$, $y \in V$ and a map $G \in C^{k}(V, \mathbb{R}^{n})$ such that $G(y) = p$, $DG(y)$ has rank $d$ and there is $U \subset \mathbb{R}^{n}$ open such that
+		      \begin{align*}
+			      M \cap U = G(V).
+		      \end{align*}
+		\item \textit{Graphical}: For any $p \in M$, there is $U \subset \mathbb{R}^{n}$ open such that $p \in U$, a set $V \subset \mathbb{R}^{d}$ open and a map $g \in C^{k}(V, \mathbb{R}^{n-d})$ such that
+		      \begin{align*}
+			      M \cap U = P(\text{graph}(g))
+		      \end{align*}
+		      such that $P: \mathbb{R}^{n} \to \mathbb{R}^{n}$ is a permutation of coordinates and
+		      \begin{align*}
+			      \text{graph}(g) = \left\{ x \in \mathbb{R}^{n} \mid (x_{d+1}, \dots, x_{n}) = g(x_{1}, \dots, x_{d}) \right\}.
+		      \end{align*}
+	\end{enumerate}
+\end{prop}
+\begin{proof}
+	(1) $\implies$ (2). Let $p \in M$. Since $M$ is a submanifold, we have the diffeomorphism $\Psi: U \to V$ such that $U$ is open, contains $p$ and
+	\begin{align*}
+		x \in M \cap U \iff \Psi(x_{d+1}) = \dots = \Psi(x_{n}) = 0.
+	\end{align*}
+	Hence we construct $f: U \to \mathbb{R}^{n-d}$ as $f(x) = (\Psi_{d+1}(x), \dots, \Psi_{n}(x))$. Then $f \in C^{k}(U, \mathbb{R}^{n-d})$ and $Df(p)$ has rank $n-d$ because it has the columns $D \psi(p)$, which is entirely invertible. Then (2) trivially holds.
+
+	(2) $\implies$ (4): Let $p \in M$. If $Df(p)$ has maximal rank $n-d$, then for a suitable permutation of the
+	variables $P$, when we consider the map $\tilde f = f \circ P^{-1}$, the $(n-d)\times(n-d)$ matrix
+	\begin{align*}
+		\left( \partial_i \tilde f_j(q) \right)_{1 \le j \le n-d,\; d+1 \le i \le n}
+		=
+		\begin{pmatrix}
+			\partial_{d+1}\tilde f_1(q)       & \partial_{d+2}\tilde f_1(q)       & \cdots & \partial_{n}\tilde f_1(q)       \\
+			\partial_{d+1}\tilde f_2(q)       & \partial_{d+2}\tilde f_2(q)       & \cdots & \partial_{n}\tilde f_2(q)       \\
+			\vdots                            & \vdots                            & \ddots & \vdots                          \\
+			\partial_{d+1}\tilde f_{\,n-d}(q) & \partial_{d+2}\tilde f_{\,n-d}(q) & \cdots & \partial_{n}\tilde f_{\,n-d}(q)
+		\end{pmatrix}
+	\end{align*}
+	is invertible at $q = P(p)$. This is because we know that in the matrix $Df(p)$, there are $n-d$ linearly independent columns. And $D\tilde{f}(q) = D(f \circ P^{-1})(q) = Df(p) \cdot P^{-1}$, so $D\tilde{f}(q)$ is just $Df(p)$, but with permuted columns. And for a suitable permutation, this will be such that the last $n-d$ columns are linearly independent, hence see above.
+
+	Hence $\tilde f$ satisfies the assumptions of the Implicit Function Theorem \ref{thm:impl-func-theorem} and therefore there exist an open cylinder $U_0 \subset U$ centered at $q$, $V \subset \mathbb{R}^{d}$ open, and a map $g : V \to \mathbb{R}^{n-d}$ of class $C^{k}$ such that for all $x \in U_0$,
+	\begin{align*}
+		\tilde f(x) = 0
+		\Longleftrightarrow
+		(x_{d+1}, \dots, x_{n}) = g(x_1, \dots, x_d)
+		\Longleftrightarrow
+		P^{-1}(x) \in M .
+	\end{align*}
+	Note the last equivalence comes from the assumption (2). Choosing $x = Pz$ for $z$ in a neighborhood of $p$ we conclude.
+
+	(4) $\implies$ (3). Let $p \in M$. By assumption (4), we get a map $U \subset \mathbb{R}^{n}$ open that contains $p$, $V \subset \mathbb{R}^{d}$ open and $g: V \to \mathbb{R}^{n-d}$ such that $M \cap U = P(\text{graph}(g))$. For $y \in V$, define $\tilde{G}(y) = (y, g(y))$ s.t. $M \cap U = (P \circ \tilde{G})(V)$, simply the image. Take $G = P \circ \tilde{G}$. By the differentiation laws \ref{prop:Ck-conservation}, $G \in C^{k}(V, \mathbb{R}^{n})$.
+
+	Find the $y \in V$ such that $p = G(y)$, which exists by assumption $p \in U$. And so it remains to show that $DG(y)$ is of rank $d$. Since
+	\begin{align*}
+		G(y_{1}, \dots, y_{d}) = (y_{1}, \dots, y_{d}, g(y_{1}), \dots, g(y_{d})) \quad  \implies \quad
+		D\tilde G(y) =
+		\begin{pmatrix}
+			I_d \\
+			Dg(y)
+		\end{pmatrix},
+	\end{align*}
+	its columns are linearly independent, hence $\operatorname{rank}(D\tilde G(y)) = d$. As $P$ is a linear iso, it follows that $\text{rank}(DG(y)) = d$.
+
+	(3) $\implies$ (1). Let $p \in M$. Let $y_0 \in V$ such that $G(y_0) = p$.
+	Since $DG(y_0)$ has rank $d$, we can extend its columns to a basis of $\mathbb{R}^n$, i.e.
+	there exist vectors $v_{d+1}, \dots, v_n \in \mathbb{R}^n$ such that
+	\begin{align*}
+		\Big(DG(y_0) \mid v_{d+1} \mid \dots \mid v_n\Big)
+	\end{align*}
+	is invertible. Define the map $\Phi \in C^{k}(V \times \mathbb{R}^{n-d}, \mathbb{R}^{n})$ by
+	\begin{align*}
+		\Phi(y_{1}, \dots, y_{n})
+		= G(y_{1}, \dots, y_{d}) + \sum_{j=d+1}^{n} v_{j}y_{j}.
+	\end{align*}
+	Then
+	\begin{align*}
+		D\Phi(y_0,0)
+		=
+		\begin{pmatrix}
+			DG(y_0) \mid v_{d+1} \mid \cdots & v_n
+		\end{pmatrix}
+	\end{align*}
+	is invertible. Hence by the Inverse Function Theorem \ref{thm:inv-func-thm}, there exist
+	open sets $W \subset V \times \mathbb{R}^{n-d}$ containing $(y_0,0)$ and
+	$U = \Phi(W)$ open containing $p = \Phi((y_{0},0))$, and a map $\Psi \in C^{k}(U, W)$ such that
+	\begin{align*}
+		\forall x \in U:\quad x = \Phi(\Psi(x)).
+	\end{align*}
+
+	Then for $x \in U$ we have the following. By (3), $x \in M \iff x \in G(V)$, so $x = G(y)$ for some $y \in W$. Because $\Phi$ is bijective, this is if and only if $x = \Phi((y,0))$, so $\Psi(x) = (y,0)$, hence $\Psi_{d+1}(x) = \dots = \Psi_{n}(x) = 0$.
+	Conversely, if $\Psi_{d+1}(x) = \dots = \Psi_{n}(x) = 0$, then $x = \Phi(\Psi(x)) = G(\Psi(x_{1}), \dots, \Psi(x_{d})) \in M$. 
+\end{proof}
+
+% PICTURE: MAYBE, how does (3) => (1) work?
+
+\begin{definition}[Tangent and normal vector]\label{def:tangent-normal-vector}
+	Let $M \subset \mathbb{R}^{n}$, a $d$-dimensional submanifold. Then $\tau \in \mathbb{R}^{d}$ is tangent to $M$ at $p \in M$ if $\exists p_{k} \in M, r_{k} > 0$ sequences such that
+	\begin{align*}
+		\lim_{k \to \infty} \frac{p_{k} - p}{r_{k}} = \tau.
+	\end{align*}
+	We call the set of all tangent vectors $T_{p}M$, the tangent space.
+
+	A vector $\nu \in \mathbb{R}^{n}$ is normal (perpendicular) to $M$ at $p$ if $\nu \cdot \tau = 0$ for all $\tau \in T_{p}M$.
+\end{definition}
 
