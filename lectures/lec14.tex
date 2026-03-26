@@ -102,6 +102,7 @@ There are similar relations between convex functions and hessian matrices to tho
 		\item $Hf(x)$ is non-negative definite for all $x \in U$.
 		\item $\forall x,y \in U: f(y) - f(x) \geq Df_{x}(y-x)$.
 	\end{enumerate}
+	It can be proven as an exercise that $f \in C^{1}(U)$ is convex if and only if (2) holds. 
 \end{prop}
 \begin{proof}
 	$f$ convex $\implies$ (1). Fix $x,y \in U$. We define $g: [0,1] \to \mathbb{R}$ by
@@ -125,14 +126,14 @@ There are similar relations between convex functions and hessian matrices to tho
 \end{proof}
 
 \begin{prop}[Jensen inequality]\label{prop:jensen}
-	Let $U \subset \mathbb{R}^{n}$ be open convex and $f \in C^{1}(U)$ convex.
+	Let $U \subset \mathbb{R}^{n}$ be open convex and $f: U \to \mathbb{R}$ convex.
 	For any set of weights $w_{1}, \dots, w_{N} \in [0,1]$ such that $\sum_{i=1}^{N} w_{i} = 1$ and vectors $x_{1}, \dots, x_{N} \in U$, we have
 	\begin{align*}
 		f \left( \sum_{i=1}^{N} w_{i} x_{i} \right) \leq \sum_{i=1}^{N} w_{i}f(x_{i}).
 	\end{align*}
 \end{prop}
 \begin{proof}
-	Fix $x_{0} = \sum_{i=1}^{N} w_{i}x_{i}$. By assumption $f$ is convex, so $f$ satisfies characterisation (2) of previous proposition and we have
+	We show the statement under the assumption $f \in C^{2}(U)$ to conclude the previous proposition. The general case can be done with induction, completely without any differentiability. Fix $x_{0} = \sum_{i=1}^{N} w_{i}x_{i}$. By assumption $f$ is convex, so $f$ satisfies characterisation (2) of previous proposition and we have
 	\begin{align*}
 		f(x_{i}) \geq f(x_{0}) + Df_{x_{0}}(x_{i} - x_{0}) \implies w_{i}f(x_{i}) \geq w_{i} f(x_{0}) + Df_{x_{0}}(w_{i}(x_{i} - x_{0})).
 	\end{align*}

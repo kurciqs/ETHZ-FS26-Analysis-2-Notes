@@ -1,1 +1,150 @@
-        
+\begin{prop}[Tangent space]\label{prop:tangent-space}
+	Let $M \subset \mathbb{R}^{n}$ be a $d$-dimensional manifold. Let $p \in M$ and let $\Psi: U \to V$ be the submanifold chart and $E = \mathbb{R}^{d} \times \left\{ 0_{n-d} \right\} \subset \mathbb{R}^{n}$ such that $\Psi(M \cap U) \subset E$. For all $\tau \in \mathbb{R}^{n}$, $\tau \in T_{p}M$ if and only if $\tau \in D\Psi^{-1}_{\Psi(p)}(E)$. In particular,
+	\begin{align*}
+		T_{p}M = D\Psi^{-1}_{\Psi(p)}(E)
+	\end{align*}
+	is a $d$-dimensional subspace of $\mathbb{R}^{n}$.
+\end{prop}
+\begin{proof}
+	We're proving that any tangent vector $\tau \in T_{p}M$ belongs to $\Psi^{-1}_{\Psi(p)} (E)$. Indeed, consider that for some sequence $p_{k}$ and $r_{k}$ giving a tangent vector $\tau \in T_{p}M$,
+	\begin{align*}
+		\lim_{k \to \infty} \frac{\Psi(p_{k}) - \Psi(p)}{r_{k}} = \lim_{k \to \infty} \frac{D \Psi_{p}(p_{k} - p) + \smalO(\left| p_{k} - p \right|)}{r_{k}} =  \lim_{k \to \infty} D \Psi_{p} \left( \frac{p_{k} - p}{r_{k}} \right) = D \Psi_{p} ( \tau) \in E,
+	\end{align*}
+    hence $\tau \in D \Psi^{-1}_{\Psi(p)}(E)$. Notice that $\frac{|p_{k} - p|}{r_{k}}$ is bounded, hence $\frac{\smalO(|p_{k} - p|)}{r_{k}} \leq \epsilon \frac{|p_{k} - p|}{r_{k}}$ (for any $\epsilon > 0$, eventually), so it goes to zero and we can drop that term and get the result.
+
+    Conversely, take $\tau \in D \Psi^{-1}_{\Psi(p)}(E)$. Because the image of $\Psi$ is open and $E$ is a subspace, we can take $t > 0$ small enough and get
+    \begin{align*}
+        \Psi(p) + tv \in E \cap V = \Psi(M \cap U),
+    \end{align*}
+    defining $p_{t} = \Psi^{-1}(\Psi(p) + tv) \in M \cap U$. Since $\Psi^{-1} \in C^{1}$, we have 
+    \begin{align*}
+        p_{t} - p  = \Psi^{-1}(\Psi(p) + tv) - \Psi^{-1}( \Psi(p)) = D \Psi^{-1}_{\Psi(p)}(tv) + \smalO(\left| tv \right|) = t \cdot \tau + \smalO(t). 
+    \end{align*}
+    Taking any sequence $t_{k} \to 0$, we get $\frac{p_{t_{k}}  -p}{t_{k}} \to \tau$, proving $\tau \in T_{p}M$.
+
+    To see that $T_{p}M$ has dimension $d$, notice that $D \Psi^{-1}_{\Psi(p)}$ is a linear isomorphism and $T_{p}M$ is the image of that map applied to a $d$-dimensional subspace $E$. 
+\end{proof}
+
+\begin{remark}[Tangent space is differential of parametrisation]\label{rem:parametrisation-tangent-space}
+	We notice that for a parametrisation $\phi$ of $M$ around $p \in M$,
+	\begin{align*}
+		T_{p}M = D \phi_{y_{0}} ( \mathbb{R}^{d}).
+	\end{align*}
+	Why? Let $v \in \mathbb{R}^{d}$. For $t> 0$ let $\phi(y_{0} + tv) = p_{t} \in M$, then
+	\begin{align*}
+		D \phi_{y_{0}}(v) = \lim_{t \to 0} \frac{\phi(y_{0} + tv) - \phi(y_{0})}{t} = \lim_{t \to 0} \frac{p_{t} - p}{t} \to \tau \in T_{p}M.
+	\end{align*}
+	Hence $D \phi_{y_{0}}(\mathbb{R}^{d}) \subset T_{p}M \subset \mathbb{R}^{n}$. And the map $D \phi_{y_{0}}$ has full rank $d$, and its image is a subspace of $T_{p}M$, which is $d$-dimensional. Hence they must coincide.
+\end{remark}
+
+Let's maybe apply this to see what we can do in $\mathbb{R}^{3}$ before we finish off this chapter.
+
+\begin{definition}[Parametrised surface]\label{def:parametrised-surface}
+    Let $V \subset \mathbb{R}^{2}$ be open. A map $\phi: V \to \mathbb{R}^{3}$ of class $C^{k}$ such that $\text{rank}\, D\Phi_{y} = 2$ for all $y \in V$ and 
+    \begin{align*}
+        \forall V' \subset V \text{ open } \exists U \subset \mathbb{R}^{3} \text{ open s.t. } \phi(V) \cap U' = \phi(V')
+    \end{align*}
+    is called a parametrisation of the surface $M=\phi(V)$. Notice that this is the characterisation (3) in Proposition \ref{prop:char-manifold}, making $M$ into an actual $2$-dimensional submanifold of $\mathbb{R}^{3}$.
+\end{definition}
+
+\begin{eg} 
+    Let $u, v \in \mathbb{R}^{2}$. We define $\phi: \mathbb{R}^{2} \to \mathbb{R}^{3}$ by
+    \begin{align*}
+        \phi(u, v) = (\cos v \cdot u, \sin v \cdot u, v)
+    \end{align*}
+    and this gives you a so-called helicoid. It is left as an exercise to check that the Jacobian $J \phi(u,v)$ has rank $2$. Then, $\tau_{1} = \partial_{u} \phi(u,v)$ and $\tau_{2} = \partial_{v} \phi(u,v)$ are both tangent vectors, by Remark \ref{rem:parametrisation-tangent-space}, and since the rank of the Jacobian is $2$, these are linearly independent and at $p = \phi(u,v)$,
+    \begin{align*}
+        T_{p}M = \text{Sp}(\tau_{1}, \tau_{2}), \quad  M = \phi(V).
+    \end{align*}
+
+    And when you take the cross product 
+    \begin{align*}
+        \nu(u,v) = \partial_{u} \phi \times \partial_{v} \phi,
+    \end{align*}
+    you actually get a normal vector at $\phi(u,v) = p$.
+\end{eg}
+
+\chapter{Multidimensional integration}
+
+Now that we have learned about differentiation and surfaces and manifolds in $\mathbb{R}^{n}$, we can move onto integration. But before we get there, we need to find out what is volume.
+
+We introduce convenient notation for this chapter. If $X \subset \mathbb{R}^{n}$ is a set and $\rho > 0$ and $a \in \mathbb{R}^{n}$, we write
+\begin{align*}
+    \rho X + a = \left\{ \rho x + a \mid x \in X \right\}.
+\end{align*}
+Visually, this corresponds to scaling by $\rho$ and translation by $a$.
+
+\begin{definition}[Dyadic cube]\label{def:daydic-cube}
+    Given $p \in \mathbb{N}$, we say that $Q \subset \mathbb{R}^{n}$ is a dyadic cube of length $2^{-p}$ if
+    \begin{align*}
+        Q = 2^{-p}(a + [0,1)^{n})
+    \end{align*}
+    for some $a \in \mathbb{R}^{n}$. 
+\end{definition}
+
+\begin{definition}[Dyadic subset]\label{def:dyadic-subset}
+    We call $F \subset \mathbb{R}^{n}$ a dyadic set if it is a finite union of disjoint dyadic cubes, i.e.
+    \begin{align*}
+        F = \bigcup_{\ell=1}^{N} 2^{-p}(a_{\ell} + [0,1)^{n})
+    \end{align*}
+    such that all the sets we are unioning over are disjoint (so $a_{i} \neq a_{j}$ for $i \neq j$).
+\end{definition}
+
+\begin{definition}[Minecraft measure]\label{def:minecraft}
+    For $F \subset \mathbb{R}^{n}$ dyadic, so $F = \bigcup_{\ell=1}^{N} 2^{-p}(a_{\ell} + [0,1)^{n})$,
+    we define the volume of $F$ as 
+    \begin{align*}
+        \mu(F) = N \cdot 2^{-pn}.
+    \end{align*}
+    One easily checks that this formula is well-defined (size of $p$ doesn't matter).
+\end{definition}
+
+\begin{prop}[Properties of $\mu$]\label{prop:properties-of-minecraft-measure}
+    Unions, intersections and differences of dyadic sets are dyadic and $\mu$ for dyadic sets satisfies the following:
+    \begin{enumerate} 
+        \item Additivity: $\mu(E \cup F) = \mu(E) + \mu(F)$ for $E, F$ dyadic and disjoint.
+        \item Normalised: $\mu([0,1)^{n}) = 1$.
+        \item Translation: $\mu(E + \tau) = \mu(E)$ for all dyadic $E$ and $\tau \in 2^{-p}\mathbb{Z}^{n}$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{remark}
+    For deeper reasons, $\mu$ is the only measure defined on dyadic sets that satisfies (1), (2) and (3). One can show it as an exercise. But for sure, these are the three properties we would definitely expect of a function that returns volumes of Minecraft cubes.
+\end{remark}
+
+Now we can move onto measuring the volumes of general sets. It's just like the Riemann integral in Analysis 1.
+
+\begin{definition}[Outer, inner volume]\label{def:outer-inner-vol}
+    Let $E \subset \mathbb{R}^{n}$. Define
+    \begin{align*}
+        \mu_{\text{out}}(E) = \inf \left\{ \mu(G) \mid G \supset E \text{ is dyadic} \right\}, \quad \mu_{\text{in}}(E) = \sup \left\{ \mu(F) \mid F \subset E \text{ is dyadic} \right\}.
+    \end{align*}
+\end{definition}
+
+\begin{definition}[Jordan measurable sets]\label{def:jordan-measure}
+    Let $E \subset \mathbb{R}^{n}$ be bounded. $E$ is called Jodran measurable if $\mu_{\text{in}}(E) = \mu_{\text{out}}(E)$ and then we write
+    \begin{align*}
+        \text{vol}_{n}(E) = \mu(E) := \mu_{\text{in}}(E).
+    \end{align*}
+\end{definition}
+
+\begin{lemma}[]\label{lem:}
+    The following properties hold for the inner and outer volumes.
+    \begin{enumerate} 
+        \item $\mu_{\text{out}}$ is subadditive:
+        \begin{align*}
+            E \subset \bigcup_{i=1}^{N} E_{i} \implies \mu_{\text{out}} \leq \sum_{i=1}^{N} \mu_{\text{out}}(E_{i}).
+        \end{align*}
+        \item $\mu_{\text{in}}$ is superadditive:
+        \begin{align*}
+            E \supset \bigcup_{i=1}^{N} E_{i} \text{ and } E_{i} \text{ are pairwise disjoint } \implies \mu_{\text{in}}(E) \geq \sum_{i=1}^{N}  \mu_{\text{in}}(E_{i}).
+        \end{align*}
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    It's enough to show this as an exercise for $2$ sets, it's fairly conceptually simple, formally annoying at most. Then do induction.
+\end{proof}
+
