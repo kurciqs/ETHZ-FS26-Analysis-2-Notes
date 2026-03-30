@@ -15,7 +15,7 @@ As discussed, we will now introduce the generalisation of the inverse function t
 \begin{proof}
 	We consider without loss of generality the case $x_{0} = 0$ and $f(x_{0}) = f(0) = 0$. Indeed, we would otherwise just be able to redefine $\tilde{f}(x) = f(x - x_{0}) - f(x_{0})$.
 
-	We take $L = Df_{0}$ and define the function $F = L^{-1} \circ f$. Using the chain rule, the differential of this is (chain rule)
+	We take $L = Df_{0}$ and define the function $F = L^{-1} \circ f$. Using the chain rule, the differential of this is
 	\begin{align*}
 		DF_{0} = L^{-1}_{f(0)} \circ Df_{0} = \text{id},
 	\end{align*}
@@ -68,6 +68,11 @@ Let's motivate what we're doing a little better. Consider the circle in 2 dimens
 		\left\{ (x,y) \in U_{0} \mid f(x,y) = \lambda \right\} = \left\{ (x,y) \in U_{0} \mid y = g(x) \right\}
 	\end{align*}
 	and $g$ is class $C^{k}$. So the level set of $\lambda$ is a graph of a $C^{k}$ function $g$.
+
+	And finally, for all $x \in B_{r}(x_{0})$, the Jacobi of $g$ is given by
+	\begin{align*}
+		Jg(x) = -J_{y}f(x, g(x))^{-1} \cdot J_{x}f(x, g(x)).
+	\end{align*}
 \end{theorem}
 \begin{proof}
 	Fix $x_{0}$ and $y_{0}$ as in the statement. Define for $x \in \mathbb{R}^{d}$ and $y \in \mathbb{R}^{n-d}$ the map $\Phi: U \to \mathbb{R}^{n}$ such that
@@ -106,4 +111,10 @@ Let's motivate what we're doing a little better. Consider the circle in 2 dimens
 		f(x,y) = \lambda \iff y = G(x,\lambda).
 	\end{align*}
     In other words, $g(x) = G(x,\lambda)$ gives the function $g$ we were searching for.
+
+	To get the formula for $Dg(x)$, we differentiate the identity $f(x,g(x)) = \lambda$ using the chain rule (check component-wise, it's a pain)
+	\begin{align*}
+		J_{x}f(x,g(x)) + J_{y}f(x,g(x)) \cdot Jg(x) = 0,
+	\end{align*}
+	whe\text{Re} $J_{y}f(x,g(x))$ is invertible, since it's close enough to $J_{y}f(x_{0}, y_{0})$\footnote{I know it's a little heuristic, but it's actually true, you can estimate the Hilbert-Schmidt norm from below like in the Inverse Function Theorem, left as an exercise. But most of the time more that half of this stuff doesn't even come up in computation, it's just very technical.}.
 \end{proof}

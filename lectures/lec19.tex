@@ -1,0 +1,133 @@
+
+
+\begin{lemma}[Volume of boxes]\label{lem:box-volume}
+    Let $E = (a_{1}, b_{1}) \times \cdots \times (a_{n}, b_{n}) \subset \mathbb{R}^{n}$ where $a_{i} < b_{i}$. Then $E, \overline{ E } $ are Jordan measurable and 
+    \begin{align*}
+        \mu(E) = \mu(\overline{ E } ) = \prod_{i=1}^{n}(b_{i} - a_{i}).
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    For $p \in \mathbb{N}$ and $t \in \mathbb{R}$, we define
+    \begin{align*}
+        \underline{t} = \max \left\{ 2^{-p}k \mid k \in \mathbb{Z} \text{ s.t. } 2^{-p}k < t \right\}, \quad \overline{ t }  = \min \left\{ 2^{-p}k \mid k \in \mathbb{Z} \text{ s.t. } 2^{-p}k > t \right\}.
+    \end{align*}
+    Notice that always $t - \underline{t}, \overline{ t } - t \leq 2^{-p}$, $t < \overline{ t } $ and $t > \underline{t}$. From this we get that for any $1 \leq i \leq n$,
+    \begin{align*}
+        [a_{i}, b_{i}] \subset [\underline{a_{i}}, \overline{ b_{i} }), \quad [\overline{ a_{i} }, \underline{b_{i}} ) \subset (a_{i}, b_{i}).
+    \end{align*}
+    Then it's clear that
+    \begin{align*}
+        \overline{ E } \subset \prod_{i=1}^{n} [\underline{a_{i}}, \overline{ b_{i} } ) = G_{p}, \quad E \supset \prod_{i=1}^{n} [ \overline{ a_{i} }, \underline{b_{i}} ) = F_{p}
+    \end{align*}
+    and $G_{p}, F_{p}$ are dyadic sets. Notice that also
+    \begin{align*}
+        \underline{b_{i}} - \overline{ a_{i} }  \geq b_{i} - a_{i}, \quad \overline{ b_{i} } - \underline{a_{i}} \leq b_{i} + 2^{-p} - (a_{i} - 2^{-p}) = b_{i} - a_{i} + 2^{1-p}. 
+    \end{align*}
+    Hence (if you find a dyadic decomposition and compute the volume, everybody knows this is true), we get for sufficiently big $p$
+    \begin{align*}
+        \mu(F_{p}) = \prod_{i=1}^{n} ( \underline{ b_{i} } - \overline{ a_{i} }  ) \geq \prod_{i=1}^{n} (b_{i} - a_{i}), \quad \mu(G_{p}) = \prod_{i=1}^{n} ( \overline{ b_{i} } - \underline{ a_{i} }  ) \leq \prod_{i=1}^{n} (b_{i} - a_{i} + 2^{1-p}).
+    \end{align*}
+    Letting $p \to \infty$, using $\mu(F_{p}) \leq \mu_{\text{in}}(E) \leq \mu_{\text{out}}(\overline{ E } ) \leq \mu(G_{p})$, we get the statement. 
+\end{proof}
+
+\begin{prop}[Unions, intersections, differences of Jordan measurable sets]\label{prop:diff-int-un-jordan}
+    Let $E_{1}$ and $E_{2}$ be Jordan measurable. Then $E_{1} \cup E_{2}$, $E_{1} \cap E_{2}$, $E_{1} \setminus E_{2}$ are all Jordan measurable and $\mu$ is additive, so if $E_{1}, E_{2}$ are Jordan measurable and disjoint then $\mu(E_{1} + E_{2}) = \mu(E_{1}) + \mu(E_{2})$.
+\end{prop}
+\begin{proof}
+    First we prove additivity and measurability of the disjoint union. So assume that $E_{1}, E_{2}$ are disjoint. By superadditivity and subadditivity \ref{lem:prop-jordan-measure},
+    \begin{align*}
+        \mu_{\text{in}}(E_{1}) + \mu_{\text{in}}(E_{2}) \leq \mu_{\text{in}}(E_{1} \cup E_{2}) \leq \mu_{\text{out}}(E_{1} \cup E_{2}) \leq \mu_{\text{out}}(E_{1}) + \mu_{\text{out}}(E_{2}).
+    \end{align*}
+    But since the last and first terms equal, the inequality collapses to an equality.
+
+    Now we inspect the difference. By assumption, for any $\epsilon > 0$, $\exists G_{i}, F_{i}$ dyadic such that $F_{i} \subset E_{i} \subset G_{i}$ and
+    \begin{align*}
+        \mu(G_{i}) - \mu(F_{i}) < \frac{\epsilon}{2}. 
+    \end{align*}
+    By inclusion,
+    \begin{align*}
+        F_{1} \setminus G_{2} \subset  E_{1} \setminus E_{2} \subset G_{1} \setminus F_{2}
+    \end{align*}
+    and we know that $F_{1} \setminus G_{2}$ and $G_{1} \setminus F_{2}$ are dyadic. Purely set theoretically,
+    \begin{align*}
+        (G_{1} \setminus F_{2}) \setminus (F_{1} \setminus G_{2}) \subset (G_{1} \setminus F_{1}) \cup (G_{2} \setminus F_{2}).
+    \end{align*}
+    Hence by subadditivity \ref{lem:prop-jordan-measure},
+    \begin{align*}
+        \mu( (G_{1} \setminus F_{2}) \setminus (F_{1} \setminus G_{2}) ) \leq \mu(G_{1} \setminus F_{1}) + \mu(G_{2} \setminus F_{2}) \leq \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+    \end{align*}
+
+    Now we look at the intersection. Set theoretically, one writes
+    \begin{align*}
+        E_{1} \cap E_{2} = E_{2} \setminus (E_{2} \setminus E_{1})
+    \end{align*}
+    and so $E_{1} \cap E_{2}$ is Jordan measurable. And finally, we express 
+    \begin{align*}
+        E_{1} \cup E_{2} = (E_{1} \setminus E_{2}) \cup (E_{2} \setminus E_{1}) \cup (E_{1} \cap E_{2}),
+    \end{align*}
+    where the second union is disjoint, so the general union is Jordan measurable as well.
+\end{proof}
+
+\begin{lemma}[Sandwich]\label{lem:sandwich}
+    Let $E \subset \mathbb{R}^{n}$. Assume for any $\epsilon > 0$, there exist $F, G \subset \mathbb{R}^{n}$ Jordan measurable such that $F \subset E \subset G$ and $\mu(G) - \mu(F) < \epsilon$. Then $E$ is Jordan measurable. 
+\end{lemma}
+\begin{proof}
+    For any $\epsilon > 0$, there exist Jordan $F_{\epsilon} \subset E \subset G_{\epsilon}$ such that
+    \begin{align*}
+        \mu(F_{\epsilon}) = \mu_{\text{in}}(F_{\epsilon}) \leq \mu_{\text{in}}(E) \leq \mu_{\text{out}}(E) \leq \mu_{\text{out}}(G_{\epsilon}) = \mu(G_{\epsilon}).
+    \end{align*}
+    This means in particular that $\mu_{\text{out}}(E) - \mu_{\text{in}}(E) \leq \mu(G_{\epsilon}) - \mu(F_{\epsilon}) < \epsilon$. This forces $\mu_{\text{out}}(E) = \mu_{\text{in}}(E)$.
+\end{proof}
+
+\begin{definition}[Jordan null set]\label{def:jordan-null-set}
+    A set $E \subset \mathbb{R}^{n}$ is called null if $\mu_{\text{out}}(E) = 0$.
+\end{definition}
+
+\begin{lemma}[Closure, interior and the Jordan measure]\label{lem:jord-clos-int}
+    Let $E \subset \mathbb{R}^{n}$ be Jordan measurable. Then $E^{\circ }, \overline{ E }$ are both Jordan measurable and $\mu(E^{\circ }) = \mu(E) = \mu(\overline{ E } )$ give all the same volume.
+\end{lemma}
+\begin{proof}
+    Let $\epsilon > 0$. Since $E$ is Jordan, $\exists F_{\epsilon}, G_{\epsilon}$ dyadic such that $F_{\epsilon} \subset E \subset G_{\epsilon}$ and $\mu(G_{\epsilon}) - \mu(F_{\epsilon}) < \epsilon$. We have
+    \begin{align*}
+        F_{\epsilon}^{\circ } \subset E^{\circ } \subset E \subset \overline{ E }  \subset \overline{ G }_{\epsilon}.
+    \end{align*}
+    Since $F_{\epsilon}$ is dyadic, it can be written as a disjoint union of Minecraft cubes
+    \begin{align*}
+        F_{\epsilon} = \bigcup (a_{\ell} + [0,1)^{n})2^{-p} \implies F_{\epsilon}^{\circ } \subset \bigcup (a_{\ell} + (0,1)^{n})2^{-p}.
+    \end{align*}
+    And we proved that the volume of the open cube is the same as the volume of the closed cube in \ref{lem:box-volume}. Hence, for the dyadic $\mu(F_{\epsilon}^{\circ }) = \mu(F_{\epsilon})$ and the same holds for $\mu(\overline{ G }_{\epsilon}) = \mu(G_{\epsilon})$. Hence $\mu(\overline{ G }_{\epsilon}) - \mu(F_{\epsilon}^{\circ }) < \epsilon$ and passing this into the Sandwich, we get the Lemma.
+\end{proof}
+
+\begin{theorem}[Jordan measurability and boundary]\label{thm:jordan-theorem}
+    $E \subset \mathbb{R}^{n}$ is Jordan measurable if and only if $E$ is bounded and $\partial E$ is null.
+\end{theorem}
+\begin{proof}
+    $\implies$: If $E$ is Jordan measurable, then $E$ is clearly bounded. If it was unbounded, you'd need infinitely many cubes to approximate its volume from the outside. Also, by Lemma \ref{lem:jord-clos-int}, 
+    \begin{align*}
+        \mu(\overline{ E } ) = \mu(E^{\circ }) = \mu(E).
+    \end{align*}
+    By \ref{prop:diff-int-un-jordan}, $\partial E = \overline{ E } \setminus E^{\circ }$ is Jordan measurable and by additivity (the interior and boundary are disjoint)
+    \begin{align*}
+        \mu(\overline{ E } ) = \mu(E^{\circ }) + \mu( \partial E) \implies \mu( \partial E ) = 0.
+    \end{align*}
+
+    $\impliedby$: Assume that $E$ is bounded and $\mu_{\text{out}}(\partial E ) = 0$. Given $p \in \mathbb{N}$, let 
+    \begin{align*}
+        F_{p} = \bigcup \left\{ Q \text{ dyadic cube of size } 2^{-p} \mid Q \subset E^{\circ } \right\}
+    \end{align*}
+    and
+    \begin{align*}
+        G_{p} = \bigcup \left\{ Q \text{ dyadic cube of size } 2^{-p} \mid Q \cap \overline{ E } \neq \emptyset \right\}.
+    \end{align*}
+    Then we clearly have $F_{p} \subset E^{\circ } \subset \overline{ E } \subset G_{p}$. Since $\partial E$ is null, it is Jordan measurable and for $\epsilon > 0$, $\exists H_{\epsilon}$ such that $\partial E \subset H_{\epsilon}$ is dyadic and $\mu(H_{\epsilon}) < \epsilon$.
+
+    Let $p$ be the pixel size of $H_{\epsilon}$. Then
+    \begin{align*}
+        G_{p} \setminus F_{p} \subset H_{\epsilon} \implies \mu(G_{p}) - \mu(F_{p}) < \epsilon.
+    \end{align*}
+    Hence $E$ is Jordan measurable by \ref{lem:sandwich}. And so it remains to justify the inclusion. Indeed, if $z \in G_{p} \setminus F_{p}$, then there exists a cube of size $2^{-p}$, call it $Q_{p}$, such that $z \in Q_{p}$. But this $Q_{p}$ must satisfy $Q_{p} \not \subset E^{\circ }$ and $Q_{p} \cap \overline{ E } \neq \emptyset$ at the same time. Hence there exist points $x,y \in Q$ such that $y \in \mathbb{R}^{n} \setminus E^{\circ }$ and $x \in \overline{ E } $. Because $Q_{p}$ is convex, we can draw a line between $x$ and $y$ and define
+    \begin{align*}
+        t_{*} = \sup \left\{ t \in (0,1) \mid (1-t)x+ty \in \overline{ E }  \right\}.
+    \end{align*}
+    But this means that the point $z_{*} = (1-t_{*})x + t_{*}y$ can be approached by sequences both from $\mathbb{R}^{n} \setminus E^{\circ }$ and from $\overline{ E } $. But since both of those sets are closed, $z_{*}$ must lie in the intersection, so $\partial E$. But that means that $Q_{p}$ has non-empty intersection with the dyadic set $H_{\epsilon}$ of pixel size $2^{-p}$, hence is entirely contained in it (easy to check), so $z \in H_{\epsilon}$.
+\end{proof}

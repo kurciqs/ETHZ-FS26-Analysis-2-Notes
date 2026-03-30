@@ -12,7 +12,7 @@
 	\end{align*}
     hence $\tau \in D \Psi^{-1}_{\Psi(p)}(E)$. Notice that $\frac{|p_{k} - p|}{r_{k}}$ is bounded, hence $\frac{\smalO(|p_{k} - p|)}{r_{k}} \leq \epsilon \frac{|p_{k} - p|}{r_{k}}$ (for any $\epsilon > 0$, eventually), so it goes to zero and we can drop that term and get the result.
 
-    Conversely, take $\tau \in D \Psi^{-1}_{\Psi(p)}(E)$. Because the image of $\Psi$ is open and $E$ is a subspace, we can take $t > 0$ small enough and get
+    Conversely, fix $p \in M$ take $\tau \in D \Psi^{-1}_{\Psi(p)}(E)$. Because the image of $\Psi$ is open and $E$ is a subspace, we can take $t > 0$ small enough, $v \in E$ so that $\tau = D \Psi^{-1}_{\Psi(p)}(v)$ and get
     \begin{align*}
         \Psi(p) + tv \in E \cap V = \Psi(M \cap U),
     \end{align*}
@@ -66,6 +66,8 @@ Let's maybe apply this to see what we can do in $\mathbb{R}^{3}$ before we finis
 
 \chapter{Multidimensional integration}
 
+\section{Jordan measure in $\mathbb{R}^{n}$}
+
 Now that we have learned about differentiation and surfaces and manifolds in $\mathbb{R}^{n}$, we can move onto integration. But before we get there, we need to find out what is volume.
 
 We introduce convenient notation for this chapter. If $X \subset \mathbb{R}^{n}$ is a set and $\rho > 0$ and $a \in \mathbb{R}^{n}$, we write
@@ -87,7 +89,7 @@ Visually, this corresponds to scaling by $\rho$ and translation by $a$.
     \begin{align*}
         F = \bigcup_{\ell=1}^{N} 2^{-p}(a_{\ell} + [0,1)^{n})
     \end{align*}
-    such that all the sets we are unioning over are disjoint (so $a_{i} \neq a_{j}$ for $i \neq j$).
+    such that all the sets we are unioning over are disjoint (so $a_{i} \in \mathbb{Z}^{n}$ and $a_{i} \neq a_{j}$ for $i \neq j$).
 \end{definition}
 
 \begin{definition}[Minecraft measure]\label{def:minecraft}
@@ -115,7 +117,7 @@ Visually, this corresponds to scaling by $\rho$ and translation by $a$.
     For deeper reasons, $\mu$ is the only measure defined on dyadic sets that satisfies (1), (2) and (3). One can show it as an exercise. But for sure, these are the three properties we would definitely expect of a function that returns volumes of Minecraft cubes.
 \end{remark}
 
-Now we can move onto measuring the volumes of general sets. It's just like the Riemann integral in Analysis 1.
+Now we can move onto measuring the volumes of general sets. 
 
 \begin{definition}[Outer, inner volume]\label{def:outer-inner-vol}
     Let $E \subset \mathbb{R}^{n}$. Define
@@ -125,13 +127,13 @@ Now we can move onto measuring the volumes of general sets. It's just like the R
 \end{definition}
 
 \begin{definition}[Jordan measurable sets]\label{def:jordan-measure}
-    Let $E \subset \mathbb{R}^{n}$ be bounded. $E$ is called Jodran measurable if $\mu_{\text{in}}(E) = \mu_{\text{out}}(E)$ and then we write
+    Let $E \subset \mathbb{R}^{n}$ be bounded. $E$ is called Jordan measurable if $\mu_{\text{in}}(E) = \mu_{\text{out}}(E)$ and then we write
     \begin{align*}
         \text{vol}_{n}(E) = \mu(E) := \mu_{\text{in}}(E).
     \end{align*}
 \end{definition}
 
-\begin{lemma}[]\label{lem:}
+\begin{lemma}[Properties of Jordan measure]\label{lem:prop-jordan-measure}
     The following properties hold for the inner and outer volumes.
     \begin{enumerate} 
         \item $\mu_{\text{out}}$ is subadditive:
