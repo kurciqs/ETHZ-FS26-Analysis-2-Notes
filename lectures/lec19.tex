@@ -23,7 +23,7 @@
     \begin{align*}
         \underline{b_{i}} - \overline{ a_{i} }  \geq b_{i} - a_{i}, \quad \overline{ b_{i} } - \underline{a_{i}} \leq b_{i} + 2^{-p} - (a_{i} - 2^{-p}) = b_{i} - a_{i} + 2^{1-p}. 
     \end{align*}
-    Hence (if you find a dyadic decomposition and compute the volume, everybody knows this is true), we get for sufficiently big $p$
+    Hence\footnote{If you find a dyadic decomposition and compute the volume, everybody knows this is true, we just had to get the boxes to have coordinates that are powers of two so it's easy to fit dyadic cubes into it.}, we get for sufficiently big $p$
     \begin{align*}
         \mu(F_{p}) = \prod_{i=1}^{n} ( \underline{ b_{i} } - \overline{ a_{i} }  ) \geq \prod_{i=1}^{n} (b_{i} - a_{i}), \quad \mu(G_{p}) = \prod_{i=1}^{n} ( \overline{ b_{i} } - \underline{ a_{i} }  ) \leq \prod_{i=1}^{n} (b_{i} - a_{i} + 2^{1-p}).
     \end{align*}
@@ -93,7 +93,7 @@
     \end{align*}
     Since $F_{\epsilon}$ is dyadic, it can be written as a disjoint union of Minecraft cubes
     \begin{align*}
-        F_{\epsilon} = \bigcup (a_{\ell} + [0,1)^{n})2^{-p} \implies F_{\epsilon}^{\circ } \subset \bigcup (a_{\ell} + (0,1)^{n})2^{-p}.
+        F_{\epsilon} = \bigcup_{\ell = 1}^{N} (a_{\ell} + [0,1)^{n})2^{-p} \implies F_{\epsilon}^{\circ } \subset \bigcup_{\ell=1}^{N} (a_{\ell} + (0,1)^{n})2^{-p}.
     \end{align*}
     And we proved that the volume of the open cube is the same as the volume of the closed cube in \ref{lem:box-volume}. Hence, for the dyadic $\mu(F_{\epsilon}^{\circ }) = \mu(F_{\epsilon})$ and the same holds for $\mu(\overline{ G }_{\epsilon}) = \mu(G_{\epsilon})$. Hence $\mu(\overline{ G }_{\epsilon}) - \mu(F_{\epsilon}^{\circ }) < \epsilon$ and passing this into the Sandwich, we get the Lemma.
 \end{proof}
@@ -131,3 +131,4 @@
     \end{align*}
     But this means that the point $z_{*} = (1-t_{*})x + t_{*}y$ can be approached by sequences both from $\mathbb{R}^{n} \setminus E^{\circ }$ and from $\overline{ E } $. But since both of those sets are closed, $z_{*}$ must lie in the intersection, so $\partial E$. But that means that $Q_{p}$ has non-empty intersection with the dyadic set $H_{\epsilon}$ of pixel size $2^{-p}$, hence is entirely contained in it (easy to check), so $z \in H_{\epsilon}$.
 \end{proof}
+

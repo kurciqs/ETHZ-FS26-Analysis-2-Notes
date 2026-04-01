@@ -1,0 +1,160 @@
+\begin{lemma}[Lipschitz maps preserve null sets]\label{lem:lipschitz-maps-preserve-null}
+	Let $E \subset \mathbb{R}^{n}$ be null and $f: E \to \mathbb{R}^{n}$ be $\Lambda$-Lipschitz. Then $f(E)$ is null.
+\end{lemma}
+\begin{proof}
+	If $E$ is null, then for any $\epsilon > 0$, there exists dyadic $G = \bigcup_{\ell=1}^{N} Q_{p}(a_{\ell})$ with volume $N \cdot 2^{-pn}$ for some $p, N \in \mathbb{N}$ such that $\mu(G) = N \cdot 2^{-pn} < \epsilon \text{ and } E \subset G$.
+
+	Since $f$ is $\Lambda$-Lipschitz, we get
+	\begin{align*}
+		x \in Q_{p}(a_{\ell}) \implies \left| f(x) - f(a_{\ell}) \right| \leq \Lambda \left| x - a_{\ell} \right| \leq \Lambda 2^{-p} \sqrt{n},
+	\end{align*}
+	hence (draw picture to visualise) for $x \in Q_{p}(a_{\ell})$, $f(x) \in f(a_{\ell}) + \Lambda 2^{-p} \sqrt{n} \, [-1, 1]^{n}$.
+
+	By simple inclusion principles,
+	\begin{align*}
+		f(E) \subset \bigcup_{\ell=1}^{N} f(Q_{p}(a_{\ell})) \subset \bigcup_{\ell=1}^{N} f(a_{\ell}) + \Lambda 2^{-p}\sqrt{n} \, [-1, 1]^{n}.
+	\end{align*}
+	But we can estimate (implicitly using \ref{lem:prop-jordan-measure} and \ref{lem:box-volume}) the measure of $f(E)$
+	\begin{align*}
+		\mu_{\text{out}}(f(E)) \leq N \cdot (\Lambda 2^{-p} \sqrt{n} 2)^{n} \leq (2 \Lambda \sqrt{n})^{n} \cdot N 2^{-pn} < (2 \Lambda \sqrt{n})^{n} \epsilon.
+	\end{align*}
+	Letting $\epsilon \to 0$, we get the statement.
+\end{proof}
+
+\begin{lemma}[Graphs are null]\label{lem:graph-null}
+	Let $E \subset \mathbb{R}^{n-1}$ and $f: E \to \mathbb{R}$ be uniformly continuous. Then the graph
+	\begin{align*}
+		\Gamma = \left\{ (x,f(x)) \in \mathbb{R}^{n} \mid x \in E \right\} \subset \mathbb{R}^{n}
+	\end{align*}
+	is null.
+\end{lemma}
+\begin{proof}
+	If $E$ is null then it is measurable hence by Theorem \ref{thm:jordan-theorem} bounded inside $E \subset [-N_{0}, N_{0})^{n-1}$ and we have for arbitrary $p \in \mathbb{N}$ a cover
+	\begin{align*}
+		E \subset \bigcup_{\ell=1}^{N} Q_{p}(a_{\ell}).
+	\end{align*}
+	Because of the bound for $E$, this must be possible for $N \leq (2 N_{0} \cdot 2^{p})^{n-1}$, so that we do not exceed the size of $[-N_{0}, N_{0})^{n-1}$.
+
+	Assume wlog that $Q_{p}(a_{\ell}) \cap E \neq \emptyset$ and for each $1 \leq \ell \leq N$ let $x_{\ell} \in E \cap Q_{p}(a_{\ell})$ and notice that it in particular holds
+	\begin{align*}
+		x \in E \cap Q_{p}(a_{\ell}) \implies \left| x-x_{\ell} \right| < \sqrt{n} \cdot 2^{-p}.
+	\end{align*}
+
+	Now, given $\epsilon > 0$, by uniform continuity $\exists \delta > 0$ such that values of $f$ are very close, but there $\exists p \in \mathbb{N}$ such that $\sqrt{n} \cdot 2^{-p} < \delta$. So if we let $p$ be large enough,
+	\begin{align*}
+		\Gamma \subset \bigcup_{\ell=1}^{N} Q_{p}(a_{\ell}) \times [f(x_{\ell}) - \epsilon, f(x_{\ell}) + \epsilon)
+	\end{align*}
+	hence we can estimate using Lemma \ref{lem:box-volume}
+	\begin{align*}
+		\mu_{\text{out}}(\Gamma ) \leq \sum_{\ell=1}^{N} 2^{-pn} \cdot 2\epsilon = N 2^{-pn} \cdot 2\epsilon \leq (2 N_{0})^{n-1} 2^{p+1} \cdot 2^{-p} = (2 N_{0})^{n-1} \cdot 2\epsilon.
+	\end{align*}
+	Sending $\epsilon \to 0$, we get the Lemma.
+\end{proof}
+
+\section{The Jordan measure under linear transformations}
+
+We inspect how the Jordan measure behaves under linear transformations. First we do it for simple affine maps.
+
+\begin{prop}[Translation and dilation invariance]\label{prop:translation-dilation-invariance}
+	Let $E \subset \mathbb{R}^{n}$ be Jordan measurable. For $\rho > 0$, $a \in \mathbb{R}^{n}$, we have that $\rho E + a$ is also Jordan measurable and
+	\begin{align*}
+		\mu (\rho E + a) = \rho^{n} \cdot \mu(E).
+	\end{align*}
+\end{prop}
+\begin{proof}
+	First we prove the formula for a dyadic cube. Let $Q = 2^{-p} \cdot [0,1)^{n}$ is a dyadic cube. Then $\rho Q + a$ is a box and by Lemma \ref{lem:box-volume}, $\mu( \rho Q + a) = \rho^{n} \mu(Q)$. Since this holds for individual cubes, and dyadic sets $S$ are disjoint unions of dyadic cubes, the formula also holds for dyadic sets.
+
+	For $E$ any Jordan measurable set, for any $\epsilon > 0$, $\exists F_{\epsilon}, G_{\epsilon}$ dyadic such that $F_{\epsilon} \subset E \subset G_{\epsilon}$ and $\mu(G_{\epsilon}) - \mu(F_{\epsilon}) < \epsilon$.
+
+	Hence by inclusion,
+	\begin{align*}
+		\rho F_{\epsilon} + a \subset \rho E + a \subset \rho G_{\epsilon} + a,
+	\end{align*}
+	and 
+	\begin{align*}
+		\mu(\rho G_{\epsilon} + a) - \mu(\rho F_{\epsilon} + a) = \rho^{n} \mu(G_{\epsilon}) - \rho^{n} \mu(F_{\epsilon}) = \rho^{n} \epsilon.
+	\end{align*}
+	Letting $\epsilon \to 0$, we get the statement.
+\end{proof}
+
+Now we extend this to general linear maps.
+
+\begin{lemma}[Measure under linear maps]\label{lem:measure-linear}
+	Let $L: \mathbb{R}^{n} \to \mathbb{R}^{n}$ be linear and invertible. Then, for all $E \subset \mathbb{R}^{n}$ Jordan measurable, $L(E)$ is Jordan measurable and
+	\begin{align*}
+		\mu(L(E)) = \lambda(L) \cdot \mu(E)
+	\end{align*}
+	for some $\lambda(L) \in \mathbb{R}$.
+\end{lemma}
+\begin{proof}
+	If $E$ is Jordan, then it is bounded and $\partial E$ is null, and since $L$ is a Lipschitz map, $L(\partial E) = \partial L(E)$ (exercise: prove, use continuity) is null. Since $L(E)$ is bounded and has null boundary, it is measurable by Theorem \ref{thm:jordan-theorem}.
+
+	If we let $L([0,1)^{n}) = A$, using linearity of $L$,
+	\begin{align*}
+		L(a + 2^{-p}[0,1)^{n}) = L (a) + 2^{-p} L([0,1)^{n}) = L(a) + 2^{-p} A.
+	\end{align*}
+	By Lemma \ref{prop:translation-dilation-invariance}, we then must have
+	\begin{align*}
+		\mu(2^{-p}A + a) = 2^{-pn} \mu(A).
+	\end{align*}
+	Hence for any dyadic set $F$, which is just a union of these small boxes, we conclude that $\mu(L(F)) = \mu(F) \cdot \mu(A)$.
+
+	For $E$ Jordan measurable, for any $\epsilon > 0$, there exist $F_{\epsilon}, G_{\epsilon}$ with $F_{\epsilon} \subset E \subset G_{\epsilon}$ and $\mu(G_{\epsilon}) - \mu(F_{\epsilon}) < \epsilon$ and by inclusions,
+	\begin{align*}
+		L(F_{\epsilon}) \subset L(E) \subset L(G_{\epsilon}).
+	\end{align*}
+	By what we found, we have
+	\begin{align*}
+		L(G_{\epsilon}) - L(F_{\epsilon}) < \mu(A) \cdot \epsilon.
+	\end{align*}
+	Sending $\epsilon \to 0$, we again get the claim.
+\end{proof}
+
+\begin{lemma}[Special stretching Lemma]\label{lem:spec-stretch-lem}
+	Let $L : \mathbb{R}^{n} \to \mathbb{R}^{n}$ be invertible with diagonal matrix representation in the standard basis. Then $\lambda(L)$ from Lemma \ref{lem:measure-linear} is equal to
+	\begin{align*}
+		\lambda(L) = \lambda_{1} \cdots \lambda_{n} = \det (L).
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	Follows from the formula for boxes, since $\lambda(L) = \mu(L([0,1)^{n}))$, and the scaling of $[0,1)^{n}$ by the diagonal map $L$ is trivial.
+\end{proof}
+
+\begin{remark}[$\text{SO}(n)$]
+	We denote by $\text{SO}(n)$ the group of $n \times n$ real orthogonal matrices, so matrices $O$ such that $O \cdot O^\top = I$. Also, get ready for playing loose with using linear maps as abstract maps or matrices. For us, it doesn't matter, because we have a canonical basis.
+\end{remark}
+
+\begin{lemma}[Decomposition]\label{lem:polar-decomp}
+	Let $L : \mathbb{R}^{n} \to  \mathbb{R}^{n}$, there exist $R_{1}, R_{2} \in \text{SO}(n)$ and $S$ diagonal such that $L = R_{2}SR_{1}$.
+\end{lemma}
+\begin{proof}
+	This is a linear algebra theorem, but here is the idea: We take $A = L^\top L$, which is a symmetric matrix. We can apply the Spectral Theorem \ref{thm:spectral-thm} to get $O^\top A O = D$, where $O \in \text{SO}(n)$ and $D$ is diagonal. Now notice that since $v \cdot Av = v^\top L^\top \cdot L v = (Lv)^{2} \geq 0$, $A$ is non-negative definite and $D$ has only positive entries.
+
+	Then it's easy to find $S$ diagonal (choose all entries positive) such that $S^{2} = D$, so $S^{-1} O^\top  L^\top L O S^{-1} = (L OS^{-1})^\top LOS^{-1}= I_{n}$, because $S^{-1}$ is diagonal and hence equals its own transpose. And so $L O S^{-1} = R \in \text{SO}(n)$ and $L = R S O^\top$, as desired.
+\end{proof}
+
+\begin{lemma}[Balls are measurable]\label{lem:balls-measurable}
+	Any ball $B_{r}(x) \subset \mathbb{R}^{n}$ is measurable.
+\end{lemma}
+\begin{proof}
+	Notice that the upper and lower boundary hemispheres respectively are the graphs of uniformly continuous functions (continuous on a compact disk) so Lemma \ref{lem:graph-null} applies, $\partial B_{r}(x)$ is null and the ball is obviously bounded, so by Theorem \ref{thm:jordan-theorem} $B_{r}(x)$ is measurable.
+\end{proof}
+
+\begin{theorem}[Jordan measure under linear maps]\label{thm:jordan-linear-maps}
+	Let $L: \mathbb{R}^{n} \to \mathbb{R}^{n}$ be linear and invertible. If $E$ is Jordan measurable, then $L(E)$ is Jordan measurable and its measure is
+	\begin{align*}
+		\mu(L(E)) = \left| \det (L) \right| \cdot \mu(E).
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	Using Lemma \ref{lem:polar-decomp}, we express $L = R_{2} S R_{1}$ and we get from Lemma \ref{lem:measure-linear} that
+	\begin{align*}
+		\lambda(L) = \lambda(R_{2}) \lambda(S) \lambda(R_{1}) = 1 \cdot  \det (S) \cdot 1 = \left| \det (R_{2}) \right| \cdot \det (S) \cdot \left| \det (R_{1}) \right| = \left| \det (L) \right|.
+	\end{align*}
+	To justify why orthogonal matrices $R$ have $\lambda(R) = 1$, consider that by Lemma \ref{lem:balls-measurable}, $\mu(B_{1}(0)) = \mu(R(B_{1}(0))) = \lambda(R) \cdot \mu(B_{1}(0))$, since orthogonal transformations leave the unit ball unchanged (check both inclusions), and hence $\lambda(R) = 1$.
+\end{proof}
+
+
+\begin{remark}
+    We keep assuming invertibility of the linear maps because the box volume Lemma \ref{lem:box-volume} doesn't quite apply if one of the intervals is degenerate. One can shows as aan exercise that non-invertible linear maps map any set to a null set. We won't be working with them, I think.
+\end{remark}
