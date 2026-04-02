@@ -63,9 +63,9 @@ Let's motivate what we're doing a little better. Consider the circle in 2 dimens
 	\end{align*}
 	where $J_{x}f(x_{0}, y_{0}) \in \mathbb{R}^{(n-d) \times d}$ and $J_{y}f(x_{0}, y_{0}) \in \mathbb{R}^{(n-d) \times (n-d)}$, we know that $J_{y}f(x_{0}, y_{0})$ is invertible.
 
-	Then $\exists U_{0} = B_{r}(x_{0}) \times B_{s}(y_{0}) \subset U$ and for any $\lambda \in \mathbb{R}$, there is a function $g: B_{r}(x_{0}) \to B_{s}(y_{0})$ such that,
+	Then $\exists U_{0} = B_{r}(x_{0}) \times B_{s}(y_{0}) \subset U$ and there is a function $g: B_{r}(x_{0}) \to B_{s}(y_{0})$ such that,
 	\begin{align*}
-		\left\{ (x,y) \in U_{0} \mid f(x,y) = \lambda \right\} = \left\{ (x,y) \in U_{0} \mid y = g(x) \right\}
+		\left\{ (x,y) \in U_{0} \mid f(x,y) = 0 \right\} = \left\{ (x,y) \in U_{0} \mid y = g(x) \right\}
 	\end{align*}
 	and $g$ is class $C^{k}$. So the level set of $\lambda$ is a graph of a $C^{k}$ function $g$.
 
@@ -75,7 +75,7 @@ Let's motivate what we're doing a little better. Consider the circle in 2 dimens
 	\end{align*}
 \end{theorem}
 \begin{proof}
-	Fix $x_{0}$ and $y_{0}$ as in the statement. Define for $x \in \mathbb{R}^{d}$ and $y \in \mathbb{R}^{n-d}$ the map $\Phi: U \to \mathbb{R}^{n}$ such that
+	Fix $x_{0}$ and $y_{0}$ as in the statement. Define the map $\Phi: U \to \mathbb{R}^{n}$ such that for $x \in \mathbb{R}^{d}, y \in \mathbb{R}^{n-d}$,
 	\begin{align*}
 		\Phi(x,y) = (x, f(x,y)).
 	\end{align*}
@@ -102,17 +102,17 @@ Let's motivate what we're doing a little better. Consider the circle in 2 dimens
 	\end{align*}
 	for some map $G: V \to B_{s}(y_{0})$ that is of course $C^{k}$. 
 
-	Because we defined the variables in such a way, for a fix $\lambda \in \mathbb{R}$,
+	Because we defined the variables in such a way, 
 	\begin{align*}
-		\eta = f(x,y) = \lambda \iff (x,y) = \Psi(\xi, \eta) = (\xi, G(\xi, \eta)) = (x, G(x, \lambda)).
+		\eta = f(x,y) = 0 \iff (x,y) = \Psi(\xi, \eta) = (\xi, G(\xi, \eta)) = (x, G(x, 0)).
 	\end{align*}
 	This shows that
 	\begin{align*}
-		f(x,y) = \lambda \iff y = G(x,\lambda).
+		f(x,y) = \lambda \iff y = G(x,0).
 	\end{align*}
-    In other words, $g(x) = G(x,\lambda)$ gives the function $g$ we were searching for.
+    In other words, $g(x) = G(x,0)$ gives the function $g$ we were searching for.
 
-	To get the formula for $Dg(x)$, we differentiate the identity $f(x,g(x)) = \lambda$ using the chain rule (check component-wise, it's a pain)
+	To get the formula for $Dg(x)$, we differentiate the identity $f(x,g(x)) = 0$ using the chain rule (check component-wise, it's a pain)
 	\begin{align*}
 		J_{x}f(x,g(x)) + J_{y}f(x,g(x)) \cdot Jg(x) = 0,
 	\end{align*}

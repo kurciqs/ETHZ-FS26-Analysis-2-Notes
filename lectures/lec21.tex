@@ -1,0 +1,166 @@
+
+\section{The Riemann integral}
+
+Now we can define integrals, proceeding similarly to Analysis 1.
+
+\begin{definition}[Indicator function]\label{def:indicator-function}
+	Let $A \subset \mathbb{R}^{n}$. The indicator/characteristic function for $A$ is a function $\boldsymbol{1}_{A}: \mathbb{R}^{n} \to \mathbb{R}$ defined by
+	\begin{align*}
+		\boldsymbol{1}_{A}(x) =
+		\begin{cases}
+			1 \quad & \text{if } x \in A                           \\
+			0 \quad & \text{if } x \in \mathbb{R}^{n} \setminus A.
+		\end{cases}
+	\end{align*}
+\end{definition}
+
+\begin{definition}[Dyadic step function]\label{def:dyadic-step-fun}
+	A function $g: \mathbb{R}^{n} \to \mathbb{R}^{n}$ is called a dyadic step function if
+	\begin{align*}
+		g(x) = \sum_{\ell=1}^{N} g_{\ell} \cdot \boldsymbol{1}_{Q_{p}(a_{\ell})},
+	\end{align*}
+	where $Q_{p}(a_{\ell})$ are disjoint dyadic cubes of pixel size $2^{-p}$ and $g_{\ell}$ are values in $\mathbb{R}$.
+\end{definition}
+
+\begin{definition}[Integrals of step functions]\label{def:int-step-func}
+	Let $A \subset \mathbb{R}^{n}$. If $g: A \to \mathbb{R}^{n}$ is a dyadic step function with $N$ blocks, then we define the integral of $g$ as
+	\begin{align*}
+		\int_{A} g = \sum_{\ell=1}^{N} g_{\ell} \cdot \mu(Q_{p}(a_{\ell})) = \left( \sum_{\ell=1}^{N} g_{\ell}  \right) 2^{-pn}.
+	\end{align*}
+\end{definition}
+
+\begin{definition}[Riemann integrability]\label{def:riemann-int}
+	Let $A \subset \mathbb{R}^{n}$. We say $f:A \to \mathbb{R}$ is Riemann integrable over $A$ if the upper and lower sums, defined below, coincide.
+	\begin{align*}
+		\underline{\int}_{A} f & = \sup \left\{ \int_{A} g \mid g \leq f \cdot \boldsymbol{1}_{A} \text{ and } g \text{ is a dyadic step function} \right\}  \\
+		\overline{\int}_{A} f  & = \inf \left\{ \int_{A} h \mid h \geq f \cdot \boldsymbol{1}_{A} \text{ and } h \text{ is a dyadic step function} \right\}.
+	\end{align*}
+	If they coincide, we write $\overline{ \int }_{A} f = \underline{\int}_{A} f = \int_{A} f = \int_{A}f \, d \mu = \int_{A} f(x) \, dx$, where one can imagine $dx = d x_{1} \cdots dx_{n}$ as the volume of an infinitesimal cube. But note that in terms of rigor, all of these are just notation to us.
+\end{definition}
+
+\begin{lemma}[Integral of the constant function]\label{lem:int-const-func}
+	Let $A \subset \mathbb{R}^{n}$ be Jordan measurable and $c: A \to \mathbb{R}$ be the constant function with value $c$. Then $c \cdot \boldsymbol{1}_{A}$ is Riemann integrable and $\int c \cdot \boldsymbol{1}_{A} = c \int \boldsymbol{1}_{A} = c \cdot \mu(A)$.
+\end{lemma}
+\begin{proof}
+	The proof is left as an exercise, it is basically a Jordan measure type proof.
+\end{proof}
+
+\begin{lemma}[Linearity of the Riemann integral]\label{lem:lin-riemann-int}
+	Let $f_{1}, f_{2}: A \to \mathbb{R}$ be Riemann integrable functions and $c_{1}, c_{2} \in \mathbb{R}$. Then $c_{1}f_{1} + c_{2}f_{2}$ is Riemann integrable and
+	\begin{align*}
+		\int_{A} (c_{1}f_{1} + c_{2}f_{2}) = c_{1} \int_{A} f_{1} + c_{2} \int_{A} f_{2}.
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	Exercise. First prove it for step functions, where it's easy and then do the usual approximation.
+\end{proof}
+
+\begin{definition}[Positive and negative part of a function]\label{def:pos-neg-func}
+    Let $X$ be a set and $f: X \to \mathbb{R}$ a function. Then we define $f^{+}: X \to \mathbb{R}$ and $f^{-}:X \to \mathbb{R}$ by
+    \begin{align*}
+        f^{+}(x) = \max \left\{ f(x), 0 \right\}, \quad f^{-}(x) = \max\left\{ -f(x) , 0\right\}.
+    \end{align*}
+    Notice that $f = f^{+} - f^{-}$.
+\end{definition}
+
+\begin{lemma}[Integrability of positive and negative part]\label{lem:int-pos-neg-func}
+	Let $A \subset \mathbb{R}^{n}$. Then $f: A \to \mathbb{R}$ is Riemann integrable over $A$ if and only if $f^{+}$ and $f^{-}$ are. In that case,
+	\begin{align*}
+		\int_{A} f = \int_{A} f^{+} - \int_{A} f^{-}.
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	Exercise. The only real difficulty here is proving $\impliedby$.
+\end{proof}
+
+\begin{remark}
+    We will from now on assume almost every time that the functions are positive-valued, since any result can be extended to arbitrary functions using the Lemma \ref{lem:int-pos-neg-func}.
+\end{remark}
+
+\begin{lemma}[Jordan measure and Riemann integral]\label{lem:jordan-and-riemann}
+	Let $A \subset \mathbb{R}^{n}$ and $f: A \to [0,\infty)$. Consider the \textit{hypograph}
+	\begin{align*}
+		\Gamma_{A}(f) = \left\{ (x_{1}, \dots, x_{n}, x_{n+1}) \in \mathbb{R}^{n+1} \mid (x_{1}, \dots, x_{n}) \in A, x_{n+1} \leq f(x_{1}, \dots, x_{n}) \right\}.
+	\end{align*}
+	Then $f$ is Riemann integrable if and only if $\Gamma_{A}(f)$ is measurable. Moreover,
+	\begin{align*}
+		\int_{A} f = \mu_{n+1}(\Gamma_{A}(f)).
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	Exercise, notice the similarity in definitions.
+\end{proof}
+
+\begin{lemma}[Uniformly continuous functions are integrable]\label{lem:unif-cont-func-int}
+    Let $A \subset \mathbb{R}^{n}$ be Jordan measurable and $f: A \to [0,\infty)$ be uniformly continuous. Then $f$ is Riemann integrable over $A$. 
+\end{lemma}
+\begin{proof}
+    By Lemma \ref{lem:jordan-and-riemann}, we know that $f$ is integrable over $A$ if and only if $\Gamma_{A}(f)$ is Jordan measurable, but by Theorem \ref{thm:jordan-theorem}, this is if and only if $\mu_{n+1}(\partial \Gamma_{A}(f)) = 0$ and $\Gamma_{A}(f)$ is bounded. Using the fact that $A$ has null boundary and is bounded, because it is measurable, we wish to show the same for $\Gamma_{A}(f)$. Notice that 
+    % draw image
+    \begin{align*}
+        \partial \Gamma_{A}(f) \subset A_{1} \cup A_{2} \cup  A_{3},
+    \end{align*}
+    where 
+    \begin{align*}
+        A_{1} & = \left\{ (x, x_{n+1}) \in \mathbb{R}^{n} \times \mathbb{R} \mid x_{n+1} = f(x), x \in A \right\} \\ 
+        A_{2} & = \partial A \times [0, \textstyle\sup_{A} f] \\ 
+        A_{3} & = A \times \left\{ 0 \right\}.
+    \end{align*}
+    Since $\partial A$ is null, one can show that $A_{2}$ has measure $0$. Since $A_{1}$ is the graph of a uniformly continuous map, we have by Lemma \ref{lem:graph-null} that it is also null. And finally, since $A$ is bounded, it's very simple to cover $A_{3}$ with smaller and smaller cubes, hence it is also null.
+
+    Also, why is $\sup_{A} f < \infty$? It suffices to show that $f(A)$ is bounded. That's because $f$ is uniformly continuous and $A$ is bounded. One can cover $\overline{ A } $ with balls of arbitrarily small size, and then find a finite subcover of $\overline{ A } $ consisting of those small balls, and the union also covers $A$. On each of the small balls, the function must be within some epsilon of the center value. Hence the function must be bounded in total. 
+
+    Also, why does the inclusion $\partial \Gamma_{A}(f) \subset A_{1} \cup A_{2} \cup A_{3}$ hold? Well, take some point $(x,x_{n+1}) \in \overline{ \Gamma_{A}(f) }$ and assume it is in none of the sets $A_{1}, A_{2}, A_{3}$. We will show that it has to be in the interior, which will make it impossible for a point to be on the boundary and not to be in $A_{1} \cup A_{2} \cup A_{3}$. Notice that any $(x,x_{n+1})$ on the closure of $\overline{ \Gamma_{A}(f) } $ must satisfy $x \in \overline{ A } $ and if $x \in A$ also $0 \leq f(x) \leq x_{n+1}$. Then, we have two options. Either $x \in A^{\circ }$ or $x \in \partial A$. 
+
+    We tackle the second case first, so $x \in \partial A$. But because $(x, x_{n+1}) \not \in A_{2}$, we get $x_{n+1} > \sup_{A} f$, because $\partial A$ was excluded by assumption. This is only possible if $x \not  \in A$, but nevertheless, $x$ is a limit point of $A$, so actually there is a sequence in $A$ that exceeds $\sup_{A} f$ with its function values, a contradiction. 
+
+    For the second case, assume $x \in A^{\circ }$. Since in particular $x \in A$, $(x, x_{n+1}) \not \in A_{2}$ forces $x \not \in \partial A$. And then, $(x, x_{n+1}) \not  \in A_{1}$ and $(x, x_{n+1}) \not \in A_{3}$ force $0 < x_{n+1} < f(x)$. But since $x \in A^{\circ }$ open and $x_{n+1} \in (0, f(x))$ open, $(x,x_{n+1})$ lies in an open set inside $\Gamma_{A}(f)$, so it's in the interior.
+\end{proof}
+
+Serra called this the "Final Boss of integration". The proof is insanely long, complicated and there is no chance we can cover every last detail without going on for two days worth of lecture time. Nevertheless, here it comes.
+
+\begin{theorem}[Change of variables formula]\label{thm:change-of-vars}
+    Let $U,V \subset \mathbb{R}^{n}$ open and $\Phi: U \to V$ a diffeomorphism. Assume $A \subset U$ is Jordan measurable, $\overline{ A } \subset U$ and $f: \overline{ A }  \to [0,\infty)$ is continuous. Then $f$ is Riemann integrable over $A$ and
+    \begin{align*}
+        \int_{A} f(x) \, dx = \int_{\Phi(A)} \frac{f(\Phi^{-1}(y))}{\left| \det J \Phi(\Phi^{-1}(y)) \right|} \, dy.
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    First we consider the heuristic idea of the proof. 
+    % BIG PICTURE HERE !!!!!!
+    The idea is to approximate $A$ by dyadic cubes from the inside. Take one such cube $x_{0} + Q_{p}$ with $Q_{p} = 2^{-p}[0,1)$. Because the differential approximates the function value well,
+    \begin{align*}
+        \Phi(x_{0} + y ) \approx \Phi(x_{0}) + D \Phi_{x_{0}}(y).
+    \end{align*}
+    And when we apply the diffeomorphism to the small cube, we will get
+    \begin{align*}
+        \Phi(x_{0} + Q_{p}) \approx \Phi(x_{0}) + D \Phi_{x_{0}}(Q_{p}).
+    \end{align*}
+    But we know how the measure of sets behaves under linear maps. In particular,
+    \begin{align*}
+        \mu(\Phi(x_{0} + Q_{p})) \approx \det \left| J \Phi(x_{0}) \right| \cdot \mu( Q_{p}).
+    \end{align*}
+    Hence, if we correct by the inverse of the determinant, we get the same "sum over many little cubes".
+
+    Step 1: Now, notice that $f |_{\overline{ A } }$ is a continuous on a compact set, hence by \ref{prop:unif_cont}, it is uniformly continuous. Hence $f$ is Riemann integrable over $A$. You also need to show that $\Phi(A)$ is Jordan measurable and $\overline{ \Phi(A) } \subset V$. Proofs left to the reader.
+
+    Now, since the integrand of the RHS is continuous and $\Phi(A)$ has good closure (it's like the last Lemma, be more precise), we can apply the last Lemma to get that the RHS integral is even well-defined in the first place, as well as the LHS one.
+
+    Step 2: Let $Q_{p} = 2^{-p}[0,1)^{n}$ and the shrunk cube $Q_{p, \delta} = 2^{-p}[\delta, 1-\delta)^{n}$. We claim
+    \begin{align*}
+        \forall \delta > 0 \; \exists p_{\delta} \in \mathbb{N} \text{ s.t. } \forall x_{0} \in U \; \forall p \geq p_{\delta}: D\Phi_{x_{0}}(Q_{p,\delta}) + \Phi(x_{0}) \subset \Phi(x_{0} + Q_{p}).
+    \end{align*}
+    The proof is in the literature. 
+    
+    Now, if $y \in \Phi(x_{0} + Q_{p})$, then (why does minimum exist?)
+    \begin{align*}
+        \min_{x \in x_{0} + Q_{p}} \frac{f(x)}{\left| \det J \Phi( \Phi^{-1}(y)) \right|} \leq \frac{f(\Phi^{-1}(y))}{\left| \det J \Phi( \Phi^{-1}(y)) \right|}.
+    \end{align*}
+
+    Then, for any $\epsilon > 0$, for some step function $g$,
+    \begin{align*}
+        \int_{A} f - \epsilon \leq \int_{A} g = \int_{A} \sum_{\ell =1}^{N} g_{\ell} \boldsymbol{1}_{x_{0} + Q_{p}} \leq \int_{A} \frac{f(x)}{\left| \det (LMAO) \right|}.
+    \end{align*}
+
+\end{proof}
+
