@@ -5,4 +5,4 @@
 *.fdb_latexmk
 *.out
 .DS_Store
-fig/*
+

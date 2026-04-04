@@ -80,7 +80,7 @@ Now we can define integrals, proceeding similarly to Analysis 1.
 \begin{lemma}[Jordan measure and Riemann integral]\label{lem:jordan-and-riemann}
 	Let $A \subset \mathbb{R}^{n}$ and $f: A \to [0,\infty)$. Consider the \textit{hypograph}
 	\begin{align*}
-		\Gamma_{A}(f) = \left\{ (x_{1}, \dots, x_{n}, x_{n+1}) \in \mathbb{R}^{n+1} \mid (x_{1}, \dots, x_{n}) \in A, x_{n+1} \leq f(x_{1}, \dots, x_{n}) \right\}.
+		\Gamma_{A}(f) = \left\{ (x_{1}, \dots, x_{n}, x_{n+1}) \in \mathbb{R}^{n+1} \mid (x_{1}, \dots, x_{n}) \in A, 0 \leq x_{n+1} \leq f(x_{1}, \dots, x_{n}) \right\}.
 	\end{align*}
 	Then $f$ is Riemann integrable if and only if $\Gamma_{A}(f)$ is measurable. Moreover,
 	\begin{align*}
@@ -142,25 +142,6 @@ Serra called this the "Final Boss of integration". The proof is insanely long, c
     \end{align*}
     Hence, if we correct by the inverse of the determinant, we get the same "sum over many little cubes".
 
-    Step 1: Now, notice that $f |_{\overline{ A } }$ is a continuous on a compact set, hence by \ref{prop:unif_cont}, it is uniformly continuous. Hence $f$ is Riemann integrable over $A$. You also need to show that $\Phi(A)$ is Jordan measurable and $\overline{ \Phi(A) } \subset V$. Proofs left to the reader.
-
-    Now, since the integrand of the RHS is continuous and $\Phi(A)$ has good closure (it's like the last Lemma, be more precise), we can apply the last Lemma to get that the RHS integral is even well-defined in the first place, as well as the LHS one.
-
-    Step 2: Let $Q_{p} = 2^{-p}[0,1)^{n}$ and the shrunk cube $Q_{p, \delta} = 2^{-p}[\delta, 1-\delta)^{n}$. We claim
-    \begin{align*}
-        \forall \delta > 0 \; \exists p_{\delta} \in \mathbb{N} \text{ s.t. } \forall x_{0} \in U \; \forall p \geq p_{\delta}: D\Phi_{x_{0}}(Q_{p,\delta}) + \Phi(x_{0}) \subset \Phi(x_{0} + Q_{p}).
-    \end{align*}
-    The proof is in the literature. 
-    
-    Now, if $y \in \Phi(x_{0} + Q_{p})$, then (why does minimum exist?)
-    \begin{align*}
-        \min_{x \in x_{0} + Q_{p}} \frac{f(x)}{\left| \det J \Phi( \Phi^{-1}(y)) \right|} \leq \frac{f(\Phi^{-1}(y))}{\left| \det J \Phi( \Phi^{-1}(y)) \right|}.
-    \end{align*}
-
-    Then, for any $\epsilon > 0$, for some step function $g$,
-    \begin{align*}
-        \int_{A} f - \epsilon \leq \int_{A} g = \int_{A} \sum_{\ell =1}^{N} g_{\ell} \boldsymbol{1}_{x_{0} + Q_{p}} \leq \int_{A} \frac{f(x)}{\left| \det (LMAO) \right|}.
-    \end{align*}
-
+    Real proof pending.
 \end{proof}
 

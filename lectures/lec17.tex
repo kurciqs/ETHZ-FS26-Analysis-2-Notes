@@ -3,7 +3,7 @@
 While the initial definition might be a little out of place, we will see what it really means.
 
 \begin{definition}[Submanifold]\label{def:submanifold}
-	A set $M \subset \mathbb{R}^{n}$ is called a $d$-dimensional submanifold of class $C^{k}$ if $\forall p \in M \; \exists U \subset \mathbb{R}^{n}$ such that $p \in U$, $\exists V \subset \mathbb{R}^{n}$ open, such that $0 \in V$ and $\Psi: U \to V$, a $C^{k}$-diffeomorphism called the \textit{submanifold chart} such that
+	A set $M \subset \mathbb{R}^{n}$ is called a $d$-dimensional submanifold of class $C^{k}$ if $\forall p \in M \; \exists U \subset \mathbb{R}^{n}$ such that $p \in U$, $\exists V \subset \mathbb{R}^{n}$ open and $\Psi: U \to V$, a $C^{k}$-diffeomorphism called the \textit{submanifold chart} such that
 	\begin{align*}
 		\Psi(M \cap U) = \left\{ y \in V \mid y_{d+1} = \dots = y_{n} = 0 \right\}.
 	\end{align*}
@@ -128,7 +128,7 @@ Now we will state the 4 equivalent criteria. They may seem very arbitrary at fir
 
 	(4) $\implies$ (3). Let $p \in M$. By assumption (4), we get a map $U \subset \mathbb{R}^{n}$ open that contains $p$, $V \subset \mathbb{R}^{d}$ open and $g: V \to \mathbb{R}^{n-d}$ such that $M \cap U = P(\text{graph}(g))$. For $y \in V$, define $\tilde{G}(y) = (y, g(y))$ s.t. $M \cap U = (P \circ \tilde{G})(V)$, simply the image. Take $G = P \circ \tilde{G}$. By the differentiation laws \ref{prop:Ck-conservation}, $G \in C^{k}(V, \mathbb{R}^{n})$.
 
-	Find the $y \in V$ such that $p = G(y)$, which exists by assumption $p \in U$. And so it remains to show that $DG(y)$ is of rank $d$. Since
+	Find the $y \in V$ such that $p = G(y)$, which exists by assumption $p \in U$. Now we show that $DG(y)$ is of rank $d$. Since
 	\begin{align*}
 		G(y_{1}, \dots, y_{d}) = (y_{1}, \dots, y_{d}, g(y_{1}), \dots, g(y_{d})) \quad  \implies \quad
 		D\tilde G(y) =
@@ -137,7 +137,12 @@ Now we will state the 4 equivalent criteria. They may seem very arbitrary at fir
 			Dg(y)
 		\end{pmatrix},
 	\end{align*}
-	its columns are linearly independent, hence $\operatorname{rank}(D\tilde G(y)) = d$. As $P$ is a linear iso, it follows that $\text{rank}(DG(y)) = d$.
+	its columns are linearly independent, hence $\operatorname{rank}(D\tilde G(y)) = d$ and as $P$ is a linear iso, it follows that $\text{rank}(DG(y)) = d$ as well.
+
+	Finally, for $V' \subset V$, let $U' = (P(V' \times \mathbb{R}^{n-d})) \cap U \subset U$, such that
+	\begin{align*}
+		M \cap U' = P(\text{graph}(g)) \cap P(V' \times \mathbb{R}^{n-d}) = G(V').
+	\end{align*}
 
 	(3) $\implies$ (1). Let $p \in M$. Let $y_0 \in V$ such that $G(y_0) = p$.
 	Since $DG(y_0)$ has rank $d$, we can extend its columns to a basis of $\mathbb{R}^n$, i.e.
@@ -155,7 +160,7 @@ Now we will state the 4 equivalent criteria. They may seem very arbitrary at fir
 		D\Phi(y_0,0)
 		=
 		\begin{pmatrix}
-			DG(y_0) \mid v_{d+1} \mid \cdots & v_n
+			DG(y_0) \mid v_{d+1} \mid \cdots \mid  v_n
 		\end{pmatrix}
 	\end{align*}
 	is invertible. Hence by the Inverse Function Theorem \ref{thm:inv-func-thm}, there exist
@@ -165,11 +170,38 @@ Now we will state the 4 equivalent criteria. They may seem very arbitrary at fir
 		\forall x \in U:\quad x = \Phi(\Psi(x)).
 	\end{align*}
 
-	Then for $x \in U$ we have the following. By (3), $x \in M \iff x \in G(V)$, so $x = G(y)$ for some $y \in V$. Because $\Phi$ is bijective, this is if and only if $x = \Phi((y,0))$, so $\Psi(x) = (y,0)$, hence $\Psi_{d+1}(x) = \dots = \Psi_{n}(x) = 0$.
-	Conversely, if $\Psi_{d+1}(x) = \dots = \Psi_{n}(x) = 0$, then $x = \Phi(\Psi(x)) = G(\Psi(x_{1}), \dots, \Psi(x_{d})) \in M$. 
+	Now define
+	\begin{align*}
+		V' := \left\{ y \in V \mid (y,0) \in W \right\}.
+	\end{align*}
+	Then $V'$ is open in $\mathbb{R}^{d}$ and $y_{0} \in V'$. By (3), there exists an open set $U' \subset \mathbb{R}^{n}$ such that
+	\begin{align*}
+		M \cap U' = G(V').
+	\end{align*}
+	Replacing $U$ by $U \cap U'$, we may assume
+	\begin{align*}
+		M \cap U = G(V').
+	\end{align*}
+
+	Then for $x \in U$ we have the following. If $x \in M$, then $x \in G(V')$, so there exists $y \in V'$ such that $x = G(y) = \Phi((y,0))$. Since $\Phi$ is bijective on $W$, it follows that $\Psi(x) = (y,0)$, hence $\Psi_{d+1}(x) = \dots = \Psi_{n}(x) = 0$.
+
+	Conversely, if $\Psi_{d+1}(x) = \dots = \Psi_{n}(x) = 0$, then $\Psi(x) = (y,0)$ for some $y \in V'$ (since $\Psi(x) \in W$), and thus
+	\begin{align*}
+		x = \Phi(\Psi(x)) = \Phi((y,0)) = G(y) \in G(V') = M.
+	\end{align*}
 \end{proof}
 
 % PICTURE: MAYBE, how does (3) => (1) work?
+
+\begin{remark}[The issue with parametrisation]
+	In the parametric characterisation, why do we require $M \cap U' = G(V')$ for any $V' \subset V$ and not just $M \cap U = G(V)$ as a whole. This has a good reason when loops enter the game. Consider the loop:
+	\begin{center}
+		\centering
+		\def\svgwidth{0.3\linewidth}
+		\input{fig/loop.pdf_tex}
+	\end{center}
+	Now, it's apparently possible to parametrise this figure on an open set around $P$ by walking along the curve and infinitesimally approaching the point $P$ from below. But this curve can clearly not be a manifold because precisely at $P$, any chart $\Psi$ will \textit{not} straighten out the curve sufficiently, because it is $3$-fold intersection. Rigorously, if you zoom in close enough to $P$ and remove the point $P$, $\Psi$ will essentially have to map $3$ disconnected components in $\mathbb{R}^{2}$ to $3$ disconnected components in $\mathbb{R} \times \left\{ 0 \right\}$, but where all of those $3$ disconnected components would have to be in contact with the image of $P$, which is obviously impossible.
+\end{remark}
 
 \begin{definition}[Tangent and normal vector]\label{def:tangent-normal-vector}
 	Let $M \subset \mathbb{R}^{n}$, a $d$-dimensional submanifold. Then $\tau \in \mathbb{R}^{n}$ is tangent to $M$ at $p \in M$ if $\exists p_{k} \in M, r_{k} > 0$ sequences such that
