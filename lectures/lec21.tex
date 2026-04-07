@@ -56,11 +56,11 @@ Now we can define integrals, proceeding similarly to Analysis 1.
 \end{proof}
 
 \begin{definition}[Positive and negative part of a function]\label{def:pos-neg-func}
-    Let $X$ be a set and $f: X \to \mathbb{R}$ a function. Then we define $f^{+}: X \to \mathbb{R}$ and $f^{-}:X \to \mathbb{R}$ by
-    \begin{align*}
-        f^{+}(x) = \max \left\{ f(x), 0 \right\}, \quad f^{-}(x) = \max\left\{ -f(x) , 0\right\}.
-    \end{align*}
-    Notice that $f = f^{+} - f^{-}$.
+	Let $X$ be a set and $f: X \to \mathbb{R}$ a function. Then we define $f^{+}: X \to \mathbb{R}$ and $f^{-}:X \to \mathbb{R}$ by
+	\begin{align*}
+		f^{+}(x) = \max \left\{ f(x), 0 \right\}, \quad f^{-}(x) = \max\left\{ -f(x) , 0\right\}.
+	\end{align*}
+	Notice that $f = f^{+} - f^{-}$.
 \end{definition}
 
 \begin{lemma}[Integrability of positive and negative part]\label{lem:int-pos-neg-func}
@@ -74,7 +74,7 @@ Now we can define integrals, proceeding similarly to Analysis 1.
 \end{proof}
 
 \begin{remark}
-    We will from now on assume almost every time that the functions are positive-valued, since any result can be extended to arbitrary functions using the Lemma \ref{lem:int-pos-neg-func}.
+	We will from now on assume almost every time that the functions are positive-valued, since any result can be extended to arbitrary functions using the Lemma \ref{lem:int-pos-neg-func}.
 \end{remark}
 
 \begin{lemma}[Jordan measure and Riemann integral]\label{lem:jordan-and-riemann}
@@ -88,60 +88,260 @@ Now we can define integrals, proceeding similarly to Analysis 1.
 	\end{align*}
 \end{lemma}
 \begin{proof}
-	Exercise, notice the similarity in definitions.
+	Exercise, notice the similarity in definitions. Indeed, for a lower step function $g \leq f \cdot \boldsymbol{1}_{A}$, the union of boxes
+	\begin{align*}
+		G = \bigcup_{\ell = 1}^{N} Q_{p}(a_{\ell}) \times [0,g_{\ell})
+	\end{align*}
+	has volume exactly equal to the value of the step function integral, so $\mu_{n+1}(G) = \int_{A} g$. Doing the same for an upper step function $h \geq f \cdot \boldsymbol{1}_{A}$ and the analogously defined set of boxes $H$, we get $\mu_{n+1}(H) = \int_{A} h$. Then it's apparent that the lower and upper sums align if and only if the inner and outer measures of $\Gamma_{A}(f)$ align.
 \end{proof}
 
 \begin{lemma}[Uniformly continuous functions are integrable]\label{lem:unif-cont-func-int}
-    Let $A \subset \mathbb{R}^{n}$ be Jordan measurable and $f: A \to [0,\infty)$ be uniformly continuous. Then $f$ is Riemann integrable over $A$. 
+	Let $A \subset \mathbb{R}^{n}$ be Jordan measurable and $f: \overline{ A }  \to [0,\infty)$ be continuous. Then $f$ is Riemann integrable over $A$.
 \end{lemma}
 \begin{proof}
-    By Lemma \ref{lem:jordan-and-riemann}, we know that $f$ is integrable over $A$ if and only if $\Gamma_{A}(f)$ is Jordan measurable, but by Theorem \ref{thm:jordan-theorem}, this is if and only if $\mu_{n+1}(\partial \Gamma_{A}(f)) = 0$ and $\Gamma_{A}(f)$ is bounded. Using the fact that $A$ has null boundary and is bounded, because it is measurable, we wish to show the same for $\Gamma_{A}(f)$. Notice that 
-    % draw image
-    \begin{align*}
-        \partial \Gamma_{A}(f) \subset A_{1} \cup A_{2} \cup  A_{3},
-    \end{align*}
-    where 
-    \begin{align*}
-        A_{1} & = \left\{ (x, x_{n+1}) \in \mathbb{R}^{n} \times \mathbb{R} \mid x_{n+1} = f(x), x \in A \right\} \\ 
-        A_{2} & = \partial A \times [0, \textstyle\sup_{A} f] \\ 
-        A_{3} & = A \times \left\{ 0 \right\}.
-    \end{align*}
-    Since $\partial A$ is null, one can show that $A_{2}$ has measure $0$. Since $A_{1}$ is the graph of a uniformly continuous map, we have by Lemma \ref{lem:graph-null} that it is also null. And finally, since $A$ is bounded, it's very simple to cover $A_{3}$ with smaller and smaller cubes, hence it is also null.
+	By Lemma \ref{lem:jordan-and-riemann}, we know that $f$ is integrable over $A$ if and only if $\Gamma_{A}(f)$ is Jordan measurable, but by Theorem \ref{thm:jordan-theorem}, this is if and only if $\mu_{n+1}(\partial \Gamma_{A}(f)) = 0$ and $\Gamma_{A}(f)$ is bounded. Using the fact that $A$ has null boundary and is bounded, because it is measurable, we wish to show the same for $\Gamma_{A}(f)$. Notice that
+	% draw image
+	\begin{align*}
+		\partial \Gamma_{A}(f) \subset A_{1} \cup A_{2} \cup  A_{3},
+	\end{align*}
+	where
+	\begin{align*}
+		A_{1} & = \left\{ (x, x_{n+1}) \in \mathbb{R}^{n} \times \mathbb{R} \mid x_{n+1} = f(x), x \in A \right\} \\
+		A_{2} & = \partial A \times [0, \textstyle\max_{\overline{ A } } f]                                       \\
+		A_{3} & = A \times \left\{ 0 \right\}.
+	\end{align*}
+	Since $\partial A$ is null, one can show that $A_{2}$ has measure $0$. Since $A_{1}$ is the graph of a uniformly continuous map, we have by Lemma \ref{lem:graph-null} that it is also null. And finally, since $A$ is bounded, it's very simple to cover $A_{3}$ with smaller and smaller cubes, hence it is also null.
 
-    Also, why is $\sup_{A} f < \infty$? It suffices to show that $f(A)$ is bounded. That's because $f$ is uniformly continuous and $A$ is bounded. One can cover $\overline{ A } $ with balls of arbitrarily small size, and then find a finite subcover of $\overline{ A } $ consisting of those small balls, and the union also covers $A$. On each of the small balls, the function must be within some epsilon of the center value. Hence the function must be bounded in total. 
+	Now, why does the inclusion $\partial \Gamma_{A}(f) \subset A_{1} \cup A_{2} \cup A_{3}$ hold? Well, take some point $(x,x_{n+1}) \in \overline{ \Gamma_{A}(f) }$ and assume it is in none of the sets $A_{1}, A_{2}, A_{3}$. We will show that it has to be in the interior, which will make it impossible for a point to be on the boundary and not to be in $A_{1} \cup A_{2} \cup A_{3}$. Notice that any $(x,x_{n+1})$ on the closure of $\overline{ \Gamma_{A}(f) } $ must satisfy $x \in \overline{ A } $ and $0 \leq f(x) \leq x_{n+1}$. Then, we have two options. Either $x \in A^{\circ }$ or $x \in \partial A$.
 
-    Also, why does the inclusion $\partial \Gamma_{A}(f) \subset A_{1} \cup A_{2} \cup A_{3}$ hold? Well, take some point $(x,x_{n+1}) \in \overline{ \Gamma_{A}(f) }$ and assume it is in none of the sets $A_{1}, A_{2}, A_{3}$. We will show that it has to be in the interior, which will make it impossible for a point to be on the boundary and not to be in $A_{1} \cup A_{2} \cup A_{3}$. Notice that any $(x,x_{n+1})$ on the closure of $\overline{ \Gamma_{A}(f) } $ must satisfy $x \in \overline{ A } $ and if $x \in A$ also $0 \leq f(x) \leq x_{n+1}$. Then, we have two options. Either $x \in A^{\circ }$ or $x \in \partial A$. 
+	We tackle the second case first, so $x \in \partial A$. But because $(x, x_{n+1}) \not \in A_{2}$, we get $x_{n+1} > \max_{\overline{ A } } f$, because $\partial A$ was forced by assumption, contradiction.
 
-    We tackle the second case first, so $x \in \partial A$. But because $(x, x_{n+1}) \not \in A_{2}$, we get $x_{n+1} > \sup_{A} f$, because $\partial A$ was excluded by assumption. This is only possible if $x \not  \in A$, but nevertheless, $x$ is a limit point of $A$, so actually there is a sequence in $A$ that exceeds $\sup_{A} f$ with its function values, a contradiction. 
-
-    For the second case, assume $x \in A^{\circ }$. Since in particular $x \in A$, $(x, x_{n+1}) \not \in A_{2}$ forces $x \not \in \partial A$. And then, $(x, x_{n+1}) \not  \in A_{1}$ and $(x, x_{n+1}) \not \in A_{3}$ force $0 < x_{n+1} < f(x)$. But since $x \in A^{\circ }$ open and $x_{n+1} \in (0, f(x))$ open, $(x,x_{n+1})$ lies in an open set inside $\Gamma_{A}(f)$, so it's in the interior.
+	For the second case, assume $x \in A^{\circ }$, forcing $x \not \in \partial A$. And then, $(x, x_{n+1}) \not  \in A_{1}$ and $(x, x_{n+1}) \not \in A_{3}$ force $0 < x_{n+1} < f(x)$. But since $x \in A^{\circ }$ open and $x_{n+1} \in (0, f(x))$ open, $(x,x_{n+1})$ lies in an open set inside $\Gamma_{A}(f)$, so it's in the interior.
 \end{proof}
 
-Serra called this the "Final Boss of integration". The proof is insanely long, complicated and there is no chance we can cover every last detail without going on for two days worth of lecture time. Nevertheless, here it comes.
+\section{Change of variables}
+
+Serra called this the "Final Boss of integration". The proof is insanely long, complicated and there is no chance we can cover every last detail without going on for two days worth of lecture time. Nevertheless, here it comes. I put in the effort to write it up outside of the lecture, I mostly stuck to the lecture notes, clarified some steps that I had issue comprehending and just copied others because they were straightforward.
 
 \begin{theorem}[Change of variables formula]\label{thm:change-of-vars}
-    Let $U,V \subset \mathbb{R}^{n}$ open and $\Phi: U \to V$ a diffeomorphism. Assume $A \subset U$ is Jordan measurable, $\overline{ A } \subset U$ and $f: \overline{ A }  \to [0,\infty)$ is continuous. Then $f$ is Riemann integrable over $A$ and
-    \begin{align*}
-        \int_{A} f(x) \, dx = \int_{\Phi(A)} \frac{f(\Phi^{-1}(y))}{\left| \det J \Phi(\Phi^{-1}(y)) \right|} \, dy.
-    \end{align*}
+	Let $U,V \subset \mathbb{R}^{n}$ open and $\Phi: U \to V$ a diffeomorphism. Assume $A \subset U$ is Jordan measurable, $\overline{ A } \subset U$ and $f: \overline{ A }  \to [0,\infty)$ is continuous. Then $f$ is Riemann integrable over $A$ and
+	\begin{align*}
+		\int_{A} f(x) \, dx = \int_{\Phi(A)} \frac{f(\Phi^{-1}(y))}{\left| \det J \Phi(\Phi^{-1}(y)) \right|} \, dy.
+	\end{align*}
 \end{theorem}
 \begin{proof}
-    First we consider the heuristic idea of the proof. 
-    % BIG PICTURE HERE !!!!!!
-    The idea is to approximate $A$ by dyadic cubes from the inside. Take one such cube $x_{0} + Q_{p}$ with $Q_{p} = 2^{-p}[0,1)$. Because the differential approximates the function value well,
-    \begin{align*}
-        \Phi(x_{0} + y ) \approx \Phi(x_{0}) + D \Phi_{x_{0}}(y).
-    \end{align*}
-    And when we apply the diffeomorphism to the small cube, we will get
-    \begin{align*}
-        \Phi(x_{0} + Q_{p}) \approx \Phi(x_{0}) + D \Phi_{x_{0}}(Q_{p}).
-    \end{align*}
-    But we know how the measure of sets behaves under linear maps. In particular,
-    \begin{align*}
-        \mu(\Phi(x_{0} + Q_{p})) \approx \det \left| J \Phi(x_{0}) \right| \cdot \mu( Q_{p}).
-    \end{align*}
-    Hence, if we correct by the inverse of the determinant, we get the same "sum over many little cubes".
+	First we consider the heuristic idea of the proof.
+	% BIG PICTURE HERE !!!!!!
+	The idea is to approximate $A$ by dyadic cubes from the inside. Take one such cube $x_{0} + Q_{p}$ with $Q_{p} = 2^{-p}[0,1)$. Because the differential approximates the function value well,
+	\begin{align*}
+		\Phi(x_{0} + y ) \approx \Phi(x_{0}) + D \Phi_{x_{0}}(y).
+	\end{align*}
+	And when we apply the diffeomorphism to the small cube, we will get
+	\begin{align*}
+		\Phi(x_{0} + Q_{p}) \approx \Phi(x_{0}) + D \Phi_{x_{0}}(Q_{p}).
+	\end{align*}
+	But we know how the measure of sets behaves under linear maps. In particular,
+	\begin{align*}
+		\mu(\Phi(x_{0} + Q_{p})) \approx \det \left| J \Phi(x_{0}) \right| \cdot \mu( Q_{p}).
+	\end{align*}
+	Hence, if we correct by the inverse of the determinant, we get the same "sum over many little cubes".
 
-    Real proof pending.
+	So let's get to it. The proof consists of three parts, of which really only one is technically demanding. In step 1, we will prove that the expressions in the Theorem statement are well-defined in the first place. Step 2 will be the core of the proof, establishing LHS $\leq$ RHS. And step 3 will just be a reverse application of step 2 to get RHS $\leq$ LHS and then we get the Theorem.
+
+	\textbf{Step 1}. Note that $A$ is bounded, hence $\overline{ A } $ is compact. Since $\Phi(\overline{ A } )$ is the image of limit points of $A$ and $\Phi$ is continuous, we get that any $y \in \Phi(\overline{ A } )$ is a limit point of $\Phi(A)$, so in $\overline{ \Phi(A) } $. And using Proposition \ref{prop:contin_image_of_compact}, we get that $\Phi( \overline{ A } )$ is closed, hence contains $\overline{ \Phi  (A) }$. This proves $\Phi(\overline{ A } ) = \overline{ \Phi(A) } $. Now consider that by \ref{thm:inv-func-thm}, $\Phi(A^{\circ })$ is open and contained in $\Phi(A)$, hence $\Phi(A^{\circ }) \subset \Phi(A)^{\circ }$. Conversely, $\Phi(A)^{\circ }$ is an open set, hence $\Phi^{-1}(\Phi(A)^{\circ })$ is open and by bijectivity contained in $A$, hence $\Phi^{-1}(\Phi(A)^{\circ }) \subset A^{\circ }$, giving $\Phi(A)^{\circ } \subset \Phi(A^{\circ })$. This gives the equality $\Phi(A^{\circ }) = \Phi(A)^{\circ }$, and using the first part also $\partial \Phi(A) = \Phi(\partial A)$.
+
+	Using this, we show that $\Phi(A)$ is Jordan measurable. Since $\overline{ A } \subset U$ and $U$ is open, for any $x \in \overline{ A } $, there exists a small radius $r_{x} > 0$ such that
+	\begin{align*}
+		B_{2r_{x}}(x) \subset U.
+	\end{align*}
+	Additionally, $\Phi |_{\overline{ B_{r_{x}}(x) } }$ is Lipschitz (generalise Proposition \ref{prop:derivative-lipschitz} and notice that the maximum of $D \Phi(x)$ is attained on $\overline{ B_{r_{x}}(x) } $ because $\Phi$ is $C^{1}$). Since $\overline{ A } $ is compact, we can easily cover $A$ using a finite set of balls
+	\begin{align*}
+		B_{2r_{1}}(x_{1}), \dots, B_{2r_{k}}(x_{k}),
+	\end{align*}
+	where $x_{i} \in A$. Because $A$ is measurable, $\partial A$ is null and so is each $\partial A \cap B_{r_{i}}(x_{i})$. And using Lemma \ref{lem:lipschitz-maps-preserve-null}, we get that each image $\Phi( \partial A \cap B_{r_{i}}(x_{i}))$ is Jordan null. But since
+	\begin{align*}
+		\partial \Phi(A) = \Phi(\partial A) = \bigcup_{\ell = 1}^{k} \Phi( \partial A \cap B_{r_{i}}(x_{i}))
+	\end{align*}
+	is a union of null sets, we get that $\partial \Phi(A)$ is Jordan null. It's also fairly obvious that $\Phi(A)$ is bounded, concluding that $\Phi(A)$ is Jordan measurable. Then, Lemma \ref{lem:unif-cont-func-int} tells us that both the LHS and RHS are well-defined, i.e. the integrals exist in the first place.
+
+	\textbf{Step 2}. Now we prove the following inequality:
+	\begin{align*}
+		\int_{A} f(x) \, dx \leq \int_{\Phi(A)} \frac{f(\Phi^{-1}(y))}{\left| \det J \Phi(\Phi^{-1}(y)) \right|} \, dy
+	\end{align*}
+
+	We use the following notation in this proof. For $p \in \mathbb{N}$ and $\delta \in (0, \tfrac{1}{2})$, we let
+	\begin{align*}
+		Q_{p} = 2^{-p} \cdot [0,1)^{n}, \quad Q_{p, \delta} = 2^{-p} \cdot [\delta, 1-\delta]^{n}.
+	\end{align*}
+	We will prove $\forall \delta > 0 \; \exists p_{\delta} \in \mathbb{N} \text{ s.t. } \forall p \geq p_{\delta}$ and $x_{0} \in \overline{ A }$,
+	\begin{align*}
+		(1-2\delta)^{n} \cdot 2^{-pn} \cdot \left| \det J \Phi(x_{0}) \right| = \mu_{n}( D\Phi_{x_{0}}(Q_{p, \delta})) \leq \mu_{n}(\Phi(x_{0} + Q_{p})) \quad \quad (*)
+	\end{align*}
+	and
+	\begin{align*}
+		\sup \left\{ \left| \det J \Phi(x) \right| \mid x \in (x_{0} + Q_{p}) \cap \overline{ A }  \right\} \leq (1+\delta) \left| \det J \Phi(x_{0}) \right|. \quad \quad (**)
+	\end{align*}
+	% picture, like maybe a 2-d washed version of this?
+	Basically, what the first equation $(*)$ is doing is estimating the volume of the image of the cube $x_{0} + Q_{p}$ from below by a slightly shrunk (by $2\delta$) cube of sufficiently small pixel size, whose volume gets distorted precisely by the determinant of $\Phi$. The second equation $(**)$ uses the continuity of $J \Phi(x)$ to estimate the size of the determinant on that small dyadic cube, which again differs only by a small factor depending on $\delta$.
+
+	First, the equality in $(*)$ is a direct application of \ref{lem:box-volume} and \ref{thm:jordan-linear-maps}. And so it suffices to show that
+	\begin{align*}
+		D \Phi_{x_{0}}(Q_{p,\delta}) \subset \Phi(x_{0} + Q_{p}).
+	\end{align*}
+	We define the smallest distance between points in $\Phi(\overline{ A } )$ and $\partial V$ as
+	\begin{align*}
+		R = \text{dist}(\Phi(\overline{ A } ), \partial V) = \inf \left\{ \left| a-b \right| \mid a \in \Phi(\overline{ A } ), b \in \partial V \right\} > 0.
+	\end{align*}
+	Since $V$ is open and $\Phi(\overline{ A } )$ is compact inside of it, $R = 0$ would imply the existence of a sequence $a_{n} \in \Phi(\overline{ A } )$ and $b_{n} \in \partial V$ such that $\left| a_{n} - b_{n} \right| \to 0$. But then we could extract a convergent subsequence of $a_{n}$ with limit necessarily in $\partial V$, which is impossible because $V$ was open, hence disjoint with its boundary.
+
+	We further let
+	\begin{align*}
+		M = \max_{x \in \overline{ A } } \lVert J \Phi(x) \rVert_{2}.
+	\end{align*}
+	For $(x_{0}, h) \in \overline{ A }  \times B_{R / M}(0)$, we wish to define the "error"
+	\begin{align*}
+		\Psi(x_{0}, h) = \Psi_{x_{0}}(h) := \Phi^{-1}(\Phi(x_{0}) + D \Phi_{x_{0}}(h)) - x_{0},
+	\end{align*}
+	but need to check this is well-defined, i.e. $\Phi(x_{0}) + D \Phi_{x_{0}}(h) \in V$. But indeed, using \ref{lem:hilbert-schmidt-norm},
+	\begin{align*}
+		\left| D \Phi_{x_{0}}(h) \right| \leq M \left| h \right| < R,
+	\end{align*}
+	hence $\Phi(x_{0}) + D \Phi_{x_{0}}(h)$ is at most a distance $R$ away from a point in $\Phi(\overline{ A } )$, hence in $V$. Define also the auxiliary function
+	\begin{align*}
+		\widetilde{\Psi}(x_{0}, h) = \widetilde{\Psi}_{x_{0}}(h) := \Psi_{x_{0}}(h) - h.
+	\end{align*}
+
+	We claim that given any $\lambda > 0$, we can find $r_{\lambda} > 0$ such that at any point $x_{0} \in \overline{ A } $ and small perturbations $\left| h \right| < r_{\lambda}$,
+	\begin{align*}
+		\left| \widetilde{\Psi}_{x_{0}}(h) \right| = \left| \Psi_{x_{0}}(h) - h \right| \leq \lambda \left| h \right|.
+	\end{align*}
+	Indeed, for a fixed $x_{0} \in \overline{ A } $, $\widetilde{\Psi}_{x_{0}}(0) = 0$. And using the Chain Rule \ref{thm:chain-rule} and denoting with $J_{h}$ the Jacobi matrix of $\widetilde{\Psi}_{x_{0}}(h)$ (with $x_{0}$ constant),
+	\begin{align*}
+		J_{h} \widetilde{\Psi}_{x_{0}}(0) = J \Phi^{-1}( \Phi(x_{0})) \cdot J \Phi(x_{0}) - I_{n} = I_{n} - I_{n} = 0.
+	\end{align*}
+	But since $J_{h} \widetilde{\Psi}: \overline{ A }  \times \overline{ B_{R / M}(0) } \to \mathbb{R}^{n \times n}$ is continuous on a compact set, so uniformly continuous, we get $r_{\lambda} > 0$ such that
+	\begin{align*}
+		\left| h \right| < r_{\lambda} \implies \lVert J_{h} \widetilde{\Psi}(x_{0}, h) - J_{h} \widetilde{\Psi}(x_{0}, 0) \rVert_{2} = \lVert J_{h} \widetilde{\Psi}(x_{0}, h) \rVert \leq \lambda.
+	\end{align*}
+	This gives the overall bound
+	\begin{align*}
+		\sup_{x_{0} \in \overline{ A } } \; \sup_{\left| \xi \right| < r_{\lambda}} \; \lVert J_{h} \widetilde{\Psi}(x_{0}, \xi) \rVert_{2} \leq \lambda.
+	\end{align*}
+	Applying the MVT \ref{thm:MVT}, we get the desired
+	\begin{align*}
+		\left| \Psi_{x_{0}}(h) - h \right| = \left| \widetilde{\Psi}_{x_{0}}(h) \right| = \left| \widetilde{\Psi}_{x_{0}}(h) - \widetilde{\Psi}_{x_{0}}(0) \right| \leq \lambda \left| h \right|.
+	\end{align*}
+
+	Let $\delta > 0$ and choose $\lambda < \delta / \sqrt{n}$ and $p_{\delta}$ large enough that $\sqrt{n} \cdot 2^{-p_{\delta}} < r_{\lambda}$. Then for $p \geq p_{\delta}$, we get
+	\begin{align*}
+		h \in Q_{p,\delta} \implies \left| h \right| \leq \sqrt{n}\cdot  2^{-p} < r_{\lambda} \implies \left| \Psi_{x_{0}}(h) - h \right| \leq \lambda \left| h \right| < \delta \cdot 2^{-p}.
+	\end{align*}
+	Since every point of $Q_{p,\delta}$ has at least distance $\delta \cdot 2^{-p}$ from the boundary of $Q_{p}$, we get
+	\begin{align*}
+		\Psi_{x_{0}}(Q_{p,\delta}) \subset Q_{p},
+	\end{align*}
+	or equivalently,
+	\begin{align*}
+		\Phi^{-1}(\Phi(x_{0}) + D \Phi_{x_{0}}(Q_{p, \delta})) \subset x_{0} + Q_{p},
+	\end{align*}
+	to which we can apply the bijection $\Phi$ to get $(*)$.
+
+	Now we prove $(**)$. For that notice that $c := \min_{x \in \overline{ A } } \left| \det J \Phi(x) \right|$ is strictly positive. Since $\left| \det J \Phi(x) \right|$ defines a continuous function on the compact set $\overline{ A } $, we get for any $\delta > 0$ an $r_{\delta} > 0$ such that
+	\begin{align*}
+		\Big|  \left| \det J\Phi(x) \right|  - \left| \det J \Phi(x_{0}) \right| \Big| < \delta c \quad \forall \left| x - x_{0} \right| < r_{\delta}.
+	\end{align*}
+	If we just shrink $p_{\delta}$ so that $\sqrt{n} \cdot 2^{-p_{\delta}} < r_{\delta}$, we get
+	\begin{align*}
+		\left| \det J \Phi(x) \right| \leq \left| \det J \Phi(x_{0}) \right| + \delta c \leq (1+\delta) \left| \det J \Phi(x_{0}) \right|
+	\end{align*}
+	for $x \in (x_{0} + Q_{p}) \cap \overline{ A } $. This proves $(**)$.
+
+	Let \( g : \mathbb{R}^n \to \mathbb{R} \) be a dyadic step function approximating \( f \cdot \mathbf{1}_A \) from below. More precisely, for \( \varepsilon > 0 \), choose
+	\begin{align*}
+		g & = \sum_{\ell=1}^N g_\ell \cdot \mathbf{1}_{Q_p(a_\ell)},
+		\quad Q_p(a_\ell) := a_\ell + Q_p,
+	\end{align*}
+	with \( g_\ell > 0 \), such that the cubes \( Q_p(a_\ell) \) are pairwise disjoint,
+	\begin{align*}
+		g                      & \le f \cdot  \mathbf{1}_A \quad \text{in } \mathbb{R}^n, \\
+		\int_A f - \varepsilon & \le \int_{A} g.
+	\end{align*}
+
+	Since \( g_\ell > 0 \) and \( g \le f \cdot \mathbf{1}_A \), each cube \( Q_p(a_\ell) \subset A \).
+
+	Applying $(*)$ and $(**)$ with \( x_0 = a_\ell \), we obtain for all \( p \ge p_\delta \)
+	\begin{align*}
+		2^{-pn}
+		 & \le \frac{1+\delta}{(1-2\delta)^n}
+		\frac{\mu_n\bigl(\Phi(Q_p(a_\ell))\bigr)}{\sup\{ \left|\det J\Phi(x)\right| \mid x \in Q_p(a_\ell) \}}.
+	\end{align*}
+
+	Moreover,
+	\begin{align*}
+		g_\ell & \le \inf_{x \in Q_p(a_\ell)} f(x)
+		= \inf_{y \in \Phi(Q_p(a_\ell))} f\bigl(\Phi^{-1}(y)\bigr).
+	\end{align*}
+
+	Combining the two equations, we obtain
+	\begin{align*}
+		g_\ell \, 2^{-pn}
+		 & \le \frac{1+\delta}{(1-2\delta)^n}
+		\inf_{y \in \Phi(Q_p(a_\ell))}
+		\frac{f\bigl(\Phi^{-1}(y)\bigr)}{\left|\det J\Phi(\Phi^{-1}(y))\right|} \,
+		\mu_n\bigl(\Phi(Q_p(a_\ell))\bigr).
+	\end{align*}
+
+	Since the sets \( \Phi(Q_p(a_\ell)) \) are pairwise disjoint and contained in \( \Phi(A) \), summing over \( \ell \) gives
+	\begin{align*}
+		\int_A f - \varepsilon
+		 & \le \int_{A} g
+		= \sum_{\ell=1}^N g_\ell \, 2^{-pn}   \\
+		 & \le \frac{1+\delta}{(1-2\delta)^n}
+		\sum_{\ell=1}^N \inf_{y \in \Phi(Q_p(a_\ell))}
+		\frac{f\bigl(\Phi^{-1}(y)\bigr)}{|\det J\Phi(\Phi^{-1}(y))|} \,
+		\mu_n\bigl(\Phi(Q_p(a_\ell))\bigr)    \\
+		 & \le \frac{1+\delta}{(1-2\delta)^n}
+		\int_{\Phi(A)} \frac{f\bigl(\Phi^{-1}(y)\bigr)}{|\det J\Phi(\Phi^{-1}(y))|} \, dy.
+	\end{align*}
+
+	Since \( \varepsilon > 0 \) and \( \delta > 0 \) are arbitrary, we obtain the inequality stated right at the beginning of the step.
+
+	\textbf{Step 3.} This will be very straightforward. Apply the obtained inequality to the diffeomorphism
+	\[
+		\tilde{\Phi} := \Phi^{-1} : \Phi(A) \to A
+	\]
+	and to the continuous function
+	\[
+		\tilde{f}(y) := \frac{f(\Phi^{-1}(y))}{\left|\det J\Phi(\Phi^{-1}(y))\right|},
+		\quad y \in \Phi(A).
+	\]
+
+	This yields
+	\begin{align*}
+		\int_{\Phi(A)} \tilde{f}(y) \, dy
+		\le \int_A \frac{\tilde{f}(\tilde{\Phi}^{-1}(x))}{\left|\det J\tilde{\Phi}(\tilde{\Phi}^{-1}(x))\right|} \, dx.
+	\end{align*}
+
+	Now $\tilde{\Phi}^{-1} = \Phi$, so
+	\begin{align*}
+		\frac{\tilde{f}(\tilde{\Phi}^{-1}(x))}{\left|\det J\tilde{\Phi}(\tilde{\Phi}^{-1}(x))\right|}
+		= \frac{\tilde{f}(\Phi(x))}{\left|\det J\Phi^{-1}(\Phi(x))\right|}
+		= \frac{f(x)}{\left|\det J\Phi(x)\right| \cdot \left|\det J\Phi^{-1}(\Phi(x))\right|}
+		= f(x),
+	\end{align*}
+	because $\det J\Phi(x) \cdot \det J\Phi^{-1}(\Phi(x)) = 1$.	Therefore
+	\begin{align*}
+		\int_{\Phi(A)} \frac{f(\Phi^{-1}(y))}{\left|\det J\Phi(\Phi^{-1}(y))\right|} \, dy
+		\le \int_A f(x) \, dx.
+	\end{align*}
+	This proves the other inequality and hence the statement.
 \end{proof}
 
+\begin{remark}[Reverse change of variables]
+	If we let $\Psi: V \to U$ a diffeomorphism and $f: \overline{ A } \to \mathbb{R}$ continuous with $\overline{ A } \subset U$ Jordan measurable, Theorem \ref{thm:change-of-vars} gives us
+	\begin{align*}
+		\int_{A} f(x) \, dx = \int_{\Psi^{-1}(A)} f(\Psi(y)) \cdot \left| \det J \Psi(y) \right| \, dy.
+	\end{align*}
+\end{remark}
+
+\section{Cavalieri's principle and Fubini's theorem}

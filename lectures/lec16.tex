@@ -6,7 +6,7 @@ As discussed, we will now introduce the generalisation of the inverse function t
 	Let $U \subset \mathbb{R}^{n}$ open and $f: U \to \mathbb{R}^{n}$ of class $C^{1}$, $x_{0} \in U$ such that $Df_{x_{0}}$ is invertible. Then $\exists U_{0} \subset U$ open with $x_{0} \in U_{0}$ such that
 	\begin{enumerate}
 		\item $f|_{U_{0}}$ is injective
-		\item $V = f(U_{0})$ is open
+		\item $V = f(U_{0})$ is open and we get the inverse $g = (f|U_{0})^{-1}$
 		\item $\forall x \in U_{0}: Dg_{f(x)} = (Df_{x})^{-1}$
 		\item $g = (f|_{U_{0}})^{-1}: V \to U$ is of class $C^{1}$.
 	\end{enumerate}
@@ -59,7 +59,7 @@ Let's motivate what we're doing a little better. Consider the circle in 2 dimens
 \begin{theorem}[Implicit function theorem]\label{thm:impl-func-theorem}
 	Let $U \subset \mathbb{R}^{n}$ be open and $0 < d < n$. Let $f \in C^{k}(U, \mathbb{R}^{n-d})$ and $(x_{0}, y_{0}) \in U$ with $x_{0} \in \mathbb{R}^{d}, y_{0} \in \mathbb{R}^{n-d}$, and assume that in the block matrix
 	\begin{align*}
-		Jf(x_{0}, y_{0}) = (J_{x}f(x_{0}, y_{0}) \mid J_{y}f(x_{0},y_{0})) \in \mathbb{R}^{(n-d) \times n},
+		Jf(x_{0}, y_{0}) = \Big(J_{x}f(x_{0}, y_{0}) \mid J_{y}f(x_{0},y_{0})\Big) \in \mathbb{R}^{(n-d) \times n},
 	\end{align*}
 	where $J_{x}f(x_{0}, y_{0}) \in \mathbb{R}^{(n-d) \times d}$ and $J_{y}f(x_{0}, y_{0}) \in \mathbb{R}^{(n-d) \times (n-d)}$, we know that $J_{y}f(x_{0}, y_{0})$ is invertible.
 
@@ -67,7 +67,7 @@ Let's motivate what we're doing a little better. Consider the circle in 2 dimens
 	\begin{align*}
 		\left\{ (x,y) \in U_{0} \mid f(x,y) = 0 \right\} = \left\{ (x,y) \in U_{0} \mid y = g(x) \right\}
 	\end{align*}
-	and $g$ is class $C^{k}$. So the level set of $\lambda$ is a graph of a $C^{k}$ function $g$.
+	and $g$ is class $C^{k}$. So the level set of $0$ is the graph of a $C^{k}$ function $g$.
 
 	And finally, for all $x \in B_{r}(x_{0})$, the Jacobi of $g$ is given by
 	\begin{align*}
@@ -108,7 +108,7 @@ Let's motivate what we're doing a little better. Consider the circle in 2 dimens
 	\end{align*}
 	This shows that
 	\begin{align*}
-		f(x,y) = \lambda \iff y = G(x,0).
+		f(x,y) = 0 \iff y = G(x,0).
 	\end{align*}
     In other words, $g(x) = G(x,0)$ gives the function $g$ we were searching for.
 
@@ -116,5 +116,5 @@ Let's motivate what we're doing a little better. Consider the circle in 2 dimens
 	\begin{align*}
 		J_{x}f(x,g(x)) + J_{y}f(x,g(x)) \cdot Jg(x) = 0,
 	\end{align*}
-	whe\text{Re} $J_{y}f(x,g(x))$ is invertible, since it's close enough to $J_{y}f(x_{0}, y_{0})$\footnote{I know it's a little heuristic, but it's actually true, you can estimate the Hilbert-Schmidt norm from below like in the Inverse Function Theorem, left as an exercise. But most of the time more that half of this stuff doesn't even come up in computation, it's just very technical.}.
+	where $J_{y}f(x,g(x))$ is invertible, since it's close enough to $J_{y}f(x_{0}, y_{0})$\footnote{I know it's a little heuristic, but it's actually true, you can estimate the Hilbert-Schmidt norm from below like in the Inverse Function Theorem, left as an exercise. But most of the time more that half of this stuff doesn't even come up in computation, it's just very technical.}.
 \end{proof}
