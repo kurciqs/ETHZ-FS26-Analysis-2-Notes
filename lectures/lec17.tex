@@ -139,7 +139,7 @@ Now we will state the 4 equivalent criteria. They may seem very arbitrary at fir
 	\end{align*}
 	its columns are linearly independent, hence $\operatorname{rank}(D\tilde G(y)) = d$ and as $P$ is a linear iso, it follows that $\text{rank}(DG(y)) = d$ as well.
 
-	Finally, for $V' \subset V$, let $U' = (P(V' \times \mathbb{R}^{n-d})) \cap U \subset U$, such that
+	Finally, for $V' \subset V$, let $U' = P(V' \times \mathbb{R}^{n-d}) \cap U \subset U$, such that
 	\begin{align*}
 		M \cap U' = P(\text{graph}(g)) \cap P(V' \times \mathbb{R}^{n-d}) = G(V').
 	\end{align*}
@@ -201,6 +201,8 @@ Now we will state the 4 equivalent criteria. They may seem very arbitrary at fir
 		\input{fig/loop.pdf_tex}
 	\end{center}
 	Now, it's apparently possible to parametrise this figure on an open set around $P$ by walking along the curve and infinitesimally approaching the point $P$ from below. But this curve can clearly not be a manifold because precisely at $P$, any chart $\Psi$ will \textit{not} straighten out the curve sufficiently, because it is a $3$-fold intersection. Rigorously, if you zoom in close enough to $P$ and remove the point $P$, $\Psi$ will essentially have to map $3$ disconnected components in $\mathbb{R}^{2}$ to $3$ disconnected components in $\mathbb{R} \times \left\{ 0 \right\}$, but where all of those $3$ disconnected components would have to be in contact with the image of $P$, which is obviously impossible.
+
+	Definitely also see Problem Sheet 7 for hands-on understanding and application of the theorem.
 \end{remark}
 
 \begin{definition}[Tangent and normal vector]\label{def:tangent-normal-vector}
