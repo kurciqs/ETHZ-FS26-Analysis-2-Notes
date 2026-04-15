@@ -89,19 +89,5 @@ For the following proofs, split the notation of points in $\mathbb{R}^{n}$ as po
 	But since $\mu(G) - \mu(F) < \epsilon$, $\mu(F) \leq \mu(A) \leq \mu(G)$ and $\epsilon > 0$ was arbitrary, we get the entire equality.
 \end{proof}
 
-\begin{theorem}[Fubini]\label{thm:fubini}
-	Let $A \subset \mathbb{R}^{n}$ be bounded in $(-C, C)^{n}$ and $f: A \to \mathbb{R}$ be Riemann integrable over $A$. Denote $\tilde{f} = f \cdot \boldsymbol{1}_{A}$ defined on $\mathbb{R}^{n}$. For $x \in \mathbb{R}^{k}$, denote $\tilde{f}_{x}(y) = \tilde{f}(x,y)$ and define the marginals 
-	\begin{align*}
-		\underline{ \varphi }(x) = \underline{ \int } \tilde{f}_{x}(y) \,dy, \quad
-		\overline{ \varphi }(x) = \overline{ \int } \tilde{f}_{x}(y) \, dy.
-	\end{align*}
-	Then both these functions are integrable and
-	\begin{align*}
-		\int_{A} f = \int_{(-C,C)^{k}} \underline{ \varphi }(x) \, dx = \int_{(-C,C)^{k}} \overline{ \varphi }(x)  \, dx.
-	\end{align*}
-\end{theorem}
-\begin{proof}
-
-\end{proof}
 
 

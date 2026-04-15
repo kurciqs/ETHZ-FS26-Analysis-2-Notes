@@ -1,0 +1,114 @@
+\begin{theorem}[Fubini]\label{thm:fubini}
+	Let $A \subset \mathbb{R}^{n}$ be bounded in $(-C, C)^{n}$ and $f: A \to \mathbb{R}$ be Riemann integrable over $A$. Denote $\tilde{f} = f \cdot \boldsymbol{1}_{A}$ defined on $\mathbb{R}^{n}$. For $x \in \mathbb{R}^{k}$, denote $\tilde{f}_{x}(y) = \tilde{f}(x,y)$ and define the marginals
+	\begin{align*}
+		\underline{ \varphi }(x) = \underline{ \int } \tilde{f}_{x}(y) \,dy, \quad
+		\overline{ \varphi }(x) = \overline{ \int } \tilde{f}_{x}(y) \, dy.
+	\end{align*}
+	Then both these functions are integrable and
+	\begin{align*}
+		\int_{A} f = \int_{(-C,C)^{k}} \underline{ \varphi }(x) \, dx = \int_{(-C,C)^{k}} \overline{ \varphi }(x)  \, dx.
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	Similar to Cavlieri, either exercise or read the official lecture notes.
+\end{proof}
+
+\begin{corollary}[Integral over a compact box]\label{cor:box-fub}
+	Let $K = [a_{1}, b_{1}] \times \cdots \times [a_{n}, b_{n}] \subset \mathbb{R}^{n}$ and $f: K \to \mathbb{R}$ continuous. Then
+	\begin{align*}
+		\int_{K} f(x) \, dx = \int_{a_{1}}^{b_{1}} \int_{a_{2}}^{b_{2}} \cdots \int_{a_{n}}^{b_{n}} f(x_{1}, \dots, x_{n})  \, dx_{n} \cdots   \, d x_{2}  \, d x_{1}.
+	\end{align*}
+    Furthermore, the order in which you integrate does not matter.
+\end{corollary}
+\begin{proof}
+	We apply Fubini \ref{thm:fubini} with $k = 1$ to get
+	\begin{align*}
+		\int_{A} f(x) \, dx = \int_{[a_{1}, b_{1}]} \overline{ \varphi }(x)  \, dx,
+	\end{align*}
+	where
+	\begin{align*}
+		\overline{ \varphi } (x_{1}, \dots, x_{n}) = \overline{ \int }_{[a_{2}, b_{2}] \times \cdots \times [a_{n}, b_{n}]} f(x_{1}, \dots, x_{n}) \, d x_{2} \cdots dx_{n}.
+	\end{align*}
+	And setting $y = (x_{2}, \dots, x_{n})$, we let $f_{x_{1}}(y) = f(x_{1}, y)$ which is a continuous function from $[a_{2}, b_{2}] \times \cdots \times [a_{n}, b_{n}]$, so integrable and we can write instead
+	\begin{align*}
+		\overline{ \varphi } (x_{1}, \dots, x_{n}) = \int_{[a_{2}, b_{2}] \times \cdots \times [a_{n}, b_{n}]} \overline{ \varphi }(x_{1}, y)  \, dy = \int_{[a_{2}, b_{2}] \times \cdots \times [a_{n}, b_{n}]} f_{x_{1}}(y) \, dy.
+	\end{align*}
+	And so we get
+	\begin{align*}
+		\int_{A} f(x) \, dx = \int_{[a_{1}, b_{1}]} \left( \int_{[a_{2}, b_{2}] \times \cdots \times [a_{n}, b_{n}]} f(x_{1}, y)  \, dy \right)  \, d x_{1}.
+	\end{align*}
+	Apply this repeatedly to compute the entire integral. Notice that you could have done this with any other coordinate, just using the function $f \circ P$ with $P$ a permutation of coordinates ($\det P = \pm 1$) and using change of variables \ref{thm:change-of-vars} to get $\int_{A} f = \int_{P^{-1}(A)} f \circ P$. You can write it down and see. This actually holds in general, you don't need Fubini.
+\end{proof}
+
+\begin{eg}[Finishing the volume of the sphere]
+	Now we can finish computing the volume of the sphere. If we take $A = (0,1) \times (0, 2\pi) \times (-\tfrac{\pi}{2}, \tfrac{\pi}{2})$ and close it to $K = \overline{ A } $ (won't alter the volume as the boundary $\partial A$ is null, so the hypograph volume at those points disappears -- see \ref{lem:unif-cont-func-int}), we get
+	\begin{align*}
+		\int_{0}^{1} \int_{0}^{2\pi} \int_{-\tfrac{\pi}{2}}^{\tfrac{\pi}{2}} y_{1}^{2} \cos y_{3} \, d y_{3}  \, d y_{2} \, d y_{1}.
+	\end{align*}
+	One computes one after another, the integrals w.r.t. to variables $y_{1}, y_{2}, y_{3}$, treating all others as a constant.
+\end{eg}
+
+\section{Differentiation under the integral sign}
+
+Important physics theorem alert! We can exchange integrals and derivatives under special conditions.
+
+\begin{theorem}[Differentiation under the integral]\label{thm:diff-und-int}
+	Let $U \subset \mathbb{R}^{n+1}$ be open, $f: U \to \mathbb{R}$ and $K \times [a,b] \subset U$ for $K \subset \mathbb{R}^{n}$ compact. We will write $f(x,t)$ for $x \in K$ and $t \in [a,b]$. Assume $f, \partial_{t}f$ are continuous and define the function $F: [a,b] \to \mathbb{R}$ as $F(t) = \int_{K} f(x,t) \, dx$. Then it holds $\forall t_{0} \in (a,b)$ that
+	\begin{align*}
+		F'(t_{0})  = \int_{K} \partial_{t}f(x, t_{0}) \, dx.
+	\end{align*}
+	More compactly,
+	\begin{align*}
+		\frac{d}{dt} \Big|_{t = t_{0}} \int_{K} f(x,t) \, dx = \int_{K} \partial_{t}f(x, t_{0}) \, dx.
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	We have
+	\begin{align*}
+		F'(t_{0}) = \lim_{h \to 0} \frac{ \int_{K} f(x,t_{0}+h) \, dx - \int_{K} f(x,t_{0}) \, dx }{h}.
+	\end{align*}
+	Using linearity of the integral \ref{lem:lin-riemann-int}, we get
+	\begin{align*}
+		F'(t_{0}) = \lim_{h \to 0} \int_{K} \frac{f(x,t_{0}+h) - f(x,t_{0})}{h} \, dt.
+	\end{align*}
+	By the mean value theorem, there exists $\xi_{x} \in (t_{0}, t_{0}+h)$ such that
+	\begin{align*}
+		\frac{f(x, t_{0} + h) - f(x, t_{0})}{h} = \partial_{t}f(x, \xi_{x}).
+	\end{align*}
+	But because $\partial_{t}f$ is continuous on $K \times [a,b]$, it is uniformly continuous (i.e. its restriction to that set is). Hence $\forall \epsilon > 0 \; \exists \delta > 0$ such that
+	\begin{align*}
+		h < \delta \implies \xi_{x} - t_{0} < \delta \implies \left| \partial_{t}f(x, \xi_{i}) - \partial_{t}f(x,t_{0}) \right| < \epsilon.
+	\end{align*}
+	Using this, if we let $E(x) = \partial_{t}f(x, \xi_{i}) - \partial_{t}f(x,t_{0}) $, we get
+	\begin{align*}
+		\int_{K} \frac{f(x, t_{0}+h) - f(x, t_{0})}{h} \, dx = \int_{K} \partial_{t}f(x, t_{0}) + E(x) \, dx = \int_{K} \partial_{t}f(x, t_{0}) \, dx + \smalO(\epsilon).
+	\end{align*}
+	Why is this $\smalO(\epsilon)$? Because we have the monotonicity bound $\left| \int_{K} E \right| \leq \int_{K} |\partial_{t}f(x, \xi_{i}) - \partial_{t}f(x,t_{0})| \, dx \leq \mu_{n}(K) \cdot \epsilon$. But now, let $h \to 0$ and you get the equality.
+\end{proof}
+
+\section{Improper integrals}
+
+We can also expand the definition of improper integrals from Analysis 1.
+
+\begin{definition}[Improper integral]\label{def:improp-int}
+	Let $U \subset \mathbb{R}^{n}$ open, $f: U \to [0,\infty)$ continuous. Define the \textit{improper} integral
+	\begin{align*}
+		\int_{U} f = \sup \left\{ \int_{K} f \mid K \subset U \text{ compact and Jordan measurable} \right\}.
+	\end{align*}
+\end{definition}
+
+\begin{remark}[Improper integral as sequence of integrals]
+	If we have a sequence of nested compact Jordan measurable sets $K_{0} \subset K_{1} \subset \cdots$ such that $U = \bigcup_{\ell \geq 0} K_{\ell}^{\circ }$ and each $K_{\ell} \subset U$, then
+	\begin{align*}
+		\int_{U} f = \lim_{\ell \to \infty} \int_{K_{\ell}} f.
+	\end{align*}
+	Why? First notice that the RHS limit exists because $ \int_{K_{\ell}} f$ is monotone increasing so has a limit in $[0,\infty]$. Let $K \subset U$ compact and Jordan measurable. Because $\bigcup_{\ell \geq 0} K_{\ell}$ is a cover for $K$ and $K$ is compact, there exists a $K_{\ell_{0}}$ such that $K \subset K_{\ell_{0}}$. But then
+	\begin{align*}
+		\int_{K} f \leq \int_{K_{\ell_{0}}} f \leq \lim_{\ell \to \infty} \int_{K_{\ell}} f.
+	\end{align*}
+	Hence the same bound holds for the improper integral $\int_{U} f \leq \lim_{\ell \to \infty} \int_{K_{\ell}} f$.
+
+	And the other inequality is trivial because each $K_{\ell}$ is in the set which we are taking the supremum of the receive $ \int_{U} f$.
+
+	In particular, because dyadic sets can be closed to be compact, the definition of improper integral doesn't clash with the original definition of integral.
+\end{remark}

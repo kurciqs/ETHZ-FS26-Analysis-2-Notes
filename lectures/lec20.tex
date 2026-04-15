@@ -120,12 +120,12 @@ Now we extend this to general linear maps.
 	Follows from the formula for boxes, since $\lambda(L) = \mu(L([0,1)^{n}))$, and the scaling of $[0,1)^{n}$ by the diagonal map $L$ is trivial.
 \end{proof}
 
-\begin{remark}[$\text{SO}(n)$]
-	We denote by $\text{SO}(n)$ the group of $n \times n$ real orthogonal matrices, so matrices $O$ such that $O \cdot O^\top = I$. Also, get ready for playing loose with using linear maps as abstract maps or matrices. For us, it doesn't matter, because we have a canonical basis.
+\begin{remark}[$\text{O}(n)$]
+	We denote by $\text{O}(n)$ the group of $n \times n$ real orthogonal matrices, so matrices $O$ such that $O \cdot O^\top = I$. Also, get ready for playing loose with using linear maps as abstract maps or matrices. For us, it doesn't matter, because we have a canonical basis.
 \end{remark}
 
 \begin{lemma}[Decomposition]\label{lem:polar-decomp}
-	Let $L : \mathbb{R}^{n} \to  \mathbb{R}^{n}$, there exist $R_{1}, R_{2} \in \text{SO}(n)$ and $S$ diagonal such that $L = R_{2}SR_{1}$.
+	Let $L : \mathbb{R}^{n} \to  \mathbb{R}^{n}$, there exist $R_{1}, R_{2} \in \text{O}(n)$ and $S$ diagonal such that $L = R_{2}SR_{1}$.
 \end{lemma}
 \begin{proof}
 	This is a linear algebra theorem, but here is the idea: We take $A = L^\top L$, which is a symmetric matrix. We can apply the Spectral Theorem \ref{thm:spectral-thm} to get $O^\top A O = D$, where $O \in \text{SO}(n)$ and $D$ is diagonal. Now notice that since $v \cdot Av = v^\top L^\top \cdot L v = (Lv)^{2} \geq 0$, $A$ is non-negative definite and $D$ has only positive entries.
