@@ -1,0 +1,91 @@
+\section{Integrals over submanifolds}
+
+Let's remind ourselves why we are doing all of this. Among the "final bosses" of Analysis 2 is for instance the Divergence Theorem, stating
+\begin{align*}
+	\int_{\Omega} \sum_{i=1}^{n} \partial_{i}F_{i} \, dx = \int_{\partial \Omega} F \cdot \nu \, dS,
+\end{align*}
+for $\Omega \subset \mathbb{R}^{n}$ open, $\partial \Omega$ a $C^{1}$ submanifold and $F \in C^{1}(\overline{ \Omega }, \mathbb{R}^{n})$. Now, we already know a big portion of this expression. We know open sets, boundaries, submanifolds, partial derivatives and integrals over sets with respect to the Jordan measure. The last part missing is what it means to take the integral over the submanifold $\partial \Omega$ with the surface measure $dS$.
+
+So that's what we're working on now. First, we need to define volumes of parametrised $d$-dimensional submanifolds. We start with the easiest case, i.e. $1$-dimensional manifolds. We will call them lines and their volume lengths.
+
+% \begin{remark}[$C^{k}$ function on non-open domains]
+% 	If $A \subset \mathbb{R}^n$ is not open we say that $f \in C^k\left(A, \mathbb{R}^n\right)$ if there exist $U \supset A$ open and $\tilde{f} \in C^k\left(U, \mathbb{R}^n\right)$ such that $\tilde{f}=f$ when restricted to $A$.
+% \end{remark}
+
+\begin{definition}[Parametrised $1$-manifold (curve)]\label{def:curve-new}
+	We call $M \subset \mathbb{R}^{n}$ a curve if it is a $1$-dimensional submanifold. Usually, we attribute to $M$ a parametrisation (in the sense of \ref{prop:char-manifold} (4), but $G$ is global) $\phi: V \to \mathbb{R}^{n}$ with $V \subset \mathbb{R}$ open such that $M \subset \phi(V)$, which we also call a curve.
+\end{definition}
+
+\begin{definition}[Length of a curve]\label{def:length}
+	Let $V \subset \mathbb{R}$ open, such that $[a,b] \subset V$ and $\phi: V \to \mathbb{R}^{n}$ a curve. Then we define the length of the curve from $a$ to $b$ as
+	\begin{align*}
+		L(\phi([a,b])) = \int_{a}^{b} \left| \phi'(t) \right| \, dt.
+	\end{align*}
+	% nice picture of a curve, with the part [a,b] highlighted
+\end{definition}
+
+What do we imagine this length of a curve should satisfy?
+\begin{enumerate}
+	\item Independence of a reparametrisation $\phi \to \phi \circ \psi$,
+	\item Additivity,
+	\item Invariance under Euclidean isometry,
+	\item Normalisation, so the length of $[0,1] \times \left\{ 0 \right\} \in \mathbb{R} \times \mathbb{R}^{n-1}$ should be $1$.
+\end{enumerate}
+Now, for 1, we will prove a general variant soon, 2 follows the additivity of the one-dimensional integral. A Euclidean isometry is a map of the form $F(x) = Rx + b$, where $R$ is an orthogonal $n \times n$ matrix. But then
+\begin{align*}
+	(F \circ \phi)'(t) = D(F \circ \phi)(t) = DF(\phi(t)) \cdot D\phi(t) = R \cdot \phi'(t),
+\end{align*}
+and in particular since $\lVert R \rVert_{2} = 1$ (Linear Algebra), we get $\left| (F \circ \phi)'(t) \right| = \left| \phi'(t) \right|$. 
+
+Now this we can extend to general dimensions. Notation-wise, when I say $M$ is \textit{parametrised by} $\phi$, I'm referring to the characterisation of a submanifold from Proposition \ref{prop:char-manifold} (4) and assuming that the parametrisation $\phi$ suffices for all points on $M$. When I asked the professor about this ambiguity, he argued this is just how it is in differential geometry. So henceforth a curve can be either, and it will have to be clear from the context. 
+
+\begin{definition}[$d$-Volume of parametrised $d$-submanifold]\label{def:d-vol}
+	Let $V \subset \mathbb{R}^{d}$ open and $M \subset \mathbb{R}^{n}$ a $d$-dimensional manifold parametrised by $\phi: V \to \mathbb{R}^{n}$. Let $E \subset V$ Jordan measurable with $\overline{ E } \subset V$, then we define
+	\begin{align*}
+		\text{vol}_{d}(\phi(E)) = \int_{E} \sqrt{ \det (D \phi^\top D \phi)}(x)  \, dx.
+	\end{align*}
+	We call the quantity $\sqrt{\det (D\phi^\top D \phi)}$ the \textit{Gram Determinant}.
+\end{definition}
+
+\begin{remark}[Gram determinant]
+	Let $L$ be an $n \times d$ matrix with $d \leq n$ and rank $d$. Then $L^\top L$ is a $d \times d$ matrix of full rank and $\sqrt{\det (L\top L)}$ is called the Gram determinant. To check that the square root exists, consider that $L^\top L$ is diagonalisable and its eigenvalues are all positive (see proof of \ref{lem:polar-decomp}).
+
+	For $d = 2$, one checks as an exercise that if $L = (v,w)$ for $v,w \in \mathbb{R}^{3}$, then
+	\begin{align*}
+		\det (L^\top L) = \left| v \times w \right|^{2} = \left| v \right|^{2} \left| w \right|^{2} - (v \cdot w)^{2}.
+	\end{align*}
+	In particular, if $\phi: V \to \mathbb{R}^{3}$ is a parametrisation of the surface $M$, then for $E \subset V$ Jordan measurable such that $\overline{ E } \subset V$,
+	\begin{align*}
+		A(\phi(E)) = \text{vol}_{2}(\phi(E)) = \int_{E} \left| \partial_{1} \phi \times \partial_{2} \phi \right|.
+	\end{align*}
+    See also slides from the interactive presentation by Serra, I think it provides a very different and much more intuitive understanding on why this is a \textit{good} definition for $d$-volume.
+\end{remark}
+
+\begin{eg} [Area of the sphere]
+	We parametrise the unit ball $B_{1}(0) \subset \mathbb{R}^{3}$ with
+	\begin{align*}
+		\Psi(\theta, \varphi) =
+		\begin{pmatrix}
+			\cos\varphi \cos \theta  \\
+			\sin \varphi \cos \theta \\
+			\sin\theta
+		\end{pmatrix}.
+	\end{align*}
+	Then the area (so $2$-volume) of $B_{1}$ is given by (ignore sets of measure $0$ as always)
+	\begin{align*}
+		A\Big(\Psi\Big((0,2\pi) \times (-\tfrac{\pi}{2}, \tfrac{\pi}{2})\Big)\Big) = \int_{0}^{2\pi} \int_{-\pi / 2}^{\pi / 2} \sqrt{\det D \Psi^\top D \Psi}  \, d\varphi d\theta.
+	\end{align*}
+	One computes
+	\begin{align*}
+		D \Psi^\top D \Psi =
+		\begin{pmatrix}
+			1 & 0 \\ 0 & \cos^{2}\theta
+		\end{pmatrix} \implies \det (D \Phi^\top D \Phi) = \cos^{2} \theta,
+	\end{align*}
+	which we can bring back to compute (switch order of integration as in Fubini)
+	\begin{align*}
+		A (B_{1}) = \int_{0}^{2\pi} \int_{-\pi / 2}^{ \pi / 2} \cos\theta  \, d\theta  d\varphi = 4 \pi.
+	\end{align*}
+\end{eg}
+
+

@@ -1,8 +1,8 @@
 \begin{theorem}[Fubini]\label{thm:fubini}
-	Let $A \subset \mathbb{R}^{n}$ be bounded in $(-C, C)^{n}$ and $f: A \to \mathbb{R}$ be Riemann integrable over $A$. Denote $\tilde{f} = f \cdot \boldsymbol{1}_{A}$ defined on $\mathbb{R}^{n}$. For $x \in \mathbb{R}^{k}$, denote $\tilde{f}_{x}(y) = \tilde{f}(x,y)$ and define the marginals
+	Let $A \subset \mathbb{R}^{n}$ be bounded in $(-C, C)^{n}$ and $f: A \to \mathbb{R}$ be Riemann integrable over $A$. Denote $\tilde{f} = f \cdot \boldsymbol{1}_{A}$ defined on $\mathbb{R}^{n}$. For $x \in \mathbb{R}^{k}$, denote $\tilde{f}_{x}(y) = \tilde{f}(x,y)$, which is a function $(-C,C)^{n-k} \to \mathbb{R}$ and define the marginals $\underline{ \varphi }, \overline{ \varphi }: (-C,C)^{k} \to \mathbb{R}$ as
 	\begin{align*}
-		\underline{ \varphi }(x) = \underline{ \int } \tilde{f}_{x}(y) \,dy, \quad
-		\overline{ \varphi }(x) = \overline{ \int } \tilde{f}_{x}(y) \, dy.
+		\underline{ \varphi }(x) = \underline{ \int }_{(-C, C)^{n-k}} \tilde{f}_{x}(y) \,dy, \quad
+		\overline{ \varphi }(x) = \overline{ \int }_{(-C,C)^{n-k}} \tilde{f}_{x}(y) \, dy.
 	\end{align*}
 	Then both these functions are integrable and
 	\begin{align*}
