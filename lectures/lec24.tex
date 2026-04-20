@@ -9,7 +9,7 @@ for $\Omega \subset \mathbb{R}^{n}$ open, $\partial \Omega$ a $C^{1}$ submanifol
 So that's what we're working on now. First, we need to define volumes of parametrised $d$-dimensional submanifolds. We start with the easiest case, i.e. $1$-dimensional manifolds. We will call them lines and their volume lengths.
 
 % \begin{remark}[$C^{k}$ function on non-open domains]
-% 	If $A \subset \mathbb{R}^n$ is not open we say that $f \in C^k\left(A, \mathbb{R}^n\right)$ if there exist $U \supset A$ open and $\tilde{f} \in C^k\left(U, \mathbb{R}^n\right)$ such that $\tilde{f}=f$ when restricted to $A$.
+% 	If $A \subset \mathbb{R}^n$ is not open we say that $f \in C^k\left(A, \mathbb{R}^n\right)$ if there exist $U \supset A$ open and $\widetilde{f} \in C^k\left(U, \mathbb{R}^n\right)$ such that $\widetilde{f}=f$ when restricted to $A$.
 % \end{remark}
 
 \begin{definition}[Parametrised $1$-manifold (curve)]\label{def:curve-new}
@@ -35,20 +35,20 @@ Now, for 1, we will prove a general variant soon, 2 follows the additivity of th
 \begin{align*}
 	(F \circ \phi)'(t) = D(F \circ \phi)(t) = DF(\phi(t)) \cdot D\phi(t) = R \cdot \phi'(t),
 \end{align*}
-and in particular since $\lVert R \rVert_{2} = 1$ (Linear Algebra), we get $\left| (F \circ \phi)'(t) \right| = \left| \phi'(t) \right|$. 
+and in particular since $\lVert R \rVert_{2} = 1$ (Linear Algebra), we get $\left| (F \circ \phi)'(t) \right| = \left| \phi'(t) \right|$. Normalisation can be verified by computation.
 
-Now this we can extend to general dimensions. Notation-wise, when I say $M$ is \textit{parametrised by} $\phi$, I'm referring to the characterisation of a submanifold from Proposition \ref{prop:char-manifold} (4) and assuming that the parametrisation $\phi$ suffices for all points on $M$. When I asked the professor about this ambiguity, he argued this is just how it is in differential geometry. So henceforth a curve can be either, and it will have to be clear from the context. 
+Now this we can extend to general dimensions. Notation-wise, when I say $M$ is \textit{parametrised by} $\phi$, I'm referring to the characterisation of a submanifold from Proposition \ref{prop:char-manifold} (4) and assuming that the parametrisation $\phi$ suffices for all points on $M$ (we will later hopefully introduce partitions of unity which take care of this). When I asked the professor about this ambiguity, he argued this is just how it is in differential geometry. So henceforth a curve can be either, and it will have to be clear from the context. The same 
 
 \begin{definition}[$d$-Volume of parametrised $d$-submanifold]\label{def:d-vol}
-	Let $V \subset \mathbb{R}^{d}$ open and $M \subset \mathbb{R}^{n}$ a $d$-dimensional manifold parametrised by $\phi: V \to \mathbb{R}^{n}$. Let $E \subset V$ Jordan measurable with $\overline{ E } \subset V$, then we define
+	Let $V \subset \mathbb{R}^{d}$ open and $M \subset \mathbb{R}^{n}$ a $d$-dimensional manifold parametrised by $\phi: V \to \mathbb{R}^{n}$. Let $E \subset V$ Jordan measurable with $\overline{ E } \subset V$, then we define the $d$-volume of $\phi(E)$ as
 	\begin{align*}
-		\text{vol}_{d}(\phi(E)) = \int_{E} \sqrt{ \det (D \phi^\top D \phi)}(x)  \, dx.
+		\text{vol}_{d}(\phi(E)) = \int_{E} \sqrt{ \det (D \phi^\top D \phi)}(x) \, dx.
 	\end{align*}
-	We call the quantity $\sqrt{\det (D\phi^\top D \phi)}$ the \textit{Gram Determinant}.
+	We call the quantity $\sqrt{\det (D\phi^\top D \phi)}$ the \textit{Gram Determinant} and it is a continuous function $\overline{ E }  \to \mathbb{R}$, hence the integral is well-defined by \ref{lem:unif-cont-func-int}.
 \end{definition}
 
 \begin{remark}[Gram determinant]
-	Let $L$ be an $n \times d$ matrix with $d \leq n$ and rank $d$. Then $L^\top L$ is a $d \times d$ matrix of full rank and $\sqrt{\det (L\top L)}$ is called the Gram determinant. To check that the square root exists, consider that $L^\top L$ is diagonalisable and its eigenvalues are all positive (see proof of \ref{lem:polar-decomp}).
+	Let $L$ be an $n \times d$ matrix with $d \leq n$ and rank $d$. Then $L^\top L$ is a $d \times d$ matrix of full rank (see Linalg 2 exercise sheet 8) and $\sqrt{\det (L^\top L)}$ is the Gram determinant. To check that the square root exists, consider that $L^\top L$ is diagonalisable and its eigenvalues are all positive (see proof of \ref{lem:polar-decomp}).
 
 	For $d = 2$, one checks as an exercise that if $L = (v,w)$ for $v,w \in \mathbb{R}^{3}$, then
 	\begin{align*}
@@ -56,9 +56,9 @@ Now this we can extend to general dimensions. Notation-wise, when I say $M$ is \
 	\end{align*}
 	In particular, if $\phi: V \to \mathbb{R}^{3}$ is a parametrisation of the surface $M$, then for $E \subset V$ Jordan measurable such that $\overline{ E } \subset V$,
 	\begin{align*}
-		A(\phi(E)) = \text{vol}_{2}(\phi(E)) = \int_{E} \left| \partial_{1} \phi \times \partial_{2} \phi \right|.
+		A(\phi(E)) := \text{vol}_{2}(\phi(E)) = \int_{E} \left| \partial_{1} \phi \times \partial_{2} \phi \right|.
 	\end{align*}
-    See also slides from the interactive presentation by Serra, I think it provides a very different and much more intuitive understanding on why this is a \textit{good} definition for $d$-volume.
+	See also slides from the interactive presentation by Serra, I think it provides a very different and much more intuitive understanding on why this is a \textit{good} definition for $d$-volume.
 \end{remark}
 
 \begin{eg} [Area of the sphere]
@@ -82,10 +82,80 @@ Now this we can extend to general dimensions. Notation-wise, when I say $M$ is \
 			1 & 0 \\ 0 & \cos^{2}\theta
 		\end{pmatrix} \implies \det (D \Phi^\top D \Phi) = \cos^{2} \theta,
 	\end{align*}
-	which we can bring back to compute (switch order of integration as in Fubini)
+	which we can bring back to compute
 	\begin{align*}
 		A (B_{1}) = \int_{0}^{2\pi} \int_{-\pi / 2}^{ \pi / 2} \cos\theta  \, d\theta  d\varphi = 4 \pi.
 	\end{align*}
 \end{eg}
 
+\begin{lemma}[Invariance under reparametrisation]\label{lem:invar-repar}
+	Let $V, W \subset \mathbb{R}^{d}$ open and $M \subset \mathbb{R}^{n}$ a $d$-dimensional manifold parametrised by $\phi: V \to \mathbb{R}^{n}$. Assume that $\psi: W \to V$ is a $C^{1}$ diffeomorphism and let $E \subset V$ Jordan measurable such that $\overline{ E } \subset V$. Then
+	\begin{align*}
+		\text{vol}_{d}(\phi(E)) = \text{vol}_{d}(\phi \circ \psi( \psi^{-1}(E) )).
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	We compute
+	\begin{align*}
+		D(\phi \circ \psi)(x) = D\phi(\psi(x)) \cdot D\psi(x) \implies D(\phi \circ \psi)(x)^\top = D\psi(x)^\top \cdot D \phi(\psi(x))^\top.
+	\end{align*}
+	This we use to find the Gram determinant
+	\begin{align*}
+		\det (D(\phi \circ \psi)^\top D(\phi \circ \psi)) = \det (D \psi^\top D(\phi \circ \psi)^\top D(\phi \circ \psi) D\psi) = \det (D \psi)^{2} \cdot \det (D\phi D\phi^\top) \circ \psi.
+	\end{align*}
+	We integrate over this using change of variables \ref{thm:change-of-vars}
+	\begin{align*}
+		\int_{E} \sqrt{\det (D \phi^{T} D \phi)}(x) \, dx = \int_{\psi^{-1}(E)} \sqrt{\det (D\phi^\top D\phi)}(\psi(x)) \left| \det D \psi(y) \right| \, dy
+	\end{align*}
+	and plug in the Gram determinant we computed to get
+	\begin{align*}
+		\int_{\psi^{-1}(E)} \sqrt{ \det (D \psi)^{2}\det (D\phi D\phi^\top) \circ \psi }(y)  \, dy.
+	\end{align*}
+	But then the respective definitions of the $d$-volumes match.
+\end{proof}
 
+\begin{remark}[The issue with reparametrisation]
+	Assume we are given multiple parametrisations for parts of a manifold that might intersect. In particular, assume we have some manifold $M$ and that we have $\phi_{i}: V_{i} \to M \cap W_{i}$ for $i = 1,2$. It is possible that $\widetilde{M} := M \cap (W_{1} \cap W_{2}) \neq \emptyset$. In general, the $d$-volume of $\phi$ and $\psi$ will not be the same, because they don't even look at the same parts of a manifold. What really matters is that they align on the part of the manifold where they intersect.
+
+	We check this by redefining the parametrisation $\phi_{i}: \widetilde{V}_{i} \to \widetilde{M}$ with $\widetilde{V}_{i} = \phi_{i}^{-1}(\widetilde{M})$. Then we define $\psi = \phi_{2}^{-1} \circ \phi_{1}: \widetilde{V}_{1} \to \widetilde{V}_{2}$, which is of class $C^{1}$ (check notes). And so it remains to show the $d$-volume is invariant under the reparametrisation with this $\psi$, which we know is true by \ref{lem:invar-repar}.
+\end{remark}
+
+\begin{lemma}[Invariance under orthogonal transformations]\label{lem:inv-ortho-trans}
+	Let $V \subset \mathbb{R}^{d}$ open and $M \subset \mathbb{R}^{n}$ a $d$-dimensional manifold parametrised by $\phi: V \to \mathbb{R}^{n}$. Let $R \in O(n)$. Then for $E \subset V$ Jordan measurable such that $\overline{ E } \subset V$,
+	\begin{align*}
+		\text{vol}_{d}(R \phi(E)) = \text{vol}_{d}(\phi(E)).
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	Use the fact that for any linear map $L: \mathbb{R}^{d} \to \mathbb{R}^{n}$, we gave \begin{align*}
+		\det ((RL)^\top RL) = \det (L^\top R^\top R L) = \det (L^\top L).
+	\end{align*}
+	The rest is obvious.
+\end{proof}
+
+\begin{remark}[More intuition about the Gram determinant]
+	Let $L$ be an $n \times d$ matrix of rank $d$. We know $L( \mathbb{R}^{d})$ is a $d$-dimensional subspace. By Linear Algebra, there exists $R \in O(n)$ such that $RL = \begin{pmatrix} \widetilde{L} \\ 0 \end{pmatrix}$ for $\widetilde{L}$ a $d \times d$ matrix. But then,
+	\begin{align*}
+		\sqrt{\det ((RL)^\top RL)} = \sqrt{\det (\widetilde{L}^\top \widetilde{L})} = \left| \det (\widetilde{L}) \right| = \left| \det (\widetilde{L}[0,1]^{d}) \right| = \left| \det (L[0,1]^{d}) \right|,
+	\end{align*}
+	so the Gram determinant gives us precisely the stretching of $d$-dimensional volume. So like $L([0,1]^{d})$ would be some parallelepiped in $\mathbb{R}^{n}$, $\widetilde{L}([0,1]^{d})$ would be the projection of that onto a flat subspace, where $\det \widetilde{L}$ tells us exactly how the $d$-volume is stretched.
+\end{remark}
+
+\begin{definition}[Support of a function]\label{def:support-func}
+	Let $U \subset \mathbb{R}^{n}$ be open and $f: U \to \mathbb{R}$ continuous. Define the support of $f$ as
+	\begin{align*}
+		\text{spt}(f) = \overline{ \left\{ x \in U \mid f(x) \neq 0 \right\} }.
+	\end{align*}
+	If $\text{spt}(f)$ is bounded, we call $f$ compactly supported in $U$.
+\end{definition}
+
+\begin{definition}[Integral over submanifold]\label{def:int-subm}
+	Let $V \subset \mathbb{R}^{d}$ open, $M \subset \mathbb{R}^{n}$ a $d$-dimensional submanifold parametrised by $\phi: V \to \mathbb{R}^{n}$ such that $\phi(V) = M$ and $f: \phi(V) \to \mathbb{R}^{n}$ continuous such that $\text{spt}(f \circ \phi) \subset V$. Then
+	\begin{align*}
+		\int_{M} f(p) \, d \text{vol}_{M}(p) = \int_{M} f \, d \text{vol}_{M} := \int_{V} \Big((f \circ \phi) \cdot \sqrt{\det (D\phi^\top D\phi)}\Big)(x) \, dx.
+	\end{align*}
+\end{definition}
+
+\begin{remark}[Integral is well-defined]
+	The integral exists because $V$ is open and the support $\text{spt}(f)$ is covered by finitely many balls $B_{r_{i}}(x_{i}) \subset V$ such that $A := \bigcup_{i = 1}^{N} B_{r_{i} / 2}(x_{i}) \subset V$ and $\overline{ A } \subset V$. But since $f$ is zero on $V \setminus \overline{ A } $, it suffices to take the integral not over $V$, but over $\overline{ A } $, so we know it exists by \ref{lem:unif-cont-func-int}.	
+\end{remark}
