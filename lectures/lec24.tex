@@ -1,4 +1,4 @@
-\section{Integrals over submanifolds}
+\section{Integrals over parametrised submanifolds}
 
 Let's remind ourselves why we are doing all of this. Among the "final bosses" of Analysis 2 is for instance the Divergence Theorem, stating
 \begin{align*}
@@ -6,11 +6,7 @@ Let's remind ourselves why we are doing all of this. Among the "final bosses" of
 \end{align*}
 for $\Omega \subset \mathbb{R}^{n}$ open, $\partial \Omega$ a $C^{1}$ submanifold and $F \in C^{1}(\overline{ \Omega }, \mathbb{R}^{n})$. Now, we already know a big portion of this expression. We know open sets, boundaries, submanifolds, partial derivatives and integrals over sets with respect to the Jordan measure. The last part missing is what it means to take the integral over the submanifold $\partial \Omega$ with the surface measure $dS$.
 
-So that's what we're working on now. First, we need to define volumes of parametrised $d$-dimensional submanifolds. We start with the easiest case, i.e. $1$-dimensional manifolds. We will call them lines and their volume lengths.
-
-% \begin{remark}[$C^{k}$ function on non-open domains]
-% 	If $A \subset \mathbb{R}^n$ is not open we say that $f \in C^k\left(A, \mathbb{R}^n\right)$ if there exist $U \supset A$ open and $\widetilde{f} \in C^k\left(U, \mathbb{R}^n\right)$ such that $\widetilde{f}=f$ when restricted to $A$.
-% \end{remark}
+So that's what we're working on now. First, we need to define volumes of parametrised $d$-dimensional submanifolds. We start with the easiest case, i.e. $1$-dimensional manifolds. We will call them lines and their volume lengths. Also, no, not every manifold is parametrised, we will extend the definitions in the next chapter. 
 
 \begin{definition}[Parametrised $1$-manifold (curve)]\label{def:curve-new}
 	We call $M \subset \mathbb{R}^{n}$ a curve if it is a $1$-dimensional submanifold. Usually, we attribute to $M$ a parametrisation (in the sense of \ref{prop:char-manifold} (4), but $G$ is global) $\phi: V \to \mathbb{R}^{n}$ with $V \subset \mathbb{R}$ open such that $M \subset \phi(V)$, which we also call a curve.
@@ -117,7 +113,7 @@ Now this we can extend to general dimensions. Notation-wise, when I say $M$ is \
 \begin{remark}[The issue with reparametrisation]
 	Assume we are given multiple parametrisations for parts of a manifold that might intersect. In particular, assume we have some manifold $M$ and that we have $\phi_{i}: V_{i} \to M \cap W_{i}$ for $i = 1,2$. It is possible that $\widetilde{M} := M \cap (W_{1} \cap W_{2}) \neq \emptyset$. In general, the $d$-volume of $\phi$ and $\psi$ will not be the same, because they don't even look at the same parts of a manifold. What really matters is that they align on the part of the manifold where they intersect.
 
-	We check this by redefining the parametrisation $\phi_{i}: \widetilde{V}_{i} \to \widetilde{M}$ with $\widetilde{V}_{i} = \phi_{i}^{-1}(\widetilde{M})$. Then we define $\psi = \phi_{2}^{-1} \circ \phi_{1}: \widetilde{V}_{1} \to \widetilde{V}_{2}$, which is of class $C^{1}$ (check notes). And so it remains to show the $d$-volume is invariant under the reparametrisation with this $\psi$, which we know is true by \ref{lem:invar-repar}.
+	We check this by redefining the parametrisation $\phi_{i}: \widetilde{V}_{i} \to \widetilde{M}$ with $\widetilde{V}_{i} = \phi_{i}^{-1}(\widetilde{M})$. Then we define $\psi = \phi_{2}^{-1} \circ \phi_{1}: \widetilde{V}_{1} \to \widetilde{V}_{2}$, which is of class $C^{1}$ (check course notes). And so it remains to show the $d$-volume is invariant under the reparametrisation with this $\psi$, which we know is true by \ref{lem:invar-repar}.
 \end{remark}
 
 \begin{lemma}[Invariance under orthogonal transformations]\label{lem:inv-ortho-trans}
@@ -154,8 +150,10 @@ Now this we can extend to general dimensions. Notation-wise, when I say $M$ is \
 	\begin{align*}
 		\int_{M} f(p) \, d \text{vol}_{M}(p) = \int_{M} f \, d \text{vol}_{M} := \int_{V} \Big((f \circ \phi) \cdot \sqrt{\det (D\phi^\top D\phi)}\Big)(x) \, dx.
 	\end{align*}
+	By similar computations like for the $d$-volume, this is invariant under isometries and reparametrisation.
 \end{definition}
 
-\begin{remark}[Integral is well-defined]
+\begin{remark}[Integral is well-defined]\label{rem:compact-inside-open}
 	The integral exists because $V$ is open and the support $\text{spt}(f)$ is covered by finitely many balls $B_{r_{i}}(x_{i}) \subset V$ such that $A := \bigcup_{i = 1}^{N} B_{r_{i} / 2}(x_{i}) \subset V$ and $\overline{ A } \subset V$. But since $f$ is zero on $V \setminus \overline{ A } $, it suffices to take the integral not over $V$, but over $\overline{ A } $, so we know it exists by \ref{lem:unif-cont-func-int}.	
 \end{remark}
+

@@ -1,0 +1,91 @@
+\begin{prop}[Divergence theorem reduced version 2]\label{prop:div-thm-red-2}
+	% Let $\Omega$ be a bounded $C^{1}$ domain, $p_{0} \in \partial \Omega$. Consider the locally graphically parametrised manifold $M := \partial \Omega \cap B_{r}(p_{0})$ and let $\nu$ denote its unit exterior normal map. Suppose also that
+	% \begin{align*}
+	% 	\Omega \cap B_{r}(p_{0}) = \left\{ (y, x_{n}) \in \mathbb{R}^{n} \mid x_{n} < g(y) \right\} \cap B_{r}(p_{0}),
+	% \end{align*}
+	% where $g: V \subset \mathbb{R}^{n-1} \to \mathbb{R}$ is the local graphic representation, and the induced $\phi(y) = (y, g(y))$.
+	Let $f: \overline{ \Omega } \to \mathbb{R}$ be a $C^{1}$ function. Assume $\text{spt}(f) \subset \overline{ \Omega } \cap B_{r}(p_{0})$. Then $\exists \epsilon > 0$ such that $\forall w \in \mathbb{R}^{n}$, if $\left| w \right| = 1$ and $\left| w - e_{n} \right| < \epsilon$,
+	\begin{align*}
+		\int_{\Omega} \partial_{w} f \, dx = \int_{M} f(p) \nu(p) \cdot w \, d \text{vol}_{M}(p).
+	\end{align*}
+\end{prop}
+\begin{proof}
+    This is the most technical and awful part of the proof, but it's a very intuitive and easy statement. Compare with course notes, I might rewrite.
+\end{proof}
+
+\begin{prop}[Divergence theorem reduced version 3]\label{prop:div-thm-red-3}
+	% Let $\Omega$ be a bounded $C^{1}$ domain, $p_{0} \in \partial \Omega$. Consider the locally graphically parametrised manifold $M := \partial \Omega \cap B_{r}(p_{0})$ and let $\nu$ denote its unit exterior normal map. Suppose also that
+	% \begin{align*}
+	% 	\Omega \cap B_{r}(p_{0}) = \left\{ (y, x_{n}) \in \mathbb{R}^{n} \mid x_{n} < g(y) \right\} \cap B_{r}(p_{0}),
+	% \end{align*}
+	% where $g: V \subset \mathbb{R}^{n-1} \to \mathbb{R}$ is the local graphic representation, and the induced $\phi(y) = (y, g(y))$.
+	Let $f: \overline{ \Omega } \to \mathbb{R}$ be a $C^{1}$ function. Assume $\text{spt}(f) \subset \overline{ \Omega } \cap B_{r}(p_{0})$. Then $\forall w \in \mathbb{R}^{n}$,
+	\begin{align*}
+		\int_{\Omega} \partial_{w} f \, dx = \int_{M} f(p) \nu(p) \cdot w \, d \text{vol}_{M}(p).
+	\end{align*}
+\end{prop}
+\begin{proof}
+	If we have proven Proposition \ref{prop:div-thm-red-2}, then we can this last step is not so hard. Indeed, the equation of Proposition \ref{prop:div-thm-red-2} is linear in $w$ and holds for all $w \in B_{\epsilon}(e_{n}) \cap \mathbb{S}^{n-1}$. But we know from linear algebra and Euclidean spaces that $\mathbb{R}^{n} = \text{Sp}(B_{\epsilon}(e_{n}) \cap \mathbb{S}^{n-1})$, so the equations holds for any $w \in \mathbb{R}^{n}$.
+\end{proof}
+
+\begin{definition}[Divergence]\label{def:divergence}
+	Let $F \in C^{1}(\Omega, \mathbb{R}^{n})$ (we call such functions a vector field). Then we define the divergence of $F$ at a point $x \in \Omega$ as $\operatorname{div}(F)(x) = \sum_{i=1}^{n} \partial_{i}F_{i}(x)$. This defines a real valued function $\operatorname{div}(F): \Omega \to \mathbb{R}$.
+\end{definition}
+
+\begin{theorem}[Local Divergence Theorem]\label{thm:div-thm-loc}
+	Let $F \in C^{1}(\overline{ \Omega }, \mathbb{R}^{n})$ such that $\text{spt}(F) \subset \overline{ \Omega } \cap B_{r}(p_{0})$. Then
+	\begin{align*}
+		\int_{\Omega} \text{div}(F) = \int_{M} F \cdot \nu \, d \text{vol}_{M}.
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	Use Proposition \ref{prop:div-thm-red-3} with $w = e_{i}$, for each $1 \leq i \leq n$ and $f = F_{i}$. We get
+	\begin{align*}
+		\int_{\Omega} \partial_{i} F_{i} = \int_{M} F_{i} e_{i} \cdot \nu \, d \text{vol}_{M}
+	\end{align*}
+	for each $1 \leq i \leq n$. We can sum over all $i$ to get the Theorem, apply linearity of the integral, scalar product and definition of divergence.
+\end{proof}
+
+\section{Partitions of unity}
+
+But how do we extend everything we did since introducing the $d$-volume to submanifolds that do not admit a single parametrisation? Indeed, a lot of work will have to be done to define an integral for multiple parametrisation and to further also prove that it is a sound definition. Only after that can we tackle the global version of the divergence theorem.
+
+\begin{lemma}[Parititions of unity]\label{lem:part-of-unity}
+    Let $K \subset \mathbb{R}^{n}$ be a compact set and for $1 \leq \ell \leq N$, $B_{p_{\ell}}(r_{\ell}) = B_{\ell}$ open balls that cover $K$. Then $\exists U$ open such that $K \subset U$ and $N$ functions $\eta_{1}, \dots, \eta_{N}: \mathbb{R}^{n} \to [0,\infty)$ and a function $\tilde{\eta}: \mathbb{R}^{n} \to [0,\infty)$, all $C^{\infty}$ such that
+    \begin{align*}
+        1 = \sum_{\ell=1}^{N} \eta_{\ell}(x) + \tilde{\eta}(x) \quad \forall x \in \mathbb{R}^{n} 
+    \end{align*}
+    and $\text{spt}(\eta_{\ell}) \subset B_{\ell}$ and $\text{spt}(\tilde{\eta}) \subset \mathbb{R}^{n} \setminus U$. 
+\end{lemma}
+\begin{proof}
+    % IMAGE TODO
+    Define the (non-analytic btw) functions $\xi, \tilde{\xi}$ on $\mathbb{R}^{n}$ via
+    \begin{align*}
+        \xi(x) = 
+        \begin{cases}
+            e^{ - \frac{1}{1-\left| x \right|^{2}} } \quad & \text{if } x \in B_{1}(0) \\ 
+            0 \quad & \text{if } x \in \mathbb{R}^{n} \setminus B_{1}(0) 
+        \end{cases}
+        \quad 
+        \tilde{\xi}(x) = 
+        \begin{cases}
+            0 \quad & \text{if } x \in B_{1}(0) \\ 
+            e^{ -\frac{1}{\left| x \right|^{2}-1} } \quad & \text{if } x \in \mathbb{R}^{n} \setminus B_{1}(0) 
+        \end{cases}.
+    \end{align*}
+    % TODO fractions look weird in the expo
+    We know $\text{spt}(\xi) = \overline{ B_{1}(0) }$. For $r > 0$ and $p \in \mathbb{R}^{n}$, we define the scaled and shifted function $\xi_{p,r}(x) := \xi(\frac{x-p}{r})$, which has support $\text{spt}(\xi_{r,p}) = \overline{ B_{r}(p) } $. We can cover
+    \begin{align*}
+        K \subset \bigcup_{\theta \in (0,1)} \bigcup_{\ell=1}^{N} B_{\theta r_{\ell}}(p_{\ell}),
+    \end{align*}
+    and since the sets form a chain and $K$ is compact, $\exists \theta \in (0,1) \text{ s.t. } K \subset \bigcup_{\ell=1}^{N} B_{\theta r_{\ell}}(p_{\ell})$. Define again
+    \begin{align*}
+        \xi_{\ell}(x) = \xi \left( \frac{x-p_{\ell}}{\sqrt{\theta} r_{\ell}} \right), \quad \tilde{\xi}_{\ell}(x) = \tilde{\xi}\left( \frac{x - p_{\ell}}{\theta r_{\ell}} \right)
+    \end{align*}
+    and notice that the function $\tilde{\xi}_{0}(x) = \prod_{i=1}^{N} \tilde{\xi}_{\ell}(x)$ is $0$ on the set $\bigcup_{\ell=1}^{N} B_{r_{\ell}\theta}(p_{\ell}) := U \supset K$. And put all of that together 
+    \begin{align*}
+        S(x) = \sum_{\ell=1}^{N} \xi_{\ell}(x) + \xi_{0}(x), 
+    \end{align*}
+    which is by construction never $0$. Hence define $\eta_{\ell}(x) := \frac{\xi_{\ell}(x)}{S(x)}$ and $\tilde{\eta}(x) = \frac{\tilde{\xi}_{0}(x)}{S(x)}$, which satisfy the statement. 
+\end{proof}
+

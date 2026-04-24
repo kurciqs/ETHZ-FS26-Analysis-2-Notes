@@ -1,0 +1,144 @@
+
+\begin{prop}[Integration over graphical submanifolds]\label{prop:int-graph-subm}
+	Let $V \subset \mathbb{R}^{n-1}$ open and let $g: V \to \mathbb{R}$ class $C^{1}$. Consider the submanifold (the fact this is one was on a problem sheet) given by
+	\begin{align*}
+		M = \left\{ x \in \mathbb{R}^{n-1} \times \mathbb{R} \mid x_{n} = g(x_{1}, \dots, x_{n-1}) \right\}.
+	\end{align*}
+	Then
+	\begin{align*}
+		\int_{M}^{} f \, d \text{vol}_{n-1} = \int_{V}^{} (f \circ \phi)(x_{1}, \dots, x_{n-1}) \sqrt{1+\left|  \nabla g(x_{1}, \dots, x_{n-1})\right|^{2} } \, dx.
+	\end{align*}
+	In particular, for $f \equiv 1$, we get the $n-1$-volume
+	\begin{align*}
+		\text{vol}_{n-1}(M) = \int_{V}^{} \sqrt{1+ \left| \nabla g(x_{1}, \dots, x_{n-1}) \right|^{2}} \, dx
+	\end{align*}
+\end{prop}
+\begin{proof}
+	It suffices to compute the Gram determinant. It requires a trick, but it's not instructive.
+\end{proof}
+
+\chapter{Global integral theorems}
+
+The goal now is to show a lot of theorems for small open balls around individual points on a manifold. Then on \textit{compact} manifolds, which we will define later, we will be able to generalise the theorems easily.
+
+\section{Parametrised submanifolds}
+
+We need to prepare definitions and Lemmas that will help us formulate the divergence theorem.
+
+\begin{definition}[Bounded $C^{k}$ domain]\label{def:bdd-ck-dom}
+	A bounded open set $\Omega \subset \mathbb{R}^{n}$ is called a bounded $C^{k}$ domain if $M = \partial \Omega$ is an $(n-1)$-dimensional manifold of class $C^{k}$.
+\end{definition}
+
+\begin{definition}[Exterior and interior normal map]\label{def:ext-norm-map}
+	Let $\Omega \subset \mathbb{R}^{n}$ be a bounded $C^{1}$ domain. A normal vector $\nu$ at $p \in \partial\Omega$ is called exterior if
+	\begin{align*}
+		p+h \nu \in \mathbb{R}^{n} \setminus \overline{ \Omega } \quad \text{ for all sufficiently small } h > 0
+	\end{align*}
+	and interior if
+	\begin{align*}
+		p+h \nu \in \mathbb{R}^{n} \in \Omega^{\circ} \quad \text{ for all sufficiently small } h > 0.
+	\end{align*}
+\end{definition}
+
+% \begin{remark}[Strict hypograph]
+%     Earlier we introduced the hypograph of a function $f: A \to \mathbb{R}$ as 
+%     \begin{align*}
+% 		\Gamma_{A}(f) = \left\{ (x_{1}, \dots, x_{n}, x_{n+1}) \in \mathbb{R}^{n+1} \mid (x_{1}, \dots, x_{n}) \in A, 0 \leq x_{n+1} \leq f(x_{1}, \dots, x_{n}) \right\}.
+% 	\end{align*}
+%     From now on, when I write $\Gamma_{f}$, I mean this hypograph, but with the second inequality strict. 
+% \end{remark}
+
+\begin{lemma}[Exterior unit normal]\label{lem:ext-unit-norm}
+	Let $\Omega$ be a bounded $C^{1}$ domain, $p_{0} \in \partial \Omega$ the point we're focusing on and assume $\phi: V \to \mathbb{R}^{n}$ defined by $\phi(y) = (y, g(y))$ where $g: V \to \mathbb{R}$, with $V \subset \mathbb{R}^{n-1}$ open, is a graphical $C^{1}$ parametrisation of $M := \partial \Omega \cap B_{r}(p_{0})$ (including the technical note about the intersection, see Proposition \ref{prop:char-manifold}).
+
+	Suppose further that
+	\begin{align*}
+		\Omega \cap B_{r}(p_{0}) = \left\{ (y, x_{n}) \in \mathbb{R}^{n} \mid x_{n} < g(y) \right\} \cap B_{r}(p_{0})
+	\end{align*}
+	and define for $p = (y,g(y))$ the vector
+	\begin{align*}
+		\nu(p) = \nu(y, g(y)) := \frac{(-\nabla g(y), 1)}{\sqrt{1 + \left| \nabla g(y) \right|^{2}}}.
+	\end{align*}
+
+	Then $\nu(p)$ is at each point $p \in M$ an exterior normal of unit length.
+\end{lemma}
+\begin{proof}
+	Recall that by Remark \ref{rem:parametrisation-tangent-space}, since we have the parametrisation of $M$ given by $\phi(y) = (y, g(y))$, then $T_{p}M$ is an $n-1$-dimensional space spanned by $\partial_{i} \phi$ for $1 \leq i \leq n-1$. In our case, the partials are
+	\begin{align*}
+		\partial_{i} \phi(y) = e_{i} + \partial_{i} g (y) \cdot e_{n},
+	\end{align*}
+	hence up to scalar factors, for $1 \leq i \leq n-1$,
+	\begin{align*}
+		\partial_{i} \phi \cdot \nu = (e_{i} + \partial_{i} g \cdot  e_{n}) \cdot ( (-\nabla g, 0) + e_{n}) = -\partial_{i} g(x) + \partial_{i} g(x) = 0.
+	\end{align*}
+	And so $\nu$ is perpendicular to all vectors in the tangent space. When you divide it by its length, you get a unit vector.
+
+	To prove it is exterior, consider that if we need to show $(y', y_{n}) = (y,g(y)) + h (-\nabla g(p), 1) \not \in \overline{ \Omega } $. For that, we would have to show that $y_{n} > g(y')$. But we can do a Taylor expansion (check details)
+	\begin{align*}
+		g(y') = g(y - h \nabla g(y)) = g(y) - \left| \nabla g(y) \right|^{2} h + \smalO(h) < g(y) + h.
+	\end{align*}
+	So for small enough $h$, the normal is exterior.
+\end{proof}
+
+I added one more thing that I thought would be useful when dealing with manifolds, which we could have introduced earlier but whatever.
+
+\begin{remark}[Uniqueness of the tangent space]
+	The definition of the tangent space $T_p M := \operatorname{Im}(D\varphi(u_0))$ (characterisation \ref{rem:parametrisation-tangent-space}) is independent of the choice of chart. Indeed, if $\varphi: U \to M$ and $\psi: V \to M$ are two charts with $\varphi(u_0)=\psi(v_0)=p$, then the transition map $\psi^{-1}\circ\varphi$ is a $C^1$-diffeomorphism. By the chain rule,
+	\[
+		D\varphi(u_0) = D\psi(v_0)\, D(\psi^{-1}\circ\varphi)(u_0).
+	\]
+	Since $D(\psi^{-1}\circ\varphi)(u_0)$ is invertible, the images coincide:
+	\[
+		\operatorname{Im}(D\varphi(u_0)) = \operatorname{Im}(D\psi(v_0)).
+	\]
+\end{remark}
+
+\begin{definition}[Exterior unit map]\label{def:ext-unit-map}
+	If $\Omega \subset \mathbb{R}^n$ is a bounded $C^1$ domain, the continuous map $\nu: \partial \Omega \rightarrow \mathbb{S}^{n-1}$ assigning to each point $p \in \partial \Omega$ the exterior normal vector at $p$ is called exterior unit normal map. Notice that since the tangent space at a point of a manifold is defined uniquely, the map is unique to each manifold.
+\end{definition}
+
+\begin{remark}[$C^{k}$ function on non-open domains]
+	If $A \subset \mathbb{R}^n$ is not open we say that $f \in C^k\left(A, \mathbb{R}^n\right)$ if there exist $U \supset A$ open and $\widetilde{f} \in C^k\left(U, \mathbb{R}^n\right)$ such that $\widetilde{f}|_{A}=f$.
+\end{remark}
+
+\newpage
+
+\section{Local integration theorems}
+
+We are now in a position to prove a weaker version of the divergence theorem. We will prove theorems using always one particular parametrisation, but don't forget that we put in the work last chapter and defined \ref{def:int-subm} and \ref{def:d-vol} such that they are invariant under such reparametrisations and also isometries.
+
+This will be the setup for every Proposition in the following section. Let $\Omega$ be a bounded $C^{1}$ domain, $p_{0} \in \partial \Omega$. Consider the locally graphically parametrised manifold $M := \partial \Omega \cap B_{r}(p_{0})$ and let $\nu$ denote its unit exterior normal map. Suppose also that
+\begin{align*}
+	\Omega \cap B_{r}(p_{0}) = \left\{ (y, x_{n}) \in \mathbb{R}^{n} \mid x_{n} < g(y) \right\} \cap B_{r}(p_{0}),
+\end{align*}
+where $g: V \subset \mathbb{R}^{n-1} \to \mathbb{R}$ is the local graphic representation, and the induced $\phi(y) = (y, g(y))$.
+
+\begin{prop}[Divergence theorem reduced version]\label{prop:div-thm-red}
+	Let $f: \overline{ \Omega } \to \mathbb{R}$ be a $C^{1}$ function. Assume $\text{spt}(f) \subset \overline{ \Omega } \cap B_{r}(p_{0})$. Then
+	\begin{align*}
+		\int_{\Omega} \partial_{n} f \, dx = \int_{M} f(p) \nu(p) \cdot e_{n} \, d \text{vol}_{M}(p).
+	\end{align*}
+\end{prop}
+\begin{proof}
+	We make use of the graphical parametrisation $M = \phi(V)$ for $\phi(x) = (x,g(x))$. Let's inspect RHS first. Using Proposition \ref{prop:int-graph-subm},
+	\begin{align*}
+		\int_{M} f(p) \nu(p) \cdot e_{n} \, d \text{vol}_{M}(p) = \int_{V} f \circ \phi \frac{(-\nabla g(x), 1)}{\sqrt{1+\left| \nabla g(x) \right|^{2}}} \cdot e_{n} \sqrt{1 + \left| \nabla g(x) \right|^{2}}\, dx.
+	\end{align*}
+	But we notice that after the scalar product is taken, all that remains will be $\int_{V} f( \phi(x))  \, dx$.
+
+	For the LHS, setting $\Gamma = \left\{ (x,x_{n}) \mid x_{n} < g(x) \right\}$, because the function vanishes outside the support, we're effectively integrating over $\overline{ \Omega \cap B_{r}(p_{0}) } $, so it's well-defined by \ref{lem:unif-cont-func-int}, \ref{rem:compact-inside-open} and by assumption,
+	\begin{align*}
+		\int_{\Omega} \partial_{n}f \, dx = \int_{\Gamma} \partial_{n} f(x,x_{n}) \, dx.
+	\end{align*}
+	But by Fubini, we can integrate for each vertical line (to do this rigorously gets ugly, see notes), so
+	\begin{align*}
+		\int_{V} \int_{-\infty}^{g(y)} \partial_{n}f(y, x_{n}) \, dx_{n} dy = \int_{V} [f(y, \cdot )]_{-\infty}^{g(y)} \, dy = \int_{V} f(y, g(y)) \, dy.
+	\end{align*}
+	But by definition of $\phi$, these are the same.
+\end{proof}
+
+% \begin{remark}[Graphs under rotation]
+% 	Observe the following. If there exists $\epsilon > 0$ and $s \in (0,r)$ such that for all orthogonal $n \times n$ matrices $R$, $\left| R - I_{n} \right| < \epsilon$, then $RM \cap B_{s}(p_{0})$ is still a graphical submanifold and $R \overline{ \Omega } \cap B_{s}(p_{0}) \supset \text{spt}(f \circ R^\top )$.
+
+% 	We will not prove this exactly, the details are in the course notes but this is very plausible.
+% \end{remark}
