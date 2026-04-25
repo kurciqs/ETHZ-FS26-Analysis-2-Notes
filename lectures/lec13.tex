@@ -4,7 +4,7 @@
 \end{remark}
 
 \begin{lemma}[Eigenvalue minimisation]\label{lem:eig-min}
-	Assume $v_{1}, \dots, v_{k} \in \mathbb{R}^{k}$ for $k \in \left\{ 1, \dots, n-1 \right\}$ are linearly independent vectors and $A$ is an $n \times n$ symmetric real matrix with eigenvectors $v_{i}$, so $A v_{i} = \mu_{i} v_{i}$ for $\mu_{i} \in \mathbb{R}$. Then $\exists w \in \mathbb{R}^{n}$ such that $\left| w \right| = 1$, $w \cdot v_{i} = 0$ and
+	Assume $v_{1}, \dots, v_{k} \in \mathbb{R}^{n}$ for $k \in \left\{ 1, \dots, n-1 \right\}$ are linearly independent vectors and $A$ is an $n \times n$ symmetric real matrix with eigenvectors $v_{i}$, so $A v_{i} = \mu_{i} v_{i}$ for $\mu_{i} \in \mathbb{R}$. Then $\exists w \in \mathbb{R}^{n}$ such that $\left| w \right| = 1$, $w \cdot v_{i} = 0$ and
 	\begin{align*}
 		Aw = \lambda w \quad \text{for } \lambda \in \mathbb{R}.
 	\end{align*}
@@ -31,7 +31,7 @@
 		                                                                 & = \lim_{t \to 0} \frac{x \cdot A te_{i} + t e_{i} \cdot Ax + t e_{i} \cdot A te_{i}}{t} \\
 		                                                                 & = 2 e_{i} \cdot Ax
 	\end{align*}
-	and so $e_{i} \cdot \nabla f(x) = \partial_{i}f(x) = 2e_{i} \cdot Ax$. Now, since $g_{*}(x) = x \cdot Ix$, we get $\nabla g_{*}(x) = 2x$.
+	and so $e_{i} \cdot \nabla f(x) = \partial_{i}f(x) = 2e_{i} \cdot Ax$. Now, since $g_{*}(x) = x \cdot Ix-1$, we get $\nabla g_{*}(x) = 2x$.
 	And for the rest,
 	\begin{align*}
 		\partial_{i} g_{j}(x) = \lim_{t \to 0} \frac{v_{j} \cdot (x+te_{i}) - v_{j} \cdot x}{t} = v_{i}e_{i},
@@ -40,7 +40,7 @@
 	\begin{align*}
 		\underbrace{2 \lambda_{0} Aw + 2\lambda_{*} w}_{w_{1}} + \underbrace{\sum_{j=1}^{k} \lambda_{j} v_{j}}_{w_{2}} = 0.
 	\end{align*}
-	By assumption,
+	By assumption, for every $1 \leq j \leq k$, 
 	\begin{align*}
 		v_{j} \cdot Aw = w \cdot Av_{j} = w \cdot \mu_{j} v_{j} = \mu_{j}w \cdot v_{i} = 0,
 	\end{align*}
@@ -48,7 +48,7 @@
 	\begin{align*}
 		\lambda_{0}Aw +  \lambda_{*}w  = 0, \quad \lambda_{1}v_{1} + \dots + \lambda_{k}v_{k} = 0
 	\end{align*}
-	which implies $\lambda_{1} = \dots = \lambda_{k} = 0$, as $(v_{1}, \dots, v_{k})$ form a basis. But then $\lambda_{0}^{2} + \lambda_{*}^{2} = 1$ and $Aw = \lambda w$ with $\lambda = -\lambda_{*} / \lambda_{0}$. And we can't have $\lambda_{0} = 0$, because that would imply $w = 0$ and we had $\left| w \right| = 1$.
+	which implies $\lambda_{1} = \dots = \lambda_{k} = 0$, as $(v_{1}, \dots, v_{k})$ are linearly independent. But then $\lambda_{0}^{2} + \lambda_{*}^{2} = 1$ and $Aw = \lambda w$ with $\lambda = -\lambda_{*} / \lambda_{0}$. And we can't have $\lambda_{0} = 0$, because that would imply $w = 0$ and we had $\left| w \right| = 1$.
 \end{proof}
 
 \begin{theorem}[Spectral theorem for symmetric matrices]\label{thm:spectral-thm}

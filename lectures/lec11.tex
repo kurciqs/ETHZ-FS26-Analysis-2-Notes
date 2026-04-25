@@ -20,7 +20,7 @@
 
 \section{Taylor theorem and analyticity}
 
-The Taylor theorem in $\mathbb{R}^{n}$ will in essence be the one in $\mathbb{R}$ but applied to the function $f \circ \gamma = \varphi$, so basically we will be able to express the value of $f$ around some point $x_{0}$ by approaching it with the path $\gamma = x_{0} + th$. That in turn will tell us that for smaller and smaller $h$ the Taylor polynomial at $h$ is going to approach $f(x_{0}+h)$. 
+The Taylor theorem in $\mathbb{R}^{n}$ will in essence be the one in $\mathbb{R}$ but applied to the function $f \circ \gamma = \varphi$, so basically we will be able to express the value of $f$ around some point $x_{0}$ by approaching it with the path $\gamma = x_{0} + th$. That in turn will tell us that for small $h$ the Taylor polynomial at $h$ is approaches $f(x_{0}+h)$. 
 
 \begin{lemma}[Derivative in terms of partials]
     Let $U \subset \mathbb{R}^{n}$ be open. Assume $f \in C^{m}(U)$, $x_{0} \in U$, $h \in \mathbb{R}^{n}$ and $x_{0} + th \in U$ for all $t \in (-\epsilon, 1+\epsilon)$ with some $\epsilon > 0$. Let $\gamma (t) = x_{0} + ht$ and define $\varphi(t) = f \circ \gamma (t)$. Then
@@ -37,7 +37,7 @@ The Taylor theorem in $\mathbb{R}^{n}$ will in essence be the one in $\mathbb{R}
 
     Now assume the equality holds for $m$. Differentiating the induction assumption with the Chain Rule \ref{rem:chain-rule-comp}, we get
     \begin{align*}
-        \frac{\varphi^{(m+1)}(t)}{m!} = \sum_{\left| \alpha  \right| = m} \sum_{i=1}^{n} \frac{1}{\alpha !} \partial_{i}\partial^{\alpha }f(x_{0}+th) \cdot h^{\alpha }h_{i} = \sum_{\left| \alpha \right| = m} \sum_{i=1}^{n} \frac{\partial_{\alpha + e_{i} } f(x_{0} + th)h^{\alpha + e_{i}}}{\alpha !}.
+        \frac{\varphi^{(m+1)}(t)}{m!} = \sum_{\left| \alpha  \right| = m} \sum_{i=1}^{n} \frac{1}{\alpha !} \partial_{i}\partial^{\alpha }f(x_{0}+th) \cdot h^{\alpha }h_{i} = \sum_{\left| \alpha \right| = m} \sum_{i=1}^{n} \frac{\partial^{\alpha + e_{i} } f(x_{0} + th)h^{\alpha + e_{i}}}{\alpha !}.
     \end{align*}
     Define for every $i$ the multi-index $\beta = \alpha + e_{i}$ such that $\frac{1}{\alpha !} = \frac{1}{\beta !} \beta_{i}$. Then
     \begin{align*}
