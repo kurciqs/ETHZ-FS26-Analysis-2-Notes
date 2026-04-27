@@ -145,12 +145,12 @@ Now this we can extend to general dimensions. Notation-wise, when I say $M$ is \
 	If $\text{spt}(f)$ is bounded, we call $f$ compactly supported in $U$.
 \end{definition}
 
-\begin{definition}[Integral over submanifold]\label{def:int-subm}
-	Let $V \subset \mathbb{R}^{d}$ open, $M \subset \mathbb{R}^{n}$ a $d$-dimensional submanifold parametrised by $\phi: V \to \mathbb{R}^{n}$ such that $\phi(V) = M$ and $f: \phi(V) \to \mathbb{R}^{n}$ continuous such that $\text{spt}(f \circ \phi) \subset V$. Then
+\begin{definition}[Integral over parametrised submanifold]\label{def:int-subm}
+	Let $V \subset \mathbb{R}^{d}$ open, $M \subset \mathbb{R}^{n}$ a $d$-dimensional submanifold parametrised by $\phi: V \to \mathbb{R}^{n}$ such that $\phi(V) = M$ and $f: M \to \mathbb{R}^{n}$ continuous such that $\text{spt}(f \circ \phi) \subset V$. Then
 	\begin{align*}
 		\int_{M} f(p) \, d \text{vol}_{M}(p) = \int_{M} f \, d \text{vol}_{M} := \int_{V} \Big((f \circ \phi) \cdot \sqrt{\det (D\phi^\top D\phi)}\Big)(x) \, dx.
 	\end{align*}
-	By similar computations like for the $d$-volume, this is invariant under isometries and reparametrisation.
+	By similar computations like for the $d$-volume, this is invariant under isometries and reparametrisation. We also often write $d \text{vol}_{d} = d \text{vol}_{M}$.
 \end{definition}
 
 \begin{remark}[Integral is well-defined]\label{rem:compact-inside-open}

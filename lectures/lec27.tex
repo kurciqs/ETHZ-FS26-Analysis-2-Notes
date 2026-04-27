@@ -1,0 +1,151 @@
+\begin{definition}[Graphical cover of a compact $d$-submanifold]\label{def:graph-cov-subm}
+	Let $M \subset \mathbb{R}^n$ be a compact $d$-dimensional submanifold of class $C^k$, with $k \geq 1$. We call a collection of $N$ maps $\phi_{\ell}: V_{\ell} \rightarrow \mathbb{R}^n, 1 \leq \ell \leq N$, of class $C^k$, a graphical cover of $M$ if for each $\ell$, the following properties are satisfied:
+
+	\begin{enumerate}
+		\item $V_{\ell}$ is an open set of $\mathbb{R}^d$.
+		\item There is an orthogonal $n \times n$ matrix $R_{\ell}$ such that $\phi_{\ell}: V_{\ell} \rightarrow \mathbb{R}^n$ is of the form
+		      $$
+			      \phi_{\ell}\left(x_1, \ldots x_d\right)=R_{\ell}\left(x_1, \ldots, x_d, g_{\ell}\left(x_1, \ldots, x_d\right)\right)
+		      $$
+		      for some $g_{\ell} \in C^k\left(V_{\ell}, \mathbb{R}^{n-d}\right)$.
+		\item There is $p_{\ell} \in M$ and $r_{\ell}>0$ such that
+		      $$
+			      \phi_{\ell}\left(V_{\ell}\right) \cap B_{r_{\ell}}\left(p_{\ell}\right)=M \cap B_{r_{\ell}}\left(p_{\ell}\right) \quad \text { and } \quad B_{r_{\ell}}\left(p_{\ell}\right) \subset R_{\ell}\left(V_{\ell} \times \mathbb{R}^{n-d}\right) .
+		      $$
+		\item The balls $B_{r_{\ell}}\left(p_{\ell}\right)$ cover $M$, so $M \subset \bigcup_{\ell=1}^N B_{r_{\ell}}\left(p_{\ell}\right)$.
+	\end{enumerate}
+\end{definition}
+
+\begin{lemma}[Graphical cover of a compact $d$-submanifold]\label{lem:graph-cov-subm}
+	Every compact $d$-dimensional submanifold $M \subset \mathbb{R}^{n}$ admits a graphical cover.
+\end{lemma}
+\begin{proof}
+	Recall Proposition \ref{prop:char-manifold}, in particular characterisation (4). For any given point $p \in M$, we are guaranteed an open set $U$ such that $M \cap U = R(\text{graph}(g))$ for $R$ a permutation of coordinates (in particular orthogonal) and $g \in C^{1}(V, \mathbb{R}^{n-d})$.
+
+	Then define the function $\phi: V \to \mathbb{R}^{n}$ by
+	\begin{align*}
+		\phi(x_{1}, \dots, x_{d}) = R(x_{1}, \dots, x_{d}, g(x_{1}, \dots x_{d})).
+	\end{align*}
+	Finally, for some $y \in V$ such that $p = \phi(y) = R(y, g(y))$, find $r > 0$ such that $B_{r}(y) \subset V$ and $B_{r}(p) \subset U$, because then you automatically get $B_{r}(p) = B_{r}(R(y,g(y))) \subset R(V \times \mathbb{R}^{n-d})$.
+
+	Now, cover $M$ with these balls for every single $p \in M$ and extract a finite subcover.
+\end{proof}
+
+\begin{definition}[Integral over a compact $d$-submanifold]\label{def:int-over-comp-subm}
+	Let $M \subset \mathbb{R}^n$ be an $d$-dimensional compact $C^1$ submanifold and $f: M \rightarrow \mathbb{R}$ a continuous function.
+	Given a graphical cover $\phi_{\ell}: V_{\ell} \rightarrow \mathbb{R}^n, 1 \leq \ell \leq N$, let $\eta_{\ell}: \mathbb{R}^n \rightarrow[0, \infty)$ be a partition of unity (exists by Lemma \ref{lem:part-of-unity}) on $M$ w.r.t. the balls $\left\{B_{r_{\ell}}\left(p_{\ell}\right)\right\}_{1 \leq \ell \leq N}$ associated to the graphical cover. We define:
+	$$
+		\begin{aligned}
+			\int_M f \, d \operatorname{vol}_d & :=\sum_{\ell=1}^N \int_{M \cap B_{\ell}\left(x_{\ell}\right)} f \eta_{\ell} \, d \operatorname{vol}_d,
+		\end{aligned}
+	$$
+    where the second integral is defined by \ref{def:int-subm}. 
+
+    This definition is once again invariant under choice of: paritition of unity, parametrisations, graphical covers. The proof for that is mostly a lot of tedious details, but the "Analysis" part has already been covered when we proved invariance for locally parametrised submanifolds. 
+\end{definition}
+
+This was totally skipped in the lecture, we just moved onto the divergence theorem without covering these details. And there's good reason for that, because it's very technical only to get a result which you would expect anyway. The details of this and generalisation will definitely be covered later in the studies in topics like differential geometry and such. For now, this is good. And most of the time, we work with one single parametrisation anyway, so the computation is simplified (although one graphical representation for a manifold with one parametrisation may already be insufficient).
+
+\section{Global divergence theorem}
+
+Now we can prove the full correct version.
+
+\begin{theorem}[Divergence theorem]\label{thm:div-thm}
+	Let $\Omega \subset \mathbb{R}^{n}$ be a bounded $C^{1}$ domain. Let $F \in C^{1}(\overline{ \Omega }, \mathbb{R}^{n} )$ be a vector field. Then
+	\begin{align*}
+		\int_{\Omega} \operatorname{div}F = \int_{\partial \Omega} F \cdot \nu \, d \text{vol}_{n-1}.
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	Because $\Omega$ is a $C^{1}$ domain, by Lemma \ref{lem:graph-cov-subm}, $\partial \Omega$ admits a graphical cover with the associated orthogonal linear maps, which we will denote $L_{\ell}$. 
+
+	Let $\eta_{\ell}$ be a partition of unity w.r.t. this graphical cover as in Lemma \ref{lem:part-of-unity} with $\tilde{\eta}$ denoting the background function. Define
+	\begin{align*}
+		F_{\ell} := F \cdot \eta_{\ell}, \quad \tilde{F} =
+		\begin{cases}
+			F \tilde{\eta} \quad & \text{on } \overline{ \Omega }                          \\
+			0 \quad              & \text{on } \mathbb{R}^{n} \setminus \overline{ \Omega }
+		\end{cases} \quad \implies \quad
+		\sum_{\ell=1}^{N} F_{\ell} + \tilde{F} = F \text{ on } \overline{ \Omega }.
+	\end{align*}
+	From the Lemma, we also get $\text{spt}(F_{\ell}) \subset B_{r_{\ell}}(p_{\ell})$ and $\text{spt}(\tilde{F}) \subset \Omega^{\circ}$ (because it's zero around the boundary thanks to the partition of unity and defined to be zero outside of $\overline{ \Omega } $). By construction, up to the isometry $L_{\ell}$, $\Omega \cap B_{r_{\ell}}(p_{\ell})$ satisfies the conditions for \ref{thm:div-thm-loc} with the function $F_{\ell}$ (actually, $F_{\ell} \circ L^{-1}_{\ell}$) hence by change of variables, 
+	\begin{align*}
+		\int_{\Omega} \operatorname{div}F_{\ell} = \int_{\partial\Omega} F_{\ell} \cdot \nu  \, d \text{vol}_{n-1}.
+	\end{align*}
+	Moreover, since $\tilde{F} \in C^{1}(\Omega, \mathbb{R}^{n})$ and $\text{spt}(\tilde{F}) \subset \Omega^{\circ }$, if we could show
+	\begin{align*}
+		\int_{\Omega} \operatorname{div} \tilde{F} = 0,
+	\end{align*}
+	we would be done. Indeed, we'd sum over all $\ell$ and get
+	\begin{align*}
+		\int_{\Omega} \operatorname{div}F = \int_{\Omega} \operatorname{div}\left( \sum_{\ell=1}^{n} F_{\ell} + \tilde{F}  \right)  = \int_{\partial \Omega} \left( \sum_{\ell=1}^{n} F_{\ell} \right) \cdot \nu \, d \text{vol}_{n-1} = \int_{\partial \Omega} F \cdot \nu \, d \text{vol}_{n-1}.
+	\end{align*}
+
+	To prove the claim, we will show $ \int_{\Omega} \partial_{i}\tilde{F}_{i} = 0$ for all $i = 1, \dots, n$ separately. Because the support of $\tilde{F}$ is compact and strictly contained in the open set $ \Omega^{\circ }$, for all $t > 0$ small enough,
+	\begin{align*}
+		\int_{\Omega} \tilde{F}_{i}(x + t e_{i}) \, dx = \int_{\Omega + t e_{i}} \tilde{F}_{i}(x) \, dx.
+	\end{align*}
+	But we can differentiate under the integral sign using \ref{thm:diff-und-int},
+	\begin{align*}
+		\frac{d}{dt} \Big|_{t=0} \int_{\Omega} \tilde{F}_{i}(x + te_{i}) \, dx = \int_{\Omega+t e_{i}} \partial_{i} \tilde{F}_{i}(x) \, dx.
+	\end{align*}
+	But the RHS doesn't actually depend on $t$ once it's small enough, because the support of $\tilde{F}$ is contained very well in $\Omega$ (so there's always at least some ball distance to the boundary), so shifting very little doesn't even change the points we integrate over. Once you establish that, the theorem is proven.
+	% hello picture of how shifting the domain leaves the support of Ftilde unchanged
+\end{proof}
+
+\begin{eg}[Archimedes Principle]
+	When a body is submerged in water, at each infinitesimal normal area to its surface, it experiences a force of $\text{Area} \cdot p \cdot \nu$, where $p$ is the pressure. The pressure at a point that is submerged $z$ distance under water is given by $p = z \rho$, where $\rho$ is the density of water. But then, the total force is given by (physicists write $dS$ for $d \text{vol}_{n-1}$)
+	\begin{align*}
+		F = \int_{\partial \Omega} p \cdot \nu \, dS = \rho\int_{\partial\Omega} z \cdot \nu \, dS.
+	\end{align*}
+	In particular, in the $z$-component, we get
+	\begin{align*}
+		F \cdot e_{3} = \rho \int_{\partial \Omega} (z e_{3}) \nu \, dS = \rho \int_{\Omega} 1 \, dx = \rho \text{vol}_{3}(\Omega),
+	\end{align*}
+	which is just the weight of the water that has been displaced by the volume of $\Omega$. Hence we have a mathematical verification of Archimedes Principle.
+\end{eg}
+
+\begin{eg}[Area and volume of the sphere]
+	Let $\partial B_{1} \subset \mathbb{R}^{n}$ be the unit sphere. We know
+	\begin{align*}
+		\text{vol}_{n-1}(\partial B_{1}) = \int_{\partial B_{1}} 1 \, dS = \int_{\partial B_{1}} \underbrace{p \cdot \nu(p) }_{=1} \, d S.
+	\end{align*}
+	But what is the divergence of $F(x) = x$? Well, you have to sum over each component once, each time the partial derivative is $1$, so $\operatorname{div}(x) = n$. But this gives us
+	\begin{align*}
+		\text{vol}_{n-1}(\partial B_{1}) = \int_{B_{1}} n \, dx = \text{vol}_{n}(B_{1}) \cdot n.
+	\end{align*}
+	This gives us the relation between the volume of the $n$-sphere and its area.
+\end{eg}
+
+\begin{eg}[Continuity equation (Fluid Dynamics)]
+	The continuity equation appears in many variations in physics. For instance, in fluid dynamics, we assign each point and time in a fluid a velocity $v$ and a density $\rho$. The mass of fluid inside a control volume $\Omega$ should satisfy
+	\begin{align*}
+		\frac{d}{dt} \int_{\Omega} \rho \, dx = \int_{\partial \Omega} \rho v \cdot \nu \, dS.
+	\end{align*}
+	But we can differentiate under the integral sign and apply the divergence theorem to get
+	\begin{align*}
+		\int_{\Omega} \partial_{t} \rho \, dx = \int_{\Omega} \operatorname{div}(\rho v) \, dx.
+	\end{align*}
+	And since this holds for all domains $\Omega$ and the functions are continuous (proof next year), this forces $\partial_{t} \rho = \operatorname{div}(\rho v)$.
+
+	Similar continuity equations hold for many other fields in physics. We saw one version of this already in electrodynamics this semester, where we have $\partial_{t} \rho = \operatorname{div}E$.
+\end{eg}
+
+\begin{definition}[Rotation (curl)]\label{def:curl}
+	Let $F \in C^{1}(\Omega, \mathbb{R}^{2})$. We define the curl, rotation or vorticity as $\operatorname{rot} F = \partial_{2} F_{1} - \partial_{1} F_{2}$.
+\end{definition}
+
+\begin{theorem}[Green's theorem]\label{thm:green-thm}
+	Let $\Omega \subset \mathbb{R}^{2}$ be a $C^{1}$ domain. Let $F \in C^{1}(\overline{ \Omega }, \mathbb{R}^{2})$ be a vector field, and $\partial \Omega$ be a curve. If we let $\tau(p)$ be the tangent vector to the curve at a point $p \in \partial \Omega$, (by convention normalise it and make it point counterclockwise). Then we have ($dL = d \text{vol}_{1}$)
+	\begin{align*}
+		\int_{\partial \Omega} F \cdot \tau \, dL = \int_{\Omega} \operatorname{rot}(F) \, dx.
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	Define another vector field by $G = F^{\perp} = (-F_{2}, F_{1})$ and apply the divergence theorem to $G$. Notice that the tangent vector $\tau$ is perpendicular to the normal vector $\nu$. Hence the relation $F \cdot \tau = - G \cdot \nu$ holds and we have by \ref{thm:div-thm},
+	\begin{align*}
+		\int_{\Omega} \operatorname{div}(G) = \int_{\partial \Omega} G \cdot \nu \, dL = \int_{\partial \Omega} - F \cdot \tau \, dL.
+	\end{align*}
+	But since $\operatorname{div}G = -\operatorname{rot} F$, we get the theorem.
+\end{proof}
+

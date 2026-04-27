@@ -1,0 +1,40 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Metric spaces}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Euclidean space $\mathbb {R}^{n}$}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Definition of metric space}{4}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Sequences in metric spaces}{4}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Open and closed sets}{6}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Continuity}{8}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Compactness}{10}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Connectedness}{14}{section.1.7}%
+\contentsline {section}{\numberline {1.8}Normed vector spaces}{17}{section.1.8}%
+\contentsline {chapter}{\numberline {2}Multidimensional differential calculus}{19}{chapter.2}%
+\contentsline {section}{\numberline {2.1}The differential}{19}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Partial derivatives}{21}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Differentiation theorems}{23}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Higher order derivatives}{26}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Taylor theorem and analyticity}{29}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Optimization problems}{34}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Basic notions}{34}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Constraint optimisation}{35}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Second order optimality conditions}{38}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Convex functions}{39}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Inverse, implicit function theorems and submanifolds}{41}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Small perturbations of the identity}{41}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Inverse function theorem}{43}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Implicit function theorem}{45}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Submanifolds of $\mathbb {R}^{n}$}{46}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Multidimensional integration}{52}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Jordan measure in $\mathbb {R}^{n}$}{52}{section.5.1}%
+\contentsline {section}{\numberline {5.2}The Jordan measure under linear transformations}{57}{section.5.2}%
+\contentsline {section}{\numberline {5.3}The Riemann integral}{59}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Change of variables}{62}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Cavalieri's principle and Fubini's theorem}{67}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Differentiation under the integral sign}{69}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Improper integrals}{70}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Integrals over parametrised submanifolds}{71}{section.5.8}%
+\contentsline {chapter}{\numberline {6}Global integral theorems}{75}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Parametrised graphical submanifolds}{75}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Local divergence theorem}{77}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Integration over compact submanifolds}{78}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Global divergence theorem}{80}{section.6.4}%

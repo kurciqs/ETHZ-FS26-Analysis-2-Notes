@@ -21,7 +21,7 @@
 
 The goal now is to show a lot of theorems for small open balls around individual points on a manifold. Then on \textit{compact} manifolds, which we will define later, we will be able to generalise the theorems easily.
 
-\section{Parametrised submanifolds}
+\section{Parametrised graphical submanifolds}
 
 We need to prepare definitions and Lemmas that will help us formulate the divergence theorem.
 
@@ -87,9 +87,9 @@ I added one more thing that I thought would be useful when dealing with manifold
 	\[
 		D\varphi(u_0) = D\psi(v_0)\, D(\psi^{-1}\circ\varphi)(u_0).
 	\]
-	Since $D(\psi^{-1}\circ\varphi)(u_0)$ is invertible, the images coincide:
+	Since $D(\psi^{-1}\circ\varphi)(u_0)$ is invertible, the domains ultimately coincide and the images
 	\[
-		\operatorname{Im}(D\varphi(u_0)) = \operatorname{Im}(D\psi(v_0)).
+		D\varphi(U) = D\psi(V).
 	\]
 \end{remark}
 
@@ -103,7 +103,7 @@ I added one more thing that I thought would be useful when dealing with manifold
 
 \newpage
 
-\section{Local integration theorems}
+\section{Local divergence theorem}
 
 We are now in a position to prove a weaker version of the divergence theorem. We will prove theorems using always one particular parametrisation, but don't forget that we put in the work last chapter and defined \ref{def:int-subm} and \ref{def:d-vol} such that they are invariant under such reparametrisations and also isometries.
 
@@ -113,7 +113,7 @@ This will be the setup for every Proposition in the following section. Let $\Ome
 \end{align*}
 where $g: V \subset \mathbb{R}^{n-1} \to \mathbb{R}$ is the local graphic representation, and the induced $\phi(y) = (y, g(y))$.
 
-\begin{prop}[Divergence theorem reduced version]\label{prop:div-thm-red}
+\begin{prop}[Divergence theorem reduced version 1]\label{prop:div-thm-red}
 	Let $f: \overline{ \Omega } \to \mathbb{R}$ be a $C^{1}$ function. Assume $\text{spt}(f) \subset \overline{ \Omega } \cap B_{r}(p_{0})$. Then
 	\begin{align*}
 		\int_{\Omega} \partial_{n} f \, dx = \int_{M} f(p) \nu(p) \cdot e_{n} \, d \text{vol}_{M}(p).
@@ -130,7 +130,7 @@ where $g: V \subset \mathbb{R}^{n-1} \to \mathbb{R}$ is the local graphic repres
 	\begin{align*}
 		\int_{\Omega} \partial_{n}f \, dx = \int_{\Gamma} \partial_{n} f(x,x_{n}) \, dx.
 	\end{align*}
-	But by Fubini, we can integrate for each vertical line (to do this rigorously gets ugly, see notes), so
+	But by Fubini, we can integrate for each vertical line (to do this rigorously gets ugly, see notes), so by Fundamental Theorem of Calculus, we get
 	\begin{align*}
 		\int_{V} \int_{-\infty}^{g(y)} \partial_{n}f(y, x_{n}) \, dx_{n} dy = \int_{V} [f(y, \cdot )]_{-\infty}^{g(y)} \, dy = \int_{V} f(y, g(y)) \, dy.
 	\end{align*}
