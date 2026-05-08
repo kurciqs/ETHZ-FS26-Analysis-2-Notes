@@ -88,22 +88,43 @@ The rest of the work today will go into showing that $\dim V \leq \text{deg}(p)$
             w^{(j)}(t_{0}) = 0 \quad \forall 0 \leq j \leq m-1
         \end{cases}
     \end{align*}
-    Then $z \equiv  0$ is the unique solution.
+    Then $w \equiv  0$ is the unique solution.
 \end{lemma}
 \begin{proof}
     Consider $u(t) = \sum_{i=0}^{m-1} (w^{(i)}(t))^{2}$. Then
-    \begin{align*}
-        u'(t) = 2w^{(m-1)}(t) \cdot w^{(m)}(t) + \sum_{i=0}^{m-2} 2 w^{(i)}(t) \cdot w^{(i+1)}(t) = 0.
-    \end{align*}
-    Because $Lw = 0$, $w^{(m)}(t) = - \sum_{i=0}^{m-1} a_{i}w^{(i)}(t)$ and we can bound
-    \begin{align*}
-        \left| w^{(m)}(t) \right| \leq C \sum_{i=0}^{m-1} \left| w^{(i)}(t) \right|,
-    \end{align*}
-    with $C = \max_{i} \left| a_{i} \right|$. Hence by $2ab \leq a^{2}+b^{2}$ (or Cauchy-Schwartz \ref{lem:cauchy-schwartz}),
-    \begin{align*}
-        u'(t) \leq \sum_{i=0}^{m-2} (w^{(i)}(t))^{2} + \sum_{i=0}^{m-1} (w^{(u+1)}(t))^{2} + 2 C \left( \sum_{i=0}^{m-1} w^{(i)}(t) \right)^{2} \leq 2u(t) + 2C m u(t) = 2(1+ Cm)u(t).
-    \end{align*}
-    Applying Grönwall \ref{lem:gronwall}, we get $0 \leq u(t) \leq u(t_{0}) \cdot \text{exp}(\overline{ C } (t-t_{0}))$ for $\overline{ C } = 2(1+Cm)$. But since $u(t_{0}) = 0$, we conclude $u(t) = 0$.
+\begin{align*}
+    u'(t) = 2w^{(m-1)}(t) \cdot w^{(m)}(t) + \sum_{i=0}^{m-2} 2 w^{(i)}(t) \cdot w^{(i+1)}(t).
+\end{align*}
+Because $Lw = 0$, $ w^{(m)}(t) = - \sum_{i=0}^{m-1} a_{i}w^{(i)}(t)$ and therefore
+\begin{align*}
+    \left| w^{(m)}(t) \right|
+    \leq \sum_{i=0}^{m-1} |a_i|\, |w^{(i)}(t)|
+    \leq C \sum_{i=0}^{m-1} \left| w^{(i)}(t) \right|,
+\end{align*}
+with $C = \max_{i} |a_i|$. Hence, by $2ab \leq a^{2}+b^{2}$,
+\begin{align*}
+    u'(t)
+    &\leq \sum_{i=0}^{m-2} \left( (w^{(i)}(t))^{2} + (w^{(i+1)}(t))^{2} \right)
+        + 2 \left| w^{(m-1)}(t) \right| \left| w^{(m)}(t) \right| \\
+    &\leq 2u(t)
+        + 2C \left| w^{(m-1)}(t) \right|
+        \sum_{i=0}^{m-1} \left| w^{(i)}(t) \right| \\
+    &\leq 2u(t)
+        + C \left( (w^{(m-1)}(t))^{2}
+        + \left( \sum_{i=0}^{m-1} |w^{(i)}(t)| \right)^{2} \right).
+\end{align*}
+Using $\left( \sum_{i=0}^{m-1} |w^{(i)}(t)| \right)^{2} \leq m \sum_{i=0}^{m-1} (w^{(i)}(t))^{2} = mu(t)$, we obtain
+\begin{align*}
+    u'(t)
+    \leq 2u(t) + C(u(t) + mu(t))
+    = (2 + C(m+1))u(t).
+\end{align*}
+Applying Grönwall \ref{lem:gronwall}, we get
+\begin{align*}
+    0 \leq u(t)
+    \leq u(t_{0}) \exp(\overline{C}(t-t_{0}))
+\end{align*}
+for $\overline{C} = 2 + C(m+1)$. Since $u(t_{0}) = 0$, we conclude that $u(t)=0$, and hence $w(t)=0$..
 \end{proof}
 
 \begin{prop}[Initial value problem]\label{prop:init-val-prob}
