@@ -1,0 +1,54 @@
+The next step is to solve the inhomogeneous equations $Ly(x) = f(x)$ in $I$ and $L = p\left( \frac{d}{dt} \right) $. We notice that if we take two solutions $y_{1}, y_{2}$, then $y_{1} - y_{2} \in V$. So actually,
+\begin{align*}
+	\left\{ y: I \to \mathbb{C} \mid Ly = f \right\} = y_{\text{part}} + V,
+\end{align*}
+where $y_{\text{part}}$ is some \textit{one particular} solution to $Ly = f$. But how do we find a particular solution in general?
+
+In the special (but common) case that $f(t) = q(t)e^{ \omega t }$ can be solved as follows. If $\omega$ is not a root of $p$, then consider $y(t) = Q(t) e^{ \omega t }$ for some polynomial $Q$ with degree $n$. If $\omega = \alpha_{j}$ is a root of $p$, consider instead $y(t) = Q(t)t^{m_{j}}e^{ \omega t }$.
+
+Then if $f(t)$ is a general poly-exp function, we apply the superposition principle. Indeed, if $y_{1}, y_{2}$ solve $L_{i} y_{i} = f_{i}$ and some $m$ initial conditions, then $a_{1} y_{1} + a_{2} y_{2}$ solves $Ly = a_{1} f_{1} + a_{2} f_{2}$ and the corresponding initial conditions. And then you plug in the above Ansatz and adjust the coefficients. That's why it's called "variation of coefficients". 
+
+For general $f(t)$, we want to represent $y_{\text{part}}(t)$ with a special type of integral, a "pulse". Physically, a pulse corresponds to applying a force to an object such that its velocity is immediately changed, but the position remains constant. But we do this for derivatives of general order.
+
+\begin{definition}[Pulse]\label{def:pulse}
+	Let $p$ be the characteristic polynomial of some linear constant coefficient differential equation and $L = p\left( \frac{d}{dt} \right)$. Denote by $P(t)$ on $I$ (s.t. $0 \in I$) the unique solution to
+	\begin{align*}
+		Lz = 0 , \quad
+		z^{(k)}(0) = 0 \quad \forall 0 \leq k \leq m-2, \quad
+		z^{(m-1)}(0) = 1. 
+	\end{align*}
+\end{definition}
+
+\begin{prop}[Duhamel principle]\label{prop:duhamel}
+	Given $f: I \to \mathbb{C}$ continuous and a polynomial $p$ with $L = p\left( \frac{d}{dt} \right) $, consider the initial value problem
+	\begin{align*}
+		L y(t) = f(t), \quad \forall k \leq m-1: y^{(k)}(t_{0}) = 0.
+	\end{align*}
+	Then the solution is given by
+	\begin{align*}
+		y(t) = \int_{t_{0}}^{t} f(s) P(t-s)  \, ds.
+	\end{align*}
+\end{prop}
+\begin{proof}
+    It is left to verify the solution. We compute
+    \begin{align*}
+        y'(t) = f(t) P(t-t) + \int_{0}^{t} f(s) P'(t-s) \, ds = \int_{0}^{t} f(s)P'(t-s) \, ds.
+    \end{align*}
+    But we can differentiate repeatedly to get
+    \begin{align*}
+        y^{(k)}(t) = \int_{0}^{t} f(s)P^{(k)}(t-s) \, ds
+    \end{align*}
+    for $0 \leq k \leq m - 1$ and at last,
+    \begin{align*}
+        y^{(m)}(t) = f(t) P^{(m-1)} + \int_{0}^{t} f(s) P^{(m)}(t-s) \, ds = f(t).
+    \end{align*}
+    Using linearity, 
+    \begin{align*}
+        Ly(t) = \sum_{i=0}^{m} a_{i}y^{(i)}(t) = \sum_{i=0}^{m} a_{i} \int_{0}^{t} f(s) P^{(i)}(t-s) \, ds + a_{m}f(t) = \int_{0}^{t} f(s) LP(t-s) \, ds + f(t) = f(t),
+    \end{align*}
+    since $P$ is taken to be such that $LP = 0$.
+\end{proof}
+
+Now that we have this, we can solve really any linear constant coefficient ODE. It's not done like this in practice, but theoretically, you'd find the homogeneous first, such that it satisfies the general initial conditions, then add the particular solution that solves the inhomogeneous and exists by above proposition. Then add them together.
+
+% i'm not kidding when i say we didn't do fuck all here, he did the pumped HO but no one cares about that it's too easy after all we've been through

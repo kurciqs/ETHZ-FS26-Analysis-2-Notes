@@ -95,8 +95,10 @@ With the tool of differential forms, we can prove a very powerful theorem that i
 	We say that $M \subset \mathbb{R}^{n}$ is a parametrised $m$-dimensional submanifold with a boundary if there exists a (any) parametrised $m$-submanifold $\phi: V \subset \mathbb{R}^{m} \to \mathbb{R}^{n}$ and a bounded $C^{1}$ domain $U \subset \mathbb{R}^{m}$ with $\overline{ U } \subset V$ such that $M = \phi(U)$.
 
 	The \textit{manifold} boundary of $M$ is then defined as $\partial M := \phi(\partial U)$.
-	
-	The orientation of $M$ is inherited from $\phi(V)$, i.e. the charts for $M$ are those of $U$ but composed with $\phi$. $\partial M$ has its orientation induced by $\partial U$, by the same principle. And now notice that these parametrisations of $M$ and $\partial M$ are also positive, because the transition map between $\phi \circ \psi_{i}$ and $\phi \circ \psi_{j}$ is just $(\phi \circ \psi_{i})^{-1} \circ (\phi \circ \psi_{j})$ and the $\phi$ nicely cancels and we know the determinant of the transition between $\psi_{i}$ and $\psi_{j}$ is positive. Hence we can treat $M$ and $\partial M$ as any other positively oriented manifolds, but their orientation is induced by $U$ and $\partial U$ as above.
+
+	The orientation of $M$ is just the atlas $\left\{ \phi \right\}$. On the other hand, $\partial M$ has its orientation induced by $\partial U$, i.e. the atlas of $\partial M$ is $\phi \circ \psi_{i}$, where $\psi_{i}$ are the charts for $\partial U$, and $\partial U$ is oriented by the exterior unit normal (\ref{prop:ext-unit-norm}).
+
+	And now notice that these parametrisations of $M$ and $\partial M$ are also positive, because the transition map between $\phi \circ \psi_{i}$ and $\phi \circ \psi_{j}$ is just $(\phi \circ \psi_{i})^{-1} \circ (\phi \circ \psi_{j})$ and the $\phi$ nicely cancels and we know the determinant of the transition between $\psi_{i}$ and $\psi_{j}$ is positive. Hence we can treat $M$ and $\partial M$ as any other positively oriented manifolds, but their orientation is induced by $U$ and $\partial U$ as above.
 \end{definition}
 
 \begin{theorem}[Generalised Stokes Theorem]\label{thm:stokes}
@@ -140,13 +142,34 @@ A corollary is the Stokes theorem from physics which we've come to love so much.
 	A physicist writes $F \, dL$ for the dot product between $F$ and a line element $dL$.
 \end{theorem}
 \begin{proof}
-    Let $\alpha = F^\top $ be the differential form. Then the only thing that is left to verify is that
-    \begin{align*}
-        \int_{\Sigma } \operatorname{rot} (F) \cdot \nu \, dS = \int_{\Sigma } d\alpha.
-    \end{align*}
-    Indeed, if we feed the Jacobi matrix of some positively oriented parametrisation $\phi$ to $d\alpha $, we get
-    \begin{align*}
-        d\alpha_{\phi(y)} (D \phi(y)) = \det ( \operatorname{rot} (F \circ \phi(y)), D\phi(y)) = \operatorname{rot} (F) \cdot (\partial_{1} \phi \times \partial_{2}\phi).
-    \end{align*}
+	Let $\alpha = F^\top $ be the differential form. Then the only thing that is left to verify is that
+	\begin{align*}
+		\int_{\Sigma } \operatorname{rot} (F) \cdot \nu \, dS = \int_{\Sigma } d\alpha.
+	\end{align*}
+	Indeed, if we feed the Jacobi matrix of some positively oriented parametrisation $\phi$ to $d\alpha $, we get
+	\begin{align*}
+		d\alpha_{\phi(y)} (D \phi(y)) = \det ( \operatorname{rot} (F \circ \phi(y)), D\phi(y)) = \operatorname{rot} (F) \cdot (\partial_{1} \phi \times \partial_{2}\phi).
+	\end{align*}
 \end{proof}
+
+\begin{remark}[Right hand rule]
+	The right-hand rule in Stokes' theorem in $\mathbb{R}^3$ determines the orientation of $\partial M$ from that of $M$. Let $\phi:U\subset\mathbb{R}^2\to M\subset\mathbb{R}^3$ be a positively oriented chart, i.e. we define
+	\begin{align*}
+		\nu_M := \partial_u\phi \times \partial_v\phi,
+	\end{align*}
+	such that $\det (\nu_{M}, \partial_{u} \phi, \partial_{v} \phi) > 0$ (see Proposition \ref{prop:norm-orient}). 
+
+	Let $\psi:I\to\partial U$ be a positively oriented parametrisation (i.e. such that it has good determinant w.r.t. the \textit{outward} normal) and set $\gamma=\phi\circ\psi$. Then the boundary tangent is $t=\gamma'=D\phi(\psi')$. Let $n_{\mathrm{out}}$ be the \textit{outward} normal of $\partial U$, so $(n_{\mathrm{out}},\psi')$ is positively oriented in $\mathbb{R}^2$.
+
+	Set $\eta:=D\phi(n_{\mathrm{out}})$. The key fact is that for any two vectors $(a,b)$ in $\mathbb{R}^2$ such that $\det (a, b) > 0$,
+	\begin{align*}
+		D\phi(a)\times D\phi(b) &= (\partial_{1}\phi \cdot a_{1} + \partial_{2} \phi \cdot a_{2}) \times (\partial_{1} \phi \cdot b_{1} + \partial_{2} \phi \cdot b_{2}) \\ 
+		&= (a_{1} b_{2} - a_{2} b_{1}) \partial_{1} \phi \times \partial_{2} \phi = \det (a,b) \partial_{1} \phi \times \partial_{2} \phi.
+	\end{align*}
+	But then we follow
+	\begin{align*}
+		\det (D \phi(n_{\text{out}}), D \phi( \psi'), \nu_{M}) = (D\phi(n_{\text{out}}) \times D\phi(\psi')) \cdot \nu_{M} = \det (n_{\text{out}}, \psi') \cdot \left| \partial_{1} \phi \times \partial_{2} \phi \right|^{2} > 0.
+	\end{align*}	
+	Hence $(\eta,t,\nu_M)$ is positively oriented and since $\nu_{M} \perp \eta, t$, we conclude that $\nu_{M} = \eta \times t$. And this is what the right hand rule really says: given $t$ and $\eta$, you can infer which direction $\nu_{M}$ points in by curling your fingers. But I'm still not sure why $\eta$ always points outwards.
+\end{remark}
 
