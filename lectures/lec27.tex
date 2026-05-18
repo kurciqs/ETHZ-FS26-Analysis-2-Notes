@@ -89,7 +89,7 @@ Now we can prove the full correct version, for $C^{1}$ domains with \textit{any}
 	\begin{align*}
 		\frac{d}{dt} \Big|_{t=0} \int_{\Omega} \tilde{F}_{i}(x + te_{i}) \, dx = \int_{\Omega+t e_{i}} \partial_{i} \tilde{F}_{i}(x) \, dx.
 	\end{align*}
-	But the RHS doesn't actually depend on $t$ once it's small enough, because the support of $\tilde{F}$ is contained very well in $\Omega$ (so there's always at least some ball distance to the boundary), so shifting very little doesn't even change the points we integrate over. Once you establish that, the theorem is proven.
+	But the RHS doesn't actually depend on $t$ once it's small enough, because the support of $\tilde{F}$ is contained very well in $\Omega$ (so there's always at least some positive ball distance to the boundary), so shifting very little doesn't even change the points we integrate over. Once you establish that, the theorem is proven.
 	% hello picture of how shifting the domain leaves the support of Ftilde unchanged
 \end{proof}
 
@@ -135,7 +135,7 @@ Now we can prove the full correct version, for $C^{1}$ domains with \textit{any}
 	Let $F \in C^{1}(\Omega, \mathbb{R}^{2})$. We define the curl, rotation or vorticity as $\operatorname{rot} F = \partial_{2} F_{1} - \partial_{1} F_{2}$.
 \end{definition}
 
-\begin{theorem}[Green's theorem]\label{thm:green-thm}
+\begin{theorem}[Green's theorem in the plane]\label{thm:green-thm}
 	Let $\Omega \subset \mathbb{R}^{2}$ be a $C^{1}$ domain. Let $F \in C^{1}(\overline{ \Omega }, \mathbb{R}^{2})$ be a vector field, and $\partial \Omega$ be a curve. If we let $\tau(p)$ be the tangent vector to the curve at a point $p \in \partial \Omega$, (by convention normalise it and make it point counterclockwise). Then we have ($dL = d \text{vol}_{1}$)
 	\begin{align*}
 		\int_{\partial \Omega} F \cdot \tau \, dL = \int_{\Omega} \operatorname{rot}(F) \, dx.

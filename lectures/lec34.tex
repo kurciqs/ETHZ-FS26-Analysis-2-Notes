@@ -1,13 +1,13 @@
 \section{Systems of ordinary differential equations}
 
-Now it's time to generalise and formally subsume all possible ordinary differential systems of equations under one definition.
+Now it's time to generalise and formally subsume all possible ordinary differential systems of equations under one definition. We subsume a differential equation of $n$ many functions $y_{1}, \dots, y_{n}$ into a single vector $y = (y_{1}, \dots, y_{n})$ and do the work on that function.
 
 \begin{definition}[$n$-dimensional system of first-order differential equations]\label{def:n-sys-de}
-    Let $I \subset \mathbb{R}$ be an interval, $U \subset I \times \mathbb{R}^n$ open, and $F: U \rightarrow \mathbb{R}^n$ a continuous function. A differential equation of the form
+	Let $I \subset \mathbb{R}$ be an interval, $U \subset I \times \mathbb{R}^n$ open, and $F: U \rightarrow \mathbb{R}^n$ a continuous function. A differential equation of the form
 	$$
 		u^{\prime}(t)=F(t, u(t))
 	$$
-	for an unknown function $u$ is called a $n$-dimensional system of first-order differential equations. The domain of definition for a solution $u$ may only be a subinterval of $I$. It must hold that $(t, u(t)) \in U$ for all $t$ in the domain of $u$. For $\left(t_0, x_0\right) \in U$, we refer to the equations
+	for an unknown function $u: I \to \mathbb{R}^{n}$ is called a $n$-dimensional system of first-order differential equations. The domain of definition for a solution $u$ may only be a subinterval of $I$. It must hold that $(t, u(t)) \in U$ for all $t$ in the domain of $u$. For $\left(t_0, x_0\right) \in U$, we refer to the equations
 	$$
 		u^{\prime}(t)=F(t, u(t)), \quad u\left(t_0\right)=x_0
 	$$
@@ -15,52 +15,68 @@ Now it's time to generalise and formally subsume all possible ordinary different
 \end{definition}
 
 \begin{remark}[First order is all you need]\label{rem:first-order-enough}
-    We can transform any $m$-order system of equations $y^{(m)}(t) = F(t, y^{(m-1)}(t), \dots, y^{(0)}(t))$ into first-order form as follows. We will look at $u: \mathbb{R} \to \mathbb{R}^{n \cdot m}$ defined by
-    \begin{align*}
-        u(t) = 
-        \begin{pmatrix}
-            y^{(0)}(t) \\ 
-            y^{(1)}(t) \\ 
-            \vdots \\ 
-            y^{(m-1)}(t)
-        \end{pmatrix}
-    \end{align*}
-    But then you can write $u'(t) = \tilde{F}(t, u(t)) = (u_{1}(t), u_{2}(t), \dots, u_{m-1}, f(x,t))$ and the equation $u'(t) = F(t, u(t))$ is equivalent to
-    \begin{align*}
-        u'_{0} = u_{1}(t), \quad u_{1}'(t) = u_{2}(t), \quad \dots, \quad u'_{m-1}(t) = f(t, u_{0}(t), \dots, u_{m-1}(t)).
-    \end{align*}
-    But the first $m-1$ equations hold trivially because $u'_{i}(t) = u_{i+1}(t)$ by construction. 
-    One can also transfer initial values like this.
+	We can transform any $m$-order equation $y^{(m)}(t) = f(t, y^{(m-1)}(t), \dots, y^{(0)}(t))$, where $y: I \to \mathbb{R}^{n}$ and $f: \mathbb{R}^{nm+1} \to \mathbb{R}^{n}$ into first-order form as follows. We will look at $u: I \to \mathbb{R}^{n \cdot m}$ defined by
+	\begin{align*}
+		u(t) =
+		\begin{pmatrix}
+			y^{(0)}(t) \\
+			y^{(1)}(t) \\
+			\vdots     \\
+			y^{(m-1)}(t)
+		\end{pmatrix}
+	\end{align*}
+	But then you can write $u'(t) = F(t, u(t)) := (u_{1}(t), u_{2}(t), \dots, u_{m-1}, f(t, u(t)))$ and the equation $u'(t) = F(t, u(t))$ is equivalent to
+	\begin{align*}
+		u'_{0} = u_{1}(t), \quad u_{1}'(t) = u_{2}(t), \quad \dots, \quad u'_{m-1}(t) = f(t, u_{0}(t), \dots, u_{m-1}(t)).
+	\end{align*}
+	But the first $m-1$ equations hold trivially because $u'_{i}(t) = u_{i+1}(t)$ by construction, and the last one is equivalent to $y^{(m)}(t) = f(t, \dots)$.
+	One can also transfer initial values like this.
 \end{remark}
 
-Now we begin with the simplest case, that is the one of constant coefficients, i.e. 
+Now we begin with the simplest case, that is the one of constant coefficients, i.e.
 \begin{align*}
-    F(t, u(t)) = A \cdot u(t), \quad A \in \mathbb{R}^{n \times n}.
+	F(t, u(t)) = A \cdot u(t), \quad A \in \mathbb{R}^{n \times n}.
 \end{align*}
-The case $n = 1$ is trivial and we know it. And we can replicate the same even when the matrix is not a scalar.
+The case $n = 1$ is trivial and we know it from Analysis 1 (separation of variables). And we can replicate the same even when the matrix is not a scalar.
 
 For that, we need to define the exponential of matrices, so $\text{exp}(A)$, where $A \in \mathbb{R}^{n \times n}$. But we just do the Taylor expansion
 \begin{align*}
-    \text{exp}(A) = \sum_{j = 0}^{\infty} \frac{A^{j}}{j!},
+	\text{exp}(A) = \sum_{j = 0}^{\infty} \frac{A^{j}}{j!},
 \end{align*}
 i.e. the limit of the partial sums in $\mathbb{R}^{n \times n}$. Does this converge? Well, using the Hilbert-Schmidt norm,
 \begin{align*}
-    \lVert \sum_{j=0}^{N} \frac{A^{j}}{j!} \rVert_{2} \leq \sum_{j=0}^{N} \frac{1}{j!}\lVert A^{j} \rVert_{2},
+	\lVert \sum_{j=0}^{N} \frac{A^{j}}{j!} \rVert_{2} \leq \sum_{j=0}^{N} \frac{1}{j!}\lVert A^{j} \rVert_{2},
 \end{align*}
 and one shows as an exercise that $\lVert A^{j} \rVert_{2} \leq \lVert A \rVert_{2}^{j}$, and then the series is bounded. Without proof, we're going to also state that if $A, B$ commute, then $\text{exp}(A+B) = \text{exp}(A) \cdot \text{exp}(B)$. And if $S$ is invertible, then $\text{exp}(S^{-1} A S) = S^{-1} \text{exp}(A) S$.
 
 It is a matter of linear algebra and Jordan normal form stuff that shows that any matrix can be almost diagonalised as $S^{-1} A S = D + N$, where $N$ is nilpotent (vanishes if raised to high enough power) and $D$ is diagonal. And then $\text{exp}(D+N) = \text{exp}(D) \cdot \text{exp}(N)$, is fairly easy to compute because $D$ is diagonal and $N$ vanishes after taking its power high enough, so $\text{exp}(N)$ only has finitely many non-zero terms.
 
 \begin{prop}[Solution to constant coefficient case]\label{prop:const-coeff-case}
-    The solution for $u'(t) = A u(t)$, $u(t_{0}) = x_{0}$ is given by
-    \begin{align*}
-        u(t) = \text{exp}(A(t-t_{0}))x_{0}.
-    \end{align*}
+	The solution for $u'(t) = A u(t)$, $u(t_{0}) = x_{0}$ is given by
+	\begin{align*}
+		u(t) = \text{exp}(A(t-t_{0}))x_{0}.
+	\end{align*}
 \end{prop}
 \begin{proof}
-    Initial conditions are satisfied. Now, define $v(t) = \text{exp}(At)$ and differentiate
-    \begin{align*}
-        v'(t) = \lim_{t \to 0} \frac{\text{exp}(At) - I}{t} = \lim_{t \to 0} \frac{\sum_{j = 1}^{\infty} \frac{1}{j!}A^{j}t^{j}}{t} = \frac{A^{1}}{1!} = A.
-    \end{align*}
+	Initial conditions are satisfied. Now, define $v(t) = \text{exp}(At)$ and differentiate
+	\begin{align*}
+		v'(0) = \lim_{t \to 0} \frac{\text{exp}(At) - I}{t} = \lim_{t \to 0} \frac{\sum_{j = 1}^{\infty} \frac{1}{j!}A^{j}t^{j}}{t} = \frac{A^{1}}{1!} = A.
+	\end{align*}
+	At any other time, the derivative is given by
+	\begin{align*}
+		v'(t) = \lim_{h \to 0} \frac{\text{exp}(A(t+h)) - \text{exp}(At)}{h} = \text{exp}(At) \lim_{h \to 0} \frac{\text{exp}(Ah) - I}{h} = \text{exp}(At) v'(0) = A \cdot \text{exp}(At) = Av(t).
+	\end{align*}
+	The function $u(t) = x_{0} v(t)$ then also satisfies $u(t_{0}) = x_{0}$, hence is a solution.
 
+	To show uniqueness, assume that on an interval $I \subseteq \mathbb{R}$ with $t_0 \in I$, we have $v: I \rightarrow \mathbb{C}^n$ of class $C^1$ solving the initial value problem. Consider the function $t \mapsto \exp (-A\left(t-t_0\right)) v(t)$ on $I$ and calculate its derivative using the product rule. It holds
+	\begin{align*}
+		 & \left(\text{exp}(-A\left(t-t_0\right)) v(t)\right)' =-A \text{exp}(-A\left(t-t_0\right)) v(t)+\text{exp}(-A\left(t-t_0\right)) v^{\prime}(t) \\
+		 & \quad=-A \text{exp}(-A\left(t-t_0\right)) v(t)+\text{exp}(-A\left(t-t_0\right)) A v(t)=0
+	\end{align*}
+
+	since $A$ and $\text{exp}(-A\left(t-t_0\right))$ commute (they commute at each partial sum). Therefore, the mapping $t \mapsto \text{exp}(-A\left(t-t_0\right)) v(t)$ is constant and thus equal to its value $v(t_0)=x_0$ at $t_0$.
+
+	Multiplying the obtained identity $\text{exp}(-A\left(t-t_0\right)) v(t)=x_0$ by $\text{exp}(A\left(t-t_0\right))$ on both sides we obtain $v(t)=\text{exp}(A\left(t-t_0\right)) x_0$ for all $t \in I$, as claimed. This proves the uniqueness.
 \end{proof}
+
+

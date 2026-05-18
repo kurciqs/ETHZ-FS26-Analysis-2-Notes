@@ -1,0 +1,65 @@
+\section{Picard-Lindelöf Theorem}
+
+We will now use properties of metric spaces to prove existence and uniqueness of solutions to systems of ODEs.
+
+
+\begin{definition}[Space of continuous bounded functions]\label{def:space-cont-bdd}
+    Let $(Y, d)$ be a metric space. Define 
+    \begin{align*}
+        C_{b}(Y, \mathbb{R}^{n}) = \left\{ f: Y \to \mathbb{R}^{n} \text{ continuous and bounded} \right\}.
+    \end{align*}
+    This forms a vector space and we endow it with the norm $\lVert f \rVert_{\infty} = \sup_{y \in Y} \left| f(y) \right|$. 
+\end{definition}
+
+\begin{definition}[Uniform convergence]\label{def:unif-conv}
+    Let $f_{k}: Y \to \mathbb{R}^{n}$ be a sequence of continuous functions with function limit $f$. We say that $f_{k} \to f$ uniformly, if 
+    \begin{align*}
+        \forall \epsilon > 0 \; \exists N \in \mathbb{N} \text{ s.t. } \forall y \in Y, k \geq N: \left| f_{k}(y) - f(y) \right| < \epsilon.
+    \end{align*}
+\end{definition}
+
+\begin{lemma}[Uniform limit of continuous functions is continuous]\label{lem:unif-lim-cont}
+    Let $(Y, d)$ be a metric space and $f_{k}: Y \to \mathbb{R}^{n}$ a sequence of continuous functions such that $f_{k} \to f$ uniformly. Then $f$ is continuous. 
+\end{lemma}
+\begin{proof}
+    Fix $y \in Y$ and $\epsilon > 0$. By uniform convergence, there exists an $N \in \mathbb{N}$ such that $\left| f_{N}(z) - f(z) \right| < \frac{\epsilon}{3}$ for all $z \in Y$. By continuity of $f_{N}$, $\exists \delta > 0$ such that $f(B_{\delta}(y)) \subset B_{\epsilon / 3}(f_{N}(y))$. 
+
+    Using both assumptions, for $z \in B_{\delta}(y)$, we have
+    \begin{align*}
+        \left| f(z) - f(y) \right| \leq \left| f(z) - f_{N}(y) \right| + \left| f_{N}(y) - f_{N}(z) \right| + \left| f_{N}(y) - f(y) \right| \leq \epsilon.
+    \end{align*}
+    Since $y$ was arbitrary, $f$ is continuous everywhere, as claimed.
+\end{proof}
+
+\begin{lemma}[Cauchy sequence convergenes uniformly]\label{lem:cauchy-unif}
+    Let $f_{k} \in C_{b}(Y, \mathbb{R}^{n})$ be a Cauchy sequence. Then $f_{k} \to f$ converges to some $f: Y \to \mathbb{R}^{n}$ \textit{uniformly}.
+\end{lemma}
+\begin{proof}
+    By Cauchy property, for $\epsilon > 0$, $\exists N$ such that $k, \ell \geq N$ implies $\lVert f_{k} - f_{\ell} \rVert_{\infty} < \epsilon$.
+
+    For any fixed $y \in Y$, we notice that $f_{k}(y)$, which is a sequence in $\mathbb{R}^{n}$, is Cauchy, hence converges to a point in $\mathbb{R}^{n}$ that we define as $f(y)$. 
+
+    So we have to show the convergence is uniform. Fix $\epsilon > 0$, receive a $N \in \mathbb{N}$ as above. Then for any $k \geq N$, $y \in Y$ and $\ell \geq N$, we have
+    \begin{align*}
+        \left| f_{k}(y) - f_{\ell}(y) \right| \leq \lVert f_{k} - f_{\ell} \rVert_{\infty} < \epsilon.
+    \end{align*}
+    But we can take $\ell \to \infty$, and we know $f_{\ell}(y) \to f(y)$, by definition and since the norm is a continuous map, 
+    \begin{align*}
+        \lim_{\ell \to \infty} \left| f_{k}(y) - f_{\ell}(y) \right| = \left| f_{k}(y) - f(y) \right| \leq \epsilon,
+    \end{align*}
+    for all $k \geq N$ and any $y \in Y$. But this just proves uniform convergence. 
+\end{proof}
+
+\begin{prop}[$C_{b}(Y, \mathbb{R}^{n})$ is complete]\label{prop:cb-comp}
+    The space $C_{b}(Y, \mathbb{R}^{n})$ is a complete metric space.
+\end{prop}
+\begin{proof}
+    We have to show that if $f_{k} \in C_{b}(Y, \mathbb{R}^{n})$ is a Cauchy sequence, then it has a limit in $C_{b}(Y, \mathbb{R}^{n})$. But we already did most of the work.
+
+    By \ref{lem:cauchy-unif}, $f_{k}$ converges uniformly to a function $f: Y \to \mathbb{R}^{n}$. By \ref{lem:unif-lim-cont}, $f$ is hence continuous. And so it remains to show that $f$ is bounded. But we know there exists $N \in \mathbb{N}$ such that 
+    \begin{align*}
+        \lVert f_{N} - f \rVert_{\infty} < 1 \implies \sup \left| f \right| \leq \sup \left| f_{N} \right| + 1 < \infty.
+    \end{align*}
+    Hence $f$ is a limit function in $C_{b}(Y, \mathbb{R}^{n})$. 
+\end{proof}
+
