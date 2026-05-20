@@ -1,0 +1,114 @@
+Using these little Lemmas, we can state the main result of this chapter. Roughly speaking, it says the following: every initial value problem that is locally Lipschitz has a unique solution. This solution can either be extended to all of $\mathbb{R}$ as a domain or until it explodes so that we couldn't define a solution outside of our solution interval.
+
+\begin{prop}[Local existence and uniqueness via Picard]\label{prop:loc-ex-uniq}
+	Let $r > 0$, $(t_{0}, x_{0}) \in \mathbb{R} \times \mathbb{R}^{n}$ and consider
+	\begin{align*}
+		F: (t_{0} - r, t_{0}+r) \times B_{r}(x_{0}) \to \mathbb{R}^{n}
+	\end{align*}
+	continuous. Suppose $\exists C \geq 1, L > 0$ such that
+	\begin{align*}
+		\left| F(t,x)  \right| \leq C, \quad \left| F(t, x_{1}) - F(t, x_{2}) \right| \leq L \left| x_{1}-x_{2} \right|
+	\end{align*}
+	for all $t \in (t_{0}-r, t_{0}+r)$ and $x, x_{1},x_{2} \in B_{r}(x_{0})$.
+
+	Then, for any $\delta > 0$ with $\delta < \min\left\{ \tfrac{r}{2C}, \tfrac{1}{2L}\right\}$, there exists a \textit{unique} differentiable function $u: (t_{0} - \delta, t_{0} + \delta) \to B_{r}(x_{0})$ satisfying
+	\begin{align*}
+		u(t_{0}) = x_{0}, \quad u'(t) = F(t,u(t)).
+	\end{align*}
+\end{prop}
+\begin{proof}
+	Choose $\delta > 0$ as proposed and denote $I = (t_{0} - \delta, t_{0}+\delta)$. We can rewrite the differential equation as
+	\begin{align*}
+		u(t) = x_{0} + \int_{t_{0}}^{t} F(s,u(s))  \, ds,
+	\end{align*}
+	where we integrate component-wise. If we could make this into a fixed point equation for a fitting Lipschitz contraction, we'd get the result from Banach Fixed Point Theorem \ref{thm:banach_fixed_point}.
+
+	For that, we define
+	\begin{align*}
+		V = \left\{ u \in C(I, \mathbb{R}^{n}) \mid \lVert u - x_{0} \rVert_{\infty} \leq r_{0}  \right\},
+	\end{align*}
+	which is a subset of $C(I, \mathbb{R}^{n})$, which is a complete metric space with supremum norm $\lVert \cdot \rVert_{\infty}$ by the same proof as $C_{b}(I, \mathbb{R}^{n})$. But $V$ is a closed subset of a complete space, is hence itself complete.
+
+	We define the \textit{Picard map} $T: V \to C(I, \mathbb{R}^{n})$ by
+	\begin{align*}
+		(Tu)(t) = x_{0} + \int_{t_{0}}^{t} F(s,u(s))  \, ds,
+	\end{align*}
+	and look for the fixed point. First, we have to verify that $T$ maps into $V$. For that, let $u \in V$ and $t \in I$
+	\begin{align*}
+		\left| Tu(t) - x_{0} \right| = \left| \int_{t_{0}}^{t} F(s,u(s))  \, ds \right| \leq \int_{t_{0}}^{t} \left| F(s, u(s)) \right|  \, ds \leq C \left| t-t_{0} \right| \leq C \delta \leq \frac{r}{2}.
+	\end{align*}
+	So the Picard map can be restricted to $T: V \to V$. Now we show that it is a Lipschitz contraction by computing
+	\begin{align*}
+		\left|T u_1(t)-T u_2(t)\right| & =\left|\int_{t_0}^t F\left(s, u_1(s)\right)-F\left(s, u_2(s)\right) d s\right|                                \\
+		                               & \leq \int_{t_0}^t\left|F\left(s, u_1(s)\right)-F\left(s, u_2(s)\right)\right| d s                             \\
+		                               & \leq \int_{t_0}^t L\left|u_1(s)-u_2(s)\right| d s                                                             \\
+		                               & \leq L\left|t-t_0\right| \sup _{s \in\left(t_0-\delta, t_0+\delta\right)}\left|\left(u_1-u_2\right)(s)\right| \\
+		                               & \leq L \delta\left\|u_1-u_2\right\|<\frac{1}{2}\left\|u_1-u_2\right\|
+	\end{align*}
+    for all $t \in I$. Hence $T$ is Lipschitz with constant $\frac{1}{2}$ and Banach applies. Note that Banach also gives us uniqueness.
+\end{proof}
+
+\begin{theorem}[Local existence and uniqueness via Peano]\label{thm:peano-ex}
+    I think Picard does the same anyway.
+\end{theorem}
+
+\begin{theorem}[Picard-Lindelöf (Cauchy-Lipschitz)]\label{thm:picard}
+	Let $U \subset \mathbb{R} \times \mathbb{R}^{n}$ open, $(t_{0}, x_{0}) \in U$ and $F: U \to \mathbb{R}^{n}$ be continuous.
+
+	Assume that $F$ is "locally Lipschitz in space". That is, for every $(t_{0}, x_{0}) \in U$, $\exists \epsilon > 0$ and $L \geq 0$ such that
+	\begin{align*}
+		\left| F(t,x) - F(t,x') \right| \leq L \left| x-x' \right| \quad \forall (t,x), (t,x') \in B_{\epsilon}((t_{0}, x_{0})) \cap U.
+	\end{align*}
+
+	Then, $\exists$ an interval $I = (a,b) \subset \mathbb{R}$ with $t_{0} \in I$ and a differentiable function $u: I \to \mathbb{R}^{d}$ such that the following holds:
+	\begin{enumerate}
+		\item $(t,u(t)) \in U$ for all $t \in I$ and $u$ solves the initial value problem
+		      \begin{align*}
+			      u'(t) = F(t,u(t)), \quad u(t_{0}) = x_{0}.
+		      \end{align*}
+		\item For any other solution $v: J \to \mathbb{R}^{n}$ of the same initial value problem with $t_{0} \in J$, we have $J \subseteq I$ and $u|_{J} = v$.
+		\item The limits $\lim_{t \to a}(t,u(t))$ and $\lim_{t \to b}(t,u(t))$ either do not exist or are not in $U$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Before we begin, one convinces themselves that locally, $F$ satisfies the assumptions in \ref{thm:peano-ex}, hence we can apply the proposition repeatedly. I won't be writing out all the qualifiers each time I invoke it.
+
+    First we tackle uniqueness. Let $u_{1}: I_{1} \to \mathbb{R}^{n}$ and $u_{2}: I_{2} \to \mathbb{R}^{n}$ satisfy
+    \begin{align*}
+        u_{i}'(t) =F(t, u_{i}(t)), \quad u_{i}(t_{0}) = x_{0}
+    \end{align*}
+    on open intervals $I_{1}, I_{2} \subset \mathbb{R}$ with $t_{0} \in I = I_{1} \cap I_{2}$ and claim $u_{1}(t) = u_{2}(t)$ on $I$. 
+
+    For that, consider
+    \begin{align*}
+        S = \left\{ t \in I \mid u_{1}(t) = u_{2}(t) \right\}.
+    \end{align*}
+    The complement $I \setminus S$ is open by continuity of $u_{1}, u_{2}$ and $S$ is not empty because $t_{0} \in S$. For any $t_{1} \in S$, both $u_{1}$ and $u_{2}$ solve the initial value problem with initial conditions $u_{1}(t_{1}) = u_{2}(t_{1}) =: x_{1}$. But Proposition \ref{thm:peano-ex} guarantees an open set around $t_{1}$ where $u_{1}$ and $u_{2}$ align. Hence $S$ is open. Since $I$ is an interval, it is connected and $I \setminus S = \emptyset$.
+
+    Now we turn to existence. Consider $\mathcal{J}$ the set of pairs $(J, v)$, where $J \subset \mathbb{R}$ is an open interval with $t_{0} \in J$ and a function $u: J \to \mathbb{R}^{n}$ that solves the initial value problem. By \ref{thm:peano-ex}, $\mathcal{J}$ is non-empty. We set $I = \bigcup_{(J,v) \in \mathcal{J}} J$ and define $u: T \to \mathbb{R}^{n}$ piecewise, which is well-defined by uniqueness. $I$ is also open as a union of open sets and solves the initial problem.
+
+    It remains to show the behavior at the end points $a$ and $b$. We show $b$, $a$ is analogous. If $b = \infty$, we are done. Otherwise, let $b = \sup I < \infty$ and assume 
+    \begin{align*}
+        \lim_{t \to b}(t,u(t)) = (b,x_{b}) \in U
+    \end{align*}
+    exists. Then, by \ref{thm:peano-ex}, we have a solution $w$ to $w(b) = x_{b}$ and $w'(t) = F(t,w(t))$ defined on $J = (b - \delta, b + \delta)$ for some $\delta > 0$. 
+
+    We use this to extend $I$, leading to a contradiction. We define $v: (a,b+\delta) \to \mathbb{R}^{n}$ by
+    \begin{align*}
+        v(t) = \begin{cases}
+            u(t) \quad &\text{if } t \in (a,b) \\ 
+            w(t) \quad &\text{if }t \in [b, b+\delta)
+        \end{cases}
+    \end{align*}
+    $v$ is continuous by construction, also at $b$. We know $v'(t) = F(t,v(t))$ holds on all $(a, b+\delta)$ maybe except at $t=b$. 
+
+    It remains to show $v$ is differentiable at $b$ and $v'(b) = F(b,v(b))$. From the right,
+    \begin{align*}
+        \lim_{h \to 0^{+}} \frac{v(b+h) - v(b)}{h} = w'(b) = F(b,w(b)) = F(b, v(b)). 
+    \end{align*}
+    From the left, using component-wise L'Hopital,
+    \begin{align*}
+        \lim_{h \to 0^{-}} \frac{u(b+h) - u(b) - F(b, u(b)) \cdot h}{h} = \lim_{h \to 0^{-}} u'(b+h) - F(b, u(b)) = 0,
+    \end{align*}
+    hence $u'(b) = F(b,u(b))$. But this proves the theorem.
+\end{proof}

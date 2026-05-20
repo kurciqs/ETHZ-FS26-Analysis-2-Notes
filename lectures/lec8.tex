@@ -1,4 +1,4 @@
-\begin{remark}\label{rem:1d-derivative}
+\begin{remark}\label{rem:1d-derivative}[1-dimensional derivative]
 	Clearly, for $m=n=1$, $L(x)=f'(x_{0})x$. Indeed
 	\begin{align*}
 		0 = \lim_{x \to 0} \frac{f(x_{0} + x) - f(x_{0}) - f'(x_{0})x}{x} \implies f'(x_{0}) = \lim_{x \to 0} \frac{f(x_{0}+x)-f(x_{0})}{x}.
@@ -38,7 +38,7 @@
 	\end{align*}
 \end{definition}
 
-\begin{remark}
+\begin{remark}[Small O criterion for differentiability]
 	Clearly, $f: U \to \mathbb{R}^{m}$ is differentiable at $x_{0} \in U$ if and only if $f(x_{0} + x) - f(x_{0}) - L(x) = \smalO(x)$.
 \end{remark}
 
@@ -99,7 +99,7 @@
 	More generally, $\partial_{v}f(x_{0}) = g'(0)$ for the function $g(t) = f(x_{0} + tv)$. So partial derivative are extremely easy to compute.
 \end{eg}
 
-\begin{remark}
+\begin{remark}[Partial derivatives]
 	If $f:U \to \mathbb{R}^{m}$ is differentiable on all of $U$, then the partial derivatives define functions
 	\begin{align*}
 		\partial_{i}f = \frac{\partial f}{\partial x_{i}}: U \to \mathbb{R}^{m}: x \mapsto \frac{\partial f}{\partial x_{i}}(x).

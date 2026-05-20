@@ -46,7 +46,7 @@ Having tackled metric spaces in general, we still have to consider vector spaces
     invoking Cauchy-Schwartz \ref{lem:cauchy-schwartz} and the triangle inequality.
 \end{proof}
 
-\begin{eg} 
+\begin{eg}[Other norms on other spaces]
     Let's consider more examples. Let $V$ be the continuous real-valued functions on $[0,1]$. Define the $p$-norm for $f \in V$:
     \begin{align*}
         \lVert f \rVert_{p} = \left( \int_{0}^{1} |f|^{p} \, dx \right)^{\frac{1}{p}}.
@@ -78,7 +78,7 @@ Having tackled metric spaces in general, we still have to consider vector spaces
     Exercise on problem sheet 3. We will also do all of this in the Linear Algebra Course.
 \end{proof}
 
-\begin{remark}\label{rem:global_conventions}
+\begin{remark}[Global conventions]\label{rem:global_conventions}
     From now on, $\mathbb{R}^{n}$ will be the vector space over $\mathbb{R}$ with the Euclidean norm denoted $\left| \cdot \right|$. It is also an inner product space, with the inner product as in \ref{def:euclid_norm}. It is also a metric space with $d(x,y) = \left| x-y \right|$. 
 
     If we say that $x_{n} \to x$ in $\mathbb{R}^{n}$, then we mean $\left| x_{n} - x \right| \to 0$. Recall that convergence is equivalent to component-wise convergence $\left| x_{i,n} - x_{i} \right| \to 0$ for all $1 \leq i \leq n$. 

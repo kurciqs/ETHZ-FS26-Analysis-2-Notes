@@ -4,7 +4,7 @@ The next step is to solve the inhomogeneous equations $Ly(x) = f(x)$ in $I$ and 
 \end{align*}
 where $y_{\text{part}}$ is some \textit{one particular} solution to $Ly = f$. But how do we find a particular solution in general?
 
-In the special (but common) case that $f(t) = q(t)e^{ \omega t }$ can be solved as follows. If $\omega$ is not a root of $p$, then consider $y(t) = Q(t) e^{ \omega t }$ for some polynomial $Q$ with degree $n$. If $\omega = \alpha_{j}$ is a root of $p$, consider instead $y(t) = Q(t)t^{m_{j}}e^{ \omega t }$.
+In the special (but common) case that $f(t) = q(t)e^{ \omega t }$, where $ \text{deg}(q) = n$, can be solved as follows. If $\omega$ is not a root of $p$, then consider $y(t) = Q(t) e^{ \omega t }$ for some polynomial $Q$ with degree $n$. If $\omega = \alpha_{j}$ is a root of $p$, consider instead $y(t) = Q(t)t^{m_{j}}e^{ \omega t }$.
 
 Then if $f(t)$ is a general poly-exp function, we apply the superposition principle. Indeed, if $y_{1}, y_{2}$ solve $L_{i} y_{i} = f_{i}$ and some $m$ initial conditions, then $a_{1} y_{1} + a_{2} y_{2}$ solves $Ly = a_{1} f_{1} + a_{2} f_{2}$ and the corresponding initial conditions. And then you plug in the above Ansatz and adjust the coefficients. That's why it's called "variation of coefficients". 
 
