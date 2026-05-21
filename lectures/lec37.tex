@@ -1,0 +1,40 @@
+\section{Ascoli-Arzelà Theorem}
+
+One of the theorems in Analysis 2 that is fairly simple and has massive application and gives simple results even in more advanced areas of math.
+
+\begin{theorem}[Ascoli-Arzelà]\label{thm:ascoli-arzela}
+	Let $K \subset \mathbb{R}^{n}$ be compact and $f_{k}: K \to \mathbb{R}^{m}$ a sequence of functions $C_{b}(K, \mathbb{R}^{m})$ that is
+	\begin{enumerate} 
+		\item bounded, so $\sup_{k \in \mathbb{N}} \lVert f_{k} \rVert_{\infty} < \infty$,
+		\item equicontinuous, so 
+		\begin{align*}
+			\forall \epsilon > 0 \; \exists \delta > 0 : \forall k \in \mathbb{N}, x \in K: 
+			f_{k}(B_{\delta}(x) \cap K) \subset B_{\epsilon}(f_{k}(x)).
+		\end{align*}
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+    We do $5$ short steps.
+
+    \textit{Step 1}: Take $Y = \left\{ y_{\ell} \in K \mid \ell \in \mathbb{N} \right\}$ to be a countable dense ($\overline{ Y } = K$) subset.\footnote{Fun exercise to stay engaged.} 
+
+    \textit{Step 2}: Since $K$ is compact and $Y$ is dense in $K$, $\forall \delta > 0$, $\exists N(\delta) \in \mathbb{N}$ such that 
+    \begin{align*}
+        K \subset \bigcup_{\ell=1}^{N} B_{\delta}(y_{\ell}).
+    \end{align*}    
+    Indeed, to each $x \in K$, we find a $y_{\ell}$ such that $x \in B_{\delta}(y_{\ell})$ (density) and then cover all of $K$ with these balls, extract finite subcover.
+
+    \textit{Step 3}: Given $x \in K$, notice that $(f_{k}(x)) \subset \mathbb{R}^{n}$ is a bounded sequence, hence admits a convergent subsequence $(f_{k_{j}}) \subset (f_{k})$ such that $f_{k_{j}}(x)$ converges.
+
+    \textit{Step 4}: By the Cantor diagonal argument, a there exists  a sequence of natural numbers $(k_{i})$ such that $f_{k_{i}}(y)$ converges for \textit{every} $y \in Y$. Why? Fix $y_{0} \in Y$. Use step 3 to find a subsequence $f_{k_{j}^{(0)}}(y_{0})$ that is convergent. Do this for every single $i \in \mathbb{N}$, i.e. fix $y_{i} \in Y$ and extract a subsequence of $k_{j}^{(i-1)}$ such that $f_{k_{j}^{(i)}}(y_{i})$ converges as in step 3. Then you define $k_{i } := k_{i }^{(i )}$. Because we construct the indices for $y_{i}$ such that the convergence of $y_{i-1}$ is preserved, $f_{k_{i}}(y)$ converges for every $y \in Y$.
+    
+    \textit{Step 5}: We wish to prove that $(f_{k_{i}})$ is Cauchy in $C_{b}(K, \mathbb{R}^{m})$, using \ref{prop:cb-comp} for it to converge. So let $\epsilon > 0$. For every $x \in K$ (and at first arbitrary $y$),
+    \begin{align*}
+        \left| f_{k_{i}}(x) - f_{k_{j}}(x) \right| \leq \left| f_{k_{i}}(x) - f_{k_{a}}(y) \right| + \left| f_{k_{i}}(y) - f_{k_{j}}(y) \right| + \left| f_{k_{j}}(y) - f_{k_{i}}(x) \right|.
+    \end{align*}
+    By equicontinuity, $\exists \delta > 0$ such that the first and third term are $< \frac{\epsilon}{3}$ if $y \in B_{\delta}(x)$.
+    But by step 2, $\exists y = y_{\ell} \in Y$ with $\ell \leq N(\delta)$. By step 4, there also exists an $A \in \mathbb{N}$ such that if $i,j \geq A$, then the second term is $< \frac{\epsilon}{3}$. 
+
+    But $A$ is independent of $x$, hence $\lVert f_{k_{i}} - f_{k_{j}} \rVert_{\infty} < \epsilon$ if $i,j \geq A$. Hence the sequence is Cauchy. 
+\end{proof}
+

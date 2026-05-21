@@ -6,7 +6,7 @@ As discussed, we will now introduce the generalisation of the inverse function t
 	Let $U \subset \mathbb{R}^{n}$ open and $f: U \to \mathbb{R}^{n}$ of class $C^{1}$, $x_{0} \in U$ such that $Df_{x_{0}}$ is invertible. Then $\exists U_{0} \subset U$ open with $x_{0} \in U_{0}$ such that
 	\begin{enumerate}
 		\item $f|_{U_{0}}$ is injective
-		\item $V = f(U_{0})$ is open and we get the inverse $g = (f|U_{0})^{-1}$
+		\item $V = f(U_{0})$ is open and we get the inverse $g = (f|_{U_{0}})^{-1}$
 		\item $\forall x \in U_{0}: Dg_{f(x)} = (Df_{x})^{-1}$
 		\item $g = (f|_{U_{0}})^{-1}: V \to U$ is of class $C^{1}$.
 	\end{enumerate}
@@ -94,11 +94,11 @@ Let's motivate what we're doing a little better. Consider the circle in 2 dimens
 
 	Call $\Psi = \Phi^{-1}: V \to U_{0}$, with $V = \Phi(U_{0})$. Using bijectivity of $\Psi, \Phi$, define for $(\xi, \eta) \in V$:
 	\begin{align*}
-		(\xi, \eta) = \Phi(x,y) = (x, f(x,y)) \iff (x,y) = \Psi(\xi, \eta)
+		(\xi, \eta) := \Phi(x,y) = (x, f(x,y)), \text{ which is equivalent to } (x,y) = \Psi(\xi, \eta)
 	\end{align*}
 	with $\xi  \in \mathbb{R}^{d}, \eta \in \mathbb{R}^{n-d}$. We see that $\xi = x$ and we can express $\Psi$ in the form
 	\begin{align*}
-		\Psi(\xi, \eta) = (\xi, G(\xi, \eta))
+		\Psi(\xi, \eta) =: (\xi, G(\xi, \eta))
 	\end{align*}
 	for some map $G: V \to B_{s}(y_{0})$ that is of course $C^{k}$. 
 

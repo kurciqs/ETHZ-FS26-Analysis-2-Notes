@@ -1,6 +1,10 @@
 Using these little Lemmas, we can state the main result of this chapter. Roughly speaking, it says the following: every initial value problem that is locally Lipschitz has a unique solution. This solution can either be extended to all of $\mathbb{R}$ as a domain or until it explodes so that we couldn't define a solution outside of our solution interval.
 
-\begin{prop}[Local existence and uniqueness via Picard]\label{prop:loc-ex-uniq}
+\begin{remark}[Locally Lipschitz]
+	It should be clear that any continuously differentiable vector field $F \in C^{1}(U, \mathbb{R}^{n})$ is always locally Lipschitz, i.e. around every point $p \in U$, there exists a ball $B_{r}(p) \subset U$ such that $F|_{B_{r}(p)}$ is Lipschitz. Indeed, since $DF(p)$ varies continuously, we can restrict $F$ to a closed ball $\overline{ B_{2r}(p) }$, where hence $\lVert DF(p) \rVert_{2}$ attains its extrema. But then we can just apply \ref{prop:derivative-lipschitz} (modify for vector valued $F$ as an exercise).
+\end{remark}
+% ignore label
+\begin{prop}[Local existence and uniqueness via Picard]\label{prop:peano-ex} 
 	Let $r > 0$, $(t_{0}, x_{0}) \in \mathbb{R} \times \mathbb{R}^{n}$ and consider
 	\begin{align*}
 		F: (t_{0} - r, t_{0}+r) \times B_{r}(x_{0}) \to \mathbb{R}^{n}
@@ -48,10 +52,6 @@ Using these little Lemmas, we can state the main result of this chapter. Roughly
     for all $t \in I$. Hence $T$ is Lipschitz with constant $\frac{1}{2}$ and Banach applies. Note that Banach also gives us uniqueness.
 \end{proof}
 
-\begin{theorem}[Local existence and uniqueness via Peano]\label{thm:peano-ex}
-    I think Picard does the same anyway.
-\end{theorem}
-
 \begin{theorem}[Picard-Lindelöf (Cauchy-Lipschitz)]\label{thm:picard}
 	Let $U \subset \mathbb{R} \times \mathbb{R}^{n}$ open, $(t_{0}, x_{0}) \in U$ and $F: U \to \mathbb{R}^{n}$ be continuous.
 
@@ -66,12 +66,12 @@ Using these little Lemmas, we can state the main result of this chapter. Roughly
 		      \begin{align*}
 			      u'(t) = F(t,u(t)), \quad u(t_{0}) = x_{0}.
 		      \end{align*}
-		\item For any other solution $v: J \to \mathbb{R}^{n}$ of the same initial value problem with $t_{0} \in J$, we have $J \subseteq I$ and $u|_{J} = v$.
+		\item For any other solution $v: J \to \mathbb{R}^{n}$ defined on an open interval $J$ of the same initial value problem with $t_{0} \in J$, we have $J \subseteq I$ and $u|_{J} = v$.
 		\item The limits $\lim_{t \to a}(t,u(t))$ and $\lim_{t \to b}(t,u(t))$ either do not exist or are not in $U$.
 	\end{enumerate}
 \end{theorem}
 \begin{proof}
-	Before we begin, one convinces themselves that locally, $F$ satisfies the assumptions in \ref{thm:peano-ex}, hence we can apply the proposition repeatedly. I won't be writing out all the qualifiers each time I invoke it.
+	Before we begin, one convinces themselves that locally, $F$ satisfies the assumptions in \ref{prop:peano-ex}, hence we can apply the proposition repeatedly. I won't be writing out all the qualifiers each time I invoke it.
 
     First we tackle uniqueness. Let $u_{1}: I_{1} \to \mathbb{R}^{n}$ and $u_{2}: I_{2} \to \mathbb{R}^{n}$ satisfy
     \begin{align*}
@@ -83,15 +83,15 @@ Using these little Lemmas, we can state the main result of this chapter. Roughly
     \begin{align*}
         S = \left\{ t \in I \mid u_{1}(t) = u_{2}(t) \right\}.
     \end{align*}
-    The complement $I \setminus S$ is open by continuity of $u_{1}, u_{2}$ and $S$ is not empty because $t_{0} \in S$. For any $t_{1} \in S$, both $u_{1}$ and $u_{2}$ solve the initial value problem with initial conditions $u_{1}(t_{1}) = u_{2}(t_{1}) =: x_{1}$. But Proposition \ref{thm:peano-ex} guarantees an open set around $t_{1}$ where $u_{1}$ and $u_{2}$ align. Hence $S$ is open. Since $I$ is an interval, it is connected and $I \setminus S = \emptyset$.
+    The complement $I \setminus S$ is open by continuity of $u_{1}, u_{2}$ and $S$ is not empty because $t_{0} \in S$. For any $t_{1} \in S$, both $u_{1}$ and $u_{2}$ solve the initial value problem with initial conditions $u_{1}(t_{1}) = u_{2}(t_{1}) =: x_{1}$. But Proposition \ref{prop:peano-ex} guarantees an open set around $t_{1}$ where $u_{1}$ and $u_{2}$ align. Hence $S$ is open. Since $I$ is an interval, it is connected and $I \setminus S = \emptyset$.
 
-    Now we turn to existence. Consider $\mathcal{J}$ the set of pairs $(J, v)$, where $J \subset \mathbb{R}$ is an open interval with $t_{0} \in J$ and a function $u: J \to \mathbb{R}^{n}$ that solves the initial value problem. By \ref{thm:peano-ex}, $\mathcal{J}$ is non-empty. We set $I = \bigcup_{(J,v) \in \mathcal{J}} J$ and define $u: T \to \mathbb{R}^{n}$ piecewise, which is well-defined by uniqueness. $I$ is also open as a union of open sets and solves the initial problem.
+    Now we turn to existence. Consider $\mathcal{J}$ the set of pairs $(J, v)$, where $J \subset \mathbb{R}$ is an open interval with $t_{0} \in J$ and a function $u: J \to \mathbb{R}^{n}$ that solves the initial value problem. By \ref{prop:peano-ex}, $\mathcal{J}$ is non-empty. We set $I = \bigcup_{(J,v) \in \mathcal{J}} J$ and define $u: T \to \mathbb{R}^{n}$ piecewise, which is well-defined by uniqueness. $I$ is also open as a union of open sets and solves the initial problem.
 
     It remains to show the behavior at the end points $a$ and $b$. We show $b$, $a$ is analogous. If $b = \infty$, we are done. Otherwise, let $b = \sup I < \infty$ and assume 
     \begin{align*}
         \lim_{t \to b}(t,u(t)) = (b,x_{b}) \in U
     \end{align*}
-    exists. Then, by \ref{thm:peano-ex}, we have a solution $w$ to $w(b) = x_{b}$ and $w'(t) = F(t,w(t))$ defined on $J = (b - \delta, b + \delta)$ for some $\delta > 0$. 
+    exists. Then, by \ref{prop:peano-ex}, we have a solution $w$ to $w(b) = x_{b}$ and $w'(t) = F(t,w(t))$ defined on $J = (b - \delta, b + \delta)$ for some $\delta > 0$. 
 
     We use this to extend $I$, leading to a contradiction. We define $v: (a,b+\delta) \to \mathbb{R}^{n}$ by
     \begin{align*}
